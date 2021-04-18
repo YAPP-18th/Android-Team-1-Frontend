@@ -37,7 +37,7 @@ targetSdk 30
 <footer>
 ```
 
-- <subject>의 예시: MainActivity를 만듬)
+- `<subject>`의 예시: MainActivity를 만듬)
 
     feat(MainActivity.kt): MainActivity를 만듬.
 
