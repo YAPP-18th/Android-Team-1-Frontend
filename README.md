@@ -47,9 +47,9 @@ targetSdk 30
 
 ## 🔁 Git Flow
 
-📌[참고 - 우아한 형제들 기술블로그](https://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html)
-branch - `master`
-working on - `suhyeon` `yuna` `giho`
+📌[참고 - 우아한 형제들 기술블로그](https://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html)  
+branch - `master`  
+working on - `suhyeon` `yuna` `giho`  
 
 [Brnach 이름 및 목적](https://www.notion.so/33969437118147fd9394e43c5964c80d)
 
