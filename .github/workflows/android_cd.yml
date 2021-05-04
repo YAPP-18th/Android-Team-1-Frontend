@@ -31,13 +31,21 @@ jobs:
       run: bash ./gradlew assembleRelease --stacktrace
      
      
-    - name: Upload APK
+    - run: './gradlew assembleRelease'
+    - uses: MeilCli/slack-upload-file@v1
+      with:
+        file_path: 'app/build/outputs/apk/release/app-release.apk'
+        file_name: 'app-release.apk'
+        file_type: 'apk'
+        initial_comment: '${{ github.ref }} 테스트 앱 슬랙 배포 성공'
+
+       
+    - name: CD 4. 테스트용 apk artifact 업로드
       uses: actions/upload-artifact@v2
       with:
-       name: app_$
-       path: app/release/app-release.apk
-       
-     
+        name: app-release.apk
+        path: app/build/outputs/apk/release/app-release.apk
+        
     - name: action-slack
       uses: 8398a7/action-slack@v3.8.0
       with:
