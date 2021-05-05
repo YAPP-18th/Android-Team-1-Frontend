@@ -12,9 +12,7 @@ on:
     
 jobs:
   build:
-
     runs-on: ubuntu-16.04
-
     steps:
     - uses: actions/checkout@v1
     - name: Set up JDK 1.8
@@ -35,7 +33,7 @@ jobs:
     - uses: MeilCli/slack-upload-file@v1
       with:
         slack_token: ${{ secrets.SLACK_READ_WRITE_TOKEN }}
-        channels: 'C020GULUXGX'
+        channels: ${{ secrets.SLACK_CHANNEL_DEPLOY }}
         file_path: 'app/build/outputs/apk/release/app-release-unsigned.apk'
         file_name: 'app-release-unsigned.apk'
         file_type: 'apk'
