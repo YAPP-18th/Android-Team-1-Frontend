@@ -51,7 +51,9 @@ jobs:
     - name: action-slack
       uses: 8398a7/action-slack@v3.8.0
       with:
-        status: $
+        status: ${{job.status}}
         author_name: 빌드 알림
       env:
          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      if: failure()
