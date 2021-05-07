@@ -1,5 +1,3 @@
-# README 에 기록하기
-
 ## 🍦MURENG (머랭)🍦
 
 ## 🎯 target version
