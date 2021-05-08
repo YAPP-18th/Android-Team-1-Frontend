@@ -1,12 +1,13 @@
-# README 에 기록하기
-
 ## 🍦MURENG (머랭)🍦
 
 ## 🎯 target version
 
-minSdk 24 
-
-targetSdk 30
+<p align="left">
+  <img src="https://img.shields.io/badge/Kotlin-1.4.10-yellowgreen?logo=kotlin"/>
+  <img src="https://img.shields.io/badge/Android-4.0.1-blue?logo=Android+Studio"/>
+  <img src="https://img.shields.io/badge/targetSdk-30-green?logo=Android"/>
+  <img src="https://img.shields.io/badge/minSdk-24-green?logo=Android"/>
+</p>
 
 <br/>
 
