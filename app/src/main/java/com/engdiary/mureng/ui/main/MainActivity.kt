@@ -26,12 +26,6 @@ class MainActivity : BaseActivity<com.engdiary.mureng.databinding.ActivityMainBi
 
     override val viewModel: MainViewModel by viewModels<MainViewModel>()
 
-    data class Menus(
-        val layout: ConstraintLayout,
-        val img: ImageView,
-        val fragment: Fragment
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
