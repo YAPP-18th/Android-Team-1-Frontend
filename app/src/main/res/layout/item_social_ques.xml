@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingHorizontal="16dp"
-        android:paddingBottom="20dp"
         android:paddingTop="16dp">
 
         <ImageView
@@ -32,6 +31,7 @@
 
 
         <TextView
+            android:id="@+id/tv_social_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="3"
@@ -43,6 +43,8 @@
             android:lineSpacingExtra="5sp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/img_social_ques"
             app:layout_constraintEnd_toStartOf="@id/img_social_replay"/>
@@ -70,7 +72,13 @@
             app:layout_constraintEnd_toEndOf="@id/img_social_replay"
             app:layout_constraintStart_toStartOf="@id/img_social_replay"/>
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorWhiteGray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

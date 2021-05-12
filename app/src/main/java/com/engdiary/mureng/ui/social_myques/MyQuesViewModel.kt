@@ -12,12 +12,10 @@ import javax.inject.Inject
 @HiltViewModel
 class MyQuesViewModel @Inject constructor(
     private val murengRepository: MurengRepository
-) : BaseViewModel(murengRepository) {
-
+) : QuestionViewModel(murengRepository) {
 
     private var _isEmpty = MutableLiveData<Boolean>()
     var isEmpty: LiveData<Boolean> = _isEmpty
-
 
     private var _quesCnt = MutableLiveData<Int>()
     var quesCnt: LiveData<Int> = _quesCnt
@@ -31,6 +29,10 @@ class MyQuesViewModel @Inject constructor(
         _isEmpty.value = false
         _quesCnt.value = 0
 
+    }
+
+    override fun questionItemClick(questionData: QuestionData) {
+        TODO("Not yet implemented")
     }
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */

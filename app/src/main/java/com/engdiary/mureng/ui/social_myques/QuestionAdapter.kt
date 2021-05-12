@@ -11,7 +11,7 @@ import com.engdiary.mureng.data.QuestionData
 import com.engdiary.mureng.databinding.ItemSocialQuesBinding
 
 
-class WineValueAdapter(val vm: QuestionViewModel) :
+class QuestionAdapter(val vm: QuestionViewModel) :
     ListAdapter<QuestionData, QuestionViewHolder>(QuestionDiffUtilCallBack) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

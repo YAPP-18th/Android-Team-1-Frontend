@@ -62,4 +62,21 @@ abstract class AnswerViewModel constructor(
             _results.value = results
         }
     }
+
+    /** [_results] 내 특정 아이템의 좋아요 클릭 여부 내용만 바꿔준다. */
+    fun toggleAnswerResult(prevAnswerData: AnswerData) {
+        val results: MutableList<AnswerData> = _results.value?.toMutableList() ?: return
+
+        val replaceIndex = results.indexOf(prevAnswerData)
+
+        if (replaceIndex == -1) {
+            Timber.i("$prevAnswerData isn't exist")
+            return
+        } else {
+            results.removeAt(replaceIndex)
+            results.add(replaceIndex, prevAnswerData.copy(likeYn = prevAnswerData.clickedLikeYn))
+            _results.value = results
+        }
+    }
+
 }
