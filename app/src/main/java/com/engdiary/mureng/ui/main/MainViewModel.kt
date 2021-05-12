@@ -46,7 +46,6 @@ class MainViewModel @Inject constructor(
     }
 
      fun homeClick() {
-         Timber.e("ddd?")
          _selectHome.value = true
          _selectMyPage.value = false
          _selectSocial.value = false
