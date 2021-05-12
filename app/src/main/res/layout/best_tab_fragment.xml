@@ -7,13 +7,13 @@
     <data>
         <variable
             name="vm"
-            type="com.engdiary.mureng.ui.social.BestTabViewModel" />
+            type="com.engdiary.mureng.ui.social_best.BestTabViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.social.BestTabFragment">
+        tools:context=".ui.social_best.BestTabFragment">
 
         <TextView
             android:layout_width="wrap_content"

@@ -1,4 +1,4 @@
-package com.engdiary.mureng.ui.social
+package com.engdiary.mureng.ui.social_best
 
 import androidx.lifecycle.ViewModel
 import com.engdiary.mureng.network.MurengRepository
