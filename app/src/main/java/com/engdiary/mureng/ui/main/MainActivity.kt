@@ -28,41 +28,33 @@ class MainActivity : BaseActivity<com.engdiary.mureng.databinding.ActivityMainBi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         binding.setVariable(BR.vm, viewModel)
 
         viewModel.selectHome.observe(this, Observer {
             if(it) {
-                Timber.e("selectHOME")
                 HomeFragment().navigate(supportFragmentManager, fl_main.id)
             }
         })
 
         viewModel.selectMyPage.observe(this, Observer {
             if(it) {
-                Timber.e("selectMYPAGE")
                 MyPageFragment().navigate(supportFragmentManager, fl_main.id)
             }
         })
 
         viewModel.selectSocial.observe(this, Observer {
             if(it) {
-                Timber.e("selectSOCIAL")
                 SocialFragment().navigate(supportFragmentManager, fl_main.id)
             }
         })
 
+
+        //TODO Writing Activity로 연결해야함
         viewModel.selectWriting.observe(this, Observer {
             if(it) {
-                Timber.e("selectWRITING")
                 WritingFragment().navigate(supportFragmentManager, fl_main.id)
             }
         })
-
-
-
-
-
 
 
     }
