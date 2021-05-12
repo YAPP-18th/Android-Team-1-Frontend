@@ -1,22 +1,18 @@
-package com.engdiary.mureng.ui.social
+package com.engdiary.mureng.ui.social_myques
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
-import com.engdiary.mureng.databinding.SocialFragmentBinding
+import com.engdiary.mureng.databinding.MyQuesFragmentBinding
 import com.engdiary.mureng.ui.base.BaseFragment
-import com.engdiary.mureng.ui.social.SocialViewModel.*
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class SocialFragment : BaseFragment<SocialFragmentBinding>(R.layout.social_fragment) {
+class MyQuesFragment : BaseFragment<MyQuesFragmentBinding>(R.layout.my_ques_fragment) {
 
-    override val viewModel: SocialViewModel by viewModels<SocialViewModel>()
+    override val viewModel: MyQuesViewModel by viewModels<MyQuesViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,8 +20,7 @@ class SocialFragment : BaseFragment<SocialFragmentBinding>(R.layout.social_fragm
 
         binding.apply {
             // 텍스트 값 세팅
-
         }
-
     }
+
 }

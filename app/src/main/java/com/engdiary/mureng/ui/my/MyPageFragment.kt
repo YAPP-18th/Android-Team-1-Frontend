@@ -12,7 +12,9 @@ import com.engdiary.mureng.databinding.HomeFragmentBinding
 import com.engdiary.mureng.databinding.MyPageFragmentBinding
 import com.engdiary.mureng.ui.base.BaseFragment
 import com.engdiary.mureng.ui.home.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyPageFragment : BaseFragment<MyPageFragmentBinding>(R.layout.my_page_fragment) {
 
     override val viewModel: MyPageViewModel by viewModels<MyPageViewModel>()

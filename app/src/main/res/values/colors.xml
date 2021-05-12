@@ -12,5 +12,20 @@
     <color name="colorPinkfc">#fc89ac</color>
 
 
+    <!--social-->
+    <color name="colorSkyBlue">#77a8ec</color>
+    <color name="colorPinkf9">#f91c5e</color>
+    <color name="colorSkyPinkff">#ffdae9</color>
+    
+    <!--social_best-->
+    <color name="colorPinkfb">#fb6a95</color>
+
+
+    <!--social_myques-->
+    <color name="colorBlackGray">#323232</color>
+
+    
+
+
 
 </resources>

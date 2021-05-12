@@ -127,8 +127,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/WRITING"
-                    tools:text="@string/WRITING"
+                    android:text="@string/writing"
+                    tools:text="@string/writing"
                     android:textSize="12dp"
                     android:textColor="@{vm.selectWriting ? @color/colorPinkfc : @color/colorGrayaf}"
                     app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +162,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/MY"
+                    android:text="@string/my"
                     tools:text="MY"
                     android:textSize="12dp"
                     android:textColor="@{vm.selectWriting ? @color/colorPinkfc : @color/colorGrayaf}"

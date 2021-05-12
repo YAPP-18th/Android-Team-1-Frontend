@@ -1,22 +1,10 @@
 package com.engdiary.mureng.ui.main
 
-import android.content.Intent
-import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
-import com.engdiary.mureng.ui.home.HomeFragment
-import com.engdiary.mureng.ui.my.MyPageFragment
-import com.engdiary.mureng.ui.social.SocialFragment
-import com.engdiary.mureng.ui.writing.WritingFragment
-import com.engdiary.mureng.view.main.MainActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel

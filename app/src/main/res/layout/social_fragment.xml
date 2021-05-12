@@ -15,14 +15,63 @@
         android:layout_height="match_parent"
         tools:context=".ui.social.SocialFragment">
 
-        <TextView
-            android:layout_width="wrap_content"
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_social_bar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SocialFragment"
-            android:textSize="20dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:elevation="2dp"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            app:tabIndicator="@color/colorPinkf9"
+            app:tabTextColor="@color/colorSkyPinkff"
+            app:tabSelectedTextColor="@color/colorPinkf9"
             app:layout_constraintTop_toTopOf="parent"
+            app:setupWithViewPager="@{pager}"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/best" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/myques" />
+
+
+        </com.google.android.material.tabs.TabLayout>
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_social"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:addOnPageChangeListener="@{vm.pageChangeListener}"
+            app:setAdapter="@{vm.adapter}"
+            app:setCurrentItem="@{vm.currentPosition}"
+            app:layout_constraintTop_toBottomOf="@id/tab_social_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_social_writing"/>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_social_writing"
+            android:background="@color/colorSkyBlue"
+            android:text="@string/make_question"
+            android:textColor="@color/colorWhite"
+            android:textSize="16dp"
+            android:paddingVertical="10dp"
+            android:lineSpacingExtra="8sp"
+            android:gravity="center_horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vp_social"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

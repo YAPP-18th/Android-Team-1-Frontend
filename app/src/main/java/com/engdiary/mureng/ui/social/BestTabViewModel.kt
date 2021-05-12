@@ -1,4 +1,4 @@
-package com.engdiary.mureng.ui.writing
+package com.engdiary.mureng.ui.social
 
 import androidx.lifecycle.ViewModel
 import com.engdiary.mureng.network.MurengRepository
@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class WritingViewModel @Inject constructor(
+class BestTabViewModel @Inject constructor(
     private val murengRepository: MurengRepository
 ) : BaseViewModel(murengRepository) {
 

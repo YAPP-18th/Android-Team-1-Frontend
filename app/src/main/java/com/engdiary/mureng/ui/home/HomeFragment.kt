@@ -12,7 +12,9 @@ import androidx.fragment.app.viewModels
 import com.engdiary.mureng.R
 import com.engdiary.mureng.databinding.HomeFragmentBinding
 import com.engdiary.mureng.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
 
     override val viewModel: HomeViewModel by viewModels<HomeViewModel>()
