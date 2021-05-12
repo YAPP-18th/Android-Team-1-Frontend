@@ -3,4 +3,14 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+
+    <!-- main -->
+    <color name="colorGrayaf">#afafaf</color>
+    <color name="colorPinkfc">#fc89ac</color>
+
+
+
 </resources>
