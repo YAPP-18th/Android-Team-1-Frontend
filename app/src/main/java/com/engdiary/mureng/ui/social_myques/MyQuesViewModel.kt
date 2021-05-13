@@ -36,11 +36,12 @@ class MyQuesViewModel @Inject constructor(
     }
 
     fun getMyQuesList() {
+        // TODO 서버 통신 연결
 
     }
 
     override fun questionItemClick(questionData: QuestionData) {
-        TODO("Not yet implemented")
+         // TODO qustion Item 클릭이벤트
     }
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */

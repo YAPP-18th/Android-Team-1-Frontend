@@ -18,9 +18,6 @@ abstract class QuestionViewModel constructor(
     protected val _results = MutableLiveData<List<QuestionData>>(listOf())
     open val results: LiveData<List<QuestionData>> = _results
 
-    private val _wineImg = MutableLiveData<Int>()
-    val wineImg : LiveData<Int> = _wineImg
-
     /** questionList 아이템뷰를 클릭시 동작하는 로직 */
     abstract fun questionItemClick(questionData: QuestionData)
 

@@ -13,17 +13,140 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorWhite"
         tools:context=".ui.social_best.BestTabFragment">
 
+
         <TextView
+            android:id="@+id/tv_social_best_pop_ques"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BestTabFragment"
-            android:textSize="20dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="@string/popular_ques"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/colorPinkfb"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="14dp"
+            android:paddingHorizontal="16dp"
+            android:id="@+id/cl_social_best_more"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_social_best_ques_more"
+                android:text="@string/more"
+                android:textStyle="normal"
+                android:textSize="12sp"
+                android:textColor="@color/colorGrayaf"
+                android:lineSpacingExtra="5sp"
+                app:layout_constraintBottom_toBottomOf="@id/img_social_best_ques_more"
+                app:layout_constraintTop_toTopOf="@id/img_social_best_ques_more"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/img_social_best_ques_more"/>
+
+
+            <ImageView
+                android:id="@+id/img_social_best_ques_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/elements_chevron_more_xs"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_social_pop_ques"
+            submitList="@{vm.quesResults}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:itemCount="3"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_social_best_more"
+            tools:listitem="@layout/item_social_ques" />
+
+        <TextView
+            android:id="@+id/tv_social_best_pop_ans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popular_answer"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/colorPinkfb"
+            app:layout_constraintTop_toBottomOf="@id/rv_social_pop_ques"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="14dp"
+            android:paddingHorizontal="16dp"
+            android:id="@+id/cl_social_best_ans_more"
+            app:layout_constraintTop_toBottomOf="@id/rv_social_pop_ques"
+            app:layout_constraintEnd_toEndOf="parent">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_social_best_ans_more"
+                android:text="@string/more"
+                android:textStyle="normal"
+                android:textSize="12sp"
+                android:textColor="@color/colorGrayaf"
+                android:lineSpacingExtra="5sp"
+                app:layout_constraintBottom_toBottomOf="@id/img_social_best_ans_more"
+                app:layout_constraintTop_toTopOf="@id/img_social_best_ans_more"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/img_social_best_ans_more"/>
+
+
+            <ImageView
+                android:id="@+id/img_social_best_ans_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/elements_chevron_more_xs"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_social_pop_ans"
+            submitList="@{vm.ansResults}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="5"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_social_best_ans_more"
+            tools:listitem="@layout/item_social_answer" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
