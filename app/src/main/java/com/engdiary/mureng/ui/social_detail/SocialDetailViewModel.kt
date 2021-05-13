@@ -2,6 +2,7 @@ package com.engdiary.mureng.ui.social_detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.engdiary.mureng.data.AnswerData
 import com.engdiary.mureng.data.QuestionData
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
@@ -11,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SocialDetailViewModel @Inject constructor(
     private val murengRepository: MurengRepository
-) : BaseViewModel(murengRepository) {
+) : UserAnswerViewModel(murengRepository) {
 
     private var _backButton = MutableLiveData<Boolean>()
     var backButton: LiveData<Boolean> = _backButton
@@ -35,6 +36,10 @@ class SocialDetailViewModel @Inject constructor(
 
     fun getQuesData(questionData: QuestionData) {
         _questionData.value = questionData
+    }
+
+    override fun answerItemClick(answerData: AnswerData) {
+        TODO("Not yet implemented")
     }
 
 

@@ -161,9 +161,28 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_social_myques"
+                submitList="@{vm.results}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_social_detail_title"
+                tools:listitem="@layout/item_social_user_answer" />
+
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="180dp"
+                tools:visibility="visible"
                 android:id="@+id/cl_social_detail_empty"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
