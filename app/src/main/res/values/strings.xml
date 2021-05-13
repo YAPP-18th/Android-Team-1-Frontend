@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">Mureng</string>
+    <string name="home">HOME</string>
+    <string name="social">SOCIAL</string>
+    <string name="writing">WRITING</string>
+    <string name="my">MY</string>
+    <!--social-->
+    <string name="make_question">질문 만들기</string>
+    <string name="best">BEST</string>
+    <string name="myques">MY QUES.</string>
+
+    <!--social_ques-->
+    <string name="total_ques_count">총 %d개의 질문</string>
+
+
+    <!--social_ques_detail-->
+    <string name="null_question">내가 만든 질문이 없어요!\n질문을 만들러 가볼까요?</string>
+
+    <!--social_best-->
+    <string name="popular_ques">인기 질문 TOP 3</string>
+    <string name="popular_answer">인기 답변 TOP 5</string>
+    <string name="more">더보기</string>
+
+    <!--social_best_detail-->
+    <string name="total_answer_count">총 %d개의 답변</string>
+    <string name="popular">인기순</string>
+    <string name="null_answer">아직 등록된 답변이 없어요!</string>
+
+
 </resources>

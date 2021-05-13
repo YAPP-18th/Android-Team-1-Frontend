@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.engdiary.mureng.ui.social.SocialViewModel" />
+
+
+        <variable
+            name="fragmentManager"
+            type="androidx.fragment.app.FragmentManager" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        tools:context=".ui.social.SocialFragment">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_social_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            app:tabMode="fixed"
+            app:tabIndicatorHeight="2dp"
+            app:tabIndicator="@color/colorPinkf9"
+            app:tabTextColor="@color/colorSkyPinkff"
+            app:tabSelectedTextColor="@color/colorPinkf9"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setTapContents="@{vm.tabItems}"
+            app:setViewPosition="@{vm.position}"
+            app:setVm="@{vm}"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_social"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:setFsm="@{fragmentManager}"
+            app:setViewPosition="@{vm.position}"
+            app:setVm="@{vm}"
+            app:setPagerCount="@{vm.tabItems}"
+            app:layout_constraintTop_toBottomOf="@id/tab_social_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_social_writing"/>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_social_writing"
+            android:background="@color/colorSkyBlue"
+            android:text="@string/make_question"
+            android:textColor="@color/colorWhite"
+            android:textSize="16dp"
+            android:paddingVertical="10dp"
+            android:lineSpacingExtra="8sp"
+            android:gravity="center_horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vp_social"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
