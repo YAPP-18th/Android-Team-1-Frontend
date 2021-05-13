@@ -18,9 +18,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorWhite"
         tools:context=".ui.social.SocialFragment">
-
-
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_social_bar"
@@ -46,6 +45,7 @@
             app:setFsm="@{fragmentManager}"
             app:setViewPosition="@{vm.position}"
             app:setVm="@{vm}"
+            app:setPagerCount="@{vm.tabItems}"
             app:layout_constraintTop_toBottomOf="@id/tab_social_bar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

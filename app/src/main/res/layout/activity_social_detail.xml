@@ -130,8 +130,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -140,8 +138,7 @@
                 android:id="@+id/cl_social_detail_title"
                 app:layout_constraintTop_toBottomOf="@id/cl_social_detail_ques"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/cl_social_detail_empty">
+                app:layout_constraintEnd_toEndOf="parent">
 
 
 
@@ -180,9 +177,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="180dp"
-                tools:visibility="visible"
+                android:layout_height="fill_parent"
+                tools:visibility="gone"
                 android:id="@+id/cl_social_detail_empty"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

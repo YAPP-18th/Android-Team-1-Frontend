@@ -8,6 +8,7 @@ import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel

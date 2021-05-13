@@ -38,21 +38,22 @@ object BindingAdapter {
         }
     }
 
-    @BindingAdapter("setFsm", "setVm")
+    @BindingAdapter("setPagerCount", "setFsm", "setVm")
     @JvmStatic
     fun setViewPager(
         viewPager: ViewPager,
+        items: List<String>?,
         fragmentManager: FragmentManager?,
         mainVm: SocialViewModel?
     ) {
-        if (!mainVm!!.tabItems.value.isNullOrEmpty())
+        if (!items.isNullOrEmpty())
             viewPager.adapter?.run {
-                if (this is ViewPagerAdpater) {
-                    //do something.
+                if (this is ViewPagerAdapter) {
+                    setItems(items)
                 }
             } ?: kotlin.run {
                 if (fragmentManager != null)
-                    viewPager.adapter = ViewPagerAdpater(fragmentManager)
+                    viewPager.adapter = ViewPagerAdapter(fragmentManager, items)
                 viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                     override fun onPageScrollStateChanged(state: Int) {
                         //Nothing.
@@ -73,7 +74,7 @@ object BindingAdapter {
             }
     }
 
-    @BindingAdapter("app:setViewPosition")
+    @BindingAdapter("setViewPosition")
     @JvmStatic
     fun setViewPosition(view: View, position: Int?) {
         if (position != null)

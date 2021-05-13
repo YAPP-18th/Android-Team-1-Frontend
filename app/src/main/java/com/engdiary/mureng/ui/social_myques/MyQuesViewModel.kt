@@ -26,8 +26,16 @@ class MyQuesViewModel @Inject constructor(
 
     /** 생성자 */
     init {
-        _isEmpty.value = false
+        _isEmpty.value = true
         _quesCnt.value = 0
+
+
+        getMyQuesList()
+
+
+    }
+
+    fun getMyQuesList() {
 
     }
 
