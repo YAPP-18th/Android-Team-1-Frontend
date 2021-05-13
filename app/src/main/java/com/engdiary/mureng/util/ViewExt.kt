@@ -15,6 +15,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.TextViewBindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 
 fun View.setVisible() {
@@ -112,4 +113,8 @@ fun setImageDrawableResource(imageView: ImageView, resource: Int) {
     imageView.setImageDrawable(drawable)
 }
 
+@BindingAdapter("imageGlideResource")
+fun setImageGlideResource(imageView: ImageView, resource: String) {
+    Glide.with(imageView).load(resource).into(imageView)
+}
 

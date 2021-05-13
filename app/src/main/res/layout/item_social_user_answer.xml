@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="AnswerData"
+            type="com.engdiary.mureng.data.AnswerData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_social_ques_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+
+        <ImageView
+            android:id="@+id/img_social_user_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
+            android:src="@drawable/icons_profile_m"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+        <TextView
+            android:id="@+id/tv_social_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{AnswerData.userName}"
+            android:textStyle="normal"
+            android:textSize="14dp"
+            android:textColor="@color/colorBlack17"
+            tools:text="abcdefgh"
+            android:layout_marginStart="10dp"
+            app:layout_constraintTop_toTopOf="@id/img_social_user_profile"
+            app:layout_constraintStart_toEndOf="@id/img_social_user_profile"/>
+
+        <TextView
+            android:id="@+id/tv_social_user_answer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{AnswerData.ansTitle}"
+            android:textStyle="normal"
+            android:textSize="14dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/colorBlack17"
+            android:lineSpacingExtra="3sp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            tools:text="Currently it is to get 10,000 students enrolled."
+            app:layout_constraintTop_toBottomOf="@id/tv_social_user_name"
+            app:layout_constraintStart_toStartOf="@id/tv_social_user_name"
+            app:layout_constraintEnd_toStartOf="@id/cl_social_user_heart"/>
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="52dp"
+            android:layout_height="0dp"
+            android:id="@+id/cl_social_user_heart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+
+            <ImageView
+                android:id="@+id/img_social_user_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/icons_heart_filled"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@{AnswerData.likeYn ? @drawable/icons_heart_filled : @drawable/icons_heart_outlined}"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="999"
+                android:text="@{AnswerData.likeNum}"
+                android:textStyle="normal"
+                android:textSize="12dp"
+                android:textColor="@color/colorGrayaf"
+                android:lineSpacingExtra="5sp"
+                app:layout_constraintTop_toBottomOf="@id/img_social_user_like"
+                app:layout_constraintStart_toStartOf="@id/img_social_user_like"
+                app:layout_constraintEnd_toEndOf="@id/img_social_user_like"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <View
+            android:id="@+id/view_social_user"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorWhiteGray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_social_user_answer"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
