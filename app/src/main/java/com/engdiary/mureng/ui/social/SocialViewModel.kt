@@ -15,32 +15,29 @@ class SocialViewModel @Inject constructor(
     private val murengRepository: MurengRepository
 ) : BaseViewModel(murengRepository) {
 
-
-
-    var currentPosition = 0
-
-    var pageChangeListener = object : ViewPager.OnPageChangeListener {
-
-        override fun onPageScrollStateChanged(p0: Int) {
-        }
-
-        override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
-        }
-
-        override fun onPageSelected(p0: Int) {
-            currentPosition = p0
-        }
-    }
+    private val _tabItems: MutableLiveData<List<String>> = MutableLiveData()
+    private val _position: MutableLiveData<Int> = MutableLiveData()
+    val tabItems: LiveData<List<String>> get() = _tabItems
+    val position: LiveData<Int> get() = _position
 
     /** 생성자 */
     init {
+        _tabItems.postValue(TAB_ITEMS)
+    }
 
+    fun selectPosition(position: Int) {
+        _position.postValue(position)
     }
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {
         super.onCleared()
     }
+
+    companion object {
+        private val TAB_ITEMS = listOf("BEST","MY QUES.")
+    }
+
 
 
 }

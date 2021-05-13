@@ -73,6 +73,3 @@ fun BaseFragment<*>.navigate(fm: FragmentManager, @IdRes id: Int): Int {
     }
 }
 
-interface getFragmentManager {
-    fun getFragmentManager() : FragmentManager
-}

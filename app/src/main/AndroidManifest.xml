@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.social_detail.SocialDetailActivity"></activity>
         <activity
-            android:name=".ui.social_detail.MainActivity"
+            android:name=".view.main.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
