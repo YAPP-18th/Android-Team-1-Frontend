@@ -32,7 +32,7 @@ const val CONNECT_TIMEOUT = 15.toLong()
 const val WRITE_TIMEOUT = 15.toLong()
 const val READ_TIMEOUT = 15.toLong()
 
-const val BASE_URL = "https://parkkiho.asuscomm.com:8081/"
+const val BASE_URL = "http://parkkiho.asuscomm.com:8081/"
 
 /**
  * 코루틴을 활용하여 HTTP 요청을 보낼 시 활용하는 로직
