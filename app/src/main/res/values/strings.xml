@@ -27,4 +27,14 @@
     <string name="null_answer">아직 등록된 답변이 없어요!</string>
 
 
+    <string name="writingdiary_nickname">%s, </string>
+    <string name="writingdiary_korean_alert_message">한글은 입력할 수 없어요!</string>
+    <string name="writingdiary_korean_alert_message_accept">확인</string>
+    <string name="writingdiary_nextbutton">다음</string>
+
+    <string name="diarydetail_otherresponse">이 질문에 다른 사람들은 어떻게 답했을까요?</string>
+
+    <string name="dialog_diarycookie_title">쿠키를 받았어요!</string>
+    <string name="dialog_diarycookie_desription">받은 쿠키는 MY에서 확인할 수 있답니다.\n내일도 머렝과 놀아주세요 :)</string>
+    <string name="dialog_diarycookie_accept">확인</string>
 </resources>
