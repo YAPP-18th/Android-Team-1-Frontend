@@ -19,8 +19,9 @@
         <activity android:name=".ui.diary_detail.DiaryDetailActivity"></activity>
         <activity android:name=".ui.write_diary.WritingDiaryImageActivity" />
         <activity
-            android:name=".view.main.MainActivity"
-            android:screenOrientation="portrait">
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
