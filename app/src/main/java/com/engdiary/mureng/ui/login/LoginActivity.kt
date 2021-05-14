@@ -20,12 +20,21 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>(R.layout.activity_login)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-
-        val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        binding.googleLogin.setOnClickListener {
+        }
 
         binding.kakaoLogin.setOnClickListener {
-            Log.i(TAG, "Log i")
         }
+
+
+        setContentView(binding.root)
+
+//        val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+//
+//
+//        binding.kakaoLogin.setOnClickListener {
+//            Log.i(TAG, "Log i")
+//        }
 
     }
 }
