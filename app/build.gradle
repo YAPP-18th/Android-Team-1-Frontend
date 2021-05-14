@@ -85,4 +85,7 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxjava:3.0.6"
     implementation 'io.reactivex.rxjava3:rxkotlin:3.0.1'
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+
+    // Expandable Layout
+    implementation "com.github.skydoves:expandablelayout:$expandable_layout_version"
 }

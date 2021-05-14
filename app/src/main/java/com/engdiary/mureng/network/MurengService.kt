@@ -1,5 +1,7 @@
 package com.engdiary.mureng.network
 
+import com.engdiary.mureng.data.response.Response
+import com.engdiary.mureng.data.response.TodayQuestionResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -13,5 +15,6 @@ interface MurengService {
      *  fun getSurveys(): Call<WinePickResponse<List<Survey>>>
      */
 
-
+    @GET("api/today-question")
+    suspend fun getTodayQuestion(@Header("X-AUTH-TOKEN") accessToken: String): Response<TodayQuestionResponse>
 }

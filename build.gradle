@@ -13,6 +13,7 @@ buildscript {
         viewmodel_ktx_version = "2.3.1"
         hilt_version = "2.31.2-alpha"
         hilt_viewmodel_version = "1.0.0-alpha01"
+        expandable_layout_version = "1.0.6"
     }
 
     repositories {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimary">@color/primary_pink</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
@@ -29,8 +29,18 @@
     <color name="colorBlack17">#171717</color>
 
 
-    
-
-
-
+    <color name="primary_pink">#fc89ac</color>
+    <color name="peachy_pink_40">#66ff8f8f</color>
+    <color name="powder_pink">#fdb2c9</color>
+    <color name="pale">#ffeecb</color>
+    <color name="warm_pink">#fb5284</color>
+    <color name="white">#ffffff</color>
+    <color name="grey_bg">#fafafa</color>
+    <color name="dialog_bg_black">#4d000000</color>
+    <color name="blue_dark">#4789e7</color>
+    <color name="blue_lightest">#edf3fd</color>
+    <color name="grey_light">#f0f0f0</color>
+    <color name="grey2">#8b8b8b</color>
+    <color name="pink2">#fb6a95</color>
+    <color name="pinkpink">#fb5284</color>
 </resources>
