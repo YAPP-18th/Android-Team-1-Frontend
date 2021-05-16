@@ -6,11 +6,14 @@ import androidx.lifecycle.Observer
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.databinding.ActivityMainBinding
+import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.ui.base.BaseActivity
 import com.engdiary.mureng.ui.base.navigate
 import com.engdiary.mureng.ui.home.HomeFragment
 import com.engdiary.mureng.ui.my.MyPageFragment
 import com.engdiary.mureng.ui.social.SocialFragment
+import com.engdiary.mureng.ui.write_diary.WritingDiaryContentActivity
+import com.engdiary.mureng.util.startActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -42,10 +45,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         })
 
 
-        //TODO Writing Activity로 연결해야함
         viewModel.selectWriting.observe(this, Observer {
             if(it) {
-
+                startActivity(WritingDiaryContentActivity::class,isFinish = false)
             }
         })
 

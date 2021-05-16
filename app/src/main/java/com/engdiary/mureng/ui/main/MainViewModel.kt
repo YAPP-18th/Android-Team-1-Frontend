@@ -50,9 +50,6 @@ class MainViewModel @Inject constructor(
 
 
     fun WritingClick() {
-        _selectHome.value = false
-        _selectMyPage.value = false
-        _selectSocial.value = false
         _selectWriting.value = true
     }
 

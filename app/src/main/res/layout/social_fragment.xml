@@ -60,6 +60,8 @@
             android:text="@string/make_question"
             android:textColor="@color/colorWhite"
             android:textSize="16dp"
+            app:backgroundTintMode="@null"
+            app:backgroundTint="@null"
             android:paddingVertical="10dp"
             android:lineSpacingExtra="8sp"
             android:gravity="center_horizontal"

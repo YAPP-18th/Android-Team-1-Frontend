@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vm"
             type="com.engdiary.mureng.ui.main.MainViewModel" />
@@ -122,7 +121,7 @@
                     android:id="@+id/img_main_writing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@{vm.selectWriting ? @drawable/icons_writing_selected : @drawable/icons_writing}"
+                    android:src="@{vm.selectWriting ? @drawable/icons_writing : @drawable/icons_writing}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/writing"
-                    android:textColor="@{vm.selectWriting ? @color/colorPinkfc : @color/colorGrayaf}"
+                    android:textColor="@{vm.selectWriting ? @color/colorGrayaf : @color/colorGrayaf}"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
