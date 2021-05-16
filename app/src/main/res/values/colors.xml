@@ -26,7 +26,12 @@
     <color name="colorWhiteGray">#f0f0f0</color>
     
     <!--social_detail-->
+    <color name="colorLightGraydf">#dfdfdf</color>
+    <color name="colorLightGrayd7">#d7d7d7</color>
     <color name="colorBlack17">#171717</color>
+    <color name="colorBabyPinkff">#ffdae9</color>
+
+
 
 
     <color name="primary_pink">#fc89ac</color>
