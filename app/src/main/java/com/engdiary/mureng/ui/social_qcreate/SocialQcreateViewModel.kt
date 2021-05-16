@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import timber.log.Timber
 import java.util.regex.Pattern
 import java.util.regex.Pattern.compile
 import java.util.regex.Pattern.matches
@@ -52,7 +53,7 @@ class SocialQcreateViewModel @Inject constructor(
 
             if (!p0.toString().isNullOrEmpty()) {
 
-                val ps: Pattern = Pattern.compile("([a-zA-Z0-9 ]|[a-zA-Z0-9 ].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9 ])")
+                val ps: Pattern = compile("^[a-zA-Z0-9\\s!~`@#\$%\\^?,. ]+$")
                 _warningEng.value = !ps.matcher(p0).matches()
 
                 _warningMaxEng.value = p0!!.length > 63
@@ -65,13 +66,16 @@ class SocialQcreateViewModel @Inject constructor(
                     _warningEng.value = false
                     _warningMaxEng.value = false
                 }
-
+                _qCreateEngQues.value = p0.toString()
                 quesWarningCheck()
 
             } else {
                 _warningEng.value = false
                 _warningMaxEng.value = false
+                quesWarningCheck()
             }
+
+
 
         }
 
@@ -86,9 +90,8 @@ class SocialQcreateViewModel @Inject constructor(
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
             if (!p0.toString().isNullOrEmpty()) {
-                val ps: Pattern = Pattern.compile("([ㄱ-ㅎ가-힣 ]|[ㄱ-ㅎ가-힣 ].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[ㄱ-ㅎ가-힣 ])")
+                val ps: Pattern = compile("^[ㄱ-ㅎ가-힣0-9\\s!~`@#\$%\\^?,. ]+$")
                 _warningKor.value = !ps.matcher(p0).matches()
                 _warningMaxKor.value = p0!!.length > 50
 
@@ -100,13 +103,17 @@ class SocialQcreateViewModel @Inject constructor(
                     _warningKor.value = false
                     _warningMaxKor.value = false
                 }
-
+                _qCreateKorQues.value = p0.toString()
                 quesWarningCheck()
+
 
             } else {
                 _warningKor.value = false
                 _warningMaxKor.value = false
+                quesWarningCheck()
+
             }
+
         }
 
         override fun afterTextChanged(p0: Editable?) {
@@ -116,7 +123,8 @@ class SocialQcreateViewModel @Inject constructor(
 
     /** 생성자 */
     init {
-
+        _qCreateKorQues.value = ""
+        _qCreateEngQues.value = ""
         _warningEng.value = false
         _warningKor.value = false
         _warningMaxEng.value = false
@@ -127,9 +135,10 @@ class SocialQcreateViewModel @Inject constructor(
 
     }
     fun quesWarningCheck() {
-        if(!_qCreateEngQues.value.toString().isNullOrEmpty()) {
-            _registerVisible.value =
-                !_warningEng.value!! && !_warningKor.value!! && !_warningMaxEng.value!! && !_warningMaxKor.value!!
+        if(!_qCreateEngQues!!.value!!.toString().isNullOrBlank()) {
+            _registerVisible.value = !_warningEng.value!! && !_warningKor.value!! && !_warningMaxEng.value!! && !_warningMaxKor.value!!
+        } else {
+            _registerVisible.value = false
         }
     }
 
