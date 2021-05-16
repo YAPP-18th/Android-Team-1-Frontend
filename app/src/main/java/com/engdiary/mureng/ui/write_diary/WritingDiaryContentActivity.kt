@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
-import com.engdiary.mureng.databinding.ActivityWritingDiaryBinding
+import com.engdiary.mureng.databinding.ActivityWritingDiaryContentBinding
 import com.engdiary.mureng.databinding.ExpandableparentHintWritingdiaryBinding
 import com.engdiary.mureng.databinding.ExpandablesecondHintWritingdiaryBinding
 import com.engdiary.mureng.ui.base.BaseActivity
@@ -18,7 +18,8 @@ import org.jetbrains.annotations.NotNull
 
 @AndroidEntryPoint
 class WritingDiaryContentActivity :
-    BaseActivity<ActivityWritingDiaryBinding>(R.layout.activity_writing_diary_content) {
+    BaseActivity<ActivityWritingDiaryContentBinding>(R.layout.activity_writing_diary_content) {
+
     override val viewModel by viewModels<WritingDiaryContentViewModel>()
     private var isHintOpen = false
 
