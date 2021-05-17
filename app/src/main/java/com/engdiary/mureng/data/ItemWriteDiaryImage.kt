@@ -12,7 +12,7 @@ sealed class ItemWriteDiaryImage {
     data class DiaryImage(
         override val id: Int,
         val url: String,
-        val imagePath: ImagePath,
+        val imagePath: String,
         val isSelected: ObservableBoolean = ObservableBoolean(false)
     ) : ItemWriteDiaryImage() {
 
