@@ -1,15 +1,21 @@
 package com.engdiary.mureng.ui.social
 
+import android.content.res.ColorStateList
+import android.graphics.BlendMode
+import android.net.Uri
 import android.view.View
+import android.widget.ImageView
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
+import com.engdiary.mureng.R
+import com.engdiary.mureng.data.ItemWriteDiaryImage
 import com.google.android.material.tabs.TabLayout
 
 
 object BindingAdapter {
-
-
     @BindingAdapter("setTapContents", "setVm")
     @JvmStatic
     fun setTapContents(tabLayout: TabLayout, items: List<String>?, mainVm: SocialViewModel?) {
@@ -93,4 +99,82 @@ object BindingAdapter {
             }
     }
 
+    @BindingAdapter("hintBulb")
+    @JvmStatic
+    fun setHintBulb(imageView: ImageView, isHintOpen: Boolean) {
+        val drawable = if (isHintOpen) {
+            imageView.context
+                .run { ResourcesCompat.getDrawable(resources, R.drawable.icons_bulb_checked, null) }
+        } else {
+            imageView.context
+                .run { ResourcesCompat.getDrawable(resources, R.drawable.icons_bulb, null) }
+        }
+
+
+        Glide.with(imageView.context)
+            .load(drawable)
+            .into(imageView)
+    }
+
+    @BindingAdapter("hintArrow")
+    @JvmStatic
+    fun setHintArrow(imageView: ImageView, isHintOpen: Boolean) {
+        val drawable = if (isHintOpen) {
+            imageView.context
+                .run {
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.writingdiary_hintarrow_up,
+                        null
+                    )
+                }
+        } else {
+            imageView.context
+                .run {
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.writingdiary_hintarrow,
+                        null
+                    )
+                }
+        }
+
+        Glide.with(imageView.context)
+            .load(drawable)
+            .into(imageView)
+    }
+
+    @BindingAdapter("diaryImageSelected")
+    @JvmStatic
+    fun setDiaryImageSelected(imageView: ImageView, diaryImageSelected: Boolean) {
+        if (diaryImageSelected) {
+            val diaryimageSelectedTint = ResourcesCompat.getColor(
+                imageView.resources,
+                R.color.diaryimage_selected_tint,
+                null
+            )
+            imageView.imageTintList = ColorStateList.valueOf(diaryimageSelectedTint)
+            imageView.imageTintBlendMode = BlendMode.SRC_OVER
+        } else {
+            imageView.imageTintList = null
+        }
+    }
+
+    @BindingAdapter("diaryImagePreview", "galleryImageUri")
+    @JvmStatic
+    fun setDiaryImagePreview(
+        imageView: ImageView,
+        diaryWriteImage: ItemWriteDiaryImage?,
+        galleryImageUri: Uri?
+    ) {
+        when (diaryWriteImage) {
+            is ItemWriteDiaryImage.DiaryImage -> diaryWriteImage.url
+            is ItemWriteDiaryImage.Gallery -> galleryImageUri
+            null -> return
+        }.let {
+            Glide.with(imageView.context)
+                .load(it)
+                .into(imageView)
+        }
+    }
 }
