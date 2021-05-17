@@ -1,10 +1,16 @@
 package com.engdiary.mureng.ui.social_best
 
+import android.content.Intent
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.engdiary.mureng.data.BestAnswerData
 import com.engdiary.mureng.data.QuestionData
+import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
+import com.engdiary.mureng.ui.social_best_more.BestMoreActivity
+import com.engdiary.mureng.ui.social_qcreate.SocialQcreateActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -17,6 +23,22 @@ class BestTabViewModel @Inject constructor(
     init {
 
     }
+
+    fun quesMoreClick() {
+        Intent(MurengApplication.appContext, BestMoreActivity::class.java).apply {
+        }.run {
+            MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }
+
+    }
+
+    fun ansMoreClick() {
+        Intent(MurengApplication.appContext, BestMoreActivity::class.java).apply {
+        }.run {
+            MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }
+    }
+
 
     override fun questionItemClick(questionData: QuestionData) {
         TODO("Not yet implemented")

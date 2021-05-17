@@ -23,10 +23,12 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_social_bar"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:elevation="2dp"
+            android:elevation="0dp"
             app:tabMode="fixed"
+            android:layout_marginEnd="128dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:tabIndicatorHeight="2dp"
             app:tabIndicator="@color/colorPinkf9"
             app:tabTextColor="@color/colorSkyPinkff"
