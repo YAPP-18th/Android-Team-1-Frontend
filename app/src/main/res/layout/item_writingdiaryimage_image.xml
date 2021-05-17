@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="itemWritingDiaryImage"
-            type="com.engdiary.mureng.data.ItemWritingDiaryImage" />
+            type="com.engdiary.mureng.data.ItemWriteDiaryImage.DiaryImage" />
         <variable
             name="onClickListener"
-            type="com.engdiary.mureng.ui.write_diary.WritingDiaryImageAdapter.OnClickListener" />
+            type="com.engdiary.mureng.ui.write_diary.WriteDiaryImageAdapter.OnClickListener" />
     </data>
 
     <ImageView
-        android:onClick="@{(view) -> onClickListener.onClick(itemWritingDiaryImage, view)}"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:onClick="@{() -> onClickListener.onClick(itemWritingDiaryImage)}"
+        app:imageGlideResource="@{itemWritingDiaryImage.url}"
+        app:diaryImageSelected="@{itemWritingDiaryImage.isSelected}"
+        android:scaleType="centerCrop"
+        android:layout_width="120dp"
+        android:layout_height="120dp" />
 </layout>
