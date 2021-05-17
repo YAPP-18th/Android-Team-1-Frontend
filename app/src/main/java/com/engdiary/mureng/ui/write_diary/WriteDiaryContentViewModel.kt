@@ -5,11 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
+import com.engdiary.mureng.data.DiaryContent
 import com.engdiary.mureng.data.SingleLiveEvent
 import com.engdiary.mureng.data.TodayQuestion
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
-import com.engdiary.mureng.util.KoreanChecker
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.IOException
@@ -25,6 +25,10 @@ class WriteDiaryContentViewModel @ViewModelInject constructor(
 
     val diaryContent = MutableLiveData<String>()
 
+    val isDiaryContentConditionSatisfied = Transformations.map(diaryContent) {
+        it != null && it.isNotBlank() && DiaryContent.checkMinLengthCondition(it)
+    }
+
     private val _isHintOpen = MutableLiveData(false)
     val isHintOpen: LiveData<Boolean>
         get() = _isHintOpen
@@ -33,8 +37,8 @@ class WriteDiaryContentViewModel @ViewModelInject constructor(
     val showKoreanExistDialog: LiveData<Unit>
         get() = _showKoreanExistDialog
 
-    private val _navigateToWritingDiaryImage = SingleLiveEvent<Unit>()
-    val navigateToWritingDiaryImage: LiveData<Unit>
+    private val _navigateToWritingDiaryImage = SingleLiveEvent<DiaryContent>()
+    val navigateToWritingDiaryImage: LiveData<DiaryContent>
         get() = _navigateToWritingDiaryImage
 
     init {
@@ -49,13 +53,16 @@ class WriteDiaryContentViewModel @ViewModelInject constructor(
     }
 
     fun checkKoreanIsExist() {
-        val isKoreanExist = diaryContent.value?.takeIf { it.isNotBlank() }
-            ?.let { KoreanChecker.isKoreanExist(it) } ?: return
-        if (isKoreanExist) {
+        val isSatisfied = diaryContent.value?.takeIf { it.isNotBlank() }
+            ?.let { DiaryContent.checkLanguageCondition(it) } ?: return
+        if (!isSatisfied) {
             _showKoreanExistDialog.call()
             return
         }
-        _navigateToWritingDiaryImage.call()
+
+        diaryContent.value?.let {
+            _navigateToWritingDiaryImage.value = DiaryContent.of(it)
+        }?.run { _navigateToWritingDiaryImage.call() }
     }
 
     fun toggleHint() {
