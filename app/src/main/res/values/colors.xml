@@ -41,6 +41,9 @@
     <color name="blue_lightest">#edf3fd</color>
     <color name="grey_light">#f0f0f0</color>
     <color name="grey2">#8b8b8b</color>
-    <color name="pink2">#fb6a95</color>
+    <color name="pink2">#66fb6a95</color>
     <color name="pinkpink">#fb5284</color>
+
+    <!-- write_diary_image -->
+    <color name="diaryimage_selected_tint">#B3ffffff</color>
 </resources>

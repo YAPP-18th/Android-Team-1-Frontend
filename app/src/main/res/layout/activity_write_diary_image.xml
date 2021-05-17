@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.engdiary.mureng.ui.write_diary.WriteDiaryImageViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/button_writingdiaryimage_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="12dp"
+            android:src="@drawable/icons_arrow_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textview_writingdiary_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:lineSpacingExtra="8sp"
+            android:paddingStart="11dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="17dp"
+            android:paddingBottom="14dp"
+            android:text="등록"
+            android:textColor="@{viewModel.selectedImage != null ? @color/pinkpink : @color/pink2}"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageview_writingdiaryimage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/grey_bg"
+            android:scaleType="centerCrop"
+            app:diaryImagePreview="@{viewModel.selectedImage}"
+            app:galleryImageUri="@{viewModel.selectedGalleryImage}"
+            app:layout_constraintBottom_toTopOf="@id/recyclerview_writingdiaryimage_candidates"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toBottomOf="@id/button_writingdiaryimage_back" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="배경 이미지를 고르세요 :)"
+            android:visibility="@{viewModel.selectedImage != null ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/imageview_writingdiaryimage"
+            app:layout_constraintEnd_toEndOf="@id/imageview_writingdiaryimage"
+            app:layout_constraintStart_toStartOf="@id/imageview_writingdiaryimage"
+            app:layout_constraintTop_toTopOf="@id/imageview_writingdiaryimage" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="20dp"
+            android:textColor="@color/white"
+            android:textFontWeight="500"
+            android:textSize="32sp"
+            android:visibility="@{viewModel.selectedImage != null ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="@id/imageview_writingdiaryimage"
+            app:layout_constraintStart_toStartOf="@id/imageview_writingdiaryimage"
+            app:layout_constraintTop_toTopOf="@id/imageview_writingdiaryimage"
+            tools:text="What are your biggest worries or concerns these days?" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_writingdiaryimage_candidates"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageview_writingdiaryimage"
+            app:spanCount="3"
+            tools:listitem="@layout/item_writingdiaryimage_image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
