@@ -10,6 +10,7 @@ import com.engdiary.mureng.R
 import com.engdiary.mureng.databinding.ActivityWriteDiaryContentBinding
 import com.engdiary.mureng.databinding.ExpandableparentHintWritingdiaryBinding
 import com.engdiary.mureng.ui.base.BaseActivity
+import com.engdiary.mureng.util.dpToPx
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -59,6 +60,7 @@ class WriteDiaryContentActivity :
     ) {
         hints.setOnClickListener { viewModel.toggleHint() }
         hints.adapter = hintAdapter
+        hints.addItemDecoration(HintDecoration(HINT_SPAN_COUNT, HINT_SPACING.dpToPx()))
         hintAdapter.notifyDataSetChanged()
     }
 
@@ -74,5 +76,10 @@ class WriteDiaryContentActivity :
                 dialog.dismiss()
             }
             .show()
+    }
+
+    companion object {
+        private const val HINT_SPAN_COUNT = 2
+        private const val HINT_SPACING = 20
     }
 }
