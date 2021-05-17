@@ -22,13 +22,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingBottom="20dp"
-            tools:context=".ui.write_diary.WritingDiaryContentActivity">
+            tools:context=".ui.write_diary.WriteDiaryContentActivity">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_writingdiary_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/writingdiary_header"
+                android:background="@drawable/writediary_header"
                 android:paddingBottom="22dp"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -92,23 +92,32 @@
                     app:layout_constraintTop_toBottomOf="@id/textview_writingdiary_question"
                     tools:text="최대여섯글자 님이 가장 좋아하는 음식은 무엇인가요?" />
 
-                <com.skydoves.expandablelayout.ExpandableLayout
+                <include
                     android:id="@+id/expandable_writingdary_hint"
+                    layout="@layout/expandableparent_hint_writingdiary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="23dp"
                     android:layout_marginBottom="12dp"
                     android:paddingVertical="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:visibility="@{viewModel.hints == null || viewModel.hints.empty ? View.GONE : View.VISIBLE}"
-                    app:expandable_parentLayout="@layout/expandableparent_hint_writingdiary"
-                    app:expandable_secondLayout="@layout/expandablesecond_hint_writingdiary"
-                    app:expandable_showSpinner="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:isHintOpen="@{viewModel.isHintOpen}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textview_writingdiary_question_kr"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toBottomOf="@id/textview_writingdiary_question_kr" />
 
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/hints"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxHeight="48dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="8dp"
+                    android:visibility="@{viewModel.hints != null &amp;&amp; viewModel.hints.empty == false &amp;&amp; viewModel.isHintOpen == true ? View.VISIBLE : View.GONE}"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/expandable_writingdary_hint"
+                    app:spanCount="2"
+                    tools:layout_editor_absoluteX="0dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -118,10 +127,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
+                android:padding="0dp"
                 app:endIconMode="none"
                 app:hintAnimationEnabled="false"
                 app:hintEnabled="false"
-                android:padding="0dp"
                 app:layout_constraintTop_toBottomOf="@id/layout_writingdiary_header">
 
                 <com.google.android.material.textfield.TextInputEditText
