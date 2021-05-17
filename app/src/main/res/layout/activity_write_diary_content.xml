@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.engdiary.mureng.ui.write_diary.WritingDiaryContentViewModel" />
+            type="com.engdiary.mureng.ui.write_diary.WriteDiaryContentViewModel" />
 
     </data>
 
