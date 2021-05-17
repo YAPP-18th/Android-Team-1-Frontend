@@ -17,11 +17,11 @@ class HintViewHolder private constructor(
     companion object {
 
         fun from(parent: ViewGroup): HintViewHolder {
-            return HintViewHolder(
-                ItemHintBinding.inflate( LayoutInflater.from(parent.context),
-                    parent,
-                    false)
-            )
+            return ItemHintBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            ).let { HintViewHolder(it) }
         }
     }
 }
