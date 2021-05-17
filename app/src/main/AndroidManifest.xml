@@ -20,8 +20,8 @@
         <activity android:name=".ui.write_diary.WritingDiaryImageActivity" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.write_diary.WritingDiaryContentActivity"
+            android:name=".ui.write_diary.WriteDiaryContentActivity"
             android:exported="true" />
     </application>
 
