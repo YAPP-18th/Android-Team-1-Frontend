@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class WriteDiaryContentActivity :
     BaseActivity<ActivityWriteDiaryContentBinding>(R.layout.activity_write_diary_content) {
 
-    override val viewModel by viewModels<WritingDiaryContentViewModel>()
+    override val viewModel by viewModels<WriteDiaryContentViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

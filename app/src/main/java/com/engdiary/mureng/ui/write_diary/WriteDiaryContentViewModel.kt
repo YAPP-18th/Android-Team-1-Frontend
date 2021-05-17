@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.IOException
 
-class WritingDiaryContentViewModel @ViewModelInject constructor(
+class WriteDiaryContentViewModel @ViewModelInject constructor(
     private val murengRepository: MurengRepository
 ) : BaseViewModel(murengRepository) {
     private val _todayQuestion = MutableLiveData<TodayQuestion>()
