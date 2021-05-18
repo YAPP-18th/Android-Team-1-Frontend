@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="com.engdiary.mureng.ui.social_qcreate.SocialQcreateViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.social_qcreate.SocialQcreateActivity">
+
+        <ImageView
+            android:id="@+id/img_qcreate_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="14dp"
+            android:paddingHorizontal="16dp"
+            app:onSingleClick="@{vm::backClick}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/writingdiary_btn_cancel"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qcreate_create_ques"
+            tools:text="@string/qcreate_create_ques"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="14dp"
+            android:fontFamily="@font/notosanskr"
+            android:textStyle="normal"
+            app:onSingleClick="@{vm::registerClick}"
+            android:textSize="16dp"
+            android:textColor="@{vm.registerVisible ? @color/pinkpink : @color/colorBabyPinkff }"
+            android:lineSpacingExtra="8sp"
+            app:layout_constraintTop_toTopOf="@id/img_qcreate_back"
+            app:layout_constraintBottom_toBottomOf="@id/img_qcreate_back"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+          <androidx.constraintlayout.widget.Guideline
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/gl_qcreate_box_left"
+              app:layout_constraintGuide_begin="12dp"
+              android:orientation="vertical"/>
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/gl_qcreate_box_right"
+                app:layout_constraintGuide_end="12dp"
+                android:orientation="vertical"/>
+
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gl_qcreate_text_left"
+            app:layout_constraintGuide_begin="16dp"
+            android:orientation="vertical"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gl_qcreate_text_right"
+            app:layout_constraintGuide_end="16dp"
+            android:orientation="vertical"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/cl_social_qcreate_warning"
+            android:background="@drawable/social_qcreate_warning"
+            app:layout_constraintStart_toStartOf="@id/gl_qcreate_box_left"
+            app:layout_constraintEnd_toEndOf="@id/gl_qcreate_box_right"
+            app:layout_constraintTop_toBottomOf="@id/img_qcreate_back"
+            android:layout_marginTop="12dp">
+
+
+            <ImageView
+                android:id="@+id/img_qcreate_warning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="28dp"
+                android:src="@drawable/icons_symbol_side"
+                android:layout_marginVertical="8dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlackGray"
+                android:fontFamily="@font/notosanskr"
+                android:textStyle="normal"
+                android:textSize="12sp"
+                android:text="@string/qcreate_alert_message"
+                android:layout_marginStart="20dp"
+                android:lineSpacingExtra="5sp"
+                app:layout_constraintBottom_toBottomOf="@id/img_qcreate_warning"
+                tools:text="@string/qcreate_alert_message"
+                app:layout_constraintTop_toTopOf="@id/img_qcreate_warning"
+                app:layout_constraintStart_toEndOf="@id/img_qcreate_warning"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/tv_social_qcreate_ques1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qcreate_number1_ques"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/cl_social_qcreate_warning"
+            app:layout_constraintStart_toStartOf="@id/gl_qcreate_text_left"
+            android:fontFamily="@font/notosanskr"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="@color/colorBlack"
+            android:lineSpacingExtra="7sp"/>
+
+
+        <EditText
+            android:id="@+id/edt_social_qcreate_ques1"
+            android:layout_width="0dp"
+            android:layout_height="128dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/social_qcreate_box_bg"
+            android:hint="@string/qcreate_eng_hint"
+            android:lineSpacingExtra="5sp"
+            android:padding="12dp"
+            android:textColor="@color/colorBlackGray"
+            android:textColorHint="@color/colorLightGrayd7"
+            android:textSize="20dp"
+            app:textChangedListener="@{vm.quesEngTextWatcher}"
+            android:gravity="left"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="@id/gl_qcreate_box_right"
+            app:layout_constraintStart_toStartOf="@id/gl_qcreate_box_left"
+            app:layout_constraintTop_toBottomOf="@id/tv_social_qcreate_ques1"
+            tools:text="what makes you live?" />
+
+        <TextView
+            android:visibility="@{vm.warningEng ? View.VISIBLE : View.GONE}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/pinkpink"
+            android:fontFamily="@font/notosanskr"
+            android:textStyle="normal"
+            android:textSize="12dp"
+            android:lineSpacingExtra="5sp"
+            android:text="@string/qcreate_eng_warning"
+            app:layout_constraintTop_toBottomOf="@id/edt_social_qcreate_ques1"
+            app:layout_constraintStart_toStartOf="@id/gl_qcreate_text_left"/>
+
+
+        <TextView
+            android:visibility="@{vm.warningMaxEng ? View.VISIBLE : View.GONE}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/pinkpink"
+            android:fontFamily="@font/notosanskr"
+            android:textStyle="normal"
+            android:textSize="12dp"
+            android:lineSpacingExtra="5sp"
+            android:text="@string/qcreate_eng_max_cnt"
+            app:layout_constraintTop_toBottomOf="@id/edt_social_qcreate_ques1"
+            app:layout_constraintStart_toStartOf="@id/gl_qcreate_text_left"/>
+
+
+        <TextView
+            android:id="@+id/tv_social_qcreate_ques2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qcreate_number2_ques"
+            android:layout_marginTop="48dp"
+            app:layout_constraintTop_toBottomOf="@id/edt_social_qcreate_ques1"
+            app:layout_constraintStart_toStartOf="@id/gl_qcreate_text_left"
+            android:fontFamily="@font/notosanskr"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="@color/colorBlack"
+            android:lineSpacingExtra="7sp"/>
+
+        <EditText
+            android:id="@+id/edt_social_qcreate_ques2"
+            android:layout_width="0dp"
+            android:layout_height="128dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/social_qcreate_box_bg"
+            android:hint="@string/qcreate_kor_hint"
+            android:lineSpacingExtra="5sp"
+            app:textChangedListener="@{vm.quesKorTextWatcher}"
+            android:padding="12dp"
+            android:fontFamily="@font/notosanskr"
+            android:textColor="@color/colorBlackGray"
+            android:textColorHint="@color/colorLightGrayd7"
+            android:textSize="16dp"
+            android:gravity="left"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="@id/gl_qcreate_box_right"
+            app:layout_constraintStart_toStartOf="@id/gl_qcreate_box_left"
+            app:layout_constraintTop_toBottomOf="@id/tv_social_qcreate_ques2"
+            tools:text="무엇이 당신을 살게하나요?" />
+
+
+        <TextView
+            android:visibility="@{vm.warningKor ? View.VISIBLE : View.GONE}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/pinkpink"
+            android:fontFamily="@font/notosanskr"
+            android:textStyle="normal"
+            android:textSize="12dp"
+            android:lineSpacingExtra="5sp"
+            android:text="@string/qcreate_kor_warning"
+            app:layout_constraintTop_toBottomOf="@id/edt_social_qcreate_ques2"
+            app:layout_constraintStart_toStartOf="@id/gl_qcreate_text_left"/>
+
+
+        <TextView
+            android:visibility="@{vm.warningMaxKor ? View.VISIBLE : View.GONE}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/pinkpink"
+            android:fontFamily="@font/notosanskr"
+            android:textStyle="normal"
+            android:textSize="12dp"
+            android:lineSpacingExtra="5sp"
+            android:text="@string/qcreate_kor_max_cnt"
+            app:layout_constraintTop_toBottomOf="@id/edt_social_qcreate_ques2"
+            app:layout_constraintStart_toStartOf="@id/gl_qcreate_text_left"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
