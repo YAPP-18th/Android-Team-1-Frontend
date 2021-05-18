@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
+import com.engdiary.mureng.data.DiaryContent
 import com.engdiary.mureng.databinding.ActivityWriteDiaryContentBinding
 import com.engdiary.mureng.databinding.ExpandableparentHintWritingdiaryBinding
 import com.engdiary.mureng.ui.base.BaseActivity
@@ -45,8 +46,8 @@ class WriteDiaryContentActivity :
             showLogoutDialog(this)
         }
 
-        viewModel.navigateToWritingDiaryImage.observe(this) {
-            navigateToWritingDiaryImage()
+        viewModel.navigateToWritingDiaryImage.observe(this) {diaryContent ->
+            navigateToWritingDiaryImage(diaryContent)
         }
 
         viewModel.hints.observe(this) { hints ->
@@ -64,8 +65,10 @@ class WriteDiaryContentActivity :
         hintAdapter.notifyDataSetChanged()
     }
 
-    private fun navigateToWritingDiaryImage() {
-        Intent(this, WritingDiaryImageActivity::class.java)
+    private fun navigateToWritingDiaryImage(diaryContent: DiaryContent?) {
+        if (diaryContent == null) return
+        Intent(this, WriteDiaryImageActivity::class.java)
+            .putExtra("diaryContent", diaryContent)
             .also { startActivity(it) }
     }
 
