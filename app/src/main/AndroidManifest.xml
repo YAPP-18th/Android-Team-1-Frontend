@@ -18,10 +18,6 @@
         <activity android:name=".ui.social_qcreate.SocialQcreateActivity" />
         <activity android:name=".ui.social_detail.SocialDetailActivity" />
         <activity android:name=".ui.diary_detail.DiaryDetailActivity" />
-        <activity android:name=".ui.write_diary.WritingDiaryImageActivity" />
-        <activity android:name=".ui.social_detail.SocialDetailActivity"></activity>
-
-        <activity android:name=".ui.diary_detail.DiaryDetailActivity"></activity>
         <activity
             android:name=".ui.write_diary.WriteDiaryImageActivity"
             android:exported="true" />

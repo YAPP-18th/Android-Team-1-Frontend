@@ -12,7 +12,7 @@ import com.engdiary.mureng.ui.base.navigate
 import com.engdiary.mureng.ui.home.HomeFragment
 import com.engdiary.mureng.ui.my.MyPageFragment
 import com.engdiary.mureng.ui.social.SocialFragment
-import com.engdiary.mureng.ui.write_diary.WritingDiaryContentActivity
+import com.engdiary.mureng.ui.write_diary.WriteDiaryContentActivity
 import com.engdiary.mureng.util.startActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -47,7 +47,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         viewModel.selectWriting.observe(this, Observer {
             if(it) {
-                startActivity(WritingDiaryContentActivity::class,isFinish = false)
+                startActivity(WriteDiaryContentActivity::class,isFinish = false)
             }
         })
 
