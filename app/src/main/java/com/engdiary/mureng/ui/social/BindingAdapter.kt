@@ -1,7 +1,7 @@
 package com.engdiary.mureng.ui.social
 
 import android.content.res.ColorStateList
-import android.graphics.BlendMode
+import android.graphics.PorterDuff
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
@@ -154,7 +154,7 @@ object BindingAdapter {
                 null
             )
             imageView.imageTintList = ColorStateList.valueOf(diaryimageSelectedTint)
-            imageView.imageTintBlendMode = BlendMode.SRC_OVER
+            imageView.imageTintMode = PorterDuff.Mode.SRC_OVER
         } else {
             imageView.imageTintList = null
         }
