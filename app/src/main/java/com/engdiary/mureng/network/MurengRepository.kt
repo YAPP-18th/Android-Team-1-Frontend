@@ -25,7 +25,7 @@ class MurengRepository @Inject constructor(
     private val authManager: AuthManager
 ) {
     private val IMAGE_MEDIA_TYPE = "image/jpg".toMediaType()
-    private val SEAT_CHART_REQUEST_PART_KEY = "seat_url"
+    private val DIARY_IMAGE = "image"
 
     /** 예시
      * fun postUser(
@@ -96,7 +96,7 @@ class MurengRepository @Inject constructor(
         val imageBodyPart = imageUri?.let {
             buildImageMultiBodyPart(
                 MurengApplication.getGlobalAppApplication(),
-                SEAT_CHART_REQUEST_PART_KEY,
+                DIARY_IMAGE,
                 it
             )
         } ?: return null
