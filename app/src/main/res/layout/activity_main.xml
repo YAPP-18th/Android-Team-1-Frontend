@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vm"
             type="com.engdiary.mureng.ui.main.MainViewModel" />
@@ -21,10 +20,20 @@
             android:id="@+id/fl_main"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/cl_main_bottom"
+            app:layout_constraintBottom_toTopOf="@id/view_main_line"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <View
+            android:id="@+id/view_main_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorWhiteGray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/cl_main_bottom"/>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,6 +59,8 @@
                     android:id="@+id/img_main_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    tools:src="@drawable/icons_writing"
+                    app:layout_constraintVertical_bias="0.2"
                     android:src="@{vm.selectHome ? @drawable/icons_home_selected : @drawable/icons_home}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -86,6 +97,7 @@
                     android:id="@+id/img_main_social"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:layout_constraintVertical_bias="0.2"
                     android:src="@{vm.selectSocial ? @drawable/icons_social_selected : @drawable/icons_social}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -122,7 +134,8 @@
                     android:id="@+id/img_main_writing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@{vm.selectWriting ? @drawable/icons_writing_selected : @drawable/icons_writing}"
+                    app:layout_constraintVertical_bias="0.2"
+                    android:src="@{vm.selectWriting ? @drawable/icons_writing : @drawable/icons_writing}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +146,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/writing"
-                    android:textColor="@{vm.selectWriting ? @color/colorPinkfc : @color/colorGrayaf}"
+                    android:textColor="@{vm.selectWriting ? @color/colorGrayaf : @color/colorGrayaf}"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -158,6 +171,7 @@
                     android:id="@+id/img_main_my_page"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:layout_constraintVertical_bias="0.2"
                     android:src="@{vm.selectMyPage ? @drawable/icons_mypage_selected : @drawable/icons_mypage}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

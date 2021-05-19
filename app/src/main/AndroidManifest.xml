@@ -16,6 +16,8 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.push_alert.PushAlertActivity" android:exported="true"></activity>
         <activity android:name=".ui.setting.SettingActivity" />
+        <activity android:name=".ui.social_best_more.BestMoreActivity"></activity>
+        <activity android:name=".ui.social_qcreate.SocialQcreateActivity" />
         <activity android:name=".ui.social_detail.SocialDetailActivity" />
         <activity android:name=".ui.diary_detail.DiaryDetailActivity" />
         <activity
