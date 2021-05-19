@@ -1,5 +1,6 @@
 package com.engdiary.mureng.ui.write_diary
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageButton
@@ -9,9 +10,11 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
+import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.data.DiaryContent
 import com.engdiary.mureng.databinding.ActivityWriteDiaryImageBinding
 import com.engdiary.mureng.ui.base.BaseActivity
+import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
 import com.engdiary.mureng.util.WindowLengthCalculator
 import com.engdiary.mureng.util.dpToPx
 import dagger.hilt.android.AndroidEntryPoint
@@ -83,6 +86,12 @@ class WriteDiaryImageActivity :
     private fun subscribeUi() {
         viewModel.diaryImages.observe(this) {
             diaryImageAdapter.submitList(it)
+        }
+
+        viewModel.navigateToDiaryDetail.observe(this) { diary ->
+            Intent(this, DiaryDetailActivity::class.java)
+                .putExtra(IntentKey.DIARY, diary)
+                .also { startActivity(it) }
         }
     }
 

@@ -6,22 +6,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.engdiary.mureng.data.DiaryContent
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.SingleLiveEvent
-import com.engdiary.mureng.data.TodayQuestion
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.io.IOException
 
 class WriteDiaryContentViewModel @ViewModelInject constructor(
     private val murengRepository: MurengRepository
 ) : BaseViewModel(murengRepository) {
-    private val _todayQuestion = MutableLiveData<TodayQuestion>()
-    val todayQuestion: LiveData<TodayQuestion>
+    private val _todayQuestion = MutableLiveData<Question>()
+    val todayQuestion: LiveData<Question>
         get() = _todayQuestion
 
-    val hints = Transformations.map(_todayQuestion) { it.hint }
+    val hints = Transformations.map(_todayQuestion) { it.hints }
 
     val diaryContent = MutableLiveData<String>()
 
@@ -45,9 +44,7 @@ class WriteDiaryContentViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             try {
                 _todayQuestion.value = murengRepository.getTodayQuestion()
-                Timber.d("Get Today Question Success: (${_todayQuestion.value})")
             } catch (networkError: IOException) {
-                Timber.d("Get Today Question Error: (cause: ${networkError.cause}) (message: ${networkError.message})")
             }
         }
     }
