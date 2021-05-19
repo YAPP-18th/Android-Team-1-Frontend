@@ -1,12 +1,12 @@
 package com.engdiary.mureng.network
 
 import com.engdiary.mureng.data.request.PostDiaryRequest
-import com.engdiary.mureng.data.response.PostDiaryImageResponse
-import com.engdiary.mureng.data.response.PostDiaryResponse
+import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.MurengResponse
-import com.engdiary.mureng.data.response.TodayQuestionResponse
+import com.engdiary.mureng.data.response.PostDiaryImageResponse
+import com.engdiary.mureng.data.response.QuestionNetwork
 import okhttp3.MultipartBody
-import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 /**
@@ -20,22 +20,23 @@ interface MurengService {
      */
 
     @GET("/api/today-question")
-    suspend fun getTodayQuestion(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<TodayQuestionResponse>
+    suspend fun getTodayQuestion(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<QuestionNetwork>
 
+    @Multipart
     @POST("/api/reply/image")
     suspend fun postDiaryImage(
         @Header("X-AUTH-TOKEN") accessToken: String,
         @Part diaryImage: MultipartBody.Part,
-    ): Call<MurengResponse<PostDiaryImageResponse>>
+    ): Response<MurengResponse<PostDiaryImageResponse>>
 
     @POST("/api/reply")
     suspend fun postDiary(
         @Header("X-AUTH-TOKEN") accessToken: String,
         @Body postDiaryRequest: PostDiaryRequest
-    ): Call<MurengResponse<PostDiaryResponse>>
+    ): Response<MurengResponse<DiaryNetwork>>
 
     @GET("/api/reply/default-images")
     suspend fun getDefaultImages(
         @Header("X-AUTH-TOKEN") accessToken: String
-    ): Call<MurengResponse<List<String>>>
+    ): Response<MurengResponse<List<String>>>
 }

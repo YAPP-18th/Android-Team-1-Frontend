@@ -3,7 +3,7 @@ package com.engdiary.mureng.data.response
 import com.engdiary.mureng.data.Hint
 import com.google.gson.annotations.SerializedName
 
-data class HintResponse(
+data class HintNetwork(
     @SerializedName("hintId")
     val id: Int,
     @SerializedName("meaning")
@@ -11,5 +11,5 @@ data class HintResponse(
     @SerializedName("word")
     val word: String
 ){
-    fun toDomain(): Hint = Hint(id, word, meaning)
+    fun asDomain(): Hint = Hint(id, word, meaning)
 }
