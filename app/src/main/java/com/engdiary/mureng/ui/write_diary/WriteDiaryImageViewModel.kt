@@ -33,7 +33,7 @@ class WriteDiaryImageViewModel @ViewModelInject constructor(
 
     init {
         viewModelScope.launch {
-            _diaryImages.value = murengRepository.getDiaryImages()
+            _diaryImages.value = murengRepository.getDefaultDiaryImages()
         }
     }
 
