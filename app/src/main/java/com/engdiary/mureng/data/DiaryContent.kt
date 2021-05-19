@@ -16,7 +16,7 @@ class DiaryContent private constructor(
     }
 
     override fun hashCode(): Int {
-        return super.hashCode()
+        return content.hashCode()
     }
 
     companion object {
