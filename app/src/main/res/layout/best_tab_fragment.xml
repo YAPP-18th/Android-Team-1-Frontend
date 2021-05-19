@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:paddingVertical="14dp"
             android:paddingHorizontal="16dp"
+            app:onSingleClick="@{vm::quesMoreClick}"
             android:id="@+id/cl_social_best_more"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -102,6 +103,7 @@
             android:layout_height="wrap_content"
             android:paddingVertical="14dp"
             android:paddingHorizontal="16dp"
+            app:onSingleClick="@{vm::ansMoreClick}"
             android:id="@+id/cl_social_best_ans_more"
             app:layout_constraintTop_toBottomOf="@id/rv_social_pop_ques"
             app:layout_constraintEnd_toEndOf="parent">

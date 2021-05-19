@@ -19,18 +19,23 @@ interface MurengService {
      *  fun getSurveys(): Call<WinePickResponse<List<Survey>>>
      */
 
-    @GET("api/today-question")
+    @GET("/api/today-question")
     suspend fun getTodayQuestion(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<TodayQuestionResponse>
 
-    @POST("api/reply/image")
+    @POST("/api/reply/image")
     suspend fun postDiaryImage(
         @Header("X-AUTH-TOKEN") accessToken: String,
         @Part diaryImage: MultipartBody.Part,
     ): Call<MurengResponse<PostDiaryImageResponse>>
 
-    @POST("api/reply")
+    @POST("/api/reply")
     suspend fun postDiary(
         @Header("X-AUTH-TOKEN") accessToken: String,
         @Body postDiaryRequest: PostDiaryRequest
     ): Call<MurengResponse<PostDiaryResponse>>
+
+    @GET("/api/reply/default-images")
+    suspend fun getDefaultImages(
+        @Header("X-AUTH-TOKEN") accessToken: String
+    ): Call<MurengResponse<List<String>>>
 }

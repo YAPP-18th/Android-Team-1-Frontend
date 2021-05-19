@@ -16,7 +16,7 @@
     <color name="colorSkyBlue">#77a8ec</color>
     <color name="colorPinkf9">#f91c5e</color>
     <color name="colorSkyPinkff">#ffdae9</color>
-    
+
     <!--social_best-->
     <color name="colorPinkfb">#fb6a95</color>
 
@@ -24,9 +24,19 @@
     <!--social_myques-->
     <color name="colorBlackGray">#323232</color>
     <color name="colorWhiteGray">#f0f0f0</color>
-    
+
     <!--social_detail-->
+    <color name="colorLightGraydf">#dfdfdf</color>
+    <color name="colorLightGrayd7">#d7d7d7</color>
     <color name="colorBlack17">#171717</color>
+    <color name="colorBabyPinkff">#ffdae9</color>
+    
+    
+    <!--social_best_more-->
+    <color name="colorDarkGray4d">#4d5050</color>
+
+
+
 
 
     <color name="primary_pink">#fc89ac</color>
@@ -46,4 +56,11 @@
 
     <!-- write_diary_image -->
     <color name="diaryimage_selected_tint">#B3ffffff</color>
+
+    <!-- setting -->
+    <color name="grey_dark2">#323232</color>
+
+    <!-- push alert -->
+    <color name="pinklight">#ffdae9</color>
+    <color name="grey_light4">#c3c3c3</color>
 </resources>

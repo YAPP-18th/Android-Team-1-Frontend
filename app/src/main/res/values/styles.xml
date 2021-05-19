@@ -16,6 +16,11 @@
         <item name="boxStrokeColor">@color/content_writingdiary</item>
     </style>
 
+    <style name="Widget.PushAlert.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="thumbTint">@color/switch_thumb_pushalert</item>
+        <item name="trackTint">@color/switch_track_pushalert</item>
+    </style>
+
     <style name="TextAppearance.WritingDiary.Question" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:lineSpacingExtra">8sp</item>
         <item name="android:textSize">22sp</item>
