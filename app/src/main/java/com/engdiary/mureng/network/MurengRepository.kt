@@ -48,7 +48,7 @@ class MurengRepository @Inject constructor(
             ?.asDomain()
     }
 
-    suspend fun postDiaryImage(imageUri: Uri?): PostDiaryImageResponse? {
+    suspend fun postDiaryImage(imageUri: Uri?): String? {
         val imageBodyPart = imageUri?.let {
             buildImageMultiBodyPart(
                 MurengApplication.getGlobalAppApplication(),
@@ -60,8 +60,13 @@ class MurengRepository @Inject constructor(
         val response = api.postDiaryImage(
             "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q",
             imageBodyPart
-        ).send()
-        return response.body()?.data
+        )
+
+        if (!response.isSuccessful) {
+            Timber.d("Post Diary Image Fail (code: ${response.code()}) (message: ${response.message()}) (raw: ${response.raw()})")
+        }
+
+        return response.body()?.data?.imagePath
     }
 
     private fun buildImageMultiBodyPart(
@@ -87,7 +92,7 @@ class MurengRepository @Inject constructor(
         return byteArrayOutputStream
     }
 
-    suspend fun postDiary(diaryContent: DiaryContent, imagePath: String): Int? {
+    suspend fun postDiary(diaryContent: DiaryContent, imagePath: String): Diary? {
         val response =
             PostDiaryRequest(
                 diaryContent.content,
