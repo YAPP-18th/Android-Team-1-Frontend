@@ -50,4 +50,27 @@
     <string name="dialog_diarycookie_title">쿠키를 받았어요!</string>
     <string name="dialog_diarycookie_desription">받은 쿠키는 MY에서 확인할 수 있답니다.\n내일도 머렝과 놀아주세요 :)</string>
     <string name="dialog_diarycookie_accept">확인</string>
+
+    <string name="setting_title">설정</string>
+    <string name="setting_logout_dialog_title">로그아웃 하시겠어요?</string>
+    <string name="setting_logout_dialog_accept">예</string>
+    <string name="setting_logout_dialog_decline">아니오</string>
+    <string name="setting_withdrawal_dialog_title">머렝을 탈퇴하시겠어요?</string>
+    <string name="setting_withdrawal_dialog_message">정말... 탈퇴하실 건가요? T^T</string>
+    <string name="setting_withdrawal_dialog_accept">예</string>
+    <string name="setting_withdrawal_dialog_decline">아니오</string>
+    <string name="setting_pushalert">푸시 알림</string>
+    <string name="setting_version">버전 정보</string>
+    <string name="setting_maker">만든 사람들</string>
+    <string name="setting_terms">이용 약관</string>
+    <string name="setting_privacy_policy">개인정보 처리방침</string>
+    <string name="setting_license">오픈소스 라이센스</string>
+    <string name="setting_review">앱 스토어 리뷰</string>
+    <string name="setting_instagram">머렝 인스타그램</string>
+    <string name="setting_logout">로그아웃</string>
+    <string name="setting_withdraw">회원 탈퇴</string>
+
+
+    <string name="pushalert_todayalert">오늘의 질문 알림</string>
+    <string name="pushalert_title">푸시 알림</string>
 </resources>
