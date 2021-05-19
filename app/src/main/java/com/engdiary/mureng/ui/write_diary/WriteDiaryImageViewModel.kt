@@ -5,12 +5,13 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.data.DiaryContent
 import com.engdiary.mureng.data.ItemWriteDiaryImage
+import com.engdiary.mureng.data.SingleLiveEvent
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class WriteDiaryImageViewModel @ViewModelInject constructor(
     private val murengRepository: MurengRepository,
@@ -30,6 +31,11 @@ class WriteDiaryImageViewModel @ViewModelInject constructor(
         get() = _diaryImages
 
     private val diaryContent = MutableLiveData<DiaryContent>()
+
+    private val _navigateToDiaryDetail = SingleLiveEvent<Diary>()
+    val navigateToDiaryDetail: LiveData<Diary>
+        get() = _navigateToDiaryDetail
+
 
     init {
         viewModelScope.launch {
@@ -60,11 +66,12 @@ class WriteDiaryImageViewModel @ViewModelInject constructor(
     private suspend fun postDiary() {
         val imagePath = when (_selectedImage.value) {
             is ItemWriteDiaryImage.DiaryImage -> (_selectedImage.value as ItemWriteDiaryImage.DiaryImage).imagePath
-            is ItemWriteDiaryImage.Gallery -> murengRepository.postDiaryImage(_selectedGalleryImage.value)?.imagePath
+            is ItemWriteDiaryImage.Gallery -> murengRepository.postDiaryImage(_selectedGalleryImage.value)
             null -> return
         }
-        val diaryId = imagePath?.let { murengRepository.postDiary(diaryContent.value!!, it) }
-        Timber.d("diaryId: $diaryId")
+        imagePath?.let { murengRepository.postDiary(diaryContent.value!!, it) }
+            ?.let { diary -> _navigateToDiaryDetail.value = diary }
+            .run { _navigateToDiaryDetail.call() }
     }
 
     fun setDiaryContent(diaryContent: DiaryContent) {
