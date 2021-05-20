@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.engdiary.mureng.ui.diary_detail.DiaryDetailViewModel" />
@@ -30,7 +31,7 @@
                     style="@style/Widget.MaterialComponents.Toolbar.Surface"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icons_more_vertical"
+                    app:menu="@menu/diary_detail_top_app_bar"
                     app:navigationIcon="@drawable/icons_home_big" />
             </com.google.android.material.appbar.AppBarLayout>
 
@@ -43,38 +44,50 @@
                 tools:layout_editor_absoluteX="0dp" />
 
             <TextView
-                android:textFontWeight="500"
                 android:id="@+id/textview_diarydetail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
+                android:text="@{viewModel.question.content}"
                 android:textAppearance="@style/TextAppearance.DiaryDetail.Question"
                 android:textColor="@color/white"
+                android:textFontWeight="500"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/appbar_layout"
                 tools:text="What are your biggest worries or concerns these days?" />
 
-            <ImageView
-                android:id="@+id/imageview_diarydetail_profileimage"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageview_diarydetail_diary" />
-
-            <TextView
-                android:fontFamily="@font/notosanskr"
-                android:id="@+id/textview_diarydetail_nickname"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/viewgroup_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.DiaryDetail.Nickname"
-                app:layout_constraintBottom_toBottomOf="@id/imageview_diarydetail_profileimage"
-                app:layout_constraintStart_toEndOf="@id/imageview_diarydetail_profileimage"
-                app:layout_constraintTop_toTopOf="@id/imageview_diarydetail_profileimage"
-                tools:text="닉네임" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageview_diarydetail_diary">
+
+                <ImageView
+                    android:id="@+id/imageview_diarydetail_profileimage"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textview_diarydetail_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanskr"
+                    android:text="@{viewModel.author.nickname}"
+                    android:textAppearance="@style/TextAppearance.DiaryDetail.Nickname"
+                    app:layout_constraintBottom_toBottomOf="@id/imageview_diarydetail_profileimage"
+                    app:layout_constraintStart_toEndOf="@id/imageview_diarydetail_profileimage"
+                    app:layout_constraintTop_toTopOf="@id/imageview_diarydetail_profileimage"
+                    tools:text="닉네임" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <View
                 android:id="@+id/view_delimiter"
@@ -82,13 +95,14 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="11dp"
                 android:background="@color/grey_light"
-                app:layout_constraintTop_toBottomOf="@id/imageview_diarydetail_profileimage" />
+                app:layout_constraintTop_toBottomOf="@id/viewgroup_profile" />
 
             <TextView
                 android:id="@+id/textview_diarydetail_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
+                android:text="@{viewModel.content.content}"
                 android:textAppearance="@style/TextAppearance.DiaryDetail.Content"
                 app:layout_constraintTop_toBottomOf="@id/view_delimiter" />
 
@@ -102,6 +116,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/textview_diarydetail_content"
                 app:layout_constraintTop_toBottomOf="@id/textview_diarydetail_content"
+                android:text="@{viewModel.diary.date}"
                 tools:text="2021. 06. 01." />
 
 
@@ -110,12 +125,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/blue_lightest"
+                android:fontFamily="@font/notosanskr"
                 android:gravity="center_horizontal"
                 android:paddingHorizontal="71dp"
                 android:paddingTop="16dp"
-                android:fontFamily="@font/notosanskr"
                 android:paddingBottom="15dp"
-                android:text="@string/diarydetail_otherresponse"
+                android:text="@string/diary_detail_otherresponse"
                 android:textAppearance="@style/TextAppearance.DiaryDetail.OtherResponse"
                 android:textColor="@color/blue_dark"
                 app:layout_constraintBottom_toBottomOf="parent" />

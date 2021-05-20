@@ -39,4 +39,10 @@ interface MurengService {
     suspend fun getDefaultImages(
         @Header("X-AUTH-TOKEN") accessToken: String
     ): Response<MurengResponse<List<String>>>
+
+    @DELETE("/api/reply/{replyId}")
+    suspend fun deleteDiary(
+        @Header("X-AUTH-TOKEN") accessToken: String,
+        @Path("replyId") diaryId: Int
+    ): Response<MurengResponse<Boolean>>
 }
