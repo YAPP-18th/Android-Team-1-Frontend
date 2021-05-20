@@ -19,7 +19,9 @@
         <activity android:name=".ui.social_best_more.BestMoreActivity"></activity>
         <activity android:name=".ui.social_qcreate.SocialQcreateActivity" />
         <activity android:name=".ui.social_detail.SocialDetailActivity" />
-        <activity android:name=".ui.diary_detail.DiaryDetailActivity" />
+        <activity
+            android:name=".ui.diary_detail.DiaryDetailActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".ui.write_diary.WriteDiaryImageActivity"
             android:exported="true" />
