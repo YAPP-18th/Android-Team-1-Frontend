@@ -12,7 +12,7 @@ import com.engdiary.mureng.data.BestAnswerData
 import com.engdiary.mureng.databinding.ItemSocialAnswerBinding
 
 
-class AnswerAdapter(val vm: BestAnswerViewModel) :
+class BestMoreAdapter(val vm: BestAnswerViewModel) :
     ListAdapter<BestAnswerData, AnswerViewHolder>(AnswerDiffUtilCallBack) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnswerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

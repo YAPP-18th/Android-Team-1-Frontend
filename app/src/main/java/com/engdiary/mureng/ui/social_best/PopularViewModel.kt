@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.engdiary.mureng.data.AnswerData
 import com.engdiary.mureng.data.BestAnswerData
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.QuestionData
+import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import timber.log.Timber
@@ -13,19 +15,19 @@ abstract class PopularViewModel constructor(
     murengRepository: MurengRepository
 ) : BaseViewModel(murengRepository) {
     /** 검색 결과 list */
-    protected val _quesResults = MutableLiveData<List<QuestionData>>(listOf())
-    open val quesResults: LiveData<List<QuestionData>> = _quesResults
+    protected val _quesResults = MutableLiveData<List<QuestionNetwork>>(listOf())
+    open val quesResults: LiveData<List<QuestionNetwork>> = _quesResults
 
     protected val _ansResults = MutableLiveData<List<BestAnswerData>>(listOf())
     open val ansResults: LiveData<List<BestAnswerData>> = _ansResults
 
     /** questionList 아이템뷰를 클릭시 동작하는 로직 */
-    abstract fun questionItemClick(questionData: QuestionData)
+    abstract fun questionItemClick(questionData: QuestionNetwork)
 
 
     /** [_results] 내 특정 아이템을 추가한다. */
-    fun addQuestionResult(questionData: QuestionData) {
-        val results: MutableList<QuestionData> = _quesResults.value?.toMutableList() ?: mutableListOf()
+    fun addQuestionResult(questionData: QuestionNetwork) {
+        val results: MutableList<QuestionNetwork> = _quesResults.value?.toMutableList() ?: mutableListOf()
 
         results.add(questionData)
 
@@ -33,10 +35,10 @@ abstract class PopularViewModel constructor(
     }
 
     /** [_results] 내 특정 아이템을 [wineResult] 변경한다. */
-    fun replaceQuestionResult(questionData: QuestionData) {
-        val results: MutableList<QuestionData> = _quesResults.value?.toMutableList() ?: return
+    fun replaceQuestionResult(questionData: QuestionNetwork) {
+        val results: MutableList<QuestionNetwork> = _quesResults.value?.toMutableList() ?: return
 
-        val prevResult = (results.filter { questionData.quesTitle == it.quesTitle }).firstOrNull()
+        val prevResult = (results.filter { questionData.content == it.content }).firstOrNull()
 
         prevResult?.let {
             val replaceIndex = results.indexOf(it)
@@ -53,8 +55,8 @@ abstract class PopularViewModel constructor(
     }
 
     /** [_results] 내 특정 아이템을 삭제한다. */
-    fun deleteQuestionResult(questionData: QuestionData) {
-        val results: MutableList<QuestionData> = _quesResults.value?.toMutableList() ?: return
+    fun deleteQuestionResult(questionData: QuestionNetwork) {
+        val results: MutableList<QuestionNetwork> = _quesResults.value?.toMutableList() ?: return
 
         val deleteIndex = results.indexOf(questionData)
 

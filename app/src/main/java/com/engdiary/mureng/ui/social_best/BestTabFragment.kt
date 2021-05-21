@@ -7,16 +7,26 @@ import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.databinding.BestTabFragmentBinding
 import com.engdiary.mureng.ui.base.BaseFragment
+import com.engdiary.mureng.ui.social_myques.QuestionAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BestTabFragment : BaseFragment<BestTabFragmentBinding>(R.layout.best_tab_fragment) {
 
     override val viewModel: BestTabViewModel by viewModels<BestTabViewModel>()
+    private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(viewModel) }
+    private val questionAdapter: QuestionAdapter by lazy { QuestionAdapter(viewModel) }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
+        binding.rvSocialPopQues.apply {
+            adapter = questionAdapter
+        }
+        binding.rvSocialPopAns.apply {
+            adapter = answerAdapter
+        }
 
         binding.apply {
             // 텍스트 값 세팅

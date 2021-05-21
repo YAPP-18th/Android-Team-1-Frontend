@@ -14,10 +14,15 @@ import dagger.hilt.android.AndroidEntryPoint
 class MyQuesFragment : BaseFragment<MyQuesFragmentBinding>(R.layout.my_ques_fragment) {
 
     override val viewModel: MyQuesViewModel by viewModels<MyQuesViewModel>()
+    private val questionAdapter: QuestionAdapter by lazy { QuestionAdapter(viewModel) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
+
+        binding.rvSocialMyques.apply {
+            adapter = questionAdapter
+        }
 
         binding.apply {
             // 텍스트 값 세팅

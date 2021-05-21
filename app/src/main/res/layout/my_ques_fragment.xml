@@ -21,7 +21,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="@{vm.isEmpty() ? View.GONE : View.VISIBLE}"
+            android:visibility="@{vm.quesCnt == 0 ? View.GONE : View.VISIBLE}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_social_myques"
-                submitList="@{vm.results}"
+                submitList="@{vm.quesResults}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="@color/colorWhite"
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:visibility="gone"
-            android:visibility="@{vm.isEmpty() ? View.VISIBLE : View.GONE}"
+            android:visibility="@{vm.quesCnt == 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

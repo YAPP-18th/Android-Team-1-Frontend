@@ -5,9 +5,11 @@ import android.app.Activity
 import android.graphics.Insets
 import android.graphics.Point
 import android.graphics.Rect
+import android.os.Build
 import android.util.Size
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.annotation.RequiresApi
 
 
 object WindowLengthCalculator {
@@ -67,6 +69,7 @@ object WindowLengthCalculator {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun getUnnecessaryInset(windowInsets: WindowInsets): Insets {
         return windowInsets.getInsetsIgnoringVisibility(
             WindowInsets.Type.navigationBars()

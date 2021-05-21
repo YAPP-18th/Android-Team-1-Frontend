@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import com.engdiary.mureng.di.AuthManager
 import kotlinx.coroutines.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -48,6 +49,9 @@ abstract class BaseActivity<B : ViewDataBinding>(
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.AndroidViewModelFactory
     abstract val viewModel: BaseViewModel?
+
+    @Inject
+    lateinit var authManager: AuthManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

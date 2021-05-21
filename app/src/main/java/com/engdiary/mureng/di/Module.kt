@@ -97,13 +97,19 @@ object NetworkModule {
      */
     @Provides
     @Singleton
-    fun provideWinePickInterceptor(authManager: AuthManager): Interceptor {
+    fun provideMurengInterceptor(authManager: AuthManager): Interceptor {
         return Interceptor { chain: Interceptor.Chain ->
-            // wine/filter 인 경우, "?" 가 인코딩 되어있는지 확인 후 인코딩 풀어주기
             val request = chain.request()
             var newUrl = request.url.toString()
             val builder = chain.request().newBuilder()
                 .url(newUrl)
+
+            if (newUrl.contains("/api/reply") || newUrl.contains("/api/questions")) {
+                return@Interceptor chain.proceed(chain.request().newBuilder().apply {
+                    addHeader("X-AUTH-TOKEN", authManager.test_jwt)
+                    url(newUrl)
+                }.build())
+            }
 
             return@Interceptor chain.proceed(builder.build())
         }
@@ -112,11 +118,11 @@ object NetworkModule {
     /** HttpClient 객체를 생성하는 Provider 함수이다. */
     @Provides
     @Singleton
-    fun provideHttpClient(okHttpCache: Cache, winePickInterceptor: Interceptor): OkHttpClient {
+    fun provideHttpClient(okHttpCache: Cache, murengInterceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .cache(okHttpCache)
             .addInterceptor(httpLoggingInterceptor)
-            .addInterceptor(winePickInterceptor)
+            .addInterceptor(murengInterceptor)
             .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS)

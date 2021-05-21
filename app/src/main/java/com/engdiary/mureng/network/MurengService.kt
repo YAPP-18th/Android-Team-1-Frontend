@@ -6,6 +6,7 @@ import com.engdiary.mureng.data.response.MurengResponse
 import com.engdiary.mureng.data.response.PostDiaryImageResponse
 import com.engdiary.mureng.data.response.QuestionNetwork
 import okhttp3.MultipartBody
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -45,4 +46,16 @@ interface MurengService {
         @Header("X-AUTH-TOKEN") accessToken: String,
         @Path("replyId") diaryId: Int
     ): Response<MurengResponse<Boolean>>
+
+
+    @GET ("/api/questions")
+    fun getQuestionList(
+        @Query("page") page : Int,
+        @Query("size") size : Int,
+        @Query("sort") sort : String
+    ) : Call<MurengResponse<List<QuestionNetwork>>>
+
+    @GET ("/api/questions/me")
+    fun getMyQuestionList(
+    ) : Call<MurengResponse<List<QuestionNetwork>>>
 }
