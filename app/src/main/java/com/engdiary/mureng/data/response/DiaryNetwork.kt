@@ -22,7 +22,8 @@ data class DiaryNetwork(
     @SerializedName("replyLikeCount")
     val likeCount: Int,
     @SerializedName("requestedByAuthor")
-    val isMine: Boolean
+    val isMine: Boolean,
+    var likeYn : Boolean = false
 ) {
     fun asDomain(): Diary =
         Diary(

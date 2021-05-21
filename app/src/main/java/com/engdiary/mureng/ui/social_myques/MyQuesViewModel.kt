@@ -2,13 +2,10 @@ package com.engdiary.mureng.ui.social_myques
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.engdiary.mureng.data.BestAnswerData
-import com.engdiary.mureng.data.QuestionData
+import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.network.MurengRepository
-import com.engdiary.mureng.ui.base.BaseViewModel
-import com.engdiary.mureng.ui.social_best.PopularViewModel
+import com.engdiary.mureng.ui.social_best.BestPopularViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -16,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MyQuesViewModel @Inject constructor(
     private val murengRepository: MurengRepository
-) : PopularViewModel(murengRepository) {
+) : BestPopularViewModel(murengRepository) {
 
     private var _quesCnt = MutableLiveData<Int>()
     var quesCnt: LiveData<Int> = _quesCnt
@@ -42,10 +39,9 @@ class MyQuesViewModel @Inject constructor(
     override fun questionItemClick(questionData: QuestionNetwork) {
     }
 
-    override fun answerItemClick(answerData: BestAnswerData) {
-        // TODO 안쓰임
+    override fun answerItemClick(answerData: DiaryNetwork) {
+        //TODO 안쓰임!!
     }
-
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {

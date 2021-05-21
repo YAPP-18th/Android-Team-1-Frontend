@@ -28,9 +28,6 @@ class SocialFragment : BaseFragment<SocialFragmentBinding>(R.layout.social_fragm
             fragmentManager = childFragmentManager
             vm = viewModel
             lifecycleOwner = this@SocialFragment.viewLifecycleOwner
-
-            // 텍스트 값 세팅
-
         }
 
     }

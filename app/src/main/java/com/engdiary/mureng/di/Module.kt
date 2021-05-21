@@ -3,6 +3,8 @@ package com.engdiary.mureng.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.BuildConfig
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.module.AppGlideModule
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.network.MurengService
 import com.engdiary.mureng.ui.base.BaseViewModel
@@ -28,11 +30,12 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 
-const val CONNECT_TIMEOUT = 15.toLong()
-const val WRITE_TIMEOUT = 15.toLong()
-const val READ_TIMEOUT = 15.toLong()
+const val CONNECT_TIMEOUT = 60.toLong()
+const val WRITE_TIMEOUT = 60.toLong()
+const val READ_TIMEOUT = 60.toLong()
 
 const val BASE_URL = "http://parkkiho.asuscomm.com:8081"
+const val MEDIA_BASE_URL = "http://parkkiho.asuscomm.com:10025"
 
 /**
  * 코루틴을 활용하여 HTTP 요청을 보낼 시 활용하는 로직
@@ -73,11 +76,14 @@ class ActivityModule {
     }
 }
 
+@GlideModule
+class MurengGlide : AppGlideModule()
+
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
-        level = if (BuildConfig.DEBUG) {
+        level = if (com.engdiary.mureng.BuildConfig.DEBUG) {
             HttpLoggingInterceptor.Level.BODY
         } else {
             HttpLoggingInterceptor.Level.NONE
@@ -185,3 +191,4 @@ object RepositoryModule {
 @InstallIn(SingletonComponent::class)
 object DataSourceModule {
 }
+

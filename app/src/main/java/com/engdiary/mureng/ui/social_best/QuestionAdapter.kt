@@ -1,4 +1,4 @@
-package com.engdiary.mureng.ui.social_myques
+package com.engdiary.mureng.ui.social_best
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,15 +7,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.R
-import com.engdiary.mureng.data.Question
-import com.engdiary.mureng.data.QuestionData
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.databinding.ItemSocialQuesBinding
-import com.engdiary.mureng.ui.social_best.PopularViewModel
 import com.engdiary.mureng.util.setOnSingleClickListener
 
-
-class QuestionAdapter(val vm: PopularViewModel) :
+/**
+ * Social_Best Tab, My QUES Tab 인기 질문, 내 질문 리스트  RecyclerView Adapter
+ */
+class QuestionAdapter(val vm: BestPopularViewModel) :
     ListAdapter<QuestionNetwork, QuestionViewHolder>(QuestionDiffUtilCallBack) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -37,7 +36,7 @@ class QuestionAdapter(val vm: PopularViewModel) :
 class QuestionViewHolder(private val binding: ItemSocialQuesBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(question: QuestionNetwork, vm: PopularViewModel) {
+    fun bind(question: QuestionNetwork, vm: BestPopularViewModel) {
         binding.quesData = question
         binding.vm = vm
 

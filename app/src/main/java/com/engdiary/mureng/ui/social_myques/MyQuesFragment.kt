@@ -7,7 +7,7 @@ import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.databinding.MyQuesFragmentBinding
 import com.engdiary.mureng.ui.base.BaseFragment
-import com.engdiary.mureng.ui.social_best.BestTabFragment
+import com.engdiary.mureng.ui.social_best.QuestionAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

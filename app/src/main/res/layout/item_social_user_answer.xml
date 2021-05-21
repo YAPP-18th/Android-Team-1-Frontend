@@ -5,12 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
-
         <variable
-            name="AnswerData"
-            type="com.engdiary.mureng.data.AnswerData" />
+            name="Diary"
+            type="com.engdiary.mureng.data.response.DiaryNetwork" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +33,7 @@
             android:id="@+id/tv_social_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{AnswerData.userName}"
+            android:text="@{Diary.author.nickname}"
             android:textStyle="normal"
             android:textSize="14dp"
             android:textColor="@color/colorBlack17"
@@ -48,7 +46,7 @@
             android:id="@+id/tv_social_user_answer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{AnswerData.ansTitle}"
+            android:text="@{Diary.content}"
             android:textStyle="normal"
             android:textSize="14dp"
             android:layout_marginTop="4dp"
@@ -80,15 +78,13 @@
                 tools:src="@drawable/icons_heart_filled"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:src="@{AnswerData.likeYn ? @drawable/icons_heart_filled : @drawable/icons_heart_outlined}"/>
+                app:layout_constraintStart_toStartOf="parent" />
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="999"
-                android:text="@{AnswerData.likeNum}"
                 android:textStyle="normal"
                 android:textSize="12dp"
                 android:textColor="@color/colorGrayaf"

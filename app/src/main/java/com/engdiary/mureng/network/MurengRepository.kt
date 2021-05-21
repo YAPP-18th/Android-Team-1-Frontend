@@ -10,6 +10,7 @@ import com.engdiary.mureng.data.DiaryContent
 import com.engdiary.mureng.data.ItemWriteDiaryImage
 import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.request.PostDiaryRequest
+import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.BASE_URL
@@ -143,6 +144,21 @@ class MurengRepository @Inject constructor(
         onFailure: () -> Unit
     ) {
         api.getQuestionList(page, size, sort).safeEnqueue (
+            onSuccess = {onSuccess(it.data!!)},
+            onFailure = {onFailure()},
+            onError = {onFailure()}
+        )
+    }
+
+
+    fun getAnswerList(
+        page : Int,
+        size : Int,
+        sort : String,
+        onSuccess: (List<DiaryNetwork>) -> Unit,
+        onFailure: () -> Unit
+    ) {
+        api.getAnswerList(page, size, sort).safeEnqueue (
             onSuccess = {onSuccess(it.data!!)},
             onFailure = {onFailure()},
             onError = {onFailure()}

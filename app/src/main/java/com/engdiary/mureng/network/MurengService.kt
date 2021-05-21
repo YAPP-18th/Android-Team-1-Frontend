@@ -48,12 +48,21 @@ interface MurengService {
     ): Response<MurengResponse<Boolean>>
 
 
+    @GET ("/api/reply")
+    fun getAnswerList(
+        @Query("page") page : Int,
+        @Query("size") size : Int,
+        @Query("sort") sort : String
+    ) : Call<MurengResponse<List<DiaryNetwork>>>
+
+
     @GET ("/api/questions")
     fun getQuestionList(
         @Query("page") page : Int,
         @Query("size") size : Int,
         @Query("sort") sort : String
     ) : Call<MurengResponse<List<QuestionNetwork>>>
+
 
     @GET ("/api/questions/me")
     fun getMyQuestionList(

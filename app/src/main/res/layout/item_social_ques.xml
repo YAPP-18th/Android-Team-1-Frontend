@@ -15,7 +15,7 @@
 
         <variable
             name="vm"
-            type="com.engdiary.mureng.ui.social_best.PopularViewModel" />
+            type="com.engdiary.mureng.ui.social_best.BestPopularViewModel" />
 
     </data>
 

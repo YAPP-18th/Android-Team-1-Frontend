@@ -95,6 +95,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textSize="16dp"
                 android:lineSpacingExtra="8sp"
+                style="@style/TextAppearance.ImcreSoojinStyle"
                 android:text="@string/null_question"
                 tools:text="질문을 만들러 가볼까요?"/>
 
