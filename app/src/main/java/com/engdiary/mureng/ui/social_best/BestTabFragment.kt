@@ -1,8 +1,10 @@
 package com.engdiary.mureng.ui.social_best
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.databinding.BestTabFragmentBinding
@@ -27,8 +29,25 @@ class BestTabFragment : BaseFragment<BestTabFragmentBinding>(R.layout.best_tab_f
 
         binding.rvSocialPopAns.apply {
             adapter = answerAdapter
+            this.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+
+                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
+
+                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                    when (e.action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            binding.rvSocialPopAns.parent?.requestDisallowInterceptTouchEvent(true)
+                        }
+                    }
+                    return false
+                }
+
+                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
+            })
             this.addItemDecoration(HorizontalItemDecorator(12))
         }
+
+
     }
 
     override fun onResume() {
