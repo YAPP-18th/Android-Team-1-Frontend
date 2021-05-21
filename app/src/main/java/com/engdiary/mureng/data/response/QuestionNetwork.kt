@@ -16,7 +16,7 @@ data class QuestionNetwork(
     val repliesCount: Int = 0 ,
     @SerializedName("wordHints")
     val wordHints: List<HintNetwork>
-) {
+) : java.io.Serializable {
     fun asDomain(): Question =
         Question(category, content, contentKr, questionId, repliesCount, wordHints.map { it.asDomain() })
 }

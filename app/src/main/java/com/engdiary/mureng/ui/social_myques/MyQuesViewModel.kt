@@ -1,11 +1,15 @@
 package com.engdiary.mureng.ui.social_myques
 
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.social_best.BestPopularViewModel
+import com.engdiary.mureng.ui.social_detail.SocialDetailActivity
+import com.engdiary.mureng.ui.social_qcreate.SocialQcreateActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -37,6 +41,12 @@ class MyQuesViewModel @Inject constructor(
     }
 
     override fun questionItemClick(questionData: QuestionNetwork) {
+        Intent(MurengApplication.appContext, SocialDetailActivity::class.java).apply {
+            this.putExtra("quesitonData", questionData)
+        }.run {
+            MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }
+
     }
 
     override fun answerItemClick(answerData: DiaryNetwork) {

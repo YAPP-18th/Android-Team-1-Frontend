@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="vm"
             type="com.engdiary.mureng.ui.social_detail.SocialDetailViewModel" />
@@ -77,6 +78,9 @@
                         android:layout_height="wrap_content"
                         tools:text="akfjaljfalkjfa;fkljadkflajdfk;lajfdkajdfk;lajdfa;kldfjaklfjafjkaldf"
                         android:maxLines="3"
+                        android:text="@{vm.questionTitle}"
+                        android:layout_marginTop="12dp"
+                        style="@style/TextAppearance.RobotoMediumStyle"
                         android:ellipsize="end"
                         android:textStyle="normal"
                         android:textSize="20dp"
@@ -91,6 +95,8 @@
                         android:layout_height="wrap_content"
                         android:textSize="14dp"
                         tools:text="요즘 당신의 ~~~"
+                        style="@style/TextAppearance.NotosanskrRegularStyle"
+                        android:text="@{vm.questionContent}"
                         android:textColor="@color/colorBlack"
                         android:lineSpacingExtra="7sp"
                         app:layout_constraintTop_toBottomOf="@id/tv_social_detail_eng"
@@ -115,7 +121,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:textStyle="normal"
+                        android:text="@{vm.questionUser}"
                         android:textSize="12dp"
+                        style="@style/TextAppearance.NotosanskrRegularStyle"
                         android:textColor="@color/colorBlackGray"
                         android:lineSpacingExtra="5sp"
                         tools:text="dddd?"
@@ -144,9 +152,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{@string/total_answer_count(vm.answerCnt)}"
-                    android:textStyle="normal"
                     android:textSize="12dp"
                     tools:text="총 n개의 답변"
+                    style="@style/TextAppearance.NotosanskrRegularStyle"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:textColor="@color/colorBlackGray"
@@ -160,6 +168,7 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 tools:visibility="gone"
+                android:visibility="@{vm.answerCnt == 0 ? View.VISIBLE : View.GONE}"
                 android:id="@+id/cl_social_detail_empty"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -184,6 +193,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/null_answer"
                     android:textSize="16dp"
+                    style="@style/TextAppearance.ImcreSoojinStyle"
                     android:textColor="@color/colorGrayaf"
                     android:lineSpacingExtra="8sp"
                     android:gravity="center_horizontal"
@@ -196,9 +206,10 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_social_myques"
-                submitList="@{vm.results}"
+                submitList="@{vm.ansResults}"
+                android:visibility="@{vm.answerCnt == 0 ? View.GONE : View.VISIBLE}"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
                 android:layout_marginTop="8dp"
@@ -212,8 +223,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

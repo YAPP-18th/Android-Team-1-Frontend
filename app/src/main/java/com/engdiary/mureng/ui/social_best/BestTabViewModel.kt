@@ -1,6 +1,10 @@
 package com.engdiary.mureng.ui.social_best
 
+import android.content.Context
 import android.content.Intent
+import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.engdiary.mureng.constant.BestMoreConstant
 import com.engdiary.mureng.constant.SortConstant
 import com.engdiary.mureng.data.response.DiaryNetwork
@@ -9,6 +13,9 @@ import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.social_best_more.BestMoreActivity
+import com.engdiary.mureng.ui.social_detail.SocialDetailActivity
+import com.engdiary.mureng.ui.social_detail.SocialDetailViewModel
+import com.engdiary.mureng.ui.social_qcreate.SocialQcreateActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,6 +25,7 @@ class BestTabViewModel @Inject constructor(
     private val murengRepository: MurengRepository,
     private val authManager: AuthManager
 ) : BestPopularViewModel(murengRepository) {
+
 
     /** 생성자 */
     init {
@@ -66,7 +74,11 @@ class BestTabViewModel @Inject constructor(
 
 
     override fun questionItemClick(questionData: QuestionNetwork) {
-        // TODO("Not yet implemented")
+        Intent(MurengApplication.appContext, SocialDetailActivity::class.java).apply {
+            this.putExtra("quesitonData", questionData)
+        }.run {
+            MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }
     }
 
     override fun answerItemClick(answerData: DiaryNetwork) {

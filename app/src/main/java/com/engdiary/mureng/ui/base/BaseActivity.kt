@@ -1,5 +1,6 @@
 package com.engdiary.mureng.ui.base
 
+import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.CallSuper
@@ -74,6 +75,10 @@ abstract class BaseActivity<B : ViewDataBinding>(
     override fun onDestroy() {
         uiScope.cancel()
         super.onDestroy()
+    }
+
+    override fun onAttachFragment(fragment: Fragment?) {
+        super.onAttachFragment(fragment)
     }
 
     /**

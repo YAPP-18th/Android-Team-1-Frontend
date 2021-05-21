@@ -16,6 +16,7 @@ import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.BASE_URL
 import com.engdiary.mureng.di.MurengApplication
+import com.engdiary.mureng.util.onErrorStub
 import com.engdiary.mureng.util.safeEnqueue
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -183,6 +184,21 @@ class MurengRepository @Inject constructor(
     ) {
         api.postCreateQuestion(postQuestioRequest).safeEnqueue(
             onSuccess = {onSuccess()},
+            onFailure = {onFailure()},
+            onError = {onFailure()}
+        )
+    }
+
+    fun getReplyAnswerList(
+        questionId : Int,
+        page : Int?,
+        size : Int?,
+        sort : String?,
+        onSuccess: (List<DiaryNetwork>) -> Unit,
+        onFailure: () -> Unit
+    ) {
+        api.getReplyAnswerList(questionId, page, size, sort).safeEnqueue(
+            onSuccess = {onSuccess(it.data!!)},
             onFailure = {onFailure()},
             onError = {onFailure()}
         )

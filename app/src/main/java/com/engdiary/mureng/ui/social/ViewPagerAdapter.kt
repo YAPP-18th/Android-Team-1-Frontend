@@ -20,7 +20,6 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, items: List<String>) :
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> BestTabFragment()
-            1 -> MyQuesFragment()
             else -> MyQuesFragment()
         }
     }

@@ -1,5 +1,6 @@
 package com.engdiary.mureng.ui.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.CoroutineScope
@@ -72,4 +74,5 @@ fun BaseFragment<*>.navigate(fm: FragmentManager, @IdRes id: Int): Int {
             .commit()
     }
 }
+
 
