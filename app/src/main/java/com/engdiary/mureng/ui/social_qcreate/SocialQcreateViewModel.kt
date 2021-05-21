@@ -52,7 +52,6 @@ class SocialQcreateViewModel @Inject constructor(
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             if (!p0.toString().isNullOrEmpty()) {
-
                 val ps: Pattern = compile("^[a-zA-Z0-9\\s!~`@#\$%\\^?,. ]+$")
                 _warningEng.value = !ps.matcher(p0).matches()
 
@@ -135,7 +134,8 @@ class SocialQcreateViewModel @Inject constructor(
 
     }
     fun quesWarningCheck() {
-        if(!_qCreateEngQues!!.value!!.toString().isNullOrBlank()) {
+        Timber.e(_qCreateEngQues.value)
+        if(!_qCreateEngQues.value!!.toString().isNullOrBlank()) {
             _registerVisible.value = !_warningEng.value!! && !_warningKor.value!! && !_warningMaxEng.value!! && !_warningMaxKor.value!!
         } else {
             _registerVisible.value = false

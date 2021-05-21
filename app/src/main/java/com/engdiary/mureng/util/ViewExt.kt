@@ -120,7 +120,6 @@ fun setImageDrawableResource(imageView: ImageView, resource: Int) {
 @BindingAdapter("imageGlideResource")
 fun setImageGlideResource(imageView: ImageView, resource: String) {
     val resourceStr = MEDIA_BASE_URL + resource
-    Timber.e("path -${resourceStr}")
     Glide.with(imageView).load(resourceStr).into(imageView)
 }
 
