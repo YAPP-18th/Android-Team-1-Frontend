@@ -35,13 +35,8 @@
     <!--social_best_more-->
     <color name="colorDarkGray4d">#4d5050</color>
 
-
-
-
-
     <color name="primary_pink">#fc89ac</color>
     <color name="peachy_pink_40">#66ff8f8f</color>
-    <color name="powder_pink">#fdb2c9</color>
     <color name="pale">#ffeecb</color>
     <color name="warm_pink">#fb5284</color>
     <color name="white">#ffffff</color>
@@ -53,7 +48,10 @@
     <color name="grey2">#8b8b8b</color>
     <color name="pink2">#66fb6a95</color>
     <color name="pinkpink">#fb5284</color>
-
+    
+    <!-- write_diary_content-->
+    <color name="powder_blue">#c2d8f7</color>
+    <color name="powder_pink">#ffaac4</color>
     <!-- write_diary_image -->
     <color name="diaryimage_selected_tint">#B3ffffff</color>
 
