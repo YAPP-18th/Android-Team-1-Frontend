@@ -39,16 +39,18 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/social_detail_bg_grad"
                 app:imageGlideResource="@{Diary.image}"
                 android:scaleType="centerCrop"/>
 
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/tv_social_best_answer_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{Diary.question.content}"
-            android:textStyle="normal"
+            style="@style/TextAppearance.RobotoMediumStyle"
             android:textSize="22dp"
             android:textColor="@color/colorWhite"
             android:maxLines="2"
@@ -57,6 +59,8 @@
             android:layout_marginHorizontal="16dp"
             android:letterSpacing="0.01"
             android:lineSpacingExtra="8sp"
+            app:layout_constraintVertical_chainStyle="spread_inside"
+            app:layout_constraintBottom_toTopOf="@id/tv_social_best_answer_content"
             app:layout_constraintTop_toTopOf="@id/cv_social_ans_best"
             app:layout_constraintEnd_toEndOf="@id/cv_social_ans_best"
             app:layout_constraintStart_toStartOf="@id/cv_social_ans_best"
@@ -65,12 +69,18 @@
 
 
         <TextView
+            android:id="@+id/tv_social_best_answer_content"
             android:text="@{Diary.content}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
+            android:textSize="16dp"
+            android:lineSpacingExtra="5sp"
+            android:maxLines="3"
+            app:layout_constraintTop_toBottomOf="@id/tv_social_best_answer_title"
             android:layout_marginBottom="16dp"
             android:layout_marginHorizontal="16dp"
+            style="@style/TextAppearance.RobotoRegularStyle"
             app:layout_constraintBottom_toTopOf="@id/view_social_best_line"
             tools:text="adlkdjfl;akdjfa;kldfja;lkdfjalk;dfjak;ldfjadklfjadfkl;adsfjka;ldsfjas;dlfjads"
             app:layout_constraintEnd_toEndOf="@id/cv_social_ans_best"
@@ -96,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="14dp"
             tools:text="dddddd"
-            android:textStyle="normal"
+            style="@style/TextAppearance.NotosanskrRegularStyle"
             android:textSize="12dp"
             android:text="@{Diary.author.nickname}"
             android:textColor="@color/colorWhite"
@@ -113,7 +123,7 @@
             android:layout_marginBottom="14dp"
             tools:text="99"
             android:text="@{@string/reply_answer_cnt(Diary.likeCount)}"
-            android:textStyle="normal"
+            style="@style/TextAppearance.RobotoMediumStyle"
             android:textSize="12dp"
             android:textColor="@color/colorWhite"
             android:lineSpacingExtra="5sp"

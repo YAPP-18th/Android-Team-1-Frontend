@@ -4,6 +4,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -143,9 +144,16 @@ class SocialQcreateViewModel @Inject constructor(
     }
 
     fun registerClick() {
-        //TODO 서버에 질문 등록 필요
         if (_registerVisible.value!!) {
-            _registerQues.value = true
+            murengRepository.postCreateQuestion(PostQuestioRequest(category = "social",content = _qCreateEngQues.value.toString(), koContent = _qCreateKorQues.value.toString()!!),
+                onSuccess = {
+                    Timber.d("질문 생성 성공")
+                    _registerQues.value = true
+                },
+                onFailure = {
+                    Timber.d("질문 생성 실패")
+                }
+            )
         }
     }
 

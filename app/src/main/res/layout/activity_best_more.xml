@@ -69,6 +69,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:text="ANSWERS"
+                            style="@style/TextAppearance.RobotoMediumStyle"
                             android:text="@{vm.barTitle}"
                             android:textColor="@color/colorBlackGray"
                             android:gravity="center_horizontal"
@@ -154,9 +155,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="normal"
                             android:textSize="12dp"
                             tools:text="총 n개의 답변"
+                            style="@style/TextAppearance.NotosanskrRegularStyle"
                             android:text="@{vm.isAns ? @string/total_answer_count(vm.totalCnt) : @string/total_ques_count(vm.totalCnt)}"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -196,7 +197,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/cl_best_more"
-                        tools:listitem="@layout/item_social_ques" />
+                        tools:listitem="@layout/item_social_best_answer"  />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

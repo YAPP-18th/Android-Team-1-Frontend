@@ -1,6 +1,7 @@
 package com.engdiary.mureng.network
 
 import com.engdiary.mureng.data.request.PostDiaryRequest
+import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.MurengResponse
 import com.engdiary.mureng.data.response.PostDiaryImageResponse
@@ -67,4 +68,9 @@ interface MurengService {
     @GET ("/api/questions/me")
     fun getMyQuestionList(
     ) : Call<MurengResponse<List<QuestionNetwork>>>
+
+    @POST("/api/questions")
+    fun postCreateQuestion(
+        @Body postQuestioRequest: PostQuestioRequest
+    ) : Call<MurengResponse<Unit>>
 }

@@ -45,8 +45,7 @@
             app:layout_constraintStart_toEndOf="@id/img_best_more_profile"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="10dp"
-            android:fontFamily="@font/notosanskr_medium"
-            android:textStyle="normal"
+            style="@style/TextAppearance.NotosanskrMediumStyle"
             android:textSize="12dp"
             android:text="@{Diary.author.nickname}"
             android:textColor="@color/colorDarkGray4d" />
@@ -62,9 +61,8 @@
             app:layout_constraintTop_toBottomOf="@id/tv_social_best_more_nickname"
             tools:text="ddddddd"
             android:layout_marginTop="6dp"
-            android:fontFamily="sans-serif-black"
-            android:textStyle="normal"
-            android:textSize="16sp"
+            style="@style/TextAppearance.RobotoMediumStyle"
+            android:textSize="16dp"
             android:textColor="@color/colorBlack17"/>
 
 
@@ -78,8 +76,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="dddd"
             android:layout_marginTop="4dp"
-            android:fontFamily="sans-serif"
-            android:textStyle="normal"
+            style="@style/TextAppearance.RobotoRegularStyle"
             android:textSize="14dp"
             android:textColor="@color/colorBlack17"
             android:lineSpacingExtra="3sp"/>
@@ -107,9 +104,8 @@
 
             <TextView
                 tools:text="999"
-                android:fontFamily="@font/notosanskr_regular"
-                android:textStyle="normal"
-                android:textSize="14sp"
+                style="@style/TextAppearance.NotosanskrRegularStyle"
+                android:textSize="14dp"
                 android:text="@{@string/reply_answer_cnt(Diary.likeCount)}"
                 android:textColor="@{Diary.likeYn ? @color/pinkpink : @color/colorGrayaf}"
                 android:lineSpacingExtra="7sp"
@@ -123,9 +119,5 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </layout>

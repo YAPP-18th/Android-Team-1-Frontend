@@ -10,6 +10,7 @@ import com.engdiary.mureng.data.DiaryContent
 import com.engdiary.mureng.data.ItemWriteDiaryImage
 import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.request.PostDiaryRequest
+import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.AuthManager
@@ -150,7 +151,6 @@ class MurengRepository @Inject constructor(
         )
     }
 
-
     fun getAnswerList(
         page : Int,
         size : Int,
@@ -171,6 +171,18 @@ class MurengRepository @Inject constructor(
     ) {
         api.getMyQuestionList().safeEnqueue(
             onSuccess = {onSuccess(it.data!!)},
+            onFailure = {onFailure()},
+            onError = {onFailure()}
+        )
+    }
+
+    fun postCreateQuestion(
+        postQuestioRequest: PostQuestioRequest,
+        onSuccess: () -> Unit,
+        onFailure: () -> Unit
+    ) {
+        api.postCreateQuestion(postQuestioRequest).safeEnqueue(
+            onSuccess = {onSuccess()},
             onFailure = {onFailure()},
             onError = {onFailure()}
         )
