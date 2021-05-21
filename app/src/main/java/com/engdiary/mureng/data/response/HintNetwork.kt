@@ -10,6 +10,6 @@ data class HintNetwork(
     val meaning: String,
     @SerializedName("word")
     val word: String
-){
+) : java.io.Serializable {
     fun asDomain(): Hint = Hint(id, word, meaning)
 }

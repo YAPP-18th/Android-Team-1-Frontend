@@ -1,5 +1,6 @@
 package com.engdiary.mureng.ui.social
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
@@ -22,7 +23,6 @@ class SocialFragment : BaseFragment<SocialFragmentBinding>(R.layout.social_fragm
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
-
 
         binding.apply {
             fragmentManager = childFragmentManager
