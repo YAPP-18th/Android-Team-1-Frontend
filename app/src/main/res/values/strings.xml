@@ -3,6 +3,7 @@
     <string name="home">HOME</string>
     <string name="social">SOCIAL</string>
     <string name="writing">WRITING</string>
+    <string name="my">MY</string>
 
     <!--social-->
     <string name="make_question">질문 만들기</string>
@@ -11,6 +12,7 @@
 
     <!--social_ques-->
     <string name="total_ques_count">총 %d개의 질문</string>
+    <string name="reply_answer_cnt">%d</string>
 
 
     <!--social_ques_detail-->
@@ -32,9 +34,9 @@
     <string name="qcreate_number1_ques">1. 질문을 자유롭게 만들어보세요.</string>
     <string name="qcreate_number2_ques">2. 해석을 쓰면 답변 확률이 높아져요.</string>
     <string name="qcreate_eng_warning">영어로 작성할 수 있는 칸이에요!</string>
-    <string name="qcreate_eng_max_cnt">최대 63자까지 쓸 수 있어요!</string>
+    <string name="qcreate_eng_max_cnt">최대 73자까지 쓸 수 있어요!</string>
     <string name="qcreate_kor_warning">한글로 작성할 수 있는 칸이에요!</string>
-    <string name="qcreate_kor_max_cnt">최대 50자까지 쓸 수 있어요!</string>
+    <string name="qcreate_kor_max_cnt">최대 45자까지 쓸 수 있어요!</string>
     <string name="qcreate_create_ques">등록</string>
     <string name="qcreate_eng_hint">Let\'s write! :D</string>
     <string name="qcreate_kor_hint">한글로 써주세요!</string>

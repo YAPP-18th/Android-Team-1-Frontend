@@ -3,6 +3,7 @@ package com.engdiary.mureng.di
 import com.engdiary.mureng.constant.AuthConstant.AUTO_LOGIN_KEY
 import com.engdiary.mureng.constant.AuthConstant.EXPIRE_KEY
 import com.engdiary.mureng.constant.AuthConstant.ID
+import com.engdiary.mureng.constant.AuthConstant.TEST_JWT
 import com.engdiary.mureng.constant.AuthConstant.TOKEN_KEY
 import kr.co.nexters.winepick.util.SharedPrefs
 import javax.inject.Inject
@@ -41,6 +42,14 @@ class AuthManager @Inject constructor(val sharedPrefs: SharedPrefs) {
         }
         set(value) {
             sharedPrefs[ID] = value
+        }
+
+    var test_jwt: String
+        get() {
+            return sharedPrefs[TEST_JWT, ""] ?: ""
+        }
+        set(value) {
+            sharedPrefs[TEST_JWT] = value
         }
 
 }

@@ -10,9 +10,12 @@ import com.engdiary.mureng.data.DiaryContent
 import com.engdiary.mureng.data.ItemWriteDiaryImage
 import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.request.PostDiaryRequest
+import com.engdiary.mureng.data.response.DiaryNetwork
+import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.BASE_URL
 import com.engdiary.mureng.di.MurengApplication
+import com.engdiary.mureng.util.safeEnqueue
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -131,5 +134,45 @@ class MurengRepository @Inject constructor(
             diaryId
         )
         return response.body()?.data
+    }
+
+    fun getQuestionList(
+        page : Int,
+        size : Int,
+        sort : String,
+        onSuccess: (List<QuestionNetwork>) -> Unit,
+        onFailure: () -> Unit
+    ) {
+        api.getQuestionList(page, size, sort).safeEnqueue (
+            onSuccess = {onSuccess(it.data!!)},
+            onFailure = {onFailure()},
+            onError = {onFailure()}
+        )
+    }
+
+
+    fun getAnswerList(
+        page : Int,
+        size : Int,
+        sort : String,
+        onSuccess: (List<DiaryNetwork>) -> Unit,
+        onFailure: () -> Unit
+    ) {
+        api.getAnswerList(page, size, sort).safeEnqueue (
+            onSuccess = {onSuccess(it.data!!)},
+            onFailure = {onFailure()},
+            onError = {onFailure()}
+        )
+    }
+
+    fun getMyQuestionList(
+        onSuccess: (List<QuestionNetwork>) -> Unit,
+        onFailure: () -> Unit
+    ) {
+        api.getMyQuestionList().safeEnqueue(
+            onSuccess = {onSuccess(it.data!!)},
+            onFailure = {onFailure()},
+            onError = {onFailure()}
+        )
     }
 }

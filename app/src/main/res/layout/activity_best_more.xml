@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
-                android:background="@color/blue_lightest"
+                android:background="@{vm.isAns()? @color/blue_lightest : @color/pinklight }"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -58,6 +58,7 @@
                             android:layout_height="wrap_content"
                             android:paddingVertical="12dp"
                             android:paddingRight="16dp"
+                            app:onSingleClick="@{vm::backClick}"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -68,6 +69,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:text="ANSWERS"
+                            android:text="@{vm.barTitle}"
                             android:textColor="@color/colorBlackGray"
                             android:gravity="center_horizontal"
                             android:textSize="16dp"
@@ -87,7 +89,35 @@
                     android:layout_height="216dp">
 
 
+                    <ImageView
+                        android:id="@+id/img_best_more_icon"
+                        tools:src="@drawable/icons_symbol_cheek_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:imageResource="@{vm.barImage}"
+                        android:layout_marginEnd="22dp"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintEnd_toStartOf="@id/tv_best_more_content"
+                        app:layout_constraintTop_toTopOf="@id/tv_best_more_content"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_best_more_content"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
+                    <TextView
+                        android:id="@+id/tv_best_more_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.ImcreSoojinStyle"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:text="@{vm.barContent}"
+                        android:textColor="@{vm.isAns()? @color/colorSkyBlue : @color/colorPinkfb }"
+                        android:lineSpacingExtra="8sp"
+                        app:layout_constraintVertical_bias="0.59"
+                        tools:text="다른 사람들은\n어떤 답을 썼을까요?"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/img_best_more_icon"
+                        app:layout_constraintEnd_toEndOf="parent"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -127,6 +157,7 @@
                             android:textStyle="normal"
                             android:textSize="12dp"
                             tools:text="총 n개의 답변"
+                            android:text="@{vm.isAns ? @string/total_answer_count(vm.totalCnt) : @string/total_ques_count(vm.totalCnt)}"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             android:textColor="@color/colorBlackGray"
@@ -137,10 +168,10 @@
 
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:visibility="@{vm.isAns ? View.VISIBLE : View.GONE}"
                         android:id="@+id/rv_social_best_answer"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:background="@color/colorWhite"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginTop="8dp"
                         submitList="@{vm.ansResults}"
@@ -151,6 +182,21 @@
                         app:layout_constraintTop_toBottomOf="@id/cl_best_more"
                         tools:listitem="@layout/item_social_best_answer" />
 
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:visibility="@{vm.isAns ? View.GONE : View.VISIBLE}"
+                        android:id="@+id/rv_social_best_question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="8dp"
+                        submitList="@{vm.quesResults}"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/cl_best_more"
+                        tools:listitem="@layout/item_social_ques" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

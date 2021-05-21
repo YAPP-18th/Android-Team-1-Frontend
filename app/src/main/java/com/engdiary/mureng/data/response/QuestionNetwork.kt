@@ -13,7 +13,7 @@ data class QuestionNetwork(
     @SerializedName("koContent")
     val contentKr: String,
     @SerializedName("repliesCount")
-    val repliesCount: Int,
+    val repliesCount: Int = 0 ,
     @SerializedName("wordHints")
     val wordHints: List<HintNetwork>
 ) {

@@ -2,11 +2,12 @@ package com.engdiary.mureng.ui.social_best_more
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
-import com.engdiary.mureng.data.QuestionData
 import com.engdiary.mureng.databinding.ActivityBestMoreBinding
 import com.engdiary.mureng.ui.base.BaseActivity
+import com.engdiary.mureng.ui.social_best.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,21 +15,34 @@ class BestMoreActivity : BaseActivity<ActivityBestMoreBinding>(R.layout.activity
 
     override val viewModel: BestMoreViewModel by viewModels<BestMoreViewModel>()
 
+    private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(AnswerRecyclerType.TYPE_BEST_MORE, viewModel) }
+    private val questionAdapter: QuestionAdapter by lazy { QuestionAdapter(viewModel) }
 
-    private val questionData: QuestionData?
-        get() = intent.getSerializableExtra("questionData") as? QuestionData
+    private val mode: String?
+        get() = intent.getSerializableExtra("mode") as? String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
 
-//        questionData?.let { viewModel.getQuesData(it) } ?: finish()
+        viewModel.setMode(mode!!)
 
-//        viewModel.backButton.observe(this, Observer {
-//            if(it) {
-//                // TODO Back Button 기능 구현
-//            }
-//        })
+        binding.rvSocialBestAnswer.apply {
+            adapter = answerAdapter
+        }
 
+        binding.rvSocialBestQuestion.apply{
+            adapter = questionAdapter
+        }
+
+        viewModel.backButton.observe(this, Observer {
+            if(it) finish()
+        })
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.onResume()
     }
 }

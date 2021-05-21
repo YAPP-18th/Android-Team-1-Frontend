@@ -22,8 +22,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/popular_ques"
-            android:textStyle="bold"
+            style="@style/TextAppearance.ImcreSoojinStyle"
             android:textSize="16dp"
+            android:fontFamily="@font/imcresoojin_regular"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:textColor="@color/colorPinkfb"
@@ -89,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/popular_answer"
-            android:textStyle="bold"
+            style="@style/TextAppearance.ImcreSoojinStyle"
             android:textSize="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
@@ -139,7 +140,7 @@
             android:id="@+id/rv_social_pop_ans"
             submitList="@{vm.ansResults}"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             tools:itemCount="5"
             android:layout_marginTop="14dp"
             android:orientation="horizontal"
@@ -147,6 +148,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_social_best_ans_more"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_social_answer" />
 
 

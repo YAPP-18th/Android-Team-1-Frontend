@@ -94,4 +94,10 @@
         <item name="fontWeight">700</item>
     </style>
 
+
+    <style name="TextAppearance.ImcreSoojinStyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/imcresoojin_regular</item>
+        <item name="android:fontFamily">@font/imcresoojin_regular</item>
+    </style>
+
 </resources>
