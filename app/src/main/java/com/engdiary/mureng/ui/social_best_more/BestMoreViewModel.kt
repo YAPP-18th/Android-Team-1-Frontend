@@ -94,6 +94,8 @@ class BestMoreViewModel @Inject constructor(
                 for (i in 0 until questionData.size) {
                     questionData[i].lineVisible =  true
                 }
+                _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
+                _isPop.value = true
                 _quesResults.value = questionData
                 _totalCnt.value = it.size
             },
