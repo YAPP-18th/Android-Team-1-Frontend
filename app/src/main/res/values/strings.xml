@@ -26,6 +26,7 @@
     <!--social_best_detail-->
     <string name="total_answer_count">총 %d개의 답변</string>
     <string name="popular">인기순</string>
+    <string name="newest">최신순</string>
     <string name="null_answer">아직 등록된 답변이 없어요!</string>
 
 

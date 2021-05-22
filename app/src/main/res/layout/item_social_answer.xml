@@ -37,11 +37,18 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <ImageView
+                android:id="@+id/img_best_ans_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/social_detail_bg_grad"
                 app:imageGlideResource="@{Diary.image}"
                 android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/img_best_ans_filter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPinkOpacity70"/>
 
         </androidx.cardview.widget.CardView>
 

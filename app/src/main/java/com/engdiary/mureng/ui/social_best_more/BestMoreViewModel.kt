@@ -7,6 +7,7 @@ import com.engdiary.mureng.constant.BestMoreConstant
 import com.engdiary.mureng.constant.SortConstant
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.social_best.BestPopularViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,18 +31,27 @@ class BestMoreViewModel @Inject constructor(
     private var _totalCnt = MutableLiveData<Int>()
     var totalCnt : LiveData<Int> = _totalCnt
 
-
     private val _barImage = MutableLiveData<Int>()
     val barImage : LiveData<Int> = _barImage
 
-
     private var _isAns = MutableLiveData<Boolean>()
     var isAns: LiveData<Boolean> = _isAns
+
+    private var _clickedSort = MutableLiveData<Boolean>()
+    var clickedSort : LiveData<Boolean> = _clickedSort
+
+    private var _selectedSort = MutableLiveData<String>()
+    var selectedSort : LiveData<String> = _selectedSort
+
+    private var _isPop = MutableLiveData<Boolean>()
+    var isPop : LiveData<Boolean> = _isPop
 
 
     init {
         _backButton.value = false
         _isAns.value = false
+        _clickedSort.value = false
+        _totalCnt.value = 0
 
     }
 
@@ -67,6 +77,9 @@ class BestMoreViewModel @Inject constructor(
             onSuccess = {
                 _ansResults.value = it
                 _totalCnt.value = it.size
+                _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
+                _isPop.value = true
+                _clickedSort.value = false
             },
             onFailure = {
                 Timber.d("AnswerList 가져오기 통신 실패")
@@ -90,6 +103,52 @@ class BestMoreViewModel @Inject constructor(
         )
     }
 
+    fun sortClick() {
+        _clickedSort.value = !_clickedSort.value!!
+    }
+
+    fun menuClick() {
+        if (!_isPop.value!!) {
+            if(_isAns.value!!) {
+               getAnswerData()
+            } else {
+                getQuestionData()
+            }
+            _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
+            _isPop.value = true
+            _clickedSort.value = false
+        } else {
+            if(_isAns.value!!) {
+                murengRepository.getAnswerList(page = 0 , size = 10, sort = SortConstant.NEW,
+                        onSuccess = {
+                            _ansResults.value = it
+                            _totalCnt.value = it.size
+                        },
+                        onFailure = {
+                            Timber.d("AnswerList 가져오기 통신 실패")
+                        }
+                )
+            } else {
+                murengRepository.getQuestionList(page = 0, size = 10, sort = SortConstant.NEW,
+                        onSuccess = {
+                            var questionData : MutableList<QuestionNetwork> = it.toMutableList()
+                            for (i in 0 until questionData.size) {
+                                questionData[i].lineVisible =  true
+                            }
+                            _quesResults.value = questionData
+                            _totalCnt.value = it.size
+                        },
+                        onFailure = {
+                            Timber.d("QuestionList 가져오기 통신 실패")
+                        }
+                )
+            }
+            _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.newest)
+            _isPop.value = false
+            _clickedSort.value = false
+        }
+
+    }
 
     fun backClick() {
         _backButton.value = true
