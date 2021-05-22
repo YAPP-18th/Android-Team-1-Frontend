@@ -72,6 +72,7 @@ class SocialQcreateViewModel @Inject constructor(
             } else {
                 _warningEng.value = false
                 _warningMaxEng.value = false
+                _qCreateEngQues.value = ""
                 quesWarningCheck()
             }
 
@@ -110,6 +111,7 @@ class SocialQcreateViewModel @Inject constructor(
             } else {
                 _warningKor.value = false
                 _warningMaxKor.value = false
+                _qCreateKorQues.value = ""
                 quesWarningCheck()
 
             }

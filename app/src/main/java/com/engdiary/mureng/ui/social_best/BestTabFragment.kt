@@ -48,7 +48,6 @@ class BestTabFragment : BaseFragment<BestTabFragmentBinding>(R.layout.best_tab_f
 
                 override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
             })
-            this.addItemDecoration(HorizontalItemDecorator(12))
         }
     }
 

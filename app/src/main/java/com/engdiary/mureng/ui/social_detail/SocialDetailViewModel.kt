@@ -49,6 +49,7 @@ class SocialDetailViewModel @Inject constructor(
             onSuccess = {
                 _ansResults.value = it
                 _answerCnt.value = it.size
+
             },
             onFailure = {
                 Timber.d("질문관련 답변 가져오기 실패")

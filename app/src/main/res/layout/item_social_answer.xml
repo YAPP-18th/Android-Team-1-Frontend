@@ -120,7 +120,6 @@
             android:id="@+id/tv_social_best_pop_cnt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
             tools:text="99"
             android:text="@{@string/reply_answer_cnt(Diary.likeCount)}"
             style="@style/TextAppearance.RobotoMediumStyle"
@@ -128,17 +127,19 @@
             android:textColor="@color/colorWhite"
             android:lineSpacingExtra="5sp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/img_best_ans_heart"
+            app:layout_constraintBottom_toBottomOf="@id/img_best_ans_heart"
             app:layout_constraintEnd_toEndOf="@id/cv_social_ans_best"/>
 
 
         <ImageView
+            android:id="@+id/img_best_ans_heart"
             android:layout_marginEnd="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@{Diary.likeYn ? @drawable/icons_heart_filled : @drawable/icons_heart_outlined}"
-            app:layout_constraintTop_toTopOf="@id/tv_social_best_pop_cnt"
-            app:layout_constraintBottom_toBottomOf="@id/tv_social_best_pop_cnt"
+            android:layout_marginBottom="14dp"
+            android:src= "@drawable/icons_heart_outlined_white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tv_social_best_pop_cnt"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
