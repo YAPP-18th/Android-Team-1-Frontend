@@ -51,8 +51,11 @@ class BestTabFragment : BaseFragment<BestTabFragmentBinding>(R.layout.best_tab_f
         }
     }
 
+
     override fun onResume() {
         super.onResume()
         viewModel.onResume()
     }
+
+
 }

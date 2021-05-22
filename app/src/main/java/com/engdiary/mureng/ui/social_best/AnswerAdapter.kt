@@ -26,13 +26,17 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel) 
     }
 
     override fun getItemViewType(position: Int): Int {
-       if (type == AnswerRecyclerType.TYPE_BEST) {
-            return  TYPE_BEST
-        } else if (type == AnswerRecyclerType.TYPE_BEST_MORE) {
-            return TYPE_BEST_MORE
-       } else {
-           return TYPE_DETAIL
-       }
+        when (type) {
+            AnswerRecyclerType.TYPE_BEST -> {
+                return  TYPE_BEST
+            }
+            AnswerRecyclerType.TYPE_BEST_MORE -> {
+                return TYPE_BEST_MORE
+            }
+            else -> {
+                return TYPE_DETAIL
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

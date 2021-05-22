@@ -77,7 +77,11 @@ class BestMoreViewModel @Inject constructor(
     private fun getQuestionData() {
         murengRepository.getQuestionList(page = 0, size = 10, sort = SortConstant.POP,
             onSuccess = {
-                 _quesResults.value = it
+                var questionData : MutableList<QuestionNetwork> = it.toMutableList()
+                for (i in 0 until questionData.size) {
+                    questionData[i].lineVisible =  true
+                }
+                _quesResults.value = questionData
                 _totalCnt.value = it.size
             },
             onFailure = {
