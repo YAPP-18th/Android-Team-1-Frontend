@@ -5,10 +5,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.DiaryContent
-import com.engdiary.mureng.data.ItemWriteDiaryImage
-import com.engdiary.mureng.data.Question
+import com.engdiary.mureng.data.*
 import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.data.response.DiaryNetwork
@@ -138,6 +135,12 @@ class MurengRepository @Inject constructor(
         return response.body()?.data
     }
 
+    suspend fun getTodayQuestionRefresh(): QuestionRefresh? {
+        return api.getTodayQuestionRefresh("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q")
+            .data
+            ?.asDomain()
+    }
+
     fun getQuestionList(
         page : Int,
         size : Int,
@@ -203,4 +206,11 @@ class MurengRepository @Inject constructor(
             onError = {onFailure()}
         )
     }
+
+    suspend fun getCheckRplied(): CheckReplied? {
+        return api.getCheckReplied("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q")
+                .data
+                ?.asDomain()
+    }
+
 }

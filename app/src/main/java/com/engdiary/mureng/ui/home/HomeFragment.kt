@@ -1,18 +1,19 @@
 package com.engdiary.mureng.ui.home
 
+import android.graphics.Color
 import android.net.wifi.hotspot2.pps.HomeSp
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.fragment.app.viewModels
+import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.databinding.HomeFragmentBinding
 import com.engdiary.mureng.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
@@ -21,11 +22,27 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.setVariable(BR.vm, viewModel)
+        binding.setVariable(BR.vm, viewModel)
+
+        binding.reply.setBackgroundColor(Color.BLACK)
 
         binding.apply {
-            // 텍스트 값 세팅
+            vm = viewModel
+            lifecycleOwner = this@HomeFragment.viewLifecycleOwner
         }
+        viewModel.todayQuestion.observe(viewLifecycleOwner, Observer {
+            binding.todayQuestion.text = it.content
+        })
+
+        viewModel.checkReplied.observe(viewLifecycleOwner, Observer {
+            if(it.replied == true) {
+                binding.reply.text = "2시간 후에 답변을 할 수 있어요"
+            } else {
+                binding.reply.text = "답변하기"
+            }
+        })
+
+
     }
 
 }

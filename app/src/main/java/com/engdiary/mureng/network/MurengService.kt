@@ -2,10 +2,7 @@ package com.engdiary.mureng.network
 
 import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
-import com.engdiary.mureng.data.response.DiaryNetwork
-import com.engdiary.mureng.data.response.MurengResponse
-import com.engdiary.mureng.data.response.PostDiaryImageResponse
-import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.response.*
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Response
@@ -23,6 +20,13 @@ interface MurengService {
 
     @GET("/api/today-question")
     suspend fun getTodayQuestion(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<QuestionNetwork>
+
+    @GET("/api/today-question/refresh")
+    suspend fun getTodayQuestionRefresh(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<QuestionRefreshNetwork>
+
+    @GET("/api/member/check-replied-today")
+    suspend fun getCheckReplied(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<CheckRepliedNetwork>
+
 
     @Multipart
     @POST("/api/reply/image")
