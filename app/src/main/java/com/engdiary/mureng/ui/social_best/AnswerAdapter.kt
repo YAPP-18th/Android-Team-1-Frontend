@@ -11,13 +11,13 @@ import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.databinding.ItemSocialAnswerBinding
 import com.engdiary.mureng.databinding.ItemSocialBestAnswerBinding
 import com.engdiary.mureng.databinding.ItemSocialUserAnswerBinding
-import timber.log.Timber
-
+import com.engdiary.mureng.di.MurengApplication
+import jp.wasabeef.blurry.Blurry
 
 /**
  * Social_Best Tab 인기 답변 RecyclerView Adapter
  */
-class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel) :
+class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, private val handler: android.os.Handler?) :
     ListAdapter<DiaryNetwork, RecyclerView.ViewHolder>(AnswerDiffUtilCallBack) {
     companion object {
         const val TYPE_BEST = 0
@@ -66,7 +66,7 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel) 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder.itemViewType) {
             TYPE_BEST -> {
-                (holder as AnswerViewHolder).bind(getItem(position), vm)
+                (holder as AnswerViewHolder).bind(getItem(position), vm, handler)
             }
             TYPE_BEST_MORE -> {
                 (holder as AnswerBestViewHolder).bind(getItem(position), vm)
@@ -81,12 +81,14 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel) 
 class AnswerViewHolder(private val binding: ItemSocialAnswerBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(diaryData: DiaryNetwork, vm: BestPopularViewModel) {
+    fun bind(diaryData: DiaryNetwork, vm: BestPopularViewModel, handler: android.os.Handler?) {
         binding.diary = diaryData
         binding.vm = vm
-        Timber.e("${diaryData.id}")
-        Timber.e("${diaryData.image}")
-        Timber.e("${diaryData.question.content}")
+        handler!!.postDelayed(Runnable {
+            Blurry.with(MurengApplication.appContext).sampling(1)
+                .capture(binding.imgBestAnsImage).into(binding.imgBestAnsImage)
+        }, 500)
+
     }
 }
 

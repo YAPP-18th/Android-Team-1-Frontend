@@ -32,12 +32,9 @@ class BestTabViewModel @Inject constructor(
     }
 
     private fun getAnswerData() {
-        murengRepository.getAnswerList(page = 0 , size = 4, sort = SortConstant.POP,
+        murengRepository.getAnswerList(page = 0 , size = 5, sort = SortConstant.POP,
             onSuccess = {
                 _ansResults.value = it
-                for(i in 0 until _ansResults.value!!.size ) {
-                    Timber.e("ddd - ${_ansResults.value!![i].id}")
-                }
             },
             onFailure = {
                 Timber.d("AnswerList 가져오기 통신 실패")

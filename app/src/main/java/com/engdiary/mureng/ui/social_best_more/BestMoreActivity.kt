@@ -15,7 +15,7 @@ class BestMoreActivity : BaseActivity<ActivityBestMoreBinding>(R.layout.activity
 
     override val viewModel: BestMoreViewModel by viewModels<BestMoreViewModel>()
 
-    private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(AnswerRecyclerType.TYPE_BEST_MORE, viewModel) }
+    private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(AnswerRecyclerType.TYPE_BEST_MORE, viewModel, null) }
     private val questionAdapter: QuestionAdapter by lazy { QuestionAdapter(viewModel) }
 
     private val mode: String?
