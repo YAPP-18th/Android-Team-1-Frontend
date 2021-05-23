@@ -46,6 +46,8 @@ class BestMoreViewModel @Inject constructor(
     private var _isPop = MutableLiveData<Boolean>()
     var isPop : LiveData<Boolean> = _isPop
 
+    private var page: Int = 0
+
 
     init {
         _backButton.value = false
@@ -61,19 +63,38 @@ class BestMoreViewModel @Inject constructor(
             _barTitle.value = "ANSWERS"
             _barContent.value = "다른 사람들은\n어떤 답을 썼을까요?"
             _barImage.value = R.drawable.icons_symbol_cheek_blue
-            getAnswerData()
+            getAnswerData(0)
 
         } else {
             _isAns.value = false
             _barTitle.value = "QUESTIONS"
             _barContent.value = "어떤 질문들이\n나를 기다릴까요?"
             _barImage.value = R.drawable.icons_symbol_cheek_pink
-            getQuestionData()
+            getQuestionData(0)
         }
     }
 
-    private fun getAnswerData() {
-        murengRepository.getAnswerList(page = 0 , size = 10, sort = SortConstant.POP,
+    fun paging(mode : String) {
+        if (mode == BestMoreConstant.ANS) {
+            this.page = page
+            _isAns.value = true
+            _barTitle.value = "ANSWERS"
+            _barContent.value = "다른 사람들은\n어떤 답을 썼을까요?"
+            _barImage.value = R.drawable.icons_symbol_cheek_blue
+            getAnswerData(page)
+
+        } else {
+            this.page = page
+            _isAns.value = false
+            _barTitle.value = "QUESTIONS"
+            _barContent.value = "어떤 질문들이\n나를 기다릴까요?"
+            _barImage.value = R.drawable.icons_symbol_cheek_pink
+            getQuestionData(page)
+        }
+    }
+
+    private fun getAnswerData(page : Int) {
+        murengRepository.getAnswerList(page = page , size = 10, sort = SortConstant.POP,
             onSuccess = {
                 _ansResults.value = it
                 _totalCnt.value = it.size
@@ -87,8 +108,8 @@ class BestMoreViewModel @Inject constructor(
         )
     }
 
-    private fun getQuestionData() {
-        murengRepository.getQuestionList(page = 0, size = 10, sort = SortConstant.POP,
+    private fun getQuestionData(page : Int) {
+        murengRepository.getQuestionList(page = page, size = 10, sort = SortConstant.POP,
             onSuccess = {
                 var questionData : MutableList<QuestionNetwork> = it.toMutableList()
                 for (i in 0 until questionData.size) {
@@ -112,9 +133,9 @@ class BestMoreViewModel @Inject constructor(
     fun menuClick() {
         if (!_isPop.value!!) {
             if(_isAns.value!!) {
-               getAnswerData()
+               getAnswerData(page)
             } else {
-                getQuestionData()
+                getQuestionData(page)
             }
             _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
             _isPop.value = true
