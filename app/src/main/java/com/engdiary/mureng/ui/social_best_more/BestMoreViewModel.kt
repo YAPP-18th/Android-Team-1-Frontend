@@ -179,6 +179,7 @@ class BestMoreViewModel @Inject constructor(
     }
 
     override fun questionItemClick(questionData: QuestionNetwork) {
+        Timber.d("question Item Click")
         //    TODO("Not yet implemented")
     }
 
