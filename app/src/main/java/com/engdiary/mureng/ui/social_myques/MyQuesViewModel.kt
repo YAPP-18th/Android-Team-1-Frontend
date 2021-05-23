@@ -25,7 +25,6 @@ class MyQuesViewModel @Inject constructor(
     /** 생성자 */
     init {
         _quesCnt.value = 0
-        getMyQuesList()
     }
 
     fun getMyQuesList() {

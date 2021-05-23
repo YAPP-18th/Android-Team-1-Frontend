@@ -45,10 +45,9 @@
                 android:scaleType="centerCrop"/>
 
             <ImageView
-                android:id="@+id/img_best_ans_filter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPinkOpacity70"/>
+                android:background="@color/colorBlackOpacity14"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -59,7 +58,7 @@
             android:text="@{Diary.question.content}"
             style="@style/TextAppearance.RobotoMediumStyle"
             android:textSize="22dp"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             android:maxLines="2"
             android:ellipsize="end"
             android:layout_marginTop="16dp"

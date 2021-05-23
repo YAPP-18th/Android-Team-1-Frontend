@@ -16,6 +16,7 @@
     <color name="colorPinkf9">#f91c5e</color>
     <color name="colorSkyPinkff">#ffdae9</color>
     <color name="colorPinkOpacity70">#b3fc89ac</color>
+    <color name="colorBlackOpacity14">#23000000</color>
 
     <!--social_myques-->
     <color name="colorBlackGray">#323232</color>

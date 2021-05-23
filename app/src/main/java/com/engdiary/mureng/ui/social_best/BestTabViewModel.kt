@@ -29,14 +29,15 @@ class BestTabViewModel @Inject constructor(
 
     /** 생성자 */
     init {
-        getQuestionData()
-        getAnswerData()
     }
 
     private fun getAnswerData() {
-        murengRepository.getAnswerList(page = 0 , size = 5, sort = SortConstant.POP,
+        murengRepository.getAnswerList(page = 0 , size = 4, sort = SortConstant.POP,
             onSuccess = {
                 _ansResults.value = it
+                for(i in 0 until _ansResults.value!!.size ) {
+                    Timber.e("ddd - ${_ansResults.value!![i].id}")
+                }
             },
             onFailure = {
                 Timber.d("AnswerList 가져오기 통신 실패")
@@ -86,7 +87,7 @@ class BestTabViewModel @Inject constructor(
     }
 
     override fun answerItemClick(answerData: DiaryNetwork) {
-       // TODO("Not yet implemented")
+       Timber.d("answerClick - ${answerData.id}, ${answerData.content}")
     }
 
 

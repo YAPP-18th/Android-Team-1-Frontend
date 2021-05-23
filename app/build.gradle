@@ -87,4 +87,7 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxjava:3.0.6"
     implementation 'io.reactivex.rxjava3:rxkotlin:3.0.1'
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+
+    //blur library
+    implementation 'jp.wasabeef:blurry:4.0.0'
 }

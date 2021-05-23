@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
+        android:descendantFocusability="blocksDescendants"
         tools:context=".ui.social_best.BestTabFragment">
 
 
@@ -78,6 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             tools:itemCount="3"
+            android:descendantFocusability="blocksDescendants"
             android:background="@color/colorWhite"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -148,6 +150,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_social_pop_ans"
             submitList="@{vm.ansResults}"
@@ -157,13 +160,13 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:descendantFocusability="blocksDescendants"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/item_social_answer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_social_best_ans_more"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:listitem="@layout/item_social_answer" />
-
-
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

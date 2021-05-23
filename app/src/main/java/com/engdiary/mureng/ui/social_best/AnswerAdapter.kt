@@ -1,12 +1,7 @@
 package com.engdiary.mureng.ui.social_best
 
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffXfermode
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,6 +11,7 @@ import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.databinding.ItemSocialAnswerBinding
 import com.engdiary.mureng.databinding.ItemSocialBestAnswerBinding
 import com.engdiary.mureng.databinding.ItemSocialUserAnswerBinding
+import timber.log.Timber
 
 
 /**
@@ -30,15 +26,15 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel) 
     }
 
     override fun getItemViewType(position: Int): Int {
-        when (type) {
+        return when (type) {
             AnswerRecyclerType.TYPE_BEST -> {
-                return TYPE_BEST
+                TYPE_BEST
             }
             AnswerRecyclerType.TYPE_BEST_MORE -> {
-                return TYPE_BEST_MORE
+                TYPE_BEST_MORE
             }
             else -> {
-                return TYPE_DETAIL
+                TYPE_DETAIL
             }
         }
     }
@@ -88,19 +84,9 @@ class AnswerViewHolder(private val binding: ItemSocialAnswerBinding) :
     fun bind(diaryData: DiaryNetwork, vm: BestPopularViewModel) {
         binding.diary = diaryData
         binding.vm = vm
-
-//        val paint = Paint()
-//        val imageBitmap = binding.imgBestAnsImage.drawable!!.toBitmap()
-//        val filterBitmap = binding.imgBestAnsFilter.drawable!!.toBitmap()
-//        val canvas : Canvas = Canvas(imageBitmap)
-//        val mode: PorterDuff.Mode =  PorterDuff.Mode.OVERLAY
-//        paint.xfermode = PorterDuffXfermode(mode)
-//        canvas.drawBitmap(filterBitmap, 0f, 0f, paint)
-//
-//        binding.imgBestAnsImage.setImageBitmap(imageBitmap)
-
-
-
+        Timber.e("${diaryData.id}")
+        Timber.e("${diaryData.image}")
+        Timber.e("${diaryData.question.content}")
     }
 }
 
@@ -126,7 +112,7 @@ object AnswerDiffUtilCallBack : DiffUtil.ItemCallback<DiaryNetwork>() {
             oldItem: DiaryNetwork,
             newItem: DiaryNetwork,
     ): Boolean {
-        return oldItem.content == newItem.content
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(
