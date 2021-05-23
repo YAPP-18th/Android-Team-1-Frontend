@@ -3,6 +3,7 @@ package com.engdiary.mureng.ui.social_best
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.MotionEvent
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -21,7 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class BestTabFragment : BaseFragment<BestTabFragmentBinding>(R.layout.best_tab_fragment) {
 
     override val viewModel: BestTabViewModel by viewModels<BestTabViewModel>()
-    private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(AnswerRecyclerType.TYPE_BEST, viewModel) }
+    val handler : Handler = Handler()
+    private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(AnswerRecyclerType.TYPE_BEST ,viewModel, handler) }
     private val questionAdapter: QuestionAdapter by lazy { QuestionAdapter(viewModel) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,8 +54,11 @@ class BestTabFragment : BaseFragment<BestTabFragmentBinding>(R.layout.best_tab_f
         }
     }
 
+
     override fun onResume() {
         super.onResume()
         viewModel.onResume()
     }
+
+
 }

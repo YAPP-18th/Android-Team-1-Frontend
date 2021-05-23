@@ -25,13 +25,16 @@ class MyQuesViewModel @Inject constructor(
     /** 생성자 */
     init {
         _quesCnt.value = 0
-        getMyQuesList()
     }
 
     fun getMyQuesList() {
         murengRepository.getMyQuestionList(
             onSuccess = {
-                _quesResults.value = it
+                var questionData : MutableList<QuestionNetwork> = it.toMutableList()
+                for (i in 0 until questionData.size) {
+                    questionData[i].lineVisible =  true
+                }
+                _quesResults.value = questionData
                 _quesCnt.value = it.size
             },
             onFailure = {
@@ -56,5 +59,10 @@ class MyQuesViewModel @Inject constructor(
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {
         super.onCleared()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getMyQuesList()
     }
 }

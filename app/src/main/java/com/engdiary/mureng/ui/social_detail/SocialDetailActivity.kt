@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SocialDetailActivity : BaseActivity<ActivitySocialDetailBinding>(R.layout.activity_social_detail) {
 
     override val viewModel: SocialDetailViewModel by viewModels<SocialDetailViewModel>()
-    private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(AnswerRecyclerType.TYPE_DETAIL, viewModel) }
+    private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(AnswerRecyclerType.TYPE_DETAIL, viewModel, null) }
 
     /** 이전 화면에서부터 받은 QuestionItem[QuestionData] */
     private val questionData: QuestionNetwork?
