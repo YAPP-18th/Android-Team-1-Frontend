@@ -28,7 +28,7 @@ jobs:
       run: bash ./gradlew assembleRelease --stacktrace
      
      
-    - run: './gradlew assembleRelease'
+    - run: './gradlew assembleDebug'
     - uses: MeilCli/slack-upload-file@v1
       with:
         slack_token: ${{ secrets.SLACK_READ_WRITE_TOKEN }}
