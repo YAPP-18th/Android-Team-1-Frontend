@@ -146,6 +146,7 @@ class BestMoreViewModel @Inject constructor(
                         onSuccess = {
                             _ansResults.value = it
                             _totalCnt.value = it.size
+                            // TODO TotalCnt 수정
                         },
                         onFailure = {
                             Timber.d("AnswerList 가져오기 통신 실패")
