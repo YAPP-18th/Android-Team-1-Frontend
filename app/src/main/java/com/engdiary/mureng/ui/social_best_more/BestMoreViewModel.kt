@@ -146,6 +146,7 @@ class BestMoreViewModel @Inject constructor(
                         onSuccess = {
                             _ansResults.value = it
                             _totalCnt.value = it.size
+                            //TODO : 바꿔야함totalCnt
                         },
                         onFailure = {
                             Timber.d("AnswerList 가져오기 통신 실패")
@@ -178,6 +179,7 @@ class BestMoreViewModel @Inject constructor(
     }
 
     override fun questionItemClick(questionData: QuestionNetwork) {
+        Timber.d("question Item Click")
         //    TODO("Not yet implemented")
     }
 
