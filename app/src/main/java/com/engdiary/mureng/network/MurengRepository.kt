@@ -9,6 +9,8 @@ import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.data.DiaryContent
 import com.engdiary.mureng.data.ItemWriteDiaryImage
 import com.engdiary.mureng.data.Question
+import android.util.Log
+import com.engdiary.mureng.data.*
 import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.data.response.DiaryNetwork
@@ -18,12 +20,15 @@ import com.engdiary.mureng.di.BASE_URL
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.util.onErrorStub
 import com.engdiary.mureng.util.safeEnqueue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.lang.Exception
 import javax.inject.Inject
 
 class MurengRepository @Inject constructor(
@@ -203,4 +208,9 @@ class MurengRepository @Inject constructor(
             onError = {onFailure()}
         )
     }
+
+    suspend fun getNickNameExist(nickName : String): NickName? {
+        return api.getNickNameExist(nickName).data?.asDomain()
+    }
+
 }

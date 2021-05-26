@@ -18,6 +18,9 @@
         <activity
             android:name=".ui.push_alert.PushAlertActivity"
             android:exported="true"></activity>
+        <activity android:name=".ui.signup.nickname.SignupNickNameActivity"
+                  android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.signup.complete.SignupCompleteActivity" />
         <activity android:name=".ui.setting.SettingActivity" />
         <activity android:name=".ui.social_best_more.BestMoreActivity"></activity>
         <activity android:name=".ui.social_qcreate.SocialQcreateActivity" />
@@ -28,8 +31,9 @@
         <activity
             android:name=".ui.write_diary.WriteDiaryImageActivity"
             android:exported="true" />
+        <!--            android:name=".ui.main.MainActivity"-->
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.signup.agreement.SignupTermsActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

@@ -2,10 +2,8 @@ package com.engdiary.mureng.network
 
 import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
-import com.engdiary.mureng.data.response.DiaryNetwork
-import com.engdiary.mureng.data.response.MurengResponse
-import com.engdiary.mureng.data.response.PostDiaryImageResponse
-import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.request.PostSignupRequest
+import com.engdiary.mureng.data.response.*
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Response
@@ -93,4 +91,19 @@ interface MurengService {
         @Query("size") size : Int?,
         @Query("sort") sort : String?
     ) : Call<MurengResponse<List<DiaryNetwork>>>
+
+//    @GET("/api/today-question")
+//    suspend fun getTodayQuestion(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<QuestionNetwork>
+
+    @GET("/api/member/nickname-exists/{nickname}")
+    suspend fun getNickNameExist(
+            @Path("nickname") nickname: String): MurengResponse<NickNameNetwork>
+
+    @POST("/api/member/signup")
+    suspend fun memberSignup(
+            @Body postSignupRequest: PostSignupRequest
+    ): Response<MurengResponse<MemberNetwork>>
+
+
+
 }
