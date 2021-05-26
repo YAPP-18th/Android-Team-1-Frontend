@@ -31,9 +31,8 @@
         <activity
             android:name=".ui.write_diary.WriteDiaryImageActivity"
             android:exported="true" />
-        <!--            android:name=".ui.main.MainActivity"-->
         <activity
-            android:name=".ui.signup.agreement.SignupTermsActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
