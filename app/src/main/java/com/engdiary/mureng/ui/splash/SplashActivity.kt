@@ -15,8 +15,9 @@ import com.engdiary.mureng.databinding.ActivitySplashBinding
 import com.engdiary.mureng.ui.base.BaseActivity
 import com.engdiary.mureng.ui.login.LoginActivity
 import com.engdiary.mureng.ui.main.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SplashActivity: BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
     val SPLASH_VIEW_TIME: Long = 2000
 
