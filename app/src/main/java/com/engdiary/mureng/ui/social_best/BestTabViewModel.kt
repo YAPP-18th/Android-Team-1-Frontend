@@ -26,7 +26,6 @@ class BestTabViewModel @Inject constructor(
     private val authManager: AuthManager
 ) : BestPopularViewModel(murengRepository) {
 
-
     /** 생성자 */
     init {
     }
@@ -34,7 +33,8 @@ class BestTabViewModel @Inject constructor(
     private fun getAnswerData() {
         murengRepository.getAnswerList(page = 0 , size = 5, sort = SortConstant.POP,
             onSuccess = {
-                _ansResults.value = it
+                _ansResults.value = it.data!!
+                _ansTotal.value = it.data!!.size
             },
             onFailure = {
                 Timber.d("AnswerList 가져오기 통신 실패")
@@ -45,11 +45,13 @@ class BestTabViewModel @Inject constructor(
     private fun getQuestionData() {
         murengRepository.getQuestionList(page = 0, size = 3, sort = SortConstant.POP,
             onSuccess = {
-                var questionData : MutableList<QuestionNetwork> = it.toMutableList()
+                var questionData : MutableList<QuestionNetwork> = it.data!!.toMutableList()
                 for (i in 0 until questionData.size) {
                     questionData[i].lineVisible =  false
                 }
                 _quesResults.value = questionData
+                _quesTotal.value = it.data!!.size
+
             },
             onFailure = {
                 Timber.d("QuestionList 가져오기 통신 실패")

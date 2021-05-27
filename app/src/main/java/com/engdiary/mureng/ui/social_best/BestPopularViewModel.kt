@@ -18,6 +18,17 @@ abstract class BestPopularViewModel constructor(
     protected val _ansResults = MutableLiveData<List<DiaryNetwork>>(listOf())
     open val ansResults: LiveData<List<DiaryNetwork>> = _ansResults
 
+    protected val _ansTotal = MutableLiveData<Int>()
+    open val ansTotal: LiveData<Int> = _ansTotal
+
+    protected val _quesTotal = MutableLiveData<Int>()
+    open val quesTotal: LiveData<Int> = _quesTotal
+
+    init {
+        _ansTotal.value = 0
+        _quesTotal.value = 0
+    }
+
     abstract fun questionItemClick(questionData: QuestionNetwork)
 
     fun addQuestionResult(questionData: QuestionNetwork) {

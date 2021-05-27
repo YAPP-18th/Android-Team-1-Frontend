@@ -3,6 +3,7 @@ package com.engdiary.mureng.ui.social_best
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,11 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, 
         const val TYPE_BEST = 0
         const val TYPE_BEST_MORE = 1
         const val TYPE_DETAIL = 2
+    }
+
+
+    fun getTotalItem(): Int {
+        return if(vm!!.ansTotal!!.value!! == null) 0 else vm!!.ansTotal!!.value!!
     }
 
     override fun getItemViewType(position: Int): Int {

@@ -36,6 +36,9 @@ class MyQuesViewModel @Inject constructor(
                 }
                 _quesResults.value = questionData
                 _quesCnt.value = it.size
+                _quesTotal.value = it!!.size
+
+
             },
             onFailure = {
                 Timber.e("나의 질문 리스트 가져오기 통신 실패")

@@ -64,6 +64,7 @@ class SocialDetailViewModel @Inject constructor(
                 _answerCnt.value = it.size
                 _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
                 _isPop.value = true
+                _quesTotal.value = it!!.size
             },
             onFailure = {
                 Timber.d("질문관련 답변 가져오기 실패")
@@ -84,6 +85,8 @@ class SocialDetailViewModel @Inject constructor(
                         _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
                         _clickedSort.value = false
                         _isPop.value = true
+                        _ansTotal.value = it!!.size
+
                     },
                     onFailure = {
                         Timber.d("질문관련 답변 가져오기 실패")
@@ -97,6 +100,8 @@ class SocialDetailViewModel @Inject constructor(
                         _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.newest)
                         _clickedSort.value = false
                         _isPop.value = false
+                        _ansTotal.value = it!!.size
+
                     },
                     onFailure = {
                         Timber.d("질문관련 답변 가져오기 실패")

@@ -12,6 +12,7 @@ import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.data.response.DiaryNetwork
+import com.engdiary.mureng.data.response.MurengResponse
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.BASE_URL
@@ -142,11 +143,11 @@ class MurengRepository @Inject constructor(
         page : Int,
         size : Int,
         sort : String,
-        onSuccess: (List<QuestionNetwork>) -> Unit,
+        onSuccess: (MurengResponse<List<QuestionNetwork>>) -> Unit,
         onFailure: () -> Unit
     ) {
         api.getQuestionList(page, size, sort).safeEnqueue (
-            onSuccess = {onSuccess(it.data!!)},
+            onSuccess = {onSuccess(it)},
             onFailure = {onFailure()},
             onError = {onFailure()}
         )
@@ -156,11 +157,11 @@ class MurengRepository @Inject constructor(
         page : Int,
         size : Int,
         sort : String,
-        onSuccess: (List<DiaryNetwork>) -> Unit,
+        onSuccess: (MurengResponse<List<DiaryNetwork>>) -> Unit,
         onFailure: () -> Unit
     ) {
         api.getAnswerList(page, size, sort).safeEnqueue (
-            onSuccess = {onSuccess(it.data!!)},
+            onSuccess = {onSuccess(it)},
             onFailure = {onFailure()},
             onError = {onFailure()}
         )
