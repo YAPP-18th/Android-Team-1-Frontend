@@ -82,6 +82,7 @@
                     android:id="@+id/textview_diarydetail_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:fontFamily="@font/notosanskr"
                     android:text="@{viewModel.author.nickname}"
                     android:textAppearance="@style/TextAppearance.DiaryDetail.Nickname"
