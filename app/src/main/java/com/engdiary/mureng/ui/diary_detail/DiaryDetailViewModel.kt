@@ -27,14 +27,14 @@ class DiaryDetailViewModel @Inject constructor(private val murengRepository: Mur
 
     private val _navigateToBefore = SingleLiveEvent<Unit>()
     val navigateToBefore: LiveData<Unit>
-    get() = _navigateToBefore
+        get() = _navigateToBefore
 
 
     fun deleteDiary() {
         viewModelScope.launch {
             _diary.value?.id?.let { murengRepository.deleteDiary(it) }
-                ?.takeIf {result -> result }
-                ?.run { _navigateToBefore.call()  }
+                ?.takeIf { result -> result }
+                ?.run { _navigateToBefore.call() }
         }
     }
 
