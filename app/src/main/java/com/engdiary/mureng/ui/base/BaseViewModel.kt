@@ -57,7 +57,6 @@ open class BaseViewModel @Inject constructor(
             userExistRequest =  UserExistRequest(accessToken = accessToken, refreshToken = refreshToken),
             kakaoLoginRequest = KakaoLoginRequest(userId = userId, kakaoToken = accessToken),
             successAction =  {
-
                 Intent(MurengApplication.appContext, HomeFragment::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -67,6 +66,7 @@ open class BaseViewModel @Inject constructor(
             } },
             failAction =  {
                 Log.i("T", "T")
+                Intent(MurengApplication.appContext, HomeFragment::class.java)
 //                _toastMeesageText.value = PerfumeApplication.getGlobalApplicationContext()
 //                    .resources.getString(R.string.api_error)
             })

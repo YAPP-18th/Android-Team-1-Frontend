@@ -33,13 +33,13 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>(R.layout.activity_login)
 
         binding.kakaoLogin.setOnClickListener {
 
-//            if (UserApiClient.instance.isKakaoTalkLoginAvailable(this@LoginActivity)) {
-//                Log.i("TAT", "TATG")
-//
-//                UserApiClient.instance.loginWithKakaoTalk(this@LoginActivity, callback = callback)
-//            } else {
-//                UserApiClient.instance.loginWithKakaoAccount(this@LoginActivity, callback = callback)
-//            }
+            if (UserApiClient.instance.isKakaoTalkLoginAvailable(this@LoginActivity)) {
+                Log.i("TAT", "TATG")
+
+                UserApiClient.instance.loginWithKakaoTalk(this@LoginActivity, callback = callback)
+            } else {
+                UserApiClient.instance.loginWithKakaoAccount(this@LoginActivity, callback = callback)
+            }
         }
 
     }

@@ -77,6 +77,8 @@ class MurengRepository @Inject constructor(
                 if(it.exist) {
                     Log.i("EIXST!!!!!", "EXIST!!!!")
                 } else {
+                    successAction?.let { it() }
+
                     Log.i(" NOT !!! EIXST!!!!!", "EXIST!!!!")
                 }
 
