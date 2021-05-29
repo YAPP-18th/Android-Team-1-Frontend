@@ -1,13 +1,16 @@
 package com.engdiary.mureng.ui.social_detail
 
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.engdiary.mureng.R
+import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.constant.SortConstant
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.network.MurengRepository
+import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
 import com.engdiary.mureng.ui.social_best.BestPopularViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
@@ -149,7 +152,11 @@ class SocialDetailViewModel @Inject constructor(
     }
 
     override fun answerItemClick(answerData: DiaryNetwork) {
-        //TODO("Not yet implemented")
+        Intent(MurengApplication.appContext, DiaryDetailActivity::class.java).apply {
+            this.putExtra(IntentKey.DIARY, answerData.asDomain())
+        }.run {
+            MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }
     }
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */

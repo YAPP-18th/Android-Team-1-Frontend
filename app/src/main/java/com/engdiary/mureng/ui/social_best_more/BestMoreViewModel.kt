@@ -5,11 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.BestMoreConstant
+import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.constant.SortConstant
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.network.MurengRepository
+import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
 import com.engdiary.mureng.ui.social_best.BestPopularViewModel
 import com.engdiary.mureng.ui.social_detail.SocialDetailActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -169,7 +171,11 @@ class BestMoreViewModel @Inject constructor(
         }
     }
     override fun answerItemClick(answerData: DiaryNetwork) {
-        //   TODO("Not yet implemented")
+        Intent(MurengApplication.appContext, DiaryDetailActivity::class.java).apply {
+            this.putExtra(IntentKey.DIARY, answerData.asDomain())
+        }.run {
+            MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }
     }
 
     override fun answerItemHeartClick(answerData: DiaryNetwork) {

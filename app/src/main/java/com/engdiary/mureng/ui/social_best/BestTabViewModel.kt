@@ -6,12 +6,14 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.engdiary.mureng.constant.BestMoreConstant
+import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.constant.SortConstant
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.network.MurengRepository
+import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
 import com.engdiary.mureng.ui.social_best_more.BestMoreActivity
 import com.engdiary.mureng.ui.social_detail.SocialDetailActivity
 import com.engdiary.mureng.ui.social_detail.SocialDetailViewModel
@@ -85,7 +87,11 @@ class BestTabViewModel @Inject constructor(
         }
     }
     override fun answerItemClick(answerData: DiaryNetwork) {
-       Timber.d("answerClick - ${answerData.id}, ${answerData.content}")
+        Intent(MurengApplication.appContext, DiaryDetailActivity::class.java).apply {
+            this.putExtra(IntentKey.DIARY, answerData.asDomain())
+        }.run {
+            MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }
     }
 
     override fun answerItemHeartClick(answerData: DiaryNetwork) {
