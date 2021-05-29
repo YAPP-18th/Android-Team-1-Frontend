@@ -5,7 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import com.engdiary.mureng.databinding.DialogDiaryCookieBinding
 
-class DiaryCookieDialog(context: Context): Dialog(context) {
+class DiaryCookieDialog(context: Context) : Dialog(context) {
     private lateinit var binding: DialogDiaryCookieBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,5 +13,6 @@ class DiaryCookieDialog(context: Context): Dialog(context) {
         binding = DialogDiaryCookieBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.textviewDiarycookieAccept.setOnClickListener { this.dismiss() }
     }
 }
