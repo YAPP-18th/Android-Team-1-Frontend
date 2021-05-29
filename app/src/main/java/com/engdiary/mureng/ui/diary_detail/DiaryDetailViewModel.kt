@@ -20,6 +20,7 @@ class DiaryDetailViewModel @Inject constructor(private val murengRepository: Mur
     val diary: LiveData<Diary>
         get() = _diary
 
+    val diaryImage = Transformations.map(_diary) { it.image }
     val question = Transformations.map(_diary) { it.question }
     val content = Transformations.map(_diary) { it.content }
     val author = Transformations.map(_diary) { it.author }
