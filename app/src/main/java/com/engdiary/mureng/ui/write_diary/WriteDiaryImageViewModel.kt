@@ -33,9 +33,13 @@ class WriteDiaryImageViewModel @ViewModelInject constructor(
     private var question: Question? = null
     private var editingDiaryId: Int? = null
 
-    private val _navigateToDiaryDetail = SingleLiveEvent<Diary>()
-    val navigateToDiaryDetail: LiveData<Diary>
-        get() = _navigateToDiaryDetail
+    private val _navigateToNewDiaryDetail = SingleLiveEvent<Diary>()
+    val navigateToNewDiaryDetail: LiveData<Diary>
+        get() = _navigateToNewDiaryDetail
+
+    private val _navigateToEditedDiaryDetail = SingleLiveEvent<Diary>()
+    val navigateToEditedDiaryDetail: LiveData<Diary>
+        get() = _navigateToEditedDiaryDetail
 
     init {
         viewModelScope.launch {
@@ -76,15 +80,15 @@ class WriteDiaryImageViewModel @ViewModelInject constructor(
                 question?.questionId!!,
                 diaryContent.value!!,
                 imagePath!!
-            )?.let { diary -> _navigateToDiaryDetail.value = diary }
-                .run { _navigateToDiaryDetail.call() }
+            )?.let { diary -> _navigateToEditedDiaryDetail.value = diary }
+                .run { _navigateToEditedDiaryDetail.call() }
             return
         }
 
         imagePath?.let {
             murengRepository.postDiary(diaryContent.value!!, it)
-                ?.let { diary -> _navigateToDiaryDetail.value = diary }
-                .run { _navigateToDiaryDetail.call() }
+                ?.let { diary -> _navigateToNewDiaryDetail.value = diary }
+                .run { _navigateToNewDiaryDetail.call() }
         }
     }
 

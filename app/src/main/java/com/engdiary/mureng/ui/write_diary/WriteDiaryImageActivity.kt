@@ -98,11 +98,24 @@ class WriteDiaryImageActivity :
             diaryImageAdapter.submitList(it)
         }
 
-        viewModel.navigateToDiaryDetail.observe(this) { diary ->
-            Intent(this, DiaryDetailActivity::class.java)
-                .putExtra(IntentKey.DIARY_CONTENT, diary)
-                .also { startActivity(it) }
+        viewModel.navigateToNewDiaryDetail.observe(this) { diary ->
+            navigateToDiaryDetail(diary, false)
         }
+
+        viewModel.navigateToEditedDiaryDetail.observe(this) { diary ->
+            navigateToDiaryDetail(diary, true)
+        }
+    }
+
+    private fun navigateToDiaryDetail(diary: Diary, isDiaryEdited: Boolean) {
+        val intent = Intent(this, DiaryDetailActivity::class.java)
+            .putExtra(IntentKey.DIARY, diary)
+        if (isDiaryEdited) intent.putExtra(
+            IntentKey.EDITED_DIARY.first,
+            IntentKey.EDITED_DIARY.second
+        )
+        startActivity(intent)
+        finish()
     }
 
     companion object {
