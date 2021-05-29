@@ -13,6 +13,7 @@ import com.engdiary.mureng.databinding.ItemSocialAnswerBinding
 import com.engdiary.mureng.databinding.ItemSocialBestAnswerBinding
 import com.engdiary.mureng.databinding.ItemSocialUserAnswerBinding
 import com.engdiary.mureng.di.MurengApplication
+import com.engdiary.mureng.util.setOnSingleClickListener
 import jp.wasabeef.blurry.Blurry
 
 /**
@@ -58,13 +59,39 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, 
                 val binding: ItemSocialBestAnswerBinding = DataBindingUtil.inflate(
                         layoutInflater, R.layout.item_social_best_answer, parent, false
                 )
-                AnswerBestViewHolder(binding)
+                AnswerBestViewHolder(binding).apply{
+                    binding.root.setOnSingleClickListener {
+                        vm.answerItemClick(binding.diary!!)
+                    }
+                    binding.clBestMoreAnswerHeart.setOnClickListener {
+                        vm.answerItemHeartClick(binding.diary!!)
+                        binding.diary = binding.diary!!.apply {
+                            if(likeYn) likeCount -= 1
+                            else likeCount += 1
+                            likeYn = !this.likeYn!!
+                        }
+
+                    }
+                }
             }
             else -> {
                 val binding: ItemSocialUserAnswerBinding = DataBindingUtil.inflate(
                         layoutInflater, R.layout.item_social_user_answer, parent, false
                 )
-                AnswerUserViewHolder(binding)
+                AnswerUserViewHolder(binding).apply {
+                    binding.root.setOnSingleClickListener {
+                        vm.answerItemClick(binding.diary!!)
+                    }
+                    binding.clSocialUserHeart.setOnClickListener {
+                        vm.answerItemHeartClick(binding.diary!!)
+                        binding.diary = binding.diary!!.apply {
+                            if(likeYn) likeCount -= 1
+                            else likeCount += 1
+                            likeYn = !this.likeYn!!
+                        }
+
+                    }
+                }
             }
         }
     }

@@ -72,6 +72,36 @@ class SocialDetailViewModel @Inject constructor(
         )
     }
 
+    override fun answerItemHeartClick(answerData: DiaryNetwork) {
+        if (answerData.likeYn) {
+            deleteLike(answerData.id)
+        } else {
+            addLike(answerData.id)
+        }
+    }
+
+    fun deleteLike(replyId : Int) {
+        murengRepository.deleteLikes(replyId,
+            onSuccess = {
+                Timber.d("좋아요 삭제 성공")
+            },
+            onFailure = {
+
+            }
+        )
+    }
+
+    fun addLike(replyId: Int) {
+        murengRepository.postLikes(replyId,
+            onSuccess = {
+                Timber.d("좋아요 성공")
+            },
+            onFailure = {
+
+            }
+        )
+    }
+
     fun sortClick() {
         _clickedSort.value = !_clickedSort.value!!
     }
@@ -121,7 +151,6 @@ class SocialDetailViewModel @Inject constructor(
     override fun answerItemClick(answerData: DiaryNetwork) {
         //TODO("Not yet implemented")
     }
-
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {

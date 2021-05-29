@@ -22,8 +22,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BestTabViewModel @Inject constructor(
-    private val murengRepository: MurengRepository,
-    private val authManager: AuthManager
+        private val murengRepository: MurengRepository,
+        private val authManager: AuthManager
 ) : BestPopularViewModel(murengRepository) {
 
     /** 생성자 */
@@ -84,11 +84,13 @@ class BestTabViewModel @Inject constructor(
             MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }
     }
-
     override fun answerItemClick(answerData: DiaryNetwork) {
        Timber.d("answerClick - ${answerData.id}, ${answerData.content}")
     }
 
+    override fun answerItemHeartClick(answerData: DiaryNetwork) {
+       // 안쓰임
+    }
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {

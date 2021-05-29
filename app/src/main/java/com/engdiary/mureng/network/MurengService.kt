@@ -93,4 +93,22 @@ interface MurengService {
         @Query("size") size : Int?,
         @Query("sort") sort : String?
     ) : Call<MurengResponse<List<DiaryNetwork>>>
+
+
+    /**
+     * 답변 좋아요
+     */
+    @POST("/api/reply/{replyId}/reply-likes")
+    fun postLikes(
+            @Path("replyId") replyId : Int
+    ) : Call<MurengResponse<Unit>>
+
+    /**
+     * 답변 좋아요 취소
+     */
+    @DELETE("/api/reply/{replyId}/reply-likes")
+    fun deleteLikes(
+            @Path("replyId") replyId: Int
+    ) : Call<MurengResponse<Unit>>
+
 }

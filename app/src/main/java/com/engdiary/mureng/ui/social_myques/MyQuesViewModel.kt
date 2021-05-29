@@ -59,6 +59,10 @@ class MyQuesViewModel @Inject constructor(
         //TODO 안쓰임!!
     }
 
+    override fun answerItemHeartClick(answerData: DiaryNetwork) {
+        TODO("Not yet implemented")
+    }
+
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {
         super.onCleared()

@@ -179,11 +179,11 @@ class MurengRepository @Inject constructor(
     }
 
     fun postCreateQuestion(
-        postQuestioRequest: PostQuestioRequest,
+        postQuestionRequest: PostQuestioRequest,
         onSuccess: () -> Unit,
         onFailure: () -> Unit
     ) {
-        api.postCreateQuestion(postQuestioRequest).safeEnqueue(
+        api.postCreateQuestion(postQuestionRequest).safeEnqueue(
             onSuccess = {onSuccess()},
             onFailure = {onFailure()},
             onError = {onFailure()}
@@ -202,6 +202,30 @@ class MurengRepository @Inject constructor(
             onSuccess = {onSuccess(it.data!!)},
             onFailure = {onFailure()},
             onError = {onFailure()}
+        )
+    }
+
+    fun postLikes(
+            replyId : Int,
+            onSuccess: () -> Unit,
+            onFailure: () -> Unit
+    ) {
+        api.postLikes(replyId).safeEnqueue(
+                onSuccess = {onSuccess()},
+                onFailure = {onFailure()},
+                onError = {onFailure()}
+        )
+    }
+
+    fun deleteLikes(
+            replyId : Int,
+            onSuccess: () -> Unit,
+            onFailure: () -> Unit
+    ) {
+        api.deleteLikes(replyId).safeEnqueue(
+                onSuccess = {onSuccess()},
+                onFailure = {onFailure()},
+                onError = {onFailure()}
         )
     }
 }

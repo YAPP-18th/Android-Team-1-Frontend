@@ -168,10 +168,41 @@ class BestMoreViewModel @Inject constructor(
             MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }
     }
-
     override fun answerItemClick(answerData: DiaryNetwork) {
         //   TODO("Not yet implemented")
     }
+
+    override fun answerItemHeartClick(answerData: DiaryNetwork) {
+        if (answerData.likeYn) {
+            deleteLike(answerData.id)
+        } else {
+            addLike(answerData.id)
+        }
+    }
+
+    fun deleteLike(replyId : Int) {
+        murengRepository.deleteLikes(replyId,
+                onSuccess = {
+                    Timber.d("좋아요 삭제 성공")
+                },
+                onFailure = {
+
+                }
+        )
+    }
+
+    fun addLike(replyId: Int) {
+        murengRepository.postLikes(replyId,
+                onSuccess = {
+                    Timber.d("좋아요 성공")
+                },
+                onFailure = {
+
+                }
+        )
+    }
+
+
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {
