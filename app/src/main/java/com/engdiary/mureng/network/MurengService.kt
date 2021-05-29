@@ -25,18 +25,14 @@ interface MurengService {
     @Multipart
     @POST("/api/reply/image")
     suspend fun postDiaryImage(
-        @Header("X-AUTH-TOKEN") accessToken: String,
-        @Part diaryImage: MultipartBody.Part,
+        @Part diaryImage: MultipartBody.Part
     ): Response<MurengResponse<PostDiaryImageResponse>>
 
     @POST("/api/reply")
     suspend fun postDiary(
-        @Header("X-AUTH-TOKEN") accessToken: String,
         @Body postDiaryRequest: PostDiaryRequest
     ): Response<MurengResponse<DiaryNetwork>>
 
     @GET("/api/reply/default-images")
-    suspend fun getDefaultImages(
-        @Header("X-AUTH-TOKEN") accessToken: String
-    ): Response<MurengResponse<List<String>>>
+    suspend fun getDefaultImages(): Response<MurengResponse<List<String>>>
 }
