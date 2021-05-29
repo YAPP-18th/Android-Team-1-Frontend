@@ -7,7 +7,10 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
+import com.engdiary.mureng.constant.IntentKey
+import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.data.DiaryContent
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.databinding.ActivityWriteDiaryContentBinding
 import com.engdiary.mureng.databinding.ExpandableparentHintWritingdiaryBinding
 import com.engdiary.mureng.ui.base.BaseActivity
@@ -21,16 +24,25 @@ class WriteDiaryContentActivity :
 
     override val viewModel by viewModels<WriteDiaryContentViewModel>()
 
+    private val diary: Diary?
+        get() = intent.getSerializableExtra(IntentKey.DIARY_CONTENT) as Diary?
+
+    private val question: Question?
+        get() = intent.getSerializableExtra(IntentKey.QUESTION) as Question?
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
         binding.viewModel = viewModel
 
+        diary?.let { viewModel.setDiary(it) }
+        question?.let { viewModel.setQuestion(it) }
 
         setOnHintClickListener(binding.expandableWritingdaryHint)
         binding.textviewWritingdiaryNext.setOnClickListener {
             viewModel.checkKoreanIsExist()
         }
+        binding.imagebuttonWritingdiaryCancel.setOnClickListener { finish() }
 
         subscribeUi()
     }
@@ -46,8 +58,8 @@ class WriteDiaryContentActivity :
             showLogoutDialog(this)
         }
 
-        viewModel.navigateToWritingDiaryImage.observe(this) {diaryContent ->
-            navigateToWritingDiaryImage(diaryContent)
+        viewModel.navigateToWritingDiaryImage.observe(this) { diaryContent ->
+            navigateToWritingDiaryImage(diaryContent, viewModel.diary.value, viewModel.question.value)
         }
 
         viewModel.hints.observe(this) { hints ->
@@ -65,10 +77,12 @@ class WriteDiaryContentActivity :
         hintAdapter.notifyDataSetChanged()
     }
 
-    private fun navigateToWritingDiaryImage(diaryContent: DiaryContent?) {
-        if (diaryContent == null) return
+    private fun navigateToWritingDiaryImage(diaryContent: DiaryContent, diary: Diary?, question: Question?) {
+        if (diary == null) return
         Intent(this, WriteDiaryImageActivity::class.java)
-            .putExtra("diaryContent", diaryContent)
+            .putExtra(IntentKey.DIARY_CONTENT, diaryContent)
+            .putExtra(IntentKey.DIARY, diary)
+            .putExtra(IntentKey.QUESTION, question)
             .also { startActivity(it) }
     }
 

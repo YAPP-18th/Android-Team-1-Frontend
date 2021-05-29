@@ -64,6 +64,7 @@
                     android:textAppearance="@style/TextAppearance.WritingDiary.Nickname"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imagebutton_writingdiary_cancel"
+                    android:text="@{viewmodel.author.nickname}"
                     tools:text="현정, " />
 
                 <TextView
@@ -72,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:layout_marginEnd="20dp"
-                    android:text="@{viewModel.todayQuestion.content}"
+                    android:text="@{viewModel.question.content}"
                     android:textAppearance="@style/TextAppearance.WritingDiary.Question"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/textview_writingdiary_nickname"
@@ -85,7 +86,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="@{viewModel.todayQuestion.contentKr}"
+                    android:text="@{viewModel.question.contentKr}"
                     android:textAppearance="@style/TextAppearance.WritingDiary.QuestionKr"
                     app:layout_constraintEnd_toEndOf="@id/textview_writingdiary_question"
                     app:layout_constraintStart_toStartOf="@id/textview_writingdiary_nickname"
@@ -138,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:foregroundGravity="top"
                     android:gravity="top"
-                    android:hint="80자 이상 써주세요 :)"
+                    android:hint="@string/hint_write_diary_content"
                     android:lines="20"
                     android:text="@={viewModel.diaryContent}"
                     android:textColorHint="#d7d7d7" />
