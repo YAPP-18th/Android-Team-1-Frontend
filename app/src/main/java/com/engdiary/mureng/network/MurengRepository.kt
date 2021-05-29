@@ -12,7 +12,7 @@ import com.engdiary.mureng.data.request.PutDiaryRequest
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.AuthManager
-import com.engdiary.mureng.di.BASE_URL
+import com.engdiary.mureng.di.MEDIA_BASE_URL
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.util.safeEnqueue
 import okhttp3.MediaType.Companion.toMediaType
@@ -121,7 +121,7 @@ class MurengRepository @Inject constructor(
 
         return response.body()
             ?.data?.mapIndexed { index, imagePath ->
-                ItemWriteDiaryImage.DiaryImage(index, BASE_URL + imagePath, imagePath)
+                ItemWriteDiaryImage.DiaryImage(index, MEDIA_BASE_URL + imagePath, imagePath)
             }
     }
 
