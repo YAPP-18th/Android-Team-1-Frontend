@@ -2,7 +2,8 @@ package com.engdiary.mureng.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewbinding.BuildConfig
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.module.AppGlideModule
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.network.MurengService
 import com.engdiary.mureng.ui.base.BaseViewModel
@@ -28,11 +29,12 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 
-const val CONNECT_TIMEOUT = 15.toLong()
-const val WRITE_TIMEOUT = 15.toLong()
-const val READ_TIMEOUT = 15.toLong()
+const val CONNECT_TIMEOUT = 60.toLong()
+const val WRITE_TIMEOUT = 60.toLong()
+const val READ_TIMEOUT = 60.toLong()
 
 const val BASE_URL = "http://parkkiho.asuscomm.com:8081"
+const val MEDIA_BASE_URL = "http://parkkiho.asuscomm.com:10025"
 
 /**
  * 코루틴을 활용하여 HTTP 요청을 보낼 시 활용하는 로직
@@ -73,11 +75,14 @@ class ActivityModule {
     }
 }
 
+@GlideModule
+class MurengGlide : AppGlideModule()
+
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
-        level = if (BuildConfig.DEBUG) {
+        level = if (com.engdiary.mureng.BuildConfig.DEBUG) {
             HttpLoggingInterceptor.Level.BODY
         } else {
             HttpLoggingInterceptor.Level.NONE
@@ -97,13 +102,19 @@ object NetworkModule {
      */
     @Provides
     @Singleton
-    fun provideWinePickInterceptor(authManager: AuthManager): Interceptor {
+    fun provideMurengInterceptor(authManager: AuthManager): Interceptor {
         return Interceptor { chain: Interceptor.Chain ->
-            // wine/filter 인 경우, "?" 가 인코딩 되어있는지 확인 후 인코딩 풀어주기
             val request = chain.request()
             var newUrl = request.url.toString()
             val builder = chain.request().newBuilder()
                 .url(newUrl)
+
+            if (newUrl.contains("/api/reply") || newUrl.contains("/api/questions")) {
+                return@Interceptor chain.proceed(chain.request().newBuilder().apply {
+                    addHeader("X-AUTH-TOKEN", authManager.test_jwt)
+                    url(newUrl)
+                }.build())
+            }
 
             return@Interceptor chain.proceed(builder.build())
         }
@@ -112,11 +123,11 @@ object NetworkModule {
     /** HttpClient 객체를 생성하는 Provider 함수이다. */
     @Provides
     @Singleton
-    fun provideHttpClient(okHttpCache: Cache, winePickInterceptor: Interceptor): OkHttpClient {
+    fun provideHttpClient(okHttpCache: Cache, murengInterceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .cache(okHttpCache)
             .addInterceptor(httpLoggingInterceptor)
-            .addInterceptor(winePickInterceptor)
+            .addInterceptor(murengInterceptor)
             .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
@@ -179,3 +190,4 @@ object RepositoryModule {
 @InstallIn(SingletonComponent::class)
 object DataSourceModule {
 }
+

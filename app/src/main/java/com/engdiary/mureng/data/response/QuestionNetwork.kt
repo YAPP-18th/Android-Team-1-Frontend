@@ -13,10 +13,11 @@ data class QuestionNetwork(
     @SerializedName("koContent")
     val contentKr: String,
     @SerializedName("repliesCount")
-    val repliesCount: Int,
+    val repliesCount: Int = 0 ,
     @SerializedName("wordHints")
-    val wordHints: List<HintNetwork>
-) {
+    val wordHints: List<HintNetwork>,
+    var lineVisible : Boolean = true
+) : java.io.Serializable {
     fun asDomain(): Question =
         Question(category, content, contentKr, questionId, repliesCount, wordHints.map { it.asDomain() })
 }

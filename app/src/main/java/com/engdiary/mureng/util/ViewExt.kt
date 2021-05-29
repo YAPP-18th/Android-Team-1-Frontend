@@ -16,6 +16,10 @@ import androidx.databinding.adapters.TextViewBindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.engdiary.mureng.di.BASE_URL
+import com.engdiary.mureng.di.GlideApp
+import com.engdiary.mureng.di.MEDIA_BASE_URL
+import timber.log.Timber
 
 
 fun View.setVisible() {
@@ -115,6 +119,7 @@ fun setImageDrawableResource(imageView: ImageView, resource: Int) {
 
 @BindingAdapter("imageGlideResource")
 fun setImageGlideResource(imageView: ImageView, resource: String) {
-    Glide.with(imageView).load(resource).into(imageView)
+    val resourceStr = MEDIA_BASE_URL + resource
+    Glide.with(imageView).load(resourceStr).into(imageView)
 }
 

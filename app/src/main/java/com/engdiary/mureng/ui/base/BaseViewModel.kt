@@ -1,5 +1,6 @@
 package com.engdiary.mureng.ui.base
 
+import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -60,6 +61,10 @@ open class BaseViewModel @Inject constructor(
      * 필수가 아니므로 추상화는 하지 않는다.
      */
     open fun onResume() {
+
+    }
+
+    open fun onAttach(context: Context) {
 
     }
 }

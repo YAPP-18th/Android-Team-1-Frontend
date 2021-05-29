@@ -26,15 +26,11 @@ class SocialQcreateActivity : BaseActivity<ActivitySocialQcreateBinding>(R.layou
         binding.setVariable(BR.vm, viewModel)
 
         viewModel.backButton.observe(this, Observer {
-            if(it) {
-                finish()
-            }
+            if(it) finish()
         })
 
         viewModel.registerQues.observe(this, Observer {
-            if(it) {
-                finish()
-            }
+            if(it) finish()
         })
 
     }
