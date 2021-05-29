@@ -64,17 +64,11 @@ abstract class BaseActivity<B : ViewDataBinding>(
                 val kakaoId = user!!.id
                 Log.i("token.accessToken", token.accessToken.toString())
                 Log.i("token.refreshToken", token.refreshToken.toString())
-
-//                timeStamp
-//                "identifier": "string",
-
-//                user!!.kakaoAccount!!.email
-//                user!!.kakaoAccount!!.profile!!.profileImageUrl!!
-//                  user!!.
+                Log.i("kakao email", user!!.kakaoAccount!!.email.toString())
 
                 viewModel?.addKakaoUser(token.accessToken, token.refreshToken, kakaoId)
             }
-            Timber.d("로그인성공 - 토큰 ${authManager.token}")
+            Timber.d("로그인성공 - 토큰 ${authManager.accessToken}")
         }
     }
 

@@ -1,9 +1,7 @@
 package com.engdiary.mureng.network
 
-import com.engdiary.mureng.data.request.KakaoLoginRequest
-import com.engdiary.mureng.data.request.PostDiaryRequest
-import com.engdiary.mureng.data.request.PostQuestioRequest
-import com.engdiary.mureng.data.request.UserExistRequest
+import com.engdiary.mureng.data.request.*
+
 import com.engdiary.mureng.data.response.*
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -35,12 +33,16 @@ interface MurengService {
         @Body userExistRequest: UserExistRequest
     ): Response<MurengResponse<DiaryNetwork>>
 
-
 //    UserExistRequest
     @POST("/api/member/user-exists/kakao")
     fun postKakaoLogin(
         @Body userExistRequest: UserExistRequest
     ): Call<MurengResponse<KakaoLoginResponse>>
+
+    @POST("/api/jwt")
+    fun postJWT(
+        @Body postJWTRequest: PostJWTRequest
+    ): Call<MurengResponse<JWTResponse>>
 
     @GET("/api/today-question")
     suspend fun getTodayQuestion(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<QuestionNetwork>
@@ -114,4 +116,16 @@ interface MurengService {
         @Query("size") size : Int?,
         @Query("sort") sort : String?
     ) : Call<MurengResponse<List<DiaryNetwork>>>
+
+    @GET("/api/member/nickname-exists/{nickname}")
+    suspend fun getNickNameExist(
+            @Path("nickname") nickname: String): MurengResponse<NickNameNetwork>
+
+    @POST("/api/member/signup")
+    suspend fun postUserSignup(
+            @Body postSignupRequest: PostSignupRequest
+    ): Response<MurengResponse<UserNetwork>>
+
+
+
 }

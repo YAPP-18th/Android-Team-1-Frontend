@@ -1,8 +1,10 @@
 package com.engdiary.mureng.di
 
 import com.engdiary.mureng.constant.AuthConstant.AUTO_LOGIN_KEY
+import com.engdiary.mureng.constant.AuthConstant.EMAIL_KEY
 import com.engdiary.mureng.constant.AuthConstant.EXPIRE_KEY
 import com.engdiary.mureng.constant.AuthConstant.ID
+import com.engdiary.mureng.constant.AuthConstant.REFRESH_TOKEN_KEY
 import com.engdiary.mureng.constant.AuthConstant.TEST_JWT
 import com.engdiary.mureng.constant.AuthConstant.TOKEN_KEY
 import kr.co.nexters.winepick.util.SharedPrefs
@@ -12,7 +14,7 @@ import javax.inject.Inject
  *  Dagger Hilt 사용한 AuthModule (SharedPrefs - Auth 정보)
  */
 class AuthManager @Inject constructor(val sharedPrefs: SharedPrefs) {
-    var token: String
+    var accessToken: String
         get() {
             return sharedPrefs[TOKEN_KEY, ""] ?: ""
         }
@@ -20,12 +22,20 @@ class AuthManager @Inject constructor(val sharedPrefs: SharedPrefs) {
             sharedPrefs[TOKEN_KEY] = value
         }
 
-    var refreshToken: String
+    var email: String
         get() {
-            return sharedPrefs[TOKEN_KEY, ""] ?: ""
+            return sharedPrefs[EMAIL_KEY, ""] ?: ""
         }
         set(value) {
-            sharedPrefs[TOKEN_KEY] = value
+            sharedPrefs[EMAIL_KEY] = value
+        }
+
+    var refreshToken: String
+        get() {
+            return sharedPrefs[REFRESH_TOKEN_KEY, ""] ?: ""
+        }
+        set(value) {
+            sharedPrefs[REFRESH_TOKEN_KEY] = value
         }
 
 

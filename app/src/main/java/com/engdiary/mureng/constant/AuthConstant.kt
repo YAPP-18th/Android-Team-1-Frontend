@@ -8,7 +8,9 @@ package com.engdiary.mureng.constant
  */
 object AuthConstant {
     const val AUTH_PREFERENCES = "auth"
-    const val TOKEN_KEY = "token"
+    const val TOKEN_KEY = "accessToken"
+    const val REFRESH_TOKEN_KEY = "refreshToken"
+    const val EMAIL_KEY = "email"
     const val AUTO_LOGIN_KEY = "auto"
     const val FIRST_KEY = "first"
     const val EXPIRE_KEY = "expire"

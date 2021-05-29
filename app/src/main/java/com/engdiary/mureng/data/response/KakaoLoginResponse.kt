@@ -9,6 +9,9 @@ data class KakaoLoginResponse(
     val exist: Boolean
 )
 
-//"email": "string",
-//"exist": true
-
+data class JWTResponse(
+    @SerializedName("accessToken")
+    val accessToken: String,
+    @SerializedName("refreshToken")
+    val refreshToken: String
+)

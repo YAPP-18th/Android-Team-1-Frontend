@@ -8,14 +8,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import com.engdiary.mureng.R
 import com.engdiary.mureng.databinding.ActivitySplashBinding
 import com.engdiary.mureng.ui.base.BaseActivity
 import com.engdiary.mureng.ui.login.LoginActivity
-import com.engdiary.mureng.ui.main.MainViewModel
+import com.engdiary.mureng.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashActivity: BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
@@ -28,12 +27,14 @@ class SplashActivity: BaseActivity<ActivitySplashBinding>(R.layout.activity_spla
         binding.setVariable(BR.vm, viewModel)
 
         Handler().postDelayed({ //delay를 위한 handler
-            startActivity(Intent(this, LoginActivity::class.java))
+            if(authManager.accessToken.isEmpty()) {
+                startActivity(Intent(this, LoginActivity::class.java))
+            } else {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+
             finish()
         }, SPLASH_VIEW_TIME)
-//        binding.kakaoLogin.setOnClickListener {
-//            Log.i(TAG, "Log i")
-//        }
 
     }
 }
