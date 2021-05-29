@@ -19,5 +19,9 @@ sealed class ItemWriteDiaryImage {
         fun setIsSelected(isSelected: Boolean){
             this.isSelected.set(isSelected)
         }
+
+        companion object{
+            const val FROM_SERVER_ID = -2
+        }
     }
 }

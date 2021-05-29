@@ -185,6 +185,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/my"
                     android:textAppearance="@{vm.selectMyPage ? R.style.TextAppearance_MainTabSelectedStyle : R.style.TextAppearance_MainTabUnSelectedStyle}"
+                    android:textColor="@{vm.selectMyPage ? @color/colorPinkfc : @color/colorGrayaf}"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
