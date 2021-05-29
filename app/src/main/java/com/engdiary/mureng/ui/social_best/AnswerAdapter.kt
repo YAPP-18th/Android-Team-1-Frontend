@@ -53,7 +53,11 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, 
                 val binding: ItemSocialAnswerBinding = DataBindingUtil.inflate(
                         layoutInflater, R.layout.item_social_answer, parent, false
                 )
-                AnswerViewHolder(binding)
+                AnswerViewHolder(binding).apply {
+                    binding.root.setOnSingleClickListener {
+                        vm.answerItemClick(binding.diary!!)
+                    }
+                }
             }
             TYPE_BEST_MORE -> {
                 val binding: ItemSocialBestAnswerBinding = DataBindingUtil.inflate(
