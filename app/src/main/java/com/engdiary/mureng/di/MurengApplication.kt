@@ -2,6 +2,7 @@ package com.engdiary.mureng.di
 
 import android.app.Application
 import android.content.Context
+import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -23,6 +24,8 @@ class MurengApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         appContext = this
+        KakaoSdk.init(this, appKey = "a53af2544ace9f28b4a214707c220ec3")
+
         Timber.plant(
             Timber.DebugTree()
         )

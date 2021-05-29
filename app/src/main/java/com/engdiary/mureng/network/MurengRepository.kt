@@ -5,13 +5,17 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.util.Log
 import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.data.DiaryContent
 import com.engdiary.mureng.data.ItemWriteDiaryImage
 import com.engdiary.mureng.data.Question
+import com.engdiary.mureng.data.request.KakaoLoginRequest
 import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
+import com.engdiary.mureng.data.request.UserExistRequest
 import com.engdiary.mureng.data.response.DiaryNetwork
+import com.engdiary.mureng.data.response.KakaoLoginResponse
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.BASE_URL
@@ -46,6 +50,50 @@ class MurengRepository @Inject constructor(
     )
     }
      */
+
+    fun postKakaoLogin(
+        userExistRequest: UserExistRequest,
+        onSuccess : (KakaoLoginResponse) -> Unit,
+        onFailure : () -> Unit
+    ) {
+        api.postKakaoLogin(userExistRequest).safeEnqueue(
+            onSuccess = { onSuccess(it.data!!)},
+            onFailure = { onFailure()},
+            onError = {onFailure()}
+        )
+    }
+
+    fun settingUser(
+        userExistRequest: UserExistRequest,
+        kakaoLoginRequest: KakaoLoginRequest,
+        successAction: (() -> Unit)? = null,
+        failAction: (() -> Unit)? = null
+    ) {
+        postKakaoLogin(
+            userExistRequest = userExistRequest,
+//            kakaoLoginRequest = kakaoLoginRequest,
+            onSuccess = {
+//                it.token
+                if(it.exist) {
+                    Log.i("EIXST!!!!!", "EXIST!!!!")
+                } else {
+                    Log.i(" NOT !!! EIXST!!!!!", "EXIST!!!!")
+                }
+
+//                authManager.serverToken = it.token
+//                Timber.e("auth serverToken - ${authManager.serverToken}")
+                authManager.autoLogin = true
+
+                authManager.token = kakaoLoginRequest.kakaoToken
+//                authManager.id = kakaoLoginRequest.userId!!
+                successAction?.let { it() }
+            },
+            onFailure = {
+                authManager.autoLogin = false
+                failAction?.let { it() }
+            }
+        )
+    }
 
     suspend fun getTodayQuestion(): Question? {
         return api.getTodayQuestion("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q")
@@ -203,4 +251,6 @@ class MurengRepository @Inject constructor(
             onError = {onFailure()}
         )
     }
+
+
 }

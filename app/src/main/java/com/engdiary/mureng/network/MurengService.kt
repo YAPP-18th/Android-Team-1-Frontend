@@ -1,11 +1,10 @@
 package com.engdiary.mureng.network
 
+import com.engdiary.mureng.data.request.KakaoLoginRequest
 import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
-import com.engdiary.mureng.data.response.DiaryNetwork
-import com.engdiary.mureng.data.response.MurengResponse
-import com.engdiary.mureng.data.response.PostDiaryImageResponse
-import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.request.UserExistRequest
+import com.engdiary.mureng.data.response.*
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Response
@@ -20,6 +19,28 @@ interface MurengService {
      *  @GET("v2/api/survey/")
      *  fun getSurveys(): Call<WinePickResponse<List<Survey>>>
      */
+
+//    {
+//        "message": "ok",
+//        "data": {
+//        "exist": false,
+//        "email": null
+//    },
+//        "timestamp": 1622125267990
+//    }
+
+    @POST("/api/member/user-exists/{provider}")
+    fun postUserExist(
+        @Path("provider") provider: String,
+        @Body userExistRequest: UserExistRequest
+    ): Response<MurengResponse<DiaryNetwork>>
+
+
+//    UserExistRequest
+    @POST("/api/member/user-exists/kakao")
+    fun postKakaoLogin(
+        @Body userExistRequest: UserExistRequest
+    ): Call<MurengResponse<KakaoLoginResponse>>
 
     @GET("/api/today-question")
     suspend fun getTodayQuestion(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<QuestionNetwork>

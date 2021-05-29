@@ -20,6 +20,15 @@ class AuthManager @Inject constructor(val sharedPrefs: SharedPrefs) {
             sharedPrefs[TOKEN_KEY] = value
         }
 
+    var refreshToken: String
+        get() {
+            return sharedPrefs[TOKEN_KEY, ""] ?: ""
+        }
+        set(value) {
+            sharedPrefs[TOKEN_KEY] = value
+        }
+
+
     var autoLogin: Boolean
         get() {
             return sharedPrefs[AUTO_LOGIN_KEY, false] ?: false

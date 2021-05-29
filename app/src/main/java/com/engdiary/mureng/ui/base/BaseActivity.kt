@@ -3,6 +3,7 @@ package com.engdiary.mureng.ui.base
 import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.engdiary.mureng.di.AuthManager
+import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -53,6 +56,27 @@ abstract class BaseActivity<B : ViewDataBinding>(
 
     @Inject
     lateinit var authManager: AuthManager
+    internal val callback : (OAuthToken?, Throwable?) -> Unit = { token, error ->
+        if (error != null) {
+            Timber.e("로그인 실패- $error")
+        } else if (token != null) {
+            UserApiClient.instance.me { user, error ->
+                val kakaoId = user!!.id
+                Log.i("token.accessToken", token.accessToken.toString())
+                Log.i("token.refreshToken", token.refreshToken.toString())
+
+//                timeStamp
+//                "identifier": "string",
+
+//                user!!.kakaoAccount!!.email
+//                user!!.kakaoAccount!!.profile!!.profileImageUrl!!
+//                  user!!.
+
+                viewModel?.addKakaoUser(token.accessToken, token.refreshToken, kakaoId)
+            }
+            Timber.d("로그인성공 - 토큰 ${authManager.token}")
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

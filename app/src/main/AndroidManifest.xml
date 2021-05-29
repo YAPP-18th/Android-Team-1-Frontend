@@ -38,11 +38,16 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="a53af2544ace9f28b4a214707c220ec3" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.write_diary.WriteDiaryContentActivity"
             android:exported="true" />
+
     </application>
 
 </manifest>
