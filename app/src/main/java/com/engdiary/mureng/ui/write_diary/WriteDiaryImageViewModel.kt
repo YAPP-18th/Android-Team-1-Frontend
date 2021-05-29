@@ -1,14 +1,14 @@
 package com.engdiary.mureng.ui.write_diary
 
 import android.net.Uri
+import androidx.databinding.ObservableBoolean
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.DiaryContent
-import com.engdiary.mureng.data.ItemWriteDiaryImage
-import com.engdiary.mureng.data.SingleLiveEvent
+import com.engdiary.mureng.data.*
+import com.engdiary.mureng.data.ItemWriteDiaryImage.DiaryImage.Companion.FROM_SERVER_ID
+import com.engdiary.mureng.di.MEDIA_BASE_URL
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
@@ -25,17 +25,17 @@ class WriteDiaryImageViewModel @ViewModelInject constructor(
     val selectedGalleryImage: LiveData<Uri>
         get() = _selectedGalleryImage
 
-
     private val _diaryImages = MutableLiveData<List<ItemWriteDiaryImage.DiaryImage>>()
     val diaryImages: LiveData<List<ItemWriteDiaryImage.DiaryImage>>
         get() = _diaryImages
 
     private val diaryContent = MutableLiveData<DiaryContent>()
+    private var question: Question? = null
+    private var editingDiaryId: Int? = null
 
     private val _navigateToDiaryDetail = SingleLiveEvent<Diary>()
     val navigateToDiaryDetail: LiveData<Diary>
         get() = _navigateToDiaryDetail
-
 
     init {
         viewModelScope.launch {
@@ -69,12 +69,42 @@ class WriteDiaryImageViewModel @ViewModelInject constructor(
             is ItemWriteDiaryImage.Gallery -> murengRepository.postDiaryImage(_selectedGalleryImage.value)
             null -> return
         }
-        imagePath?.let { murengRepository.postDiary(diaryContent.value!!, it) }
-            ?.let { diary -> _navigateToDiaryDetail.value = diary }
-            .run { _navigateToDiaryDetail.call() }
+        val isEditing = checkIsEditing(editingDiaryId)
+        if (isEditing) {
+            murengRepository.putDiary(
+                editingDiaryId!!,
+                question?.questionId!!,
+                diaryContent.value!!,
+                imagePath!!
+            )?.let { diary -> _navigateToDiaryDetail.value = diary }
+                .run { _navigateToDiaryDetail.call() }
+            return
+        }
+
+        imagePath?.let {
+            murengRepository.postDiary(diaryContent.value!!, it)
+                ?.let { diary -> _navigateToDiaryDetail.value = diary }
+                .run { _navigateToDiaryDetail.call() }
+        }
     }
+
+    private fun checkIsEditing(diaryId: Int?) = diaryId == null
 
     fun setDiaryContent(diaryContent: DiaryContent) {
         this.diaryContent.value = diaryContent
+    }
+
+    fun setDiaryImages(diary: Diary) {
+        _selectedImage.value = ItemWriteDiaryImage.DiaryImage(
+            FROM_SERVER_ID,
+            MEDIA_BASE_URL + diary.image,
+            diary.image,
+            ObservableBoolean(true)
+        )
+        this.editingDiaryId = diary.id
+    }
+
+    fun setQuestion(question: Question) {
+        this.question = question
     }
 }
