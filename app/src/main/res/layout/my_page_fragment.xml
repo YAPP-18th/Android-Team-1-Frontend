@@ -13,17 +13,90 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.my.MyPageFragment">
+        tools:context=".ui.my.MyPageFragment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:background="@color/colorWhite"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/coll_tb_best_more"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:title="Coordinator">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/img_best_more_back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="12dp"
+                            android:paddingRight="16dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:src="@drawable/icons_settings"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ImageView
+            android:id="@+id/icons_profile_big"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="8dip"
+            android:src="@drawable/icons_profile_big"
+            android:duplicateParentState="true"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="8dp" />
 
         <TextView
+            android:id="@+id/tv_social_best_pop_ans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MyPageFragment"
-            android:textSize="20dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:text="최현정"
+            style="@style/TextAppearance.ImcreSoojinStyle"
+            android:textSize="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/colorPinkfb"
+            app:layout_constraintTop_toTopOf="@+id/icons_profile_big"
+            app:layout_constraintEnd_toEndOf="@+id/icons_profile_big"
+            app:layout_constraintLeft_toRightOf="@+id/icons_profile_big"
+            />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
