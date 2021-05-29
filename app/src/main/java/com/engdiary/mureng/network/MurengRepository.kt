@@ -5,11 +5,19 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import com.engdiary.mureng.data.*
+import com.engdiary.mureng.data.Diary
+import com.engdiary.mureng.data.DiaryContent
+import com.engdiary.mureng.data.ItemWriteDiaryImage
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.request.PostDiaryRequest
+import com.engdiary.mureng.data.request.PostQuestioRequest
+import com.engdiary.mureng.data.response.DiaryNetwork
+import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.BASE_URL
 import com.engdiary.mureng.di.MurengApplication
+import com.engdiary.mureng.util.onErrorStub
+import com.engdiary.mureng.util.safeEnqueue
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -118,6 +126,80 @@ class MurengRepository @Inject constructor(
             ?.data?.mapIndexed { index, imagePath ->
                 ItemWriteDiaryImage.DiaryImage(index, BASE_URL + imagePath, imagePath)
             }
+    }
+
+    suspend fun deleteDiary(diaryId: Int): Boolean? {
+        val response = api.deleteDiary(
+            "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q",
+            diaryId
+        )
+        return response.body()?.data
+    }
+
+    fun getQuestionList(
+        page : Int,
+        size : Int,
+        sort : String,
+        onSuccess: (List<QuestionNetwork>) -> Unit,
+        onFailure: () -> Unit
+    ) {
+        api.getQuestionList(page, size, sort).safeEnqueue (
+            onSuccess = {onSuccess(it.data!!)},
+            onFailure = {onFailure()},
+            onError = {onFailure()}
+        )
+    }
+
+    fun getAnswerList(
+        page : Int,
+        size : Int,
+        sort : String,
+        onSuccess: (List<DiaryNetwork>) -> Unit,
+        onFailure: () -> Unit
+    ) {
+        api.getAnswerList(page, size, sort).safeEnqueue (
+            onSuccess = {onSuccess(it.data!!)},
+            onFailure = {onFailure()},
+            onError = {onFailure()}
+        )
+    }
+
+    fun getMyQuestionList(
+        onSuccess: (List<QuestionNetwork>) -> Unit,
+        onFailure: () -> Unit
+    ) {
+        api.getMyQuestionList().safeEnqueue(
+            onSuccess = {onSuccess(it.data!!)},
+            onFailure = {onFailure()},
+            onError = {onFailure()}
+        )
+    }
+
+    fun postCreateQuestion(
+        postQuestioRequest: PostQuestioRequest,
+        onSuccess: () -> Unit,
+        onFailure: () -> Unit
+    ) {
+        api.postCreateQuestion(postQuestioRequest).safeEnqueue(
+            onSuccess = {onSuccess()},
+            onFailure = {onFailure()},
+            onError = {onFailure()}
+        )
+    }
+
+    fun getReplyAnswerList(
+        questionId : Int,
+        page : Int?,
+        size : Int?,
+        sort : String?,
+        onSuccess: (List<DiaryNetwork>) -> Unit,
+        onFailure: () -> Unit
+    ) {
+        api.getReplyAnswerList(questionId, page, size, sort).safeEnqueue(
+            onSuccess = {onSuccess(it.data!!)},
+            onFailure = {onFailure()},
+            onError = {onFailure()}
+        )
     }
 
     suspend fun getMyInfo(): Author? {

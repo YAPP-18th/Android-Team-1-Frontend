@@ -68,6 +68,8 @@ dependencies {
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
+    implementation "com.github.bumptech.glide:okhttp3-integration:$glide_version"
+
 
     // ktx
     implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
@@ -85,4 +87,11 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxjava:3.0.6"
     implementation 'io.reactivex.rxjava3:rxkotlin:3.0.1'
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+
+    //blur library
+    implementation 'jp.wasabeef:blurry:4.0.0'
+
+    // Paging Library
+    implementation "androidx.paging:paging-runtime-ktx:2.1.2"
+    testImplementation "androidx.paging:paging-common-ktx:2.1.2"
 }

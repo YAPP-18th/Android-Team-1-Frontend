@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 data class DiaryNetwork(
     @SerializedName("author")
-    val author: AuthorNetwork,
+    val author: AuthorNetwork?,
     @SerializedName("content")
     val content: String,
     @SerializedName("image")
@@ -22,11 +22,12 @@ data class DiaryNetwork(
     @SerializedName("replyLikeCount")
     val likeCount: Int,
     @SerializedName("requestedByAuthor")
-    val isMine: Boolean
+    val isMine: Boolean,
+    var likeYn : Boolean = false
 ) {
     fun asDomain(): Diary =
         Diary(
-            author.asDomain(),
+            author!!.asDomain(),
             DiaryContent.of(content),
             image,
             question.asDomain(),

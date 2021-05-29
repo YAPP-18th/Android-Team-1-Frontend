@@ -13,4 +13,5 @@ object AuthConstant {
     const val FIRST_KEY = "first"
     const val EXPIRE_KEY = "expire"
     const val ID = "id"
+    const val TEST_JWT = "jwt"
 }

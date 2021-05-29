@@ -5,12 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
-
         <variable
-            name="AnswerData"
-            type="com.engdiary.mureng.data.AnswerData" />
+            name="Diary"
+            type="com.engdiary.mureng.data.response.DiaryNetwork" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,9 +33,10 @@
             android:id="@+id/tv_social_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{AnswerData.userName}"
+            android:text="@{Diary.author.nickname}"
             android:textStyle="normal"
             android:textSize="14dp"
+            style="@style/TextAppearance.RobotoMediumStyle"
             android:textColor="@color/colorBlack17"
             tools:text="abcdefgh"
             android:layout_marginStart="10dp"
@@ -48,7 +47,7 @@
             android:id="@+id/tv_social_user_answer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{AnswerData.ansTitle}"
+            android:text="@{Diary.content}"
             android:textStyle="normal"
             android:textSize="14dp"
             android:layout_marginTop="4dp"
@@ -56,6 +55,7 @@
             android:lineSpacingExtra="3sp"
             android:maxLines="3"
             android:ellipsize="end"
+            style="@style/TextAppearance.RobotoRegularStyle"
             tools:text="Currently it is to get 10,000 students enrolled."
             app:layout_constraintTop_toBottomOf="@id/tv_social_user_name"
             app:layout_constraintStart_toStartOf="@id/tv_social_user_name"
@@ -77,21 +77,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
+                android:src="@{Diary.likeYn ? @drawable/icons_heart_filled_pink : @drawable/icons_heart_outlined}"
                 tools:src="@drawable/icons_heart_filled"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:src="@{AnswerData.likeYn ? @drawable/icons_heart_filled : @drawable/icons_heart_outlined}"/>
+                app:layout_constraintStart_toStartOf="parent" />
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="999"
-                android:text="@{AnswerData.likeNum}"
+                android:textColor="@{Diary.likeYn ? @color/pinkpink : @color/colorGrayaf}"
+                android:text="@{@string/reply_answer_cnt(Diary.likeCount)}"
                 android:textStyle="normal"
                 android:textSize="12dp"
-                android:textColor="@color/colorGrayaf"
                 android:lineSpacingExtra="5sp"
                 app:layout_constraintTop_toBottomOf="@id/img_social_user_like"
                 app:layout_constraintStart_toStartOf="@id/img_social_user_like"

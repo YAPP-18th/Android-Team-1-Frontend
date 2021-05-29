@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.engdiary.mureng.R"/>
+
         <variable
             name="vm"
             type="com.engdiary.mureng.ui.main.MainViewModel" />
@@ -72,8 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/home"
-                    android:textColor="@{vm.selectHome ? @color/colorPinkfc : @color/colorGrayaf}"
-                    android:textSize="12dp"
+                    android:textAppearance="@{vm.selectHome ? R.style.TextAppearance_MainTabSelectedStyle : R.style.TextAppearance_MainTabUnSelectedStyle}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/social"
-                    android:textColor="@{vm.selectSocial ? @color/colorPinkfc : @color/colorGrayaf}"
+                    android:textAppearance="@{vm.selectSocial ? R.style.TextAppearance_MainTabSelectedStyle : R.style.TextAppearance_MainTabUnSelectedStyle}"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -146,7 +147,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/writing"
-                    android:textColor="@{vm.selectWriting ? @color/colorGrayaf : @color/colorGrayaf}"
+                    android:textAppearance="@{vm.selectWriting ? R.style.TextAppearance_MainTabUnSelectedStyle : R.style.TextAppearance_MainTabUnSelectedStyle}"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -183,7 +184,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/my"
-                    android:textColor="@{vm.selectMyPage ? @color/colorPinkfc : @color/colorGrayaf}"
+                    android:textAppearance="@{vm.selectMyPage ? R.style.TextAppearance_MainTabSelectedStyle : R.style.TextAppearance_MainTabUnSelectedStyle}"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -194,7 +195,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

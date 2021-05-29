@@ -9,8 +9,12 @@
         <import type="android.view.View" />
 
         <variable
-            name="BestAnswerData"
-            type="com.engdiary.mureng.data.BestAnswerData" />
+            name="Diary"
+            type="com.engdiary.mureng.data.response.DiaryNetwork" />
+
+        <variable
+            name="vm"
+            type="com.engdiary.mureng.ui.social_best.BestPopularViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,15 +45,14 @@
             app:layout_constraintStart_toEndOf="@id/img_best_more_profile"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="10dp"
-            android:fontFamily="@font/notosanskr_medium"
-            android:textStyle="normal"
+            style="@style/TextAppearance.NotosanskrMediumStyle"
             android:textSize="12dp"
-            android:text="@{BestAnswerData.userName}"
+            android:text="@{Diary.author.nickname}"
             android:textColor="@color/colorDarkGray4d" />
 
 
         <TextView
-            android:text="@{BestAnswerData.answerTitle}"
+            android:text="@{Diary.content}"
             android:id="@+id/tv_social_best_more_ques"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -58,14 +61,13 @@
             app:layout_constraintTop_toBottomOf="@id/tv_social_best_more_nickname"
             tools:text="ddddddd"
             android:layout_marginTop="6dp"
-            android:fontFamily="sans-serif-black"
-            android:textStyle="normal"
-            android:textSize="16sp"
+            style="@style/TextAppearance.RobotoMediumStyle"
+            android:textSize="16dp"
             android:textColor="@color/colorBlack17"/>
 
 
         <TextView
-            android:text="@{BestAnswerData.answerContent}"
+            android:text="@{Diary.question.content}"
             android:id="@+id/tv_social_best_more_ans"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -74,8 +76,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="dddd"
             android:layout_marginTop="4dp"
-            android:fontFamily="sans-serif"
-            android:textStyle="normal"
+            style="@style/TextAppearance.RobotoRegularStyle"
             android:textSize="14dp"
             android:textColor="@color/colorBlack17"
             android:lineSpacingExtra="3sp"/>
@@ -90,7 +91,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <ImageView
-                android:src="@{BestAnswerData.likeYn ? @drawable/icons_heart_filled_pink : @drawable/icons_heart_outlined }"
+                android:src="@{Diary.likeYn ? @drawable/icons_heart_filled_pink : @drawable/icons_heart_outlined }"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/img_best_more_heart"
@@ -102,12 +103,11 @@
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
-                android:text="@{BestAnswerData.likeNum}"
                 tools:text="999"
-                android:fontFamily="@font/notosanskr_regular"
-                android:textStyle="normal"
-                android:textSize="14sp"
-                android:textColor="@{BestAnswerData.likeYn ? @color/pinkpink : @color/colorGrayaf}"
+                style="@style/TextAppearance.NotosanskrRegularStyle"
+                android:textSize="14dp"
+                android:text="@{@string/reply_answer_cnt(Diary.likeCount)}"
+                android:textColor="@{Diary.likeYn ? @color/pinkpink : @color/colorGrayaf}"
                 android:lineSpacingExtra="7sp"
                 android:gravity="center_horizontal"
                 android:layout_width="wrap_content"
@@ -119,9 +119,5 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </layout>

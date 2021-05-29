@@ -1,5 +1,6 @@
 package com.engdiary.mureng.ui.social
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
@@ -23,14 +24,10 @@ class SocialFragment : BaseFragment<SocialFragmentBinding>(R.layout.social_fragm
         super.onViewCreated(view, savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
 
-
         binding.apply {
             fragmentManager = childFragmentManager
             vm = viewModel
             lifecycleOwner = this@SocialFragment.viewLifecycleOwner
-
-            // 텍스트 값 세팅
-
         }
 
     }

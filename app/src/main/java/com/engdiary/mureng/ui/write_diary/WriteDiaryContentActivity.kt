@@ -55,7 +55,7 @@ class WriteDiaryContentActivity :
 
     private fun subscribeUi() {
         viewModel.showKoreanExistDialog.observe(this) {
-            showLogoutDialog(this)
+            showKoreanExistDialog(this)
         }
 
         viewModel.navigateToWritingDiaryImage.observe(this) { diaryContent ->
@@ -86,7 +86,7 @@ class WriteDiaryContentActivity :
             .also { startActivity(it) }
     }
 
-    private fun showLogoutDialog(context: Context) {
+    private fun showKoreanExistDialog(context: Context) {
         MaterialAlertDialogBuilder(context)
             .setMessage(resources.getString(R.string.writingdiary_korean_alert_message))
             .setPositiveButton(resources.getString(R.string.writingdiary_korean_alert_message_accept)) { dialog, _ ->
