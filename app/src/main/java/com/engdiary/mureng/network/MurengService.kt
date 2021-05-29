@@ -1,10 +1,7 @@
 package com.engdiary.mureng.network
 
 import com.engdiary.mureng.data.request.PostDiaryRequest
-import com.engdiary.mureng.data.response.DiaryNetwork
-import com.engdiary.mureng.data.response.MurengResponse
-import com.engdiary.mureng.data.response.PostDiaryImageResponse
-import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.response.*
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -35,4 +32,9 @@ interface MurengService {
 
     @GET("/api/reply/default-images")
     suspend fun getDefaultImages(): Response<MurengResponse<List<String>>>
+
+    @GET("/api/member/me")
+    suspend fun getMyInfo(
+        @Header("X-AUTH-TOKEN") accessToken: String
+    ): Response<MurengResponse<AuthorNetwork>>
 }
