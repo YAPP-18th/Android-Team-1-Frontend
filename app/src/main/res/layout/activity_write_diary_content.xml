@@ -64,7 +64,7 @@
                     android:textAppearance="@style/TextAppearance.WritingDiary.Nickname"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imagebutton_writingdiary_cancel"
-                    android:text="@{viewmodel.author.nickname}"
+                    android:text="@{viewModel.author.nickname}"
                     tools:text="현정, " />
 
                 <TextView
