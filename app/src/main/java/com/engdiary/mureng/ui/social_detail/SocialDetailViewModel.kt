@@ -1,13 +1,16 @@
 package com.engdiary.mureng.ui.social_detail
 
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.engdiary.mureng.R
+import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.constant.SortConstant
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.network.MurengRepository
+import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
 import com.engdiary.mureng.ui.social_best.BestPopularViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
@@ -64,9 +67,40 @@ class SocialDetailViewModel @Inject constructor(
                 _answerCnt.value = it.size
                 _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
                 _isPop.value = true
+                _quesTotal.value = it!!.size
             },
             onFailure = {
                 Timber.d("질문관련 답변 가져오기 실패")
+            }
+        )
+    }
+
+    override fun answerItemHeartClick(answerData: DiaryNetwork) {
+        if (answerData.likeYn) {
+            deleteLike(answerData.id)
+        } else {
+            addLike(answerData.id)
+        }
+    }
+
+    fun deleteLike(replyId : Int) {
+        murengRepository.deleteLikes(replyId,
+            onSuccess = {
+                Timber.d("좋아요 삭제 성공")
+            },
+            onFailure = {
+
+            }
+        )
+    }
+
+    fun addLike(replyId: Int) {
+        murengRepository.postLikes(replyId,
+            onSuccess = {
+                Timber.d("좋아요 성공")
+            },
+            onFailure = {
+
             }
         )
     }
@@ -84,6 +118,8 @@ class SocialDetailViewModel @Inject constructor(
                         _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
                         _clickedSort.value = false
                         _isPop.value = true
+                        _ansTotal.value = it!!.size
+
                     },
                     onFailure = {
                         Timber.d("질문관련 답변 가져오기 실패")
@@ -97,6 +133,8 @@ class SocialDetailViewModel @Inject constructor(
                         _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.newest)
                         _clickedSort.value = false
                         _isPop.value = false
+                        _ansTotal.value = it!!.size
+
                     },
                     onFailure = {
                         Timber.d("질문관련 답변 가져오기 실패")
@@ -114,9 +152,12 @@ class SocialDetailViewModel @Inject constructor(
     }
 
     override fun answerItemClick(answerData: DiaryNetwork) {
-        //TODO("Not yet implemented")
+        Intent(MurengApplication.appContext, DiaryDetailActivity::class.java).apply {
+            this.putExtra(IntentKey.DIARY, answerData.asDomain())
+        }.run {
+            MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }
     }
-
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {

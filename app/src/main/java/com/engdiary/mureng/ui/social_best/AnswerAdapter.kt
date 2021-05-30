@@ -3,6 +3,7 @@ package com.engdiary.mureng.ui.social_best
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,7 @@ import com.engdiary.mureng.databinding.ItemSocialAnswerBinding
 import com.engdiary.mureng.databinding.ItemSocialBestAnswerBinding
 import com.engdiary.mureng.databinding.ItemSocialUserAnswerBinding
 import com.engdiary.mureng.di.MurengApplication
+import com.engdiary.mureng.util.setOnSingleClickListener
 import jp.wasabeef.blurry.Blurry
 
 /**
@@ -23,6 +25,11 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, 
         const val TYPE_BEST = 0
         const val TYPE_BEST_MORE = 1
         const val TYPE_DETAIL = 2
+    }
+
+
+    fun getTotalItem(): Int {
+        return if(vm!!.ansTotal!!.value!! == null) 0 else vm!!.ansTotal!!.value!!
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -46,19 +53,49 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, 
                 val binding: ItemSocialAnswerBinding = DataBindingUtil.inflate(
                         layoutInflater, R.layout.item_social_answer, parent, false
                 )
-                AnswerViewHolder(binding)
+                AnswerViewHolder(binding).apply {
+                    binding.root.setOnSingleClickListener {
+                        vm.answerItemClick(binding.diary!!)
+                    }
+                }
             }
             TYPE_BEST_MORE -> {
                 val binding: ItemSocialBestAnswerBinding = DataBindingUtil.inflate(
                         layoutInflater, R.layout.item_social_best_answer, parent, false
                 )
-                AnswerBestViewHolder(binding)
+                AnswerBestViewHolder(binding).apply{
+                    binding.root.setOnSingleClickListener {
+                        vm.answerItemClick(binding.diary!!)
+                    }
+                    binding.clBestMoreAnswerHeart.setOnClickListener {
+                        vm.answerItemHeartClick(binding.diary!!)
+                        binding.diary = binding.diary!!.apply {
+                            if(likeYn) likeCount -= 1
+                            else likeCount += 1
+                            likeYn = !this.likeYn!!
+                        }
+
+                    }
+                }
             }
             else -> {
                 val binding: ItemSocialUserAnswerBinding = DataBindingUtil.inflate(
                         layoutInflater, R.layout.item_social_user_answer, parent, false
                 )
-                AnswerUserViewHolder(binding)
+                AnswerUserViewHolder(binding).apply {
+                    binding.root.setOnSingleClickListener {
+                        vm.answerItemClick(binding.diary!!)
+                    }
+                    binding.clSocialUserHeart.setOnClickListener {
+                        vm.answerItemHeartClick(binding.diary!!)
+                        binding.diary = binding.diary!!.apply {
+                            if(likeYn) likeCount -= 1
+                            else likeCount += 1
+                            likeYn = !this.likeYn!!
+                        }
+
+                    }
+                }
             }
         }
     }

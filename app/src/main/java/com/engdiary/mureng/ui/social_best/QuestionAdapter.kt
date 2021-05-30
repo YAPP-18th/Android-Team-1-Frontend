@@ -27,6 +27,9 @@ class QuestionAdapter(val vm: BestPopularViewModel) :
             }
         }
     }
+    fun getTotalCount() : Int {
+        return if(vm!!.quesTotal!!.value!! == null ) 0 else vm!!.quesTotal!!.value!!
+    }
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         holder.bind(getItem(position), vm)
