@@ -98,11 +98,6 @@ interface MurengService {
         @Path("replyId") replyId: Int?,
         @Body putDiaryRequest: PutDiaryRequest
     ): MurengResponse<DiaryNetwork>
-        @Query("page") page : Int?,
-        @Query("size") size : Int?,
-        @Query("sort") sort : String?
-    ) : Call<MurengResponse<List<DiaryNetwork>>>
-
 
     /**
      * 답변 좋아요

@@ -215,7 +215,6 @@ class MurengRepository @Inject constructor(
             api.putDiary(diaryId, PutDiaryRequest(questionId, diaryContent?.content, imagePath))
         return response.data?.asDomain()
     }
-
     fun postLikes(
             replyId : Int,
             onSuccess: () -> Unit,
