@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.IntentKey
+import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.data.DiaryContent
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.databinding.ActivityWriteDiaryImageBinding
 import com.engdiary.mureng.ui.base.BaseActivity
 import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
@@ -50,15 +52,23 @@ class WriteDiaryImageActivity :
         resultLauncher.launch(SELECT_IMAGE_INPUT)
     }
 
+    private val diary: Diary?
+        get() = intent.getSerializableExtra(IntentKey.DIARY) as Diary?
+
+    private val question: Question?
+        get() = intent.getSerializableExtra(IntentKey.QUESTION) as Question?
+
     private val diaryContent: DiaryContent?
-        get() = intent.getSerializableExtra("diaryContent") as DiaryContent?
+        get() = intent.getSerializableExtra(IntentKey.DIARY_CONTENT) as DiaryContent?
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
         binding.viewModel = viewModel
 
+        diary?.let { viewModel.setDiaryImages(it) }
         diaryContent?.let { viewModel.setDiaryContent(it) } ?: finish()
+        question?.let { viewModel.setQuestion(it) } ?: finish()
 
         initButtons(binding.buttonWritingdiaryimageBack, binding.textviewWritingdiaryWrite)
         initDiaryImages(binding.recyclerviewWritingdiaryimageCandidates)
@@ -88,11 +98,24 @@ class WriteDiaryImageActivity :
             diaryImageAdapter.submitList(it)
         }
 
-        viewModel.navigateToDiaryDetail.observe(this) { diary ->
-            Intent(this, DiaryDetailActivity::class.java)
-                .putExtra(IntentKey.DIARY, diary)
-                .also { startActivity(it) }
+        viewModel.navigateToNewDiaryDetail.observe(this) { diary ->
+            navigateToDiaryDetail(diary, false)
         }
+
+        viewModel.navigateToEditedDiaryDetail.observe(this) { diary ->
+            navigateToDiaryDetail(diary, true)
+        }
+    }
+
+    private fun navigateToDiaryDetail(diary: Diary, isDiaryEdited: Boolean) {
+        val intent = Intent(this, DiaryDetailActivity::class.java)
+            .putExtra(IntentKey.DIARY, diary)
+        if (isDiaryEdited) intent.putExtra(
+            IntentKey.EDITED_DIARY.first,
+            IntentKey.EDITED_DIARY.second
+        )
+        startActivity(intent)
+        finish()
     }
 
     companion object {

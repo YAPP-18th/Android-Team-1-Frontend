@@ -2,7 +2,6 @@ package com.engdiary.mureng.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewbinding.BuildConfig
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
 import com.engdiary.mureng.network.MurengRepository

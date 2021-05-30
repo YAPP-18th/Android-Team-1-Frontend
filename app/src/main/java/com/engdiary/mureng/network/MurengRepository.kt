@@ -5,19 +5,16 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.DiaryContent
-import com.engdiary.mureng.data.ItemWriteDiaryImage
-import com.engdiary.mureng.data.Question
+import com.engdiary.mureng.data.*
 import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
+import com.engdiary.mureng.data.request.PutDiaryRequest
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.MurengResponse
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.AuthManager
-import com.engdiary.mureng.di.BASE_URL
+import com.engdiary.mureng.di.MEDIA_BASE_URL
 import com.engdiary.mureng.di.MurengApplication
-import com.engdiary.mureng.util.onErrorStub
 import com.engdiary.mureng.util.safeEnqueue
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -64,7 +61,6 @@ class MurengRepository @Inject constructor(
         } ?: return null
 
         val response = api.postDiaryImage(
-            "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q",
             imageBodyPart
         )
 
@@ -105,7 +101,6 @@ class MurengRepository @Inject constructor(
                 imagePath
             ).let {
                 api.postDiary(
-                    "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q",
                     it
                 )
             }
@@ -119,7 +114,7 @@ class MurengRepository @Inject constructor(
 
     suspend fun getDefaultDiaryImages(): List<ItemWriteDiaryImage.DiaryImage>? {
         val response =
-            api.getDefaultImages("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q")
+            api.getDefaultImages()
 
         if (!response.isSuccessful) {
             Timber.d("Get Default Images Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
@@ -127,7 +122,7 @@ class MurengRepository @Inject constructor(
 
         return response.body()
             ?.data?.mapIndexed { index, imagePath ->
-                ItemWriteDiaryImage.DiaryImage(index, BASE_URL + imagePath, imagePath)
+                ItemWriteDiaryImage.DiaryImage(index, MEDIA_BASE_URL + imagePath, imagePath)
             }
     }
 
@@ -172,37 +167,53 @@ class MurengRepository @Inject constructor(
         onFailure: () -> Unit
     ) {
         api.getMyQuestionList().safeEnqueue(
-            onSuccess = {onSuccess(it.data!!)},
-            onFailure = {onFailure()},
-            onError = {onFailure()}
+            onSuccess = { onSuccess(it.data!!) },
+            onFailure = { onFailure() },
+            onError = { onFailure() }
         )
     }
 
     fun postCreateQuestion(
-        postQuestionRequest: PostQuestioRequest,
+        postQuestioRequest: PostQuestioRequest,
         onSuccess: () -> Unit,
         onFailure: () -> Unit
     ) {
-        api.postCreateQuestion(postQuestionRequest).safeEnqueue(
-            onSuccess = {onSuccess()},
-            onFailure = {onFailure()},
-            onError = {onFailure()}
+        api.postCreateQuestion(postQuestioRequest).safeEnqueue(
+            onSuccess = { onSuccess() },
+            onFailure = { onFailure() },
+            onError = { onFailure() }
         )
     }
 
     fun getReplyAnswerList(
-        questionId : Int,
-        page : Int?,
-        size : Int?,
-        sort : String?,
+        questionId: Int,
+        page: Int?,
+        size: Int?,
+        sort: String?,
         onSuccess: (List<DiaryNetwork>) -> Unit,
         onFailure: () -> Unit
     ) {
         api.getReplyAnswerList(questionId, page, size, sort).safeEnqueue(
-            onSuccess = {onSuccess(it.data!!)},
-            onFailure = {onFailure()},
-            onError = {onFailure()}
+            onSuccess = { onSuccess(it.data!!) },
+            onFailure = { onFailure() },
+            onError = { onFailure() }
         )
+    }
+
+    suspend fun getMyInfo(): Author? {
+        val response = api.getMyInfo(authManager.token)
+        return response.body()?.data?.asDomain()
+    }
+
+    suspend fun putDiary(
+        diaryId: Int,
+        questionId: Int,
+        diaryContent: DiaryContent,
+        imagePath: String
+    ): Diary? {
+        val response =
+            api.putDiary(diaryId, PutDiaryRequest(questionId, diaryContent?.content, imagePath))
+        return response.data?.asDomain()
     }
 
     fun postLikes(
