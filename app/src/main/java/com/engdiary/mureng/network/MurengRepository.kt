@@ -10,6 +10,7 @@ import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.data.request.PutDiaryRequest
 import com.engdiary.mureng.data.response.DiaryNetwork
+import com.engdiary.mureng.data.response.MurengResponse
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.MEDIA_BASE_URL
@@ -134,30 +135,30 @@ class MurengRepository @Inject constructor(
     }
 
     fun getQuestionList(
-        page: Int,
-        size: Int,
-        sort: String,
-        onSuccess: (List<QuestionNetwork>) -> Unit,
+        page : Int,
+        size : Int,
+        sort : String,
+        onSuccess: (MurengResponse<List<QuestionNetwork>>) -> Unit,
         onFailure: () -> Unit
     ) {
-        api.getQuestionList(page, size, sort).safeEnqueue(
-            onSuccess = { onSuccess(it.data!!) },
-            onFailure = { onFailure() },
-            onError = { onFailure() }
+        api.getQuestionList(page, size, sort).safeEnqueue (
+            onSuccess = {onSuccess(it)},
+            onFailure = {onFailure()},
+            onError = {onFailure()}
         )
     }
 
     fun getAnswerList(
-        page: Int,
-        size: Int,
-        sort: String,
-        onSuccess: (List<DiaryNetwork>) -> Unit,
+        page : Int,
+        size : Int,
+        sort : String,
+        onSuccess: (MurengResponse<List<DiaryNetwork>>) -> Unit,
         onFailure: () -> Unit
     ) {
-        api.getAnswerList(page, size, sort).safeEnqueue(
-            onSuccess = { onSuccess(it.data!!) },
-            onFailure = { onFailure() },
-            onError = { onFailure() }
+        api.getAnswerList(page, size, sort).safeEnqueue (
+            onSuccess = {onSuccess(it)},
+            onFailure = {onFailure()},
+            onError = {onFailure()}
         )
     }
 
@@ -213,5 +214,28 @@ class MurengRepository @Inject constructor(
         val response =
             api.putDiary(diaryId, PutDiaryRequest(questionId, diaryContent?.content, imagePath))
         return response.data?.asDomain()
+    }
+    fun postLikes(
+            replyId : Int,
+            onSuccess: () -> Unit,
+            onFailure: () -> Unit
+    ) {
+        api.postLikes(replyId).safeEnqueue(
+                onSuccess = {onSuccess()},
+                onFailure = {onFailure()},
+                onError = {onFailure()}
+        )
+    }
+
+    fun deleteLikes(
+            replyId : Int,
+            onSuccess: () -> Unit,
+            onFailure: () -> Unit
+    ) {
+        api.deleteLikes(replyId).safeEnqueue(
+                onSuccess = {onSuccess()},
+                onFailure = {onFailure()},
+                onError = {onFailure()}
+        )
     }
 }

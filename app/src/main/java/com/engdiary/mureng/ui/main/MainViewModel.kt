@@ -34,18 +34,22 @@ class MainViewModel @Inject constructor(
     }
 
      fun homeClick() {
-         _selectHome.value = true
-         _selectMyPage.value = false
-         _selectSocial.value = false
-         _selectWriting.value = false
+         if(!_selectHome.value!!) {
+             _selectHome.value = true
+             _selectMyPage.value = false
+             _selectSocial.value = false
+             _selectWriting.value = false
+         }
      }
 
 
     fun MypageClick() {
-        _selectHome.value = false
-        _selectMyPage.value = true
-        _selectSocial.value = false
-        _selectWriting.value = false
+        if(!_selectMyPage.value!!) {
+            _selectHome.value = false
+            _selectMyPage.value = true
+            _selectSocial.value = false
+            _selectWriting.value = false
+        }
     }
 
 
@@ -56,10 +60,12 @@ class MainViewModel @Inject constructor(
 
 
     fun SocialClick() {
-        _selectHome.value = false
-        _selectMyPage.value = false
-        _selectSocial.value = true
-        _selectWriting.value = false
+        if(!_selectSocial.value!!) {
+            _selectHome.value = false
+            _selectMyPage.value = false
+            _selectSocial.value = true
+            _selectWriting.value = false
+        }
     }
 
 

@@ -3,6 +3,7 @@ package com.engdiary.mureng.ui.social_best_more
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.databinding.ActivityBestMoreBinding
@@ -37,7 +38,7 @@ class BestMoreActivity : BaseActivity<ActivityBestMoreBinding>(R.layout.activity
                 layoutManager?.let {
                     scrollListener = object : EndlessScrollListener(it, 10) {
                         override fun onLoadMore(page: Int) {
-                            Timber.i("onLoadMore $page")
+                            Timber.e("onLoadMore $page")
                             viewModel.paging(mode!!)
                         }
                     }
@@ -51,7 +52,7 @@ class BestMoreActivity : BaseActivity<ActivityBestMoreBinding>(R.layout.activity
                 layoutManager?.let {
                     scrollListener = object : EndlessScrollListener(it, 10) {
                         override fun onLoadMore(page: Int) {
-                            Timber.i("onLoadMore $page")
+                            Timber.e("onLoadMore $page")
                             viewModel.paging(mode!!)
                         }
                     }

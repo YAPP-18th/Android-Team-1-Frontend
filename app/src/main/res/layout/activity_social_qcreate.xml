@@ -11,6 +11,10 @@
             type="com.engdiary.mureng.ui.social_qcreate.SocialQcreateViewModel" />
     </data>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,7 +40,7 @@
             tools:text="@string/qcreate_create_ques"
             android:paddingHorizontal="16dp"
             android:paddingVertical="14dp"
-            style="@style/TextAppearance.NotosanskrRegularStyle"
+            style="@style/TextAppearance.NotosanskrMediumStyle"
             app:onSingleClick="@{vm::registerClick}"
             android:textSize="16dp"
             android:textColor="@{vm.registerVisible ? @color/pinkpink : @color/colorBabyPinkff }"
@@ -137,20 +141,23 @@
         <EditText
             android:id="@+id/edt_social_qcreate_ques1"
             android:layout_width="0dp"
-            android:layout_height="128dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:minHeight="128dp"
             android:background="@drawable/social_qcreate_box_bg"
             android:hint="@string/qcreate_eng_hint"
             android:lineSpacingExtra="5sp"
             style="@style/TextAppearance.RobotoMediumStyle"
             android:padding="12dp"
-            android:inputType="text"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="false"
             android:fontFamily="@font/roboto_medium"
             android:textColor="@color/colorBlackGray"
             android:textColorHint="@color/colorLightGrayd7"
             android:textSize="20dp"
             app:textChangedListener="@{vm.quesEngTextWatcher}"
             android:gravity="left"
+            android:singleLine="true"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="@id/gl_qcreate_box_right"
             app:layout_constraintStart_toStartOf="@id/gl_qcreate_box_left"
@@ -201,11 +208,13 @@
         <EditText
             android:id="@+id/edt_social_qcreate_ques2"
             android:layout_width="0dp"
-            android:layout_height="128dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:minHeight="128dp"
             android:background="@drawable/social_qcreate_box_bg"
             android:hint="@string/qcreate_kor_hint"
-            android:inputType="text"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="false"
             android:lineSpacingExtra="5sp"
             app:textChangedListener="@{vm.quesKorTextWatcher}"
             android:padding="12dp"
@@ -214,7 +223,9 @@
             android:textColorHint="@color/colorLightGrayd7"
             android:textSize="16dp"
             android:gravity="left"
+            android:singleLine="true"
             android:textStyle="normal"
+            app:layout_constraintVertical_bias="0"
             app:layout_constraintEnd_toEndOf="@id/gl_qcreate_box_right"
             app:layout_constraintStart_toStartOf="@id/gl_qcreate_box_left"
             app:layout_constraintTop_toBottomOf="@id/tv_social_qcreate_ques2"
@@ -230,7 +241,9 @@
             style="@style/TextAppearance.NotosanskrRegularStyle"
             android:textStyle="normal"
             android:textSize="12dp"
+            android:layout_marginBottom="10dp"
             android:lineSpacingExtra="5sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:text="@string/qcreate_kor_warning"
             app:layout_constraintTop_toBottomOf="@id/edt_social_qcreate_ques2"
             app:layout_constraintStart_toStartOf="@id/gl_qcreate_text_left"/>
@@ -246,9 +259,13 @@
             android:textStyle="normal"
             android:textSize="12dp"
             android:lineSpacingExtra="5sp"
+            android:layout_marginBottom="10dp"
             android:text="@string/qcreate_kor_max_cnt"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edt_social_qcreate_ques2"
             app:layout_constraintStart_toStartOf="@id/gl_qcreate_text_left"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>

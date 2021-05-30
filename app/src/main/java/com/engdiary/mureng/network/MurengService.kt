@@ -98,4 +98,21 @@ interface MurengService {
         @Path("replyId") replyId: Int?,
         @Body putDiaryRequest: PutDiaryRequest
     ): MurengResponse<DiaryNetwork>
+
+    /**
+     * 답변 좋아요
+     */
+    @POST("/api/reply/{replyId}/reply-likes")
+    fun postLikes(
+            @Path("replyId") replyId : Int
+    ) : Call<MurengResponse<Unit>>
+
+    /**
+     * 답변 좋아요 취소
+     */
+    @DELETE("/api/reply/{replyId}/reply-likes")
+    fun deleteLikes(
+            @Path("replyId") replyId: Int
+    ) : Call<MurengResponse<Unit>>
+
 }
