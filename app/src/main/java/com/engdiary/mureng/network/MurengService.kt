@@ -24,6 +24,9 @@ interface MurengService {
     @GET("/api/today-question/refresh")
     suspend fun getTodayQuestionRefresh(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<QuestionRefreshNetwork>
 
+    @GET("/api/today-expression")
+    suspend fun getTodayExpression(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<List<TodayExpression>>
+
     @GET("/api/member/check-replied-today")
     suspend fun getCheckReplied(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<CheckRepliedNetwork>
 

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.engdiary.mureng.data.CheckReplied
 import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.QuestionRefresh
+import com.engdiary.mureng.data.response.TodayExpression
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,9 +21,25 @@ class HomeViewModel @Inject constructor(
     private val murengRepository: MurengRepository
 ) : BaseViewModel(murengRepository) {
 
-    private val _todayQuestion = MutableLiveData<QuestionRefresh>()
+
+//    private val _tabItems: MutableLiveData<List<String>> = MutableLiveData()
+
+//    private val _tabItems: MutableLiveData<List<String>> = MutableLiveData()
+//    private val _position: MutableLiveData<Int> = MutableLiveData()
+//    val tabItems: LiveData<List<String>> get() = _tabItems
+
+//    private val _todayQuestion = MutableLiveData<List<QuestionRefresh>>()
+//    val todayQuestion: LiveData<QuestionRefresh>
+//        get() = _todayQuestion
+
+private val _todayQuestion = MutableLiveData<QuestionRefresh>()
     val todayQuestion: LiveData<QuestionRefresh>
         get() = _todayQuestion
+
+    private val _todayExpression = MutableLiveData<List<TodayExpression>>()
+    val todayExpression: LiveData<List<TodayExpression>>
+        get() =_todayExpression
+
 
     private val _checkReplied = MutableLiveData<CheckReplied>()
     val checkReplied: LiveData<CheckReplied> = _checkReplied
@@ -61,8 +78,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 _todayQuestion.value = murengRepository.getTodayQuestionRefresh()
-
-                Log.i("GET!!", "TODATY")
+                _todayExpression.value = murengRepository.getTodayExpression()
 
             } catch (networkError: IOException) {
             }

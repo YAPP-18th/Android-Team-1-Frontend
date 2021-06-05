@@ -10,6 +10,7 @@ import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.response.TodayExpression
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.BASE_URL
 import com.engdiary.mureng.di.MurengApplication
@@ -140,6 +141,12 @@ class MurengRepository @Inject constructor(
             .data
             ?.asDomain()
     }
+
+    suspend fun getTodayExpression(): List<TodayExpression>? {
+        return api.getTodayExpression("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q")
+                .data
+    }
+
 
     fun getQuestionList(
         page : Int,

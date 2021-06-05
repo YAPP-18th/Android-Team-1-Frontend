@@ -15,6 +15,14 @@
         <variable
             name="vm"
             type="com.engdiary.mureng.ui.social_best.BestPopularViewModel" />
+
+        <variable
+            name="Expression"
+            type="com.engdiary.mureng.data.response.TodayExpression" />
+
+        <variable
+            name="vm2"
+            type="com.engdiary.mureng.ui.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="4dp"
-            android:text="@{Diary.author.nickname}"
+            android:text="@{Expression.expression}"
             android:textColor="@color/colorDarkGray4d"
             android:textSize="12dp"
             app:layout_constraintEnd_toStartOf="@+id/img_best_more_heart"

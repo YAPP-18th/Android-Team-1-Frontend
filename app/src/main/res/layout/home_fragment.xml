@@ -65,6 +65,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="10dp"
+                            android:layout_marginRight="50dp"
                             android:text=""
                             android:textColor="#000000"
                             android:textSize="26sp"
@@ -160,18 +161,20 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:visibility="@{View.VISIBLE}"
+                        android:background="#333"
                         android:id="@+id/rv_home_today_expression"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginTop="8dp"
+                        submitList="@{vm.todayExpression}"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/cl_best_more"
                         tools:listitem="@layout/item_today_expression"  />
-
+                    
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.core.widget.NestedScrollView>

@@ -110,7 +110,10 @@ object NetworkModule {
             val builder = chain.request().newBuilder()
                 .url(newUrl)
 
-            if (newUrl.contains("/api/reply") || newUrl.contains("/api/questions")) {
+            if (newUrl.contains("/api/reply") ||
+                    newUrl.contains("/api/questions") ||
+                    newUrl.contains("/api/today-expression")
+                    ) {
                 return@Interceptor chain.proceed(chain.request().newBuilder().apply {
                     addHeader("X-AUTH-TOKEN", authManager.test_jwt)
                     url(newUrl)
