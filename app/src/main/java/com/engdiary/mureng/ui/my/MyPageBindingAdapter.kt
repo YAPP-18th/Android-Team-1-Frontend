@@ -1,0 +1,181 @@
+package com.engdiary.mureng.ui.my
+
+import android.content.res.ColorStateList
+import android.graphics.PorterDuff
+import android.net.Uri
+import android.view.View
+import android.widget.ImageView
+import androidx.core.content.res.ResourcesCompat
+import androidx.databinding.BindingAdapter
+import androidx.fragment.app.FragmentManager
+import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
+import com.engdiary.mureng.R
+import com.engdiary.mureng.data.ItemWriteDiaryImage
+
+import com.google.android.material.tabs.TabLayout
+
+
+object MyPageBindingAdapter {
+    @BindingAdapter("setTapContents", "setMypageVm")
+    @JvmStatic
+    fun setTapContents(tabLayout: TabLayout, items: List<String>?, mainVm: MyPageViewModel?) {
+        items?.forEach {
+            with(tabLayout) {
+                newTab().let { tab ->
+                    tab.text = it
+                    addTab(tab)
+                }
+                addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                    override fun onTabReselected(tab: TabLayout.Tab?) {
+                        //Nothing.
+                    }
+
+                    override fun onTabUnselected(tab: TabLayout.Tab?) {
+                        //Nothing.
+                    }
+
+                    override fun onTabSelected(tab: TabLayout.Tab?) {
+                        tab?.position?.let { position ->
+                            mainVm?.selectPosition(position)
+                        }
+                    }
+                })
+            }
+        }
+    }
+
+    @BindingAdapter("setPagerCount", "setMypageFsm", "setMypageVm")
+    @JvmStatic
+    fun setViewPager(
+        viewPager: ViewPager,
+        items: List<String>?,
+        fragmentManager: FragmentManager?,
+        mainVm: MyPageViewModel?
+    ) {
+        if (!items.isNullOrEmpty())
+            viewPager.adapter?.run {
+                if (this is MyPageViewPagerAdapter) {
+                    setItems(items)
+                }
+            } ?: kotlin.run {
+                if (fragmentManager != null)
+                    viewPager.adapter = MyPageViewPagerAdapter(fragmentManager, items)
+                viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                    override fun onPageScrollStateChanged(state: Int) {
+                        //Nothing.
+                    }
+
+                    override fun onPageScrolled(
+                        position: Int,
+                        positionOffset: Float,
+                        positionOffsetPixels: Int
+                    ) {
+                        //Nothing.
+                    }
+
+                    override fun onPageSelected(position: Int) {
+                        mainVm?.selectPosition(position)
+                    }
+                })
+            }
+    }
+
+    @BindingAdapter("setViewPosition")
+    @JvmStatic
+    fun setViewPosition(view: View, position: Int?) {
+        if (position != null)
+            when (view) {
+                is ViewPager -> {
+                    view.currentItem = position
+                }
+                is TabLayout -> {
+                    view.run {
+                        getTabAt(position)?.let { tab ->
+                            selectTab(tab)
+                        }
+
+                    }
+                }
+            }
+    }
+
+//    @BindingAdapter("hintBulb")
+//    @JvmStatic
+//    fun setHintBulb(imageView: ImageView, isHintOpen: Boolean) {
+//        val drawable = if (isHintOpen) {
+//            imageView.context
+//                .run { ResourcesCompat.getDrawable(resources, R.drawable.icons_bulb_checked, null) }
+//        } else {
+//            imageView.context
+//                .run { ResourcesCompat.getDrawable(resources, R.drawable.icons_bulb, null) }
+//        }
+//
+//
+//        Glide.with(imageView.context)
+//            .load(drawable)
+//            .into(imageView)
+//    }
+
+//    @BindingAdapter("hintArrow")
+//    @JvmStatic
+//    fun setHintArrow(imageView: ImageView, isHintOpen: Boolean) {
+//        val drawable = if (isHintOpen) {
+//            imageView.context
+//                .run {
+//                    ResourcesCompat.getDrawable(
+//                        resources,
+//                        R.drawable.writingdiary_hintarrow_up,
+//                        null
+//                    )
+//                }
+//        } else {
+//            imageView.context
+//                .run {
+//                    ResourcesCompat.getDrawable(
+//                        resources,
+//                        R.drawable.writingdiary_hintarrow,
+//                        null
+//                    )
+//                }
+//        }
+//
+//        Glide.with(imageView.context)
+//            .load(drawable)
+//            .into(imageView)
+//    }
+
+//    @BindingAdapter("diaryImageSelected")
+//    @JvmStatic
+//    fun setDiaryImageSelected(imageView: ImageView, diaryImageSelected: Boolean) {
+//        if (diaryImageSelected) {
+//            val diaryimageSelectedTint = ResourcesCompat.getColor(
+//                imageView.resources,
+//                R.color.diaryimage_selected_tint,
+//                null
+//            )
+//            imageView.imageTintList = ColorStateList.valueOf(diaryimageSelectedTint)
+//            imageView.imageTintMode = PorterDuff.Mode.SRC_OVER
+//        } else {
+//            imageView.imageTintList = null
+//        }
+//    }
+//
+//    @BindingAdapter("diaryImagePreview", "galleryImageUri")
+//    @JvmStatic
+//    fun setDiaryImagePreview(
+//        imageView: ImageView,
+//        diaryWriteImage: ItemWriteDiaryImage?,
+//        galleryImageUri: Uri?
+//    ) {
+//        when (diaryWriteImage) {
+//            is ItemWriteDiaryImage.DiaryImage -> diaryWriteImage.url
+//            is ItemWriteDiaryImage.Gallery -> galleryImageUri
+//            null -> return
+//        }.let {
+//            Glide.with(imageView.context)
+//                .load(it)
+//                .into(imageView)
+//        }
+//    }
+}

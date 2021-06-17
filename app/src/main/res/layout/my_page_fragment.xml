@@ -8,6 +8,10 @@
         <variable
             name="vm"
             type="com.engdiary.mureng.ui.my.MyPageViewModel" />
+
+        <variable
+            name="fragmentManager"
+            type="androidx.fragment.app.FragmentManager" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -87,14 +91,47 @@
             android:text="최현정"
             style="@style/TextAppearance.ImcreSoojinStyle"
             android:textSize="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="18dp"
             android:textColor="@color/colorPinkfb"
             app:layout_constraintTop_toTopOf="@+id/icons_profile_big"
-            app:layout_constraintEnd_toEndOf="@+id/icons_profile_big"
             app:layout_constraintLeft_toRightOf="@+id/icons_profile_big"
             />
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_mypage_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            app:tabMode="fixed"
+            style="@style/TextAppearance.SocialTabLayoutStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tabIndicatorHeight="2dp"
+            app:tabTextAppearance="@style/TextAppearance.SocialTabLayoutStyle"
+            app:tabIndicator="@color/colorPinkf9"
+            app:tabTextColor="@color/colorSkyPinkff"
+            app:tabSelectedTextColor="@color/colorPinkf9"
+            app:layout_constraintTop_toBottomOf="@id/icons_profile_big"
+            android:layout_marginTop="30dp"
+            app:setTapContents="@{vm.tabItems}"
+            app:setViewPosition="@{vm.position}"
+            app:setMypageVm="@{vm}"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_mypage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            app:setMypageFsm="@{fragmentManager}"
+            app:setViewPosition="@{vm.position}"
+            app:setMypageVm="@{vm}"
+            app:setPagerCount="@{vm.tabItems}"
+
+            app:layout_constraintTop_toBottomOf="@id/tab_mypage_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
