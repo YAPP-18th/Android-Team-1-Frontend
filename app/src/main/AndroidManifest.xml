@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.setting.DevelopPersonActivity"></activity>
+        <activity android:name=".ui.setting.WebviewActivity"></activity>
+        <activity android:name=".ui.setting.DevelopPersonActivity" />
         <activity android:name=".ui.setting.VersionActivity" />
         <activity android:name=".ui.setting.VersionInformationActivity" />
         <activity
