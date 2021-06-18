@@ -1,5 +1,7 @@
 package com.engdiary.mureng.di
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.annotation.GlideModule
@@ -33,8 +35,8 @@ const val CONNECT_TIMEOUT = 60.toLong()
 const val WRITE_TIMEOUT = 60.toLong()
 const val READ_TIMEOUT = 60.toLong()
 
-const val BASE_URL = "http://parkkiho.asuscomm.com:8081"
-const val MEDIA_BASE_URL = "http://parkkiho.asuscomm.com:10025"
+const val BASE_URL = "http://dev.mureng.hkpark.net"
+const val MEDIA_BASE_URL = "http://dev.mureng-media.hkpark.net"
 
 /**
  * 코루틴을 활용하여 HTTP 요청을 보낼 시 활용하는 로직
@@ -57,18 +59,18 @@ suspend fun <T> Call<T>.send(): Response<T> = suspendCoroutine {
 class ActivityModule {
     @Provides
     fun provideViewModelFactory(
-        murengRepository: MurengRepository
+            murengRepository: MurengRepository
     ): ViewModelProvider.AndroidViewModelFactory = ViewModelFactoryImpl(
-        MurengApplication.getGlobalAppApplication(), murengRepository
+            MurengApplication.getGlobalAppApplication(), murengRepository
     )
 
     /**
      * ViewModelFactory 구현체 (impl) 를 만드는 클래스
      */
     class ViewModelFactoryImpl(
-        val application: MurengApplication,
-        val murengRepository: MurengRepository
-    ) : ViewModelProvider.AndroidViewModelFactory(application) {
+            val murengApplication: MurengApplication,
+            val murengRepository: MurengRepository
+    ) : ViewModelProvider.AndroidViewModelFactory(murengApplication) {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return BaseViewModel(murengRepository) as T
         }
