@@ -36,7 +36,6 @@ class BestTabViewModel @Inject constructor(
         murengRepository.getAnswerList(page = 0 , size = 5, sort = SortConstant.POP,
             onSuccess = {
                 _ansResults.value = it.data!!
-                _ansTotal.value = it.data!!.size
             },
             onFailure = {
                 Timber.d("AnswerList 가져오기 통신 실패")
@@ -52,7 +51,6 @@ class BestTabViewModel @Inject constructor(
                     questionData[i].lineVisible =  false
                 }
                 _quesResults.value = questionData
-                _quesTotal.value = it.data!!.size
 
             },
             onFailure = {
