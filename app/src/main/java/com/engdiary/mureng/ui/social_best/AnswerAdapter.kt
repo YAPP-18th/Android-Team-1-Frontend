@@ -15,6 +15,7 @@ import com.engdiary.mureng.databinding.ItemSocialUserAnswerBinding
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.util.setOnSingleClickListener
 import jp.wasabeef.blurry.Blurry
+import timber.log.Timber
 
 /**
  * Social_Best Tab 인기 답변 RecyclerView Adapter
@@ -27,10 +28,10 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, 
         const val TYPE_DETAIL = 2
     }
 
-
-    fun getTotalItem(): Int {
-        return if(vm!!.ansTotal!!.value!! == null) 0 else vm!!.ansTotal!!.value!!
+    override fun getItemCount(): Int {
+        return super.getItemCount()
     }
+
 
     override fun getItemViewType(position: Int): Int {
         return when (type) {

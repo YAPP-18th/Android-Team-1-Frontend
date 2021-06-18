@@ -36,7 +36,6 @@ class MyQuesViewModel @Inject constructor(
                 }
                 _quesResults.value = questionData
                 _quesCnt.value = it.size
-                _quesTotal.value = it!!.size
 
 
             },

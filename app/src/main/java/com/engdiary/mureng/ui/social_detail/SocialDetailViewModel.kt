@@ -51,11 +51,20 @@ class SocialDetailViewModel @Inject constructor(
     private var _questionUserImg = MutableLiveData<String>()
     val questionUserImg : LiveData<String> = _questionUserImg
 
+    private var _totalPage = MutableLiveData<Int>()
+    val totalPage : LiveData<Int> = _totalPage
+
+    private var _qusetionId = MutableLiveData<Int>()
+    val qusetionId : LiveData<Int> = _qusetionId
+
     /** 생성자 */
     init {
         _backButton.value = false
         _answerCnt.value = 0
         _clickedSort.value = false
+        _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
+        _isPop.value = true
+
 
     }
 
@@ -63,17 +72,32 @@ class SocialDetailViewModel @Inject constructor(
         _questionNetwork.value = questionData
         _questionContent.value = questionData.contentKr
         _questionTitle.value = questionData.content
+        _qusetionId.value = questionData.questionId
         if(questionData.author != null) {
             _questionUser.value = questionData.author.nickname
             _questionUserImg.value = questionData.author.image
         }
-        murengRepository.getReplyAnswerList(questionId = questionData.questionId, sort = SortConstant.POP, size = 10, page = 0,
+        getPagingReplyData(0)
+    }
+
+    fun getPagingReplyData(page : Int) {
+        var sort : String? = null
+        sort = if(_isPop.value!!) {
+            SortConstant.POP
+        } else {
+            SortConstant.NEW
+        }
+        murengRepository.getReplyAnswerList(questionId = _qusetionId.value!!, sort = sort, size = 10, page = page,
             onSuccess = {
-                _ansResults.value = it
-                _answerCnt.value = it.size
-                _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
-                _isPop.value = true
-                _quesTotal.value = it!!.size
+                if(page > 0) {
+                    for (item in it.data!!) {
+                        addAnswerResult(item)
+                    }
+                } else {
+                    _ansResults.value = it.data!!
+                    _answerCnt.value = it.totalItemSize!!
+                    _totalPage.value = it.totalPage!!
+                }
             },
             onFailure = {
                 Timber.d("질문관련 답변 가져오기 실패")
@@ -117,35 +141,15 @@ class SocialDetailViewModel @Inject constructor(
 
     fun menuClick() {
         if (!_isPop.value!!) {
-            murengRepository.getReplyAnswerList(questionId = _questionNetwork.value!!.questionId, sort = SortConstant.POP, size = 10, page = 0,
-                    onSuccess = {
-                        _ansResults.value = it
-                        _answerCnt.value = it.size
-                        _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
-                        _clickedSort.value = false
-                        _isPop.value = true
-                        _ansTotal.value = it!!.size
-
-                    },
-                    onFailure = {
-                        Timber.d("질문관련 답변 가져오기 실패")
-                    }
-            )
+            _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
+            _clickedSort.value = false
+            _isPop.value = true
+            getPagingReplyData(0)
         } else {
-            murengRepository.getReplyAnswerList(questionId = _questionNetwork.value!!.questionId, sort = SortConstant.NEW, size = 10, page = 0,
-                    onSuccess = {
-                        _ansResults.value = it
-                        _answerCnt.value = it.size
-                        _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.newest)
-                        _clickedSort.value = false
-                        _isPop.value = false
-                        _ansTotal.value = it!!.size
-
-                    },
-                    onFailure = {
-                        Timber.d("질문관련 답변 가져오기 실패")
-                    }
-            )
+            _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.newest)
+            _clickedSort.value = false
+            _isPop.value = false
+            getPagingReplyData(0)
         }
 
     }
