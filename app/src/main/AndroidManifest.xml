@@ -14,17 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".ui.setting.DevelopPersonActivity"></activity>
+        <activity android:name=".ui.setting.VersionActivity" />
+        <activity android:name=".ui.setting.VersionInformationActivity" />
         <activity
             android:name=".ui.push_alert.PushAlertActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity android:name=".ui.setting.SettingActivity" />
-        <activity android:name=".ui.social_best_more.BestMoreActivity"></activity>
-        <activity android:name=".ui.social_qcreate.SocialQcreateActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.social_best_more.BestMoreActivity" />
+        <activity
+            android:name=".ui.social_qcreate.SocialQcreateActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.social_detail.SocialDetailActivity" />
         <activity
             android:name=".ui.diary_detail.DiaryDetailActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.write_diary.WriteDiaryImageActivity"
             android:exported="true" />
