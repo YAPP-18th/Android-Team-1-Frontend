@@ -16,6 +16,7 @@ import androidx.databinding.adapters.TextViewBindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.engdiary.mureng.R
 import com.engdiary.mureng.di.BASE_URL
 import com.engdiary.mureng.di.GlideApp
 import com.engdiary.mureng.di.MEDIA_BASE_URL
@@ -122,4 +123,25 @@ fun setImageGlideResource(imageView: ImageView, resource: String) {
     val resourceStr = MEDIA_BASE_URL + resource
     Glide.with(imageView).load(resourceStr).into(imageView)
 }
+
+@BindingAdapter("imageCircleGlideResource")
+fun setImageCircleGlideResource(imageView: ImageView, resource: String?) {
+    if(!resource.isNullOrEmpty()) {
+        val resourceStr = MEDIA_BASE_URL + resource
+        Glide.with(imageView).load(resourceStr).circleCrop().into(imageView)
+    } else {
+        Glide.with(imageView).load(R.drawable.icons_profile_m).into(imageView)
+    }
+}
+
+@BindingAdapter("imageCircleSmallGlideResource")
+fun setImageCircleSmallGlideResource(imageView: ImageView, resource: String?) {
+    if(!resource.isNullOrEmpty()) {
+        val resourceStr = MEDIA_BASE_URL + resource
+        Glide.with(imageView).load(resourceStr).circleCrop().into(imageView)
+    } else {
+        Glide.with(imageView).load(R.drawable.icons_profile_s).into(imageView)
+    }
+}
+
 

@@ -94,4 +94,5 @@ dependencies {
     // Paging Library
     implementation "androidx.paging:paging-runtime-ktx:2.1.2"
     testImplementation "androidx.paging:paging-common-ktx:2.1.2"
+
 }

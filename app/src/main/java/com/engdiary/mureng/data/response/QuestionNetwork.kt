@@ -16,6 +16,8 @@ data class QuestionNetwork(
     val repliesCount: Int = 0 ,
     @SerializedName("wordHints")
     val wordHints: List<HintNetwork>,
+    @SerializedName("author")
+    val author : AuthorNetwork?,
     var lineVisible : Boolean = true,
     var likeYn: Boolean? = null,
 ) : java.io.Serializable {
