@@ -1,7 +1,9 @@
 package com.engdiary.mureng.ui.social
 
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
 import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
@@ -10,9 +12,12 @@ import androidx.databinding.BindingAdapter
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.engdiary.mureng.R
 import com.engdiary.mureng.data.ItemWriteDiaryImage
 import com.google.android.material.tabs.TabLayout
+import jp.wasabeef.blurry.Blurry
 
 
 object BindingAdapter {
@@ -167,14 +172,31 @@ object BindingAdapter {
         diaryWriteImage: ItemWriteDiaryImage?,
         galleryImageUri: Uri?
     ) {
-        when (diaryWriteImage) {
+        val image = when (diaryWriteImage) {
             is ItemWriteDiaryImage.DiaryImage -> diaryWriteImage.url
             is ItemWriteDiaryImage.Gallery -> galleryImageUri
             null -> return
-        }.let {
-            Glide.with(imageView.context)
-                .load(it)
-                .into(imageView)
         }
+
+        Glide.with(imageView.context)
+            .asBitmap()
+            .load(image)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    transition: Transition<in Bitmap>?
+                ) {
+                    loadBlurBitmap(imageView, resource)
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {}
+            })
     }
+}
+
+private fun loadBlurBitmap(imageView: ImageView, bitmap: Bitmap) {
+    Blurry.with(imageView.context)
+        .sampling(1)
+        .from(bitmap)
+        .into(imageView)
 }
