@@ -23,7 +23,10 @@ class DiaryDetailActivity :
     override val viewModel: DiaryDetailViewModel by viewModels()
 
     private val diary: Diary?
-        get() = intent.getSerializableExtra(IntentKey.DIARY) as? Diary
+        get() = intent.getSerializableExtra(IntentKey.DIARY) as Diary?
+
+    private val isDiaryEdited: String?
+        get() = intent.getStringExtra(IntentKey.EDITED_DIARY.first)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +34,19 @@ class DiaryDetailActivity :
         binding.viewModel = viewModel
 
         diary?.let { viewModel.setDiary(it) } ?: finish()
-
-        initToolbar(binding.toolbar)
+        showNewCookieDialog(isDiaryEdited)
+        initToolbar(binding.toolbar, diary?.isMine)
         initButtons(binding)
         subscribeUi()
     }
 
-    private fun initToolbar(toolbar: MaterialToolbar) {
+    private fun showNewCookieDialog(diaryEdited: String?) {
+        diaryEdited?.let {
+            NewCookieDialog(this).show()
+        }
+    }
+
+    private fun initToolbar(toolbar: MaterialToolbar, isMine: Boolean?) {
         toolbar.overflowIcon =
             ResourcesCompat.getDrawable(resources, R.drawable.icons_more_vertical, null)
         toolbar.setOnMenuItemClickListener { menuItem ->
@@ -51,7 +60,9 @@ class DiaryDetailActivity :
             }
             return@setOnMenuItemClickListener true
         }
+        isMine?.let { toolbar.menu.setGroupVisible(R.id.menu_requiring_authenticated, it) }
     }
+
 
     private fun showDeleteDiaryDialog(context: Context) {
         MaterialAlertDialogBuilder(context)
@@ -83,7 +94,6 @@ class DiaryDetailActivity :
                 .putExtra(IntentKey.QUESTION_ID, it)
         }?.also { startActivity(it) } ?: return
     }
-
 
     private fun subscribeUi() {
         viewModel.navigateToBefore.observe(this) {
