@@ -94,16 +94,13 @@ class MurengRepository @Inject constructor(
         return byteArrayOutputStream
     }
 
-    suspend fun postDiary(diaryContent: DiaryContent, imagePath: String): Diary? {
+    suspend fun postDiary(questionId: Int, diaryContent: DiaryContent, imagePath: String): Diary? {
         val response =
             PostDiaryRequest(
+                questionId,
                 diaryContent.content,
                 imagePath
-            ).let {
-                api.postDiary(
-                    it
-                )
-            }
+            ).let { api.postDiary(it) }
 
         if (!response.isSuccessful) {
             Timber.d("Post Diary Fail (code: ${response.code()}) (message: ${response.message()}) (response: ${response.raw()})")
@@ -135,30 +132,30 @@ class MurengRepository @Inject constructor(
     }
 
     fun getQuestionList(
-        page : Int,
-        size : Int,
-        sort : String,
+        page: Int,
+        size: Int,
+        sort: String,
         onSuccess: (MurengResponse<List<QuestionNetwork>>) -> Unit,
         onFailure: () -> Unit
     ) {
-        api.getQuestionList(page, size, sort).safeEnqueue (
-            onSuccess = {onSuccess(it)},
-            onFailure = {onFailure()},
-            onError = {onFailure()}
+        api.getQuestionList(page, size, sort).safeEnqueue(
+            onSuccess = { onSuccess(it) },
+            onFailure = { onFailure() },
+            onError = { onFailure() }
         )
     }
 
     fun getAnswerList(
-        page : Int,
-        size : Int,
-        sort : String,
+        page: Int,
+        size: Int,
+        sort: String,
         onSuccess: (MurengResponse<List<DiaryNetwork>>) -> Unit,
         onFailure: () -> Unit
     ) {
-        api.getAnswerList(page, size, sort).safeEnqueue (
-            onSuccess = {onSuccess(it)},
-            onFailure = {onFailure()},
-            onError = {onFailure()}
+        api.getAnswerList(page, size, sort).safeEnqueue(
+            onSuccess = { onSuccess(it) },
+            onFailure = { onFailure() },
+            onError = { onFailure() }
         )
     }
 
@@ -215,27 +212,28 @@ class MurengRepository @Inject constructor(
             api.putDiary(diaryId, PutDiaryRequest(questionId, diaryContent?.content, imagePath))
         return response.data?.asDomain()
     }
+
     fun postLikes(
-            replyId : Int,
-            onSuccess: () -> Unit,
-            onFailure: () -> Unit
+        replyId: Int,
+        onSuccess: () -> Unit,
+        onFailure: () -> Unit
     ) {
         api.postLikes(replyId).safeEnqueue(
-                onSuccess = {onSuccess()},
-                onFailure = {onFailure()},
-                onError = {onFailure()}
+            onSuccess = { onSuccess() },
+            onFailure = { onFailure() },
+            onError = { onFailure() }
         )
     }
 
     fun deleteLikes(
-            replyId : Int,
-            onSuccess: () -> Unit,
-            onFailure: () -> Unit
+        replyId: Int,
+        onSuccess: () -> Unit,
+        onFailure: () -> Unit
     ) {
         api.deleteLikes(replyId).safeEnqueue(
-                onSuccess = {onSuccess()},
-                onFailure = {onFailure()},
-                onError = {onFailure()}
+            onSuccess = { onSuccess() },
+            onFailure = { onFailure() },
+            onError = { onFailure() }
         )
     }
 }
