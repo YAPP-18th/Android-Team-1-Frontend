@@ -60,6 +60,7 @@ class MurengRepository @Inject constructor(
             )
         } ?: return null
 
+        Timber.d("imageBodypart: $imageBodyPart")
         val response = api.postDiaryImage(
             imageBodyPart
         )
