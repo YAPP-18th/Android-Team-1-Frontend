@@ -40,8 +40,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         viewModel.selectMyPage.observe(this, Observer {
             if(it) {
-//                MyPageFragment().navigate(supportFragmentManager, fl_main.id)
-                startActivity(SettingActivity::class, isFinish = false)
+                MyPageFragment().navigate(supportFragmentManager, fl_main.id)
+//                startActivity(SettingActivity::class, isFinish = false)
             }
         })
 
