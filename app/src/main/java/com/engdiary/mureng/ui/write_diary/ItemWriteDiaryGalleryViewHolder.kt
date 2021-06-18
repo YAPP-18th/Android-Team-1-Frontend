@@ -19,6 +19,11 @@ class ItemWriteDiaryGalleryViewHolder private constructor(
         binding.itemWritingDiaryGallery = itemWriteDiaryGallery
     }
 
+    private fun setSize(size: Int) {
+        itemView.layoutParams.height = size
+        itemView.layoutParams.width = size
+    }
+
     companion object {
         const val viewType = 0
 
@@ -28,10 +33,7 @@ class ItemWriteDiaryGalleryViewHolder private constructor(
                 parent,
                 false
             ).let { ItemWriteDiaryGalleryViewHolder(it) }
-                .apply {
-                    itemView.layoutParams.height = itemWidth
-                    itemView.layoutParams.width = itemWidth
-                }
+                .apply { setSize(itemWidth) }
         }
     }
 }
