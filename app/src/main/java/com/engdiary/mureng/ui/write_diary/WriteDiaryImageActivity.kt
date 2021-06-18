@@ -20,7 +20,6 @@ import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
 import com.engdiary.mureng.util.WindowLengthCalculator
 import com.engdiary.mureng.util.dpToPx
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class WriteDiaryImageActivity :
@@ -45,7 +44,6 @@ class WriteDiaryImageActivity :
     private val resultLauncher = registerForActivityResult(GetContent())
     { uri: Uri? ->
         viewModel.selectGalleryImage(uri)
-        Timber.d("(uri: $uri)")
     }
 
     private fun launchGallery() {
@@ -56,7 +54,7 @@ class WriteDiaryImageActivity :
         get() = intent.getSerializableExtra(IntentKey.DIARY) as Diary?
 
     private val question: Question?
-        get() = intent.getSerializableExtra(IntentKey.QUESTION) as Question?
+        get() = intent.getParcelableExtra(IntentKey.QUESTION) as Question?
 
     private val diaryContent: DiaryContent?
         get() = intent.getSerializableExtra(IntentKey.DIARY_CONTENT) as DiaryContent?
@@ -75,6 +73,14 @@ class WriteDiaryImageActivity :
         subscribeUi()
     }
 
+    private fun initButtons(
+        imageButtonWritingdiaryCancel: ImageButton,
+        textviewWritingdiaryWrite: TextView
+    ) {
+        imageButtonWritingdiaryCancel.setOnClickListener { finish() }
+        textviewWritingdiaryWrite.setOnClickListener { viewModel.requestWriteDiary() }
+    }
+
     private fun initDiaryImages(recyclerviewWritingdiaryimageCandidates: RecyclerView) {
         recyclerviewWritingdiaryimageCandidates.adapter = diaryImageAdapter
         recyclerviewWritingdiaryimageCandidates.addItemDecoration(
@@ -85,21 +91,13 @@ class WriteDiaryImageActivity :
         )
     }
 
-    private fun initButtons(
-        imageButtonWritingdiaryCancel: ImageButton,
-        textviewWritingdiaryWrite: TextView
-    ) {
-        imageButtonWritingdiaryCancel.setOnClickListener { finish() }
-        textviewWritingdiaryWrite.setOnClickListener { viewModel.requestWriteDiary() }
-    }
-
     private fun subscribeUi() {
         viewModel.diaryImages.observe(this) {
             diaryImageAdapter.submitList(it)
         }
 
         viewModel.navigateToNewDiaryDetail.observe(this) { diary ->
-            navigateToDiaryDetail(diary, false)
+            diary?.let { navigateToDiaryDetail(it, false) }
         }
 
         viewModel.navigateToEditedDiaryDetail.observe(this) { diary ->
