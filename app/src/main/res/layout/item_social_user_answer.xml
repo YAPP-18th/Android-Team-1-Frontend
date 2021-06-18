@@ -20,10 +20,11 @@
 
         <ImageView
             android:id="@+id/img_social_user_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="14dp"
+            app:imageCircleGlideResource="@{Diary.image}"
             android:src="@drawable/icons_profile_m"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

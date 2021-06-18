@@ -107,11 +107,12 @@
 
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:id="@+id/img_social_detail_user"
                         android:layout_marginTop="16dp"
                         tools:src="@drawable/icons_profile_s"
+                        app:imageCircleSmallGlideResource="@{vm.questionUserImg}"
                         app:layout_constraintStart_toStartOf="@id/tv_social_detail_kor"
                         app:layout_constraintTop_toBottomOf="@id/tv_social_detail_kor"/>
 

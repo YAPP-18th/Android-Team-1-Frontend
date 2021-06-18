@@ -22,31 +22,34 @@ class SocialDetailViewModel @Inject constructor(
 ) : BestPopularViewModel(murengRepository) {
 
     private var _backButton = MutableLiveData<Boolean>()
-    var backButton: LiveData<Boolean> = _backButton
+    val backButton: LiveData<Boolean> = _backButton
 
     private var _answerCnt = MutableLiveData<Int>()
-    var answerCnt : LiveData<Int> = _answerCnt
+    val answerCnt : LiveData<Int> = _answerCnt
 
     private var _questionTitle = MutableLiveData<String>()
-    var questionTitle : LiveData<String> = _questionTitle
+    val questionTitle : LiveData<String> = _questionTitle
 
     private var _questionContent = MutableLiveData<String>()
-    var questionContent : LiveData<String> = _questionContent
+    val questionContent : LiveData<String> = _questionContent
 
     private var _questionUser = MutableLiveData<String>()
-    var questionUser : LiveData<String> = _questionUser
+    val questionUser : LiveData<String> = _questionUser
 
     private var _clickedSort = MutableLiveData<Boolean>()
-    var clickedSort : LiveData<Boolean> = _clickedSort
+    val clickedSort : LiveData<Boolean> = _clickedSort
 
     private var _selectedSort = MutableLiveData<String>()
-    var selectedSort : LiveData<String> = _selectedSort
+    val selectedSort : LiveData<String> = _selectedSort
 
     private var _questionNetwork = MutableLiveData<QuestionNetwork>()
-    var questionNetwork : LiveData<QuestionNetwork> = _questionNetwork
+    val questionNetwork : LiveData<QuestionNetwork> = _questionNetwork
 
     private var _isPop = MutableLiveData<Boolean>()
-    var isPop : LiveData<Boolean> = _isPop
+    val isPop : LiveData<Boolean> = _isPop
+
+    private var _questionUserImg = MutableLiveData<String>()
+    val questionUserImg : LiveData<String> = _questionUserImg
 
     /** 생성자 */
     init {
@@ -60,7 +63,10 @@ class SocialDetailViewModel @Inject constructor(
         _questionNetwork.value = questionData
         _questionContent.value = questionData.contentKr
         _questionTitle.value = questionData.content
-        _questionUser.value = ""
+        if(questionData.author != null) {
+            _questionUser.value = questionData.author.nickname
+            _questionUserImg.value = questionData.author.image
+        }
         murengRepository.getReplyAnswerList(questionId = questionData.questionId, sort = SortConstant.POP, size = 10, page = 0,
             onSuccess = {
                 _ansResults.value = it
