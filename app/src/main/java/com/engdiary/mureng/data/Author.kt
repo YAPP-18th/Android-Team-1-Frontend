@@ -1,10 +1,11 @@
 package com.engdiary.mureng.data
 
 import android.os.Parcelable
+import com.engdiary.mureng.data.response.AuthorNetwork
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Author (
+data class Author(
     val attendanceCount: Int,
     val email: String,
     val identifier: String,
@@ -14,4 +15,16 @@ data class Author (
     val murengCount: Int,
     val nickname: String,
     val pushActive: Boolean
-) : Parcelable
+) : Parcelable {
+    fun asNetwork(): AuthorNetwork = AuthorNetwork(
+        attendanceCount,
+        email,
+        identifier,
+        image,
+        lastAttendanceDate,
+        memberId,
+        murengCount,
+        nickname,
+        pushActive
+    )
+}

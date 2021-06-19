@@ -7,4 +7,5 @@ object IntentKey {
     const val DIARY = "DIARY"
     val EDITED_DIARY = Pair("EDITED_DIARY_KEY", "EDITED_DIARY_VALUE")
     const val OPEN_SOURCE = "OPEN_SOURCE"
+    const val QUESTION_NETWORK = "QUESTION_NETWORK"
 }
