@@ -139,4 +139,13 @@ interface MurengService {
         @Path("replyId") replyId: Int
     ): Call<MurengResponse<Unit>>
 
+    @PUT("api/member/me/setting/push/daily")
+    suspend fun putDailyPushAlertSetting(
+        @Body notificationRequest: NotificationRequest
+    ): MurengResponse<UserNetwork>
+
+    @PUT("/api/member/me/setting/push/like")
+    suspend fun putLikeAlertSetting(
+        @Body notificationRequest: NotificationRequest
+    ): MurengResponse<UserNetwork>
 }

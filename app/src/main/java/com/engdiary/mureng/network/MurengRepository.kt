@@ -346,4 +346,17 @@ class MurengRepository @Inject constructor(
         return api.getNickNameExist(nickName).data?.asDomain()
     }
 
+    suspend fun putDailyPushAlertSetting(isActive: Boolean): Boolean {
+        val userNetwork = api.putDailyPushAlertSetting(NotificationRequest(isActive)).data
+        return userNetwork?.let {
+            true
+        } ?: false
+    }
+
+    suspend fun putLikeAlertSetting(isActive: Boolean): Boolean {
+        val userNetwork = api.putLikeAlertSetting(NotificationRequest(isActive)).data
+        return userNetwork?.let {
+            true
+        } ?: false
+    }
 }
