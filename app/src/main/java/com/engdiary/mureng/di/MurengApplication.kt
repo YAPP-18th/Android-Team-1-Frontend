@@ -7,6 +7,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import com.engdiary.mureng.R
+import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -29,6 +30,8 @@ class MurengApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         appContext = this
+        KakaoSdk.init(this, appKey = "a53af2544ace9f28b4a214707c220ec3")
+
         Timber.plant(
             Timber.DebugTree()
         )

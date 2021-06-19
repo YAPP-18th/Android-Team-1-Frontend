@@ -1,5 +1,6 @@
 package com.engdiary.mureng.network
 
+import com.engdiary.mureng.data.request.*
 import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.data.request.PutDiaryRequest
@@ -19,8 +20,33 @@ interface MurengService {
      *  fun getSurveys(): Call<WinePickResponse<List<Survey>>>
      */
 
+//    {
+//        "message": "ok",
+//        "data": {
+//        "exist": false,
+//        "email": null
+//    },
+//        "timestamp": 1622125267990
+//    }
+
+    @POST("/api/member/user-exists/{provider}")
+    fun postUserExist(
+        @Path("provider") provider: String,
+        @Body userExistRequest: UserExistRequest
+    ): Response<MurengResponse<DiaryNetwork>>
+
+    @POST("/api/member/user-exists/kakao")
+    fun postKakaoLogin(
+        @Body userExistRequest: UserExistRequest
+    ): Call<MurengResponse<KakaoLoginResponse>>
+
+    @POST("/api/jwt")
+    fun postJWT(
+        @Body postJWTRequest: PostJWTRequest
+    ): Call<MurengResponse<JWTResponse>>
+
     @GET("/api/today-question")
-    suspend fun getTodayQuestion(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<QuestionNetwork>
+    suspend fun getTodayQuestion(): MurengResponse<QuestionNetwork>
 
     @Multipart
     @POST("/api/reply/image")
@@ -43,9 +69,8 @@ interface MurengService {
 
     @DELETE("/api/reply/{replyId}")
     suspend fun deleteDiary(
-        @Header("X-AUTH-TOKEN") accessToken: String,
         @Path("replyId") diaryId: Int
-    ): Response<MurengResponse<Boolean>>
+    ): Response<MurengResponse<DeleteDiaryResponse>>
 
     /**
      *  답변 가져오기 (Best, Newest)
@@ -88,10 +113,20 @@ interface MurengService {
     @GET("/api/questions/{questionId}/replies")
     fun getReplyAnswerList(
         @Path("questionId") questionId: Int,
-        @Query("page") page: Int?,
-        @Query("size") size: Int?,
-        @Query("sort") sort: String?
-    ): Call<MurengResponse<List<DiaryNetwork>>>
+
+        @Query("page") page : Int?,
+        @Query("size") size : Int?,
+        @Query("sort") sort : String?
+    ) : Call<MurengResponse<List<DiaryNetwork>>>
+
+    @GET("/api/member/nickname-exists/{nickname}")
+    suspend fun getNickNameExist(
+            @Path("nickname") nickname: String): MurengResponse<NickNameNetwork>
+
+    @POST("/api/member/signup")
+    suspend fun postUserSignup(
+            @Body postSignupRequest: PostSignupRequest
+    ): Response<MurengResponse<UserNetwork>>
 
     @PUT("/api/reply/{replyId}")
     suspend fun putDiary(

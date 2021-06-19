@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.BestMoreConstant
+import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.databinding.ActivitySocialDetailBinding
 import com.engdiary.mureng.ui.base.BaseActivity
@@ -22,7 +23,7 @@ class SocialDetailActivity : BaseActivity<ActivitySocialDetailBinding>(R.layout.
 
     /** 이전 화면에서부터 받은 QuestionItem[QuestionData] */
     private val questionData: QuestionNetwork?
-        get() = intent.getSerializableExtra("quesitonData") as? QuestionNetwork
+        get() = intent.getSerializableExtra(IntentKey.QUESTION_NETWORK) as? QuestionNetwork
 
     private var page : Int = 0
 

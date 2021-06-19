@@ -35,6 +35,7 @@ const val CONNECT_TIMEOUT = 60.toLong()
 const val WRITE_TIMEOUT = 60.toLong()
 const val READ_TIMEOUT = 60.toLong()
 
+
 const val BASE_URL = "http://dev.mureng.hkpark.net"
 const val MEDIA_BASE_URL = "http://dev.mureng-media.hkpark.net"
 
@@ -59,17 +60,17 @@ suspend fun <T> Call<T>.send(): Response<T> = suspendCoroutine {
 class ActivityModule {
     @Provides
     fun provideViewModelFactory(
-            murengRepository: MurengRepository
+        murengRepository: MurengRepository
     ): ViewModelProvider.AndroidViewModelFactory = ViewModelFactoryImpl(
-            MurengApplication.getGlobalAppApplication(), murengRepository
+        MurengApplication.getGlobalAppApplication(), murengRepository
     )
 
     /**
      * ViewModelFactory 구현체 (impl) 를 만드는 클래스
      */
     class ViewModelFactoryImpl(
-            val murengApplication: MurengApplication,
-            val murengRepository: MurengRepository
+        val murengApplication: MurengApplication,
+        val murengRepository: MurengRepository
     ) : ViewModelProvider.AndroidViewModelFactory(murengApplication) {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return BaseViewModel(murengRepository) as T
@@ -111,7 +112,10 @@ object NetworkModule {
             val builder = chain.request().newBuilder()
                 .url(newUrl)
 
-            if (newUrl.contains("/api/reply") || newUrl.contains("/api/questions")) {
+            if (newUrl.contains("/api/reply")
+                || newUrl.contains("/api/questions")
+                || newUrl.contains("/api/today-question")
+            ) {
                 return@Interceptor chain.proceed(chain.request().newBuilder().apply {
                     addHeader("X-AUTH-TOKEN", authManager.test_jwt)
                     url(newUrl)

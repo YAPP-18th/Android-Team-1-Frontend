@@ -30,7 +30,11 @@ class WriteDiaryImageViewModel @ViewModelInject constructor(
         get() = _diaryImages
 
     private val diaryContent = MutableLiveData<DiaryContent>()
-    private var question: Question? = null
+
+    private val _question = MutableLiveData<Question>()
+    val question: LiveData<Question>
+        get() = _question
+
     private var editingDiaryId: Int? = null
 
     private val _navigateToNewDiaryDetail = SingleLiveEvent<Diary>()
@@ -77,22 +81,21 @@ class WriteDiaryImageViewModel @ViewModelInject constructor(
         if (isEditing) {
             murengRepository.putDiary(
                 editingDiaryId!!,
-                question?.questionId!!,
+                question?.value?.questionId!!,
                 diaryContent.value!!,
                 imagePath!!
             )?.let { diary -> _navigateToEditedDiaryDetail.value = diary }
-                .run { _navigateToEditedDiaryDetail.call() }
             return
         }
 
         imagePath?.let {
-            murengRepository.postDiary(diaryContent.value!!, it)
+            murengRepository.postDiary(question.value?.questionId!!, diaryContent.value!!, it)
                 ?.let { diary -> _navigateToNewDiaryDetail.value = diary }
                 .run { _navigateToNewDiaryDetail.call() }
         }
     }
 
-    private fun checkIsEditing(diaryId: Int?) = diaryId == null
+    private fun checkIsEditing(diaryId: Int?) = diaryId != null
 
     fun setDiaryContent(diaryContent: DiaryContent) {
         this.diaryContent.value = diaryContent
@@ -109,6 +112,6 @@ class WriteDiaryImageViewModel @ViewModelInject constructor(
     }
 
     fun setQuestion(question: Question) {
-        this.question = question
+        this._question.value = question
     }
 }
