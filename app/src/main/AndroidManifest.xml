@@ -15,12 +15,26 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
+        <service
+            android:name=".fcm.MurengFCMService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher_round" />
+
         <activity
             android:name=".ui.push_alert.PushAlertActivity"
             android:exported="true"></activity>
         <activity android:name=".ui.setting.SettingActivity" />
         <activity android:name=".ui.social_best_more.BestMoreActivity"></activity>
-        <activity android:name=".ui.social_qcreate.SocialQcreateActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".ui.social_qcreate.SocialQcreateActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.social_detail.SocialDetailActivity" />
         <activity
             android:name=".ui.diary_detail.DiaryDetailActivity"
@@ -42,5 +56,4 @@
             android:name=".ui.write_diary.WriteDiaryContentActivity"
             android:exported="true" />
     </application>
-
 </manifest>
