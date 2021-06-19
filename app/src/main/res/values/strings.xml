@@ -73,6 +73,7 @@
 
 
     <string name="pushalert_todayalert">오늘의 질문 알림</string>
+    <string name="pushalert_likealert">좋아요 알림</string>
     <string name="pushalert_title">푸시 알림</string>
 
 
@@ -84,4 +85,15 @@
     <string name="diary_detail_delete_dialog_accept">네</string>
     <string name="diary_detail_delete_dialog_cancel">아니오</string>
     <string name="hint_write_diary_content">50자 이상 써주세요 :)</string>
+    
+    <!-- like push notification -->
+    <string name="like_channel_id">LIKE_CHANNEL</string>
+    <string name="like_channel_name">좋아요 알림</string>
+    <string name="like_channel_description">좋아요를 받으면 알림이 옵니다.</string>
+
+    <!-- 매일 일기 알람 -->
+    <string name="daily_channel_id">DAILY_CHANNEL</string>
+    <string name="daily_channel_name">오늘의 질문 알림</string>
+    <string name="daily_channel_description">매일 일기 알림을 받습니다.</string>
+
 </resources>

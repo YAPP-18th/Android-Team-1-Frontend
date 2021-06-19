@@ -22,8 +22,16 @@ jobs:
     - name: Get current date
       id: date
       run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-     
-     
+
+    - name: Decrypt Services
+      run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$FIREBASE_SECRET" --output app/services.tar app/services.tar.gpg
+
+      env:
+        FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
+
+    - name: Unzip Services
+      run: tar xvf app/services.tar
+
     - name: Build APK
       run: bash ./gradlew assembleDebug --stacktrace
      
