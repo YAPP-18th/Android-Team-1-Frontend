@@ -52,7 +52,7 @@ class SignupNickNameViewModel @Inject constructor(
         if(_isDuplicate.value == false) {
 
             val currentTimestamp = System.currentTimeMillis()
-            val signupRequest = PostSignupRequest(identifier = currentTimestamp.toString(), nickname = nickName, email = "")
+            val signupRequest = PostSignupRequest(identifier = currentTimestamp.toString(), nickname = nickName, email = null)
 
             viewModelScope.launch {
                 murengRepository.userSignup(
