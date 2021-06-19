@@ -50,15 +50,23 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
-                <data
-                    android:host="oauth"
-                    android:scheme="a53af2544ace9f28b4a214707c220ec3" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.write_diary.WriteDiaryContentActivity"
             android:exported="true" />
+
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="oauth"
+                    android:scheme="kakaoa53af2544ace9f28b4a214707c220ec3" />
+
+            </intent-filter>
+        </activity>
 
     </application>
 
