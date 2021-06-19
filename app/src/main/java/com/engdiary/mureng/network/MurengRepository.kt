@@ -307,7 +307,7 @@ class MurengRepository @Inject constructor(
     }
 
     suspend fun getMyInfo(): Author? {
-        val response = api.getMyInfo(authManager.token)
+        val response = api.getMyInfo(authManager.accessToken)
         return response.body()?.data?.asDomain()
     }
 

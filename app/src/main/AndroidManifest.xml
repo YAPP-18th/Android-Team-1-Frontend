@@ -17,11 +17,9 @@
         <activity android:name=".ui.setting.WebviewActivity"></activity>
         <activity android:name=".ui.setting.DevelopPersonActivity" />
         <activity android:name=".ui.setting.VersionActivity" />
-        <activity android:name=".ui.setting.VersionInformationActivity" />
         <activity
             android:name=".ui.push_alert.PushAlertActivity"
             android:exported="true" />
-            android:exported="true"></activity>
         <activity android:name=".ui.signup.nickname.SignupNickNameActivity"
                   android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.signup.complete.SignupCompleteActivity" />

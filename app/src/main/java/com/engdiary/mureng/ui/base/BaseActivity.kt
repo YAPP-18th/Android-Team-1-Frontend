@@ -62,9 +62,9 @@ abstract class BaseActivity<B : ViewDataBinding>(
         } else if (token != null) {
             UserApiClient.instance.me { user, error ->
                 val kakaoId = user!!.id
-                Log.i("token.accessToken", token.accessToken.toString())
-                Log.i("token.refreshToken", token.refreshToken.toString())
-                Log.i("kakao email", user!!.kakaoAccount!!.email.toString())
+                Timber.d("token.accessToken- $token.accessToken.toString()")
+                Timber.d("token.refreshToken $token.refreshToken.toString()")
+                Timber.d("kakao email $user!!.kakaoAccount!!.email.toString()")
 
                 viewModel?.addKakaoUser(token.accessToken, token.refreshToken, kakaoId)
             }
