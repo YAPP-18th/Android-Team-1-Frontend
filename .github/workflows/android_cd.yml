@@ -25,12 +25,11 @@ jobs:
 
     - name: Decrypt Services
       run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$FIREBASE_SECRET" --output app/services.tar app/services.tar.gpg
-
       env:
         FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
 
     - name: Unzip Services
-      run: tar xvf app/services.tar
+      run: tar xvf app/services.tar -C app
 
     - name: Build APK
       run: bash ./gradlew assembleDebug --stacktrace
