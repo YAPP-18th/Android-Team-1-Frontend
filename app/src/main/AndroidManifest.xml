@@ -30,7 +30,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.social_detail.SocialDetailActivity" />
         <activity android:name=".ui.signup.agreement.SignupTermsActivity" />
-        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.main.MainActivity"
+            android:exported="true"/>
 
 
         <activity
