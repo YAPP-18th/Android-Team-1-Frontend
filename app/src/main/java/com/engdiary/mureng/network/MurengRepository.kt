@@ -5,7 +5,15 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.util.Log
+import com.engdiary.mureng.data.Diary
+import com.engdiary.mureng.data.DiaryContent
+import com.engdiary.mureng.data.ItemWriteDiaryImage
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.*
+import com.engdiary.mureng.data.request.*
+import com.engdiary.mureng.data.response.JWTResponse
+import com.engdiary.mureng.data.response.KakaoLoginResponse
 import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.data.request.PutDiaryRequest
@@ -16,12 +24,15 @@ import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.MEDIA_BASE_URL
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.util.safeEnqueue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.lang.Exception
 import javax.inject.Inject
 
 class MurengRepository @Inject constructor(
@@ -44,6 +55,100 @@ class MurengRepository @Inject constructor(
     )
     }
      */
+
+    fun postKakaoLogin(
+        userExistRequest: UserExistRequest,
+        onSuccess : (KakaoLoginResponse) -> Unit,
+        onFailure : () -> Unit
+    ) {
+        api.postKakaoLogin(userExistRequest).safeEnqueue(
+            onSuccess = { onSuccess(it.data!!) },
+            onFailure = { onFailure()},
+            onError = {onFailure()}
+        )
+    }
+
+    fun getJWT(
+        jwtRequest: PostJWTRequest,
+        onSuccess : (JWTResponse) -> Unit,
+        onFailure : () -> Unit
+    ) {
+        api.postJWT(jwtRequest).safeEnqueue (
+            onSuccess = { onSuccess(it.data!!) },
+            onFailure = { onFailure()},
+            onError = {onFailure()}
+        )
+    }
+
+    fun settingUser(
+        userExistRequest: UserExistRequest,
+        successAction: (() -> Unit)? = null,
+        failAction: (() -> Unit)? = null,
+        errorAction: (() -> Unit)? = null
+    ) {
+        postKakaoLogin(
+            userExistRequest = userExistRequest,
+            onSuccess = {
+
+                it.email?.let {
+                    authManager.email = it
+                }
+
+                if(it.exist) {
+
+                    getJWT(
+                        jwtRequest = PostJWTRequest(email = authManager.email),
+                        onSuccess = {
+                            Log.i("get JWT it.accessToken", it.accessToken)
+                            authManager.accessToken = it.accessToken
+                            it.refreshToken?.let {
+                                authManager.refreshToken = it
+                            }
+                            successAction?.let { it() }
+                        },
+                        onFailure = {
+                            //failAction?.let { it() }
+                        }
+                    )
+
+                } else {
+                    failAction?.let { it() }
+                }
+            },
+            onFailure = { //kakao login fail
+                //errorAction?.let { it() }
+            }
+        )
+    }
+
+    suspend fun userSignup(
+        postSignupRequest: PostSignupRequest,
+        successAction: (() -> Unit)? = null,
+        failAction: (() -> Unit)? = null
+    ) {
+
+        postSignupRequest.email = authManager.email
+        val res = api.postUserSignup(postSignupRequest).body()?.data?.asDomain()
+        res.let {
+            getJWT(
+                jwtRequest = PostJWTRequest(email = authManager.email),
+                onSuccess = {
+                    authManager.accessToken = it.accessToken
+
+                    it.refreshToken?.let {
+                        authManager.refreshToken = it
+                    }
+
+                    successAction?.let { it() }
+
+                },
+                onFailure = {
+//                    failAction?.let { it() }
+                }
+            )
+        }
+    }
+
 
     suspend fun getTodayQuestion(): Question? {
         return api.getTodayQuestion("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q")
@@ -199,7 +304,7 @@ class MurengRepository @Inject constructor(
     }
 
     suspend fun getMyInfo(): Author? {
-        val response = api.getMyInfo(authManager.token)
+        val response = api.getMyInfo(authManager.accessToken)
         return response.body()?.data?.asDomain()
     }
 
@@ -237,4 +342,9 @@ class MurengRepository @Inject constructor(
             onError = { onFailure() }
         )
     }
+
+    suspend fun getNickNameExist(nickName : String): NickName? {
+        return api.getNickNameExist(nickName).data?.asDomain()
+    }
+
 }

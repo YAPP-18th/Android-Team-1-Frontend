@@ -20,20 +20,30 @@
         <activity
             android:name=".ui.push_alert.PushAlertActivity"
             android:exported="true" />
+        <activity android:name=".ui.signup.nickname.SignupNickNameActivity"
+                  android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.signup.complete.SignupCompleteActivity" />
         <activity android:name=".ui.setting.SettingActivity" />
         <activity android:name=".ui.social_best_more.BestMoreActivity" />
         <activity
             android:name=".ui.social_qcreate.SocialQcreateActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.social_detail.SocialDetailActivity" />
+        <activity android:name=".ui.signup.agreement.SignupTermsActivity" />
+        <activity android:name=".ui.main.MainActivity" />
+
+
         <activity
             android:name=".ui.diary_detail.DiaryDetailActivity"
+            android:exported="true"></activity>
+        <activity android:name=".ui.login.LoginActivity" />
+
             android:exported="true" />
         <activity
             android:name=".ui.write_diary.WriteDiaryImageActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.splash.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -45,6 +55,19 @@
         <activity
             android:name=".ui.write_diary.WriteDiaryContentActivity"
             android:exported="true" />
+
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="oauth"
+                    android:scheme="kakaoa53af2544ace9f28b4a214707c220ec3" />
+
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
