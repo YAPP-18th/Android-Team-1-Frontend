@@ -10,6 +10,7 @@ import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.data.DiaryContent
+import com.engdiary.mureng.data.Hint
 import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.databinding.ActivityWriteDiaryContentBinding
 import com.engdiary.mureng.databinding.ExpandableparentHintWritingdiaryBinding
@@ -36,9 +37,17 @@ class WriteDiaryContentActivity :
         binding.viewModel = viewModel
 
         diary?.let { viewModel.setDiary(it) }
-        question?.let { viewModel.setQuestion(it) }
+        // todo dummy data 제거하기
+        question?.let { viewModel.setQuestion(it) } ?: viewModel.setQuestion(
+            Question(
+                "category", "content", "콘텐츠", 1, 120, listOf(
+                    Hint(0, "word0", "meaning0"), Hint(1, "word1", "meaning1")
+                )
+            )
+        )
 
         setOnHintClickListener(binding.expandableWritingdaryHint)
+
         binding.textviewWritingdiaryNext.setOnClickListener {
             viewModel.checkKoreanIsExist()
         }
@@ -78,12 +87,11 @@ class WriteDiaryContentActivity :
     }
 
     private fun navigateToWritingDiaryImage(diaryContent: DiaryContent, diary: Diary?, question: Question?) {
-        if (diary == null) return
         Intent(this, WriteDiaryImageActivity::class.java)
             .putExtra(IntentKey.DIARY_CONTENT, diaryContent)
             .putExtra(IntentKey.DIARY, diary)
             .putExtra(IntentKey.QUESTION, question)
-            .also { startActivity(it) }
+            .let { startActivity(it) }
     }
 
     private fun showKoreanExistDialog(context: Context) {
