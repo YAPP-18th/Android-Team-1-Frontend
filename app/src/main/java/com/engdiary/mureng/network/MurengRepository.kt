@@ -58,25 +58,25 @@ class MurengRepository @Inject constructor(
 
     fun postKakaoLogin(
         userExistRequest: UserExistRequest,
-        onSuccess : (KakaoLoginResponse) -> Unit,
-        onFailure : () -> Unit
+        onSuccess: (KakaoLoginResponse) -> Unit,
+        onFailure: () -> Unit
     ) {
         api.postKakaoLogin(userExistRequest).safeEnqueue(
             onSuccess = { onSuccess(it.data!!) },
-            onFailure = { onFailure()},
-            onError = {onFailure()}
+            onFailure = { onFailure() },
+            onError = { onFailure() }
         )
     }
 
     fun getJWT(
         jwtRequest: PostJWTRequest,
-        onSuccess : (JWTResponse) -> Unit,
-        onFailure : () -> Unit
+        onSuccess: (JWTResponse) -> Unit,
+        onFailure: () -> Unit
     ) {
-        api.postJWT(jwtRequest).safeEnqueue (
+        api.postJWT(jwtRequest).safeEnqueue(
             onSuccess = { onSuccess(it.data!!) },
-            onFailure = { onFailure()},
-            onError = {onFailure()}
+            onFailure = { onFailure() },
+            onError = { onFailure() }
         )
     }
 
@@ -94,8 +94,8 @@ class MurengRepository @Inject constructor(
                     authManager.jwtIdentifier = it
                 }
 
-                if(it.exist) {
 
+                if (it.exist) {
                     getJWT(
                         jwtRequest = PostJWTRequest(identifier = authManager.jwtIdentifier),
                         onSuccess = {
@@ -303,8 +303,8 @@ class MurengRepository @Inject constructor(
     }
 
     suspend fun getMyInfo(): Author? {
-        val response = api.getMyInfo(authManager.accessToken)
-        return response.body()?.data?.asDomain()
+        val response = api.getMyInfo()
+        return response?.data?.asDomain()
     }
 
     suspend fun putDiary(
@@ -342,7 +342,7 @@ class MurengRepository @Inject constructor(
         )
     }
 
-    suspend fun getNickNameExist(nickName : String): NickName? {
+    suspend fun getNickNameExist(nickName: String): NickName? {
         return api.getNickNameExist(nickName).data?.asDomain()
     }
 

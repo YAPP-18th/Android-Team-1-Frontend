@@ -1,7 +1,5 @@
 package com.engdiary.mureng.di
 
-import android.os.Parcel
-import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.annotation.GlideModule
@@ -115,6 +113,7 @@ object NetworkModule {
             if (newUrl.contains("/api/reply")
                 || newUrl.contains("/api/questions")
                 || newUrl.contains("/api/today-question")
+                || newUrl.contains("/api/member/me")
             ) {
                 return@Interceptor chain.proceed(chain.request().newBuilder().apply {
                     addHeader("X-AUTH-TOKEN", authManager.test_jwt)
