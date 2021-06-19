@@ -2,13 +2,13 @@ package com.engdiary.mureng.ui.setting
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.engdiary.mureng.R
-import com.engdiary.mureng.constant.IntentKey
-import com.engdiary.mureng.constant.IntentKey.INSTA_GRAM
 import com.engdiary.mureng.constant.IntentKey.OPEN_SOURCE
+import com.engdiary.mureng.constant.URLConstant.INSAT_GRAM_URL
 import com.engdiary.mureng.databinding.ActivitySettingBinding
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
@@ -44,8 +44,7 @@ class SettingActivity : AppCompatActivity() {
 
     private fun initInstaGram(textviewSettingLicense : TextView) {
         textviewSettingLicense.setOnClickListener {
-            Intent(this, WebviewActivity::class.java).also {
-                it.putExtra("mode", INSTA_GRAM)
+            Intent(Intent.ACTION_VIEW, Uri.parse(INSAT_GRAM_URL)).also {
                 startActivity(it)
             }
         }

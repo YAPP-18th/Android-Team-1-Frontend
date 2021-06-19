@@ -10,9 +10,8 @@ import android.webkit.WebViewClient
 import androidx.activity.viewModels
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
-import com.engdiary.mureng.constant.IntentKey.INSTA_GRAM
 import com.engdiary.mureng.constant.IntentKey.OPEN_SOURCE
-import com.engdiary.mureng.constant.URLConstant.INSTAR_GRAM_URL
+import com.engdiary.mureng.constant.URLConstant.INSAT_GRAM_URL
 import com.engdiary.mureng.constant.URLConstant.LISENCE_URL
 import com.engdiary.mureng.databinding.ActivityPushAlertBinding
 import com.engdiary.mureng.databinding.ActivityWebviewBinding
@@ -56,8 +55,6 @@ class WebviewActivity() : BaseActivity<ActivityWebviewBinding>(R.layout.activity
 
         if(mode == OPEN_SOURCE) {
             webView.loadUrl(LISENCE_URL)
-        } else if(mode == INSTA_GRAM) {
-            webView.loadUrl(INSTAR_GRAM_URL)
         }
     }
 
