@@ -26,7 +26,7 @@ data class DiaryNetwork(
     val isMine: Boolean,
     @SerializedName("likedByRequester")
     var likeYn : Boolean,
-): java.io.Serializable  {
+): Serializable  {
     fun asDomain(): Diary =
         Diary(
             author!!.asDomain(),

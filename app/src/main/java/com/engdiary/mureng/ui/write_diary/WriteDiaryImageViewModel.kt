@@ -85,7 +85,6 @@ class WriteDiaryImageViewModel @ViewModelInject constructor(
                 diaryContent.value!!,
                 imagePath!!
             )?.let { diary -> _navigateToEditedDiaryDetail.value = diary }
-                .run { _navigateToEditedDiaryDetail.call() }
             return
         }
 

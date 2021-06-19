@@ -11,6 +11,7 @@ import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.databinding.ActivityDiaryDetailBinding
 import com.engdiary.mureng.ui.base.BaseActivity
+import com.engdiary.mureng.ui.main.MainActivity
 import com.engdiary.mureng.ui.social_detail.SocialDetailActivity
 import com.engdiary.mureng.ui.write_diary.WriteDiaryContentActivity
 import com.google.android.material.appbar.MaterialToolbar
@@ -23,7 +24,7 @@ class DiaryDetailActivity :
     override val viewModel: DiaryDetailViewModel by viewModels()
 
     private val diary: Diary?
-        get() = intent.getSerializableExtra(IntentKey.DIARY) as Diary?
+        get() = intent.getParcelableExtra(IntentKey.DIARY)
 
     private val isDiaryEdited: String?
         get() = intent.getStringExtra(IntentKey.EDITED_DIARY.first)
@@ -40,8 +41,8 @@ class DiaryDetailActivity :
         subscribeUi()
     }
 
-    private fun showNewCookieDialog(diaryEdited: String?) {
-        diaryEdited?.let {
+    private fun showNewCookieDialog(isDiaryEdited: String?) {
+        if (isDiaryEdited == null) {
             NewCookieDialog(this).show()
         }
     }
@@ -61,12 +62,22 @@ class DiaryDetailActivity :
             return@setOnMenuItemClickListener true
         }
         isMine?.let { toolbar.menu.setGroupVisible(R.id.menu_requiring_authenticated, it) }
+        toolbar.setNavigationOnClickListener {
+            navigateToHome()
+        }
+    }
+
+    private fun navigateToHome() {
+        Intent(this, MainActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            .also { startActivity(it) }
     }
 
 
     private fun showDeleteDiaryDialog(context: Context) {
         MaterialAlertDialogBuilder(context)
-            .setMessage(resources.getString(R.string.diary_detail_delete_dialog))
+            .setTitle(resources.getString(R.string.diary_detail_delete_dialog))
+            .setMessage(resources.getString(R.string.diary_detail_delete_diary_description))
             .setPositiveButton(resources.getString(R.string.diary_detail_delete_dialog_accept)) { dialog, _ ->
                 viewModel.deleteDiary()
             }
@@ -89,15 +100,20 @@ class DiaryDetailActivity :
     }
 
     private fun navigateToSocialDetail() {
-        viewModel.getQuestionId()?.let {
+        viewModel.getQuestionNetwork()?.let {
             Intent(this, SocialDetailActivity::class.java)
-                .putExtra(IntentKey.QUESTION_ID, it)
+                .putExtra(IntentKey.QUESTION_NETWORK, it)
         }?.also { startActivity(it) } ?: return
     }
 
     private fun subscribeUi() {
         viewModel.navigateToBefore.observe(this) {
-            finish()
+            navigateToHome()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        navigateToHome()
     }
 }

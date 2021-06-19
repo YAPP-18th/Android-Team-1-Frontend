@@ -69,9 +69,8 @@ interface MurengService {
 
     @DELETE("/api/reply/{replyId}")
     suspend fun deleteDiary(
-        @Header("X-AUTH-TOKEN") accessToken: String,
         @Path("replyId") diaryId: Int
-    ): Response<MurengResponse<Boolean>>
+    ): Response<MurengResponse<DeleteDiaryResponse>>
 
     /**
      *  답변 가져오기 (Best, Newest)

@@ -230,11 +230,10 @@ class MurengRepository @Inject constructor(
     }
 
     suspend fun deleteDiary(diaryId: Int): Boolean? {
-        val response = api.deleteDiary(
-            "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q",
-            diaryId
-        )
-        return response.body()?.data
+        val response = api.deleteDiary(diaryId)
+            .body()
+            ?.data
+        return response?.isDeleted
     }
 
     fun getQuestionList(
@@ -293,7 +292,7 @@ class MurengRepository @Inject constructor(
         page: Int?,
         size: Int?,
         sort: String?,
-        onSuccess: (MurengResponse< List<DiaryNetwork>>) -> Unit,
+        onSuccess: (MurengResponse<List<DiaryNetwork>>) -> Unit,
         onFailure: () -> Unit
     ) {
         api.getReplyAnswerList(questionId, page, size, sort).safeEnqueue(

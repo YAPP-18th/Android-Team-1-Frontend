@@ -51,7 +51,7 @@ class WriteDiaryImageActivity :
     }
 
     private val diary: Diary?
-        get() = intent.getSerializableExtra(IntentKey.DIARY) as Diary?
+        get() = intent.getParcelableExtra(IntentKey.DIARY) as Diary?
 
     private val question: Question?
         get() = intent.getParcelableExtra(IntentKey.QUESTION) as Question?
@@ -107,13 +107,13 @@ class WriteDiaryImageActivity :
 
     private fun navigateToDiaryDetail(diary: Diary, isDiaryEdited: Boolean) {
         val intent = Intent(this, DiaryDetailActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             .putExtra(IntentKey.DIARY, diary)
         if (isDiaryEdited) intent.putExtra(
             IntentKey.EDITED_DIARY.first,
             IntentKey.EDITED_DIARY.second
         )
         startActivity(intent)
-        finish()
     }
 
     companion object {
