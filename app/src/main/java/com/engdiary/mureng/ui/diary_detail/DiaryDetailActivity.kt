@@ -40,8 +40,8 @@ class DiaryDetailActivity :
         subscribeUi()
     }
 
-    private fun showNewCookieDialog(diaryEdited: String?) {
-        diaryEdited?.let {
+    private fun showNewCookieDialog(isDiaryEdited: String?) {
+        if (isDiaryEdited == null) {
             NewCookieDialog(this).show()
         }
     }
@@ -66,7 +66,8 @@ class DiaryDetailActivity :
 
     private fun showDeleteDiaryDialog(context: Context) {
         MaterialAlertDialogBuilder(context)
-            .setMessage(resources.getString(R.string.diary_detail_delete_dialog))
+            .setTitle(resources.getString(R.string.diary_detail_delete_dialog))
+            .setMessage(resources.getString(R.string.diary_detail_delete_diary_description))
             .setPositiveButton(resources.getString(R.string.diary_detail_delete_dialog_accept)) { dialog, _ ->
                 viewModel.deleteDiary()
             }
