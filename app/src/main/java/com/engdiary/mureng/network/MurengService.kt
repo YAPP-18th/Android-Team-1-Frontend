@@ -46,7 +46,7 @@ interface MurengService {
     ): Call<MurengResponse<JWTResponse>>
 
     @GET("/api/today-question")
-    suspend fun getTodayQuestion(@Header("X-AUTH-TOKEN") accessToken: String): MurengResponse<QuestionNetwork>
+    suspend fun getTodayQuestion(): MurengResponse<QuestionNetwork>
 
     @Multipart
     @POST("/api/reply/image")
