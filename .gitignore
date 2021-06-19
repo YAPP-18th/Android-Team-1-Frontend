@@ -246,3 +246,4 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 app/services.tar
+app/google-services.json
