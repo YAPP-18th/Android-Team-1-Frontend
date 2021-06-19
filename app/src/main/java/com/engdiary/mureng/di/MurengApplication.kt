@@ -8,7 +8,6 @@ import com.kakao.sdk.common.KakaoSdk
 import android.graphics.Color
 import android.os.Build
 import com.engdiary.mureng.R
-import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
