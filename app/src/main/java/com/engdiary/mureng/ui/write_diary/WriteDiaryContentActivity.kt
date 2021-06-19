@@ -29,7 +29,7 @@ class WriteDiaryContentActivity :
         get() = intent.getParcelableExtra(IntentKey.DIARY) as Diary?
 
     private val question: Question?
-        get() = intent.getSerializableExtra(IntentKey.QUESTION) as Question?
+        get() = intent.getParcelableExtra(IntentKey.QUESTION) as Question?
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

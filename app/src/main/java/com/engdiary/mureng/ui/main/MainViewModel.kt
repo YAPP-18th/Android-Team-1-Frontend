@@ -2,9 +2,13 @@ package com.engdiary.mureng.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,6 +28,8 @@ class MainViewModel @Inject constructor(
     private var _selectWriting = MutableLiveData<Boolean>()
     var selectWriting: LiveData<Boolean> = _selectWriting
 
+    var todayQuestion: Question? = null
+    private set
 
     /** 생성자 */
     init {
@@ -31,20 +37,23 @@ class MainViewModel @Inject constructor(
         _selectWriting.value = false
         _selectSocial.value = false
         _selectMyPage.value = false
+        viewModelScope.launch(Dispatchers.IO) {
+            todayQuestion = murengRepository.getTodayQuestion()
+        }
     }
 
-     fun homeClick() {
-         if(!_selectHome.value!!) {
-             _selectHome.value = true
-             _selectMyPage.value = false
-             _selectSocial.value = false
-             _selectWriting.value = false
-         }
-     }
+    fun homeClick() {
+        if (!_selectHome.value!!) {
+            _selectHome.value = true
+            _selectMyPage.value = false
+            _selectSocial.value = false
+            _selectWriting.value = false
+        }
+    }
 
 
     fun MypageClick() {
-        if(!_selectMyPage.value!!) {
+        if (!_selectMyPage.value!!) {
             _selectHome.value = false
             _selectMyPage.value = true
             _selectSocial.value = false
@@ -58,16 +67,14 @@ class MainViewModel @Inject constructor(
     }
 
 
-
     fun SocialClick() {
-        if(!_selectSocial.value!!) {
+        if (!_selectSocial.value!!) {
             _selectHome.value = false
             _selectMyPage.value = false
             _selectSocial.value = true
             _selectWriting.value = false
         }
     }
-
 
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
