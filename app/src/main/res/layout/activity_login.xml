@@ -26,16 +26,16 @@
             android:layout_marginBottom="40dp"
             />
 
-        <ImageButton
-            android:id="@+id/google_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="0dp"
-            android:layout_marginBottom="12dp"
-            android:src="@drawable/group_145"
-            app:layout_constraintBottom_toTopOf="@+id/kakao_login"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/google_login"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="0dp"-->
+<!--            android:layout_marginBottom="12dp"-->
+<!--            android:src="@drawable/group_145"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/kakao_login"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent" />-->
 
 
         <ImageView

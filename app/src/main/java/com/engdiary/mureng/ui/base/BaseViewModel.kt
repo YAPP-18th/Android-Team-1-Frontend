@@ -63,7 +63,7 @@ open class BaseViewModel @Inject constructor(
     /** 카카오 로그인 서버 통신 */
     open fun addKakaoUser(accessToken: String, refreshToken: String, userId: Long) {
         murengRepository.settingUser(
-            userExistRequest =  UserExistRequest(accessToken = accessToken, refreshToken = refreshToken),
+            userExistRequest =  UserExistRequest(providerAccessToken = accessToken, providerName = "kakao"),
             successAction =  {
                 Log.i("TKAKAEE", "T")
                 _navigateToHome.call()

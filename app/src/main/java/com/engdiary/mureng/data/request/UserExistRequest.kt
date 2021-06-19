@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 
 data class UserExistRequest (
-    @SerializedName("accessToken")
-    val accessToken: String,
-    @SerializedName("refreshToken")
-    val refreshToken: String
+    @SerializedName("providerAccessToken")
+    val providerAccessToken: String,
+    @SerializedName("providerName")
+    val providerName: String
 )

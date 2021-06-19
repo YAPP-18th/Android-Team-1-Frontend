@@ -90,14 +90,14 @@ class MurengRepository @Inject constructor(
             userExistRequest = userExistRequest,
             onSuccess = {
 
-                it.email?.let {
-                    authManager.email = it
+                it.identifier?.let {
+                    authManager.jwtIdentifier = it
                 }
 
                 if(it.exist) {
 
                     getJWT(
-                        jwtRequest = PostJWTRequest(email = authManager.email),
+                        jwtRequest = PostJWTRequest(identifier = authManager.jwtIdentifier),
                         onSuccess = {
                             Log.i("get JWT it.accessToken", it.accessToken)
                             authManager.accessToken = it.accessToken
@@ -127,11 +127,11 @@ class MurengRepository @Inject constructor(
         failAction: (() -> Unit)? = null
     ) {
 
-        postSignupRequest.email = authManager.email
         val res = api.postUserSignup(postSignupRequest).body()?.data?.asDomain()
         res.let {
+            authManager.jwtIdentifier = it!!.identifier
             getJWT(
-                jwtRequest = PostJWTRequest(email = authManager.email),
+                jwtRequest = PostJWTRequest(identifier = authManager.jwtIdentifier),
                 onSuccess = {
                     authManager.accessToken = it.accessToken
 
