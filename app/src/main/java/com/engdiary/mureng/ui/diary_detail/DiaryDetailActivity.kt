@@ -11,6 +11,7 @@ import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.databinding.ActivityDiaryDetailBinding
 import com.engdiary.mureng.ui.base.BaseActivity
+import com.engdiary.mureng.ui.main.MainActivity
 import com.engdiary.mureng.ui.social_detail.SocialDetailActivity
 import com.engdiary.mureng.ui.write_diary.WriteDiaryContentActivity
 import com.google.android.material.appbar.MaterialToolbar
@@ -61,6 +62,15 @@ class DiaryDetailActivity :
             return@setOnMenuItemClickListener true
         }
         isMine?.let { toolbar.menu.setGroupVisible(R.id.menu_requiring_authenticated, it) }
+        toolbar.setNavigationOnClickListener {
+            navigateToHome()
+        }
+    }
+
+    private fun navigateToHome() {
+        Intent(this, MainActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            .also { startActivity(it) }
     }
 
 
@@ -98,7 +108,12 @@ class DiaryDetailActivity :
 
     private fun subscribeUi() {
         viewModel.navigateToBefore.observe(this) {
-            finish()
+            navigateToHome()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        navigateToHome()
     }
 }

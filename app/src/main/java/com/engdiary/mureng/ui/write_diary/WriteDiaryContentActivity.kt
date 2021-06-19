@@ -26,7 +26,7 @@ class WriteDiaryContentActivity :
     override val viewModel by viewModels<WriteDiaryContentViewModel>()
 
     private val diary: Diary?
-        get() = intent.getSerializableExtra(IntentKey.DIARY_CONTENT) as Diary?
+        get() = intent.getParcelableExtra(IntentKey.DIARY) as Diary?
 
     private val question: Question?
         get() = intent.getSerializableExtra(IntentKey.QUESTION) as Question?
@@ -40,9 +40,10 @@ class WriteDiaryContentActivity :
         // todo dummy data 제거하기
         question?.let { viewModel.setQuestion(it) } ?: viewModel.setQuestion(
             Question(
-                "category", "content", "콘텐츠", 1, 120, listOf(
+                "category", "content", "콘텐츠", 35, 120, listOf(
                     Hint(0, "word0", "meaning0"), Hint(1, "word1", "meaning1")
-                )
+                ),
+                null
             )
         )
 
@@ -68,7 +69,11 @@ class WriteDiaryContentActivity :
         }
 
         viewModel.navigateToWritingDiaryImage.observe(this) { diaryContent ->
-            navigateToWritingDiaryImage(diaryContent, viewModel.diary.value, viewModel.question.value)
+            navigateToWritingDiaryImage(
+                diaryContent,
+                viewModel.diary.value,
+                viewModel.question.value
+            )
         }
 
         viewModel.hints.observe(this) { hints ->
@@ -86,8 +91,13 @@ class WriteDiaryContentActivity :
         hintAdapter.notifyDataSetChanged()
     }
 
-    private fun navigateToWritingDiaryImage(diaryContent: DiaryContent, diary: Diary?, question: Question?) {
+    private fun navigateToWritingDiaryImage(
+        diaryContent: DiaryContent,
+        diary: Diary?,
+        question: Question?
+    ) {
         Intent(this, WriteDiaryImageActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
             .putExtra(IntentKey.DIARY_CONTENT, diaryContent)
             .putExtra(IntentKey.DIARY, diary)
             .putExtra(IntentKey.QUESTION, question)
