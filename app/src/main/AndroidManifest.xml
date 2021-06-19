@@ -8,16 +8,15 @@
     <application
         android:name=".di.MurengApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_app_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.setting.WebviewActivity"></activity>
+        <activity android:name=".ui.setting.WebviewActivity"/>
         <activity android:name=".ui.setting.DevelopPersonActivity" />
         <activity android:name=".ui.setting.VersionActivity" />
-        <activity android:name=".ui.setting.VersionInformationActivity" />
         <activity
             android:name=".ui.push_alert.PushAlertActivity"
             android:exported="true" />
