@@ -46,7 +46,7 @@ class MurengRepository @Inject constructor(
      */
 
     suspend fun getTodayQuestion(): Question? {
-        return api.getTodayQuestion("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q")
+        return api.getTodayQuestion("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpZGVudGl0eSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjozNDk2NzA1MTEwLCJleHAiOjM1MDE4ODkxMTB9.dkvgL0xVaUBGwbN3STJNT3lID5ku5a6qkfkFUg_GZ8WFi5QTiOuduLYgD85yZlzRnjmoKxjjwii4Mr11bZsOHA")
             .data
             ?.asDomain()
     }
@@ -102,7 +102,7 @@ class MurengRepository @Inject constructor(
                 imagePath
             ).let {
                 api.postDiary(
-                    "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q",
+                    "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpZGVudGl0eSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjozNDk2NzA1MTEwLCJleHAiOjM1MDE4ODkxMTB9.dkvgL0xVaUBGwbN3STJNT3lID5ku5a6qkfkFUg_GZ8WFi5QTiOuduLYgD85yZlzRnjmoKxjjwii4Mr11bZsOHA",
                     it
                 )
             }
@@ -116,7 +116,7 @@ class MurengRepository @Inject constructor(
 
     suspend fun getDefaultDiaryImages(): List<ItemWriteDiaryImage.DiaryImage>? {
         val response =
-            api.getDefaultImages("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q")
+            api.getDefaultImages("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpZGVudGl0eSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjozNDk2NzA1MTEwLCJleHAiOjM1MDE4ODkxMTB9.dkvgL0xVaUBGwbN3STJNT3lID5ku5a6qkfkFUg_GZ8WFi5QTiOuduLYgD85yZlzRnjmoKxjjwii4Mr11bZsOHA")
 
         if (!response.isSuccessful) {
             Timber.d("Get Default Images Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
@@ -137,13 +137,13 @@ class MurengRepository @Inject constructor(
     }
 
     suspend fun getTodayQuestionRefresh(): QuestionRefresh? {
-        return api.getTodayQuestionRefresh("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q")
+        return api.getTodayQuestionRefresh("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpZGVudGl0eSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjozNDk2NzA1MTEwLCJleHAiOjM1MDE4ODkxMTB9.dkvgL0xVaUBGwbN3STJNT3lID5ku5a6qkfkFUg_GZ8WFi5QTiOuduLYgD85yZlzRnjmoKxjjwii4Mr11bZsOHA")
             .data
             ?.asDomain()
     }
 
     suspend fun getTodayExpression(): List<TodayExpression>? {
-        return api.getTodayExpression("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q")
+        return api.getTodayExpression("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpZGVudGl0eSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjozNDk2NzA1MTEwLCJleHAiOjM1MDE4ODkxMTB9.dkvgL0xVaUBGwbN3STJNT3lID5ku5a6qkfkFUg_GZ8WFi5QTiOuduLYgD85yZlzRnjmoKxjjwii4Mr11bZsOHA")
                 .data
     }
 
@@ -215,7 +215,7 @@ class MurengRepository @Inject constructor(
     }
 
     suspend fun getCheckRplied(): CheckReplied? {
-        return api.getCheckReplied("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q")
+        return api.getCheckReplied("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpZGVudGl0eSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjozNDk2NzA1MTEwLCJleHAiOjM1MDE4ODkxMTB9.dkvgL0xVaUBGwbN3STJNT3lID5ku5a6qkfkFUg_GZ8WFi5QTiOuduLYgD85yZlzRnjmoKxjjwii4Mr11bZsOHA")
                 .data
                 ?.asDomain()
     }

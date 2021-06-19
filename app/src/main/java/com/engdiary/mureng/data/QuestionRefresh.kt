@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class QuestionRefresh (
-    val category: String,
+//    val category: String,
     val content: String,
     val koContent: String,
     val questionId: Int,

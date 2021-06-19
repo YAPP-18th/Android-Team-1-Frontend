@@ -8,8 +8,8 @@ import com.google.gson.annotations.SerializedName
 data class QuestionRefreshNetwork(
     @SerializedName("questionId")
     val questionId: Int,
-    @SerializedName("category")
-    val category: String,
+//    @SerializedName("category")
+//    val category: String,
     @SerializedName("content")
     val content: String,
     @SerializedName("koContent")
@@ -19,5 +19,5 @@ data class QuestionRefreshNetwork(
 
 ) : java.io.Serializable {
     fun asDomain(): QuestionRefresh =
-        QuestionRefresh(category, content, contentKr, questionId, repliesCount)
+        QuestionRefresh(content, contentKr, questionId, repliesCount)
 }

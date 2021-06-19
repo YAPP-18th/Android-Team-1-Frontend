@@ -8,25 +8,24 @@
 
         <import type="android.view.View" />
 
-        <variable
-            name="Diary"
-            type="com.engdiary.mureng.data.response.DiaryNetwork" />
+<!--        <variable-->
+<!--            name="Diary"-->
+<!--            type="com.engdiary.mureng.data.response.DiaryNetwork" />-->
 
         <variable
             name="vm"
-            type="com.engdiary.mureng.ui.social_best.BestPopularViewModel" />
+            type="com.engdiary.mureng.ui.home.HomeViewModel" />
 
         <variable
             name="Expression"
             type="com.engdiary.mureng.data.response.TodayExpression" />
 
-        <variable
-            name="vm2"
-            type="com.engdiary.mureng.ui.home.HomeViewModel" />
+<!--        <variable-->
+<!--            name="vm2"-->
+<!--            type="com.engdiary.mureng.ui.home.HomeViewModel" />-->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_social_answer_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -59,7 +58,7 @@
             />
 
         <TextView
-            android:text="@{Diary.content}"
+            android:text="@{Expression.expression}"
             android:id="@+id/tv_social_best_more_ques"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -78,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:src="@{Diary.likeYn ? @drawable/icons_bookmark_default : @drawable/icons_bookmark_fill }"
+            android:src="@{Expression.scrappedByRequester ? @drawable/icons_bookmark_default : @drawable/icons_bookmark_fill }"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_en_script"
             app:layout_goneMarginRight="12dp"

@@ -8,11 +8,14 @@ import androidx.lifecycle.viewModelScope
 import com.engdiary.mureng.data.CheckReplied
 import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.QuestionRefresh
+import com.engdiary.mureng.data.response.DiaryNetwork
+import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.data.response.TodayExpression
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
@@ -36,9 +39,14 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
     val todayQuestion: LiveData<QuestionRefresh>
         get() = _todayQuestion
 
-    private val _todayExpression = MutableLiveData<List<TodayExpression>>()
-    val todayExpression: LiveData<List<TodayExpression>>
-        get() =_todayExpression
+    protected val _quesResults = MutableLiveData<List<QuestionNetwork>>(listOf())
+    open var quesResults: LiveData<List<QuestionNetwork>> = _quesResults
+
+    private val _todayExpression = MutableLiveData<List<TodayExpression>>(listOf())
+    val todayExpression: LiveData<List<TodayExpression>> = _todayExpression
+
+
+//    open val ansResults: LiveData<List<DiaryNetwork>> = _ansResults
 
 
     private val _checkReplied = MutableLiveData<CheckReplied>()
@@ -78,12 +86,29 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
         viewModelScope.launch {
             try {
                 _todayQuestion.value = murengRepository.getTodayQuestionRefresh()
+
                 _todayExpression.value = murengRepository.getTodayExpression()
+
+                Log.i("HEARARER", "QEWRQWERE")
 
             } catch (networkError: IOException) {
             }
         }
     }
+
+//    fun getMyQuesList() {
+//        murengRepository.getMyQuestionList(
+//            onSuccess = {
+//                _quesResults.value = it
+//                _quesCnt.value = it.size
+//            },
+//            onFailure = {
+//                Timber.e("나의 질문 리스트 가져오기 통신 실패")
+//            }
+//        )
+//    }
+
+
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {
