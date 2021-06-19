@@ -35,6 +35,7 @@ const val CONNECT_TIMEOUT = 60.toLong()
 const val WRITE_TIMEOUT = 60.toLong()
 const val READ_TIMEOUT = 60.toLong()
 
+
 const val BASE_URL = "http://dev.mureng.hkpark.net"
 const val MEDIA_BASE_URL = "http://dev.mureng-media.hkpark.net"
 

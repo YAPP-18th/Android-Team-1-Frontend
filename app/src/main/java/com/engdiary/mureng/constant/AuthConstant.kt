@@ -11,6 +11,8 @@ object AuthConstant {
     const val TOKEN_KEY = "accessToken"
     const val REFRESH_TOKEN_KEY = "refreshToken"
     const val EMAIL_KEY = "email"
+    const val IDENTIFIER_KEY = "identifier"
+    const val JWTIDENTIFIER_KEY = "jwtIdentifier"
     const val AUTO_LOGIN_KEY = "auto"
     const val FIRST_KEY = "first"
     const val EXPIRE_KEY = "expire"

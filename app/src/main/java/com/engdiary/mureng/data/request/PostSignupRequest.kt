@@ -12,6 +12,6 @@ data class PostSignupRequest (
 )
 
 data class PostJWTRequest(
-    @SerializedName("email")
-    val email: String
+    @SerializedName("identifier")
+    val identifier: String
 )
