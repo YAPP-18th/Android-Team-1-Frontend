@@ -90,8 +90,14 @@ class MurengRepository @Inject constructor(
             userExistRequest = userExistRequest,
             onSuccess = {
 
-                it.identifier?.let {
-                    authManager.jwtIdentifier = it
+
+                it.identifier?.let { identifier ->
+                    if(it.exist) {
+                        authManager.jwtIdentifier = identifier
+                    } else {
+                        authManager.identifier = identifier
+                    }
+
                 }
 
                 if(it.exist) {

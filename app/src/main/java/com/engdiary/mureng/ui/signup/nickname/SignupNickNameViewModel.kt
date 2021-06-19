@@ -24,8 +24,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignupNickNameViewModel @Inject constructor(
-        private val murengRepository: MurengRepository
+        private val murengRepository: MurengRepository,
+        private val authManager: AuthManager
 ): BaseViewModel(murengRepository) {
+
+
 
     private var _isDuplicate = MutableLiveData<Boolean>()
     var isDuplicate: LiveData<Boolean> = _isDuplicate
@@ -52,8 +55,8 @@ class SignupNickNameViewModel @Inject constructor(
         if(_isDuplicate.value == false) {
 
             val currentTimestamp = System.currentTimeMillis()
-            val signupRequest = PostSignupRequest(identifier = currentTimestamp.toString(), nickname = nickName, email = null)
-
+            val signupRequest = PostSignupRequest(identifier = authManager.identifier, nickname = nickName, email = null)
+//
             viewModelScope.launch {
                 murengRepository.userSignup(
                     signupRequest,
