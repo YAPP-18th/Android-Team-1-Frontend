@@ -193,20 +193,10 @@ object BindingAdapter {
             })
     }
 
-    @BindingAdapter("diaryImage")
-    @JvmStatic
-    fun setDiaryImage(imageView: ImageView, diaryImage: String?) {
-        diaryImage?.let {
-            Glide.with(imageView.context)
-                .load(it)
-                .into(imageView)
-        }
+    private fun loadBlurBitmap(imageView: ImageView, bitmap: Bitmap) {
+        Blurry.with(imageView.context)
+            .sampling(1)
+            .from(bitmap)
+            .into(imageView)
     }
-}
-
-private fun loadBlurBitmap(imageView: ImageView, bitmap: Bitmap) {
-    Blurry.with(imageView.context)
-        .sampling(1)
-        .from(bitmap)
-        .into(imageView)
 }

@@ -23,7 +23,7 @@ class DiaryDetailActivity :
     override val viewModel: DiaryDetailViewModel by viewModels()
 
     private val diary: Diary?
-        get() = intent.getSerializableExtra(IntentKey.DIARY) as Diary?
+        get() = intent.getParcelableExtra(IntentKey.DIARY)
 
     private val isDiaryEdited: String?
         get() = intent.getStringExtra(IntentKey.EDITED_DIARY.first)
