@@ -161,13 +161,12 @@
                             android:textColor="#fb6a95"
                             android:lineSpacingExtra="5sp"/>
 
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                     <androidx.recyclerview.widget.RecyclerView
                         submitList="@{vm.todayExpression}"
-                        android:id="@+id/rv_home_today_expression"
+                        android:id="@+id/home_today_expression"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"

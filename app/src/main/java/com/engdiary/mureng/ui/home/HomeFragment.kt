@@ -14,6 +14,10 @@ import com.engdiary.mureng.R
 import com.engdiary.mureng.databinding.HomeFragmentBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.ui.base.BaseFragment
+import com.engdiary.mureng.ui.write_diary.HintAdapter
+import com.engdiary.mureng.ui.write_diary.HintDecoration
+import com.engdiary.mureng.ui.write_diary.WriteDiaryContentActivity
+import com.engdiary.mureng.util.dpToPx
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -23,10 +27,10 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
     override val viewModel: HomeViewModel by viewModels<HomeViewModel>()
     val handler : Handler = Handler()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
+        binding.vm = viewModel
 
         binding.reply.setBackgroundColor(Color.BLACK)
 
@@ -34,9 +38,15 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             vm = viewModel
             lifecycleOwner = this@HomeFragment.viewLifecycleOwner
         }
+
         viewModel.todayQuestion.observe(viewLifecycleOwner, Observer {
             binding.todayQuestion.text = it.content
         })
+
+        viewModel.todayExpression.observe(this) { expressions ->
+            expressions?.let { initHintAdapter(binding.homeTodayExpression, TodayExpressionAdapter(it)) }
+        }
+
 
         viewModel.checkReplied.observe(viewLifecycleOwner, Observer {
             if(it.replied == true) {
@@ -46,8 +56,21 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             }
         })
 
-
-
     }
 
+    private fun initHintAdapter(
+        hints: RecyclerView,
+        hintAdapter: TodayExpressionAdapter
+    ) {
+        hints.adapter = hintAdapter
+        hints.addItemDecoration(HintDecoration(HomeFragment.HINT_SPAN_COUNT, HomeFragment.HINT_SPACING.dpToPx()))
+        hintAdapter.notifyDataSetChanged()
+    }
+
+
+    companion object {
+        private const val HINT_SPAN_COUNT = 2
+        private const val HINT_SPACING = 20
+    }
 }
+
