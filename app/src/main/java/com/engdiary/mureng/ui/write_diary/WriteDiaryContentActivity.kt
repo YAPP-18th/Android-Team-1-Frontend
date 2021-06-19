@@ -37,15 +37,7 @@ class WriteDiaryContentActivity :
         binding.viewModel = viewModel
 
         diary?.let { viewModel.setDiary(it) }
-        // todo dummy data 제거하기
-        question?.let { viewModel.setQuestion(it) } ?: viewModel.setQuestion(
-            Question(
-                "category", "content", "콘텐츠", 35, 120, listOf(
-                    Hint(0, "word0", "meaning0"), Hint(1, "word1", "meaning1")
-                ),
-                null
-            )
-        )
+        question?.let { viewModel.setQuestion(it) }
 
         setOnHintClickListener(binding.expandableWritingdaryHint)
 
