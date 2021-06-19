@@ -73,6 +73,7 @@
 
 
     <string name="pushalert_todayalert">오늘의 질문 알림</string>
+    <string name="pushalert_likealert">좋아요 알림</string>
     <string name="pushalert_title">푸시 알림</string>
 
 
