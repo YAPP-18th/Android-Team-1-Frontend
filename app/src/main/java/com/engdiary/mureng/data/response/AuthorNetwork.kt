@@ -22,7 +22,7 @@ data class AuthorNetwork(
     val nickname: String,
     @SerializedName("pushActive")
     val pushActive: Boolean
-) {
+) : java.io.Serializable  {
     fun asDomain(): Author = Author(
         attendanceCount,
         email,

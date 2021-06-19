@@ -20,15 +20,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_social_answer_item"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center">
 
 
         <androidx.cardview.widget.CardView
             android:layout_width="176dp"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
+            app:layout_constraintDimensionRatio="3:4"
             android:id="@+id/cv_social_ans_best"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

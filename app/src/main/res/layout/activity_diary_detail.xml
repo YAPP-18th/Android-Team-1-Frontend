@@ -39,9 +39,13 @@
                 android:id="@+id/imageview_diarydetail_diary"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                app:diaryImage="@{viewModel.diaryImage}"
+                android:scaleType="centerCrop"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintTop_toBottomOf="@id/appbar_layout"
-                tools:layout_editor_absoluteX="0dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appbar_layout" />
 
             <TextView
                 android:id="@+id/textview_diarydetail_title"
@@ -78,6 +82,7 @@
                     android:id="@+id/textview_diarydetail_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:fontFamily="@font/notosanskr"
                     android:text="@{viewModel.author.nickname}"
                     android:textAppearance="@style/TextAppearance.DiaryDetail.Nickname"
@@ -111,12 +116,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="19dp"
                 android:layout_marginBottom="95dp"
+                android:text="@{viewModel.diary.date}"
                 android:textAppearance="@style/TextAppearance.DiaryDetail.Date"
                 android:textColor="@color/grey2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/textview_diarydetail_content"
                 app:layout_constraintTop_toBottomOf="@id/textview_diarydetail_content"
-                android:text="@{viewModel.diary.date}"
                 tools:text="2021. 06. 01." />
 
 

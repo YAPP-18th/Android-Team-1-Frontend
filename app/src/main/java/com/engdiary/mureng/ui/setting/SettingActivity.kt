@@ -6,7 +6,12 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.engdiary.mureng.R
+import com.engdiary.mureng.constant.IntentKey
+import com.engdiary.mureng.constant.IntentKey.INSTA_GRAM
+import com.engdiary.mureng.constant.IntentKey.OPEN_SOURCE
 import com.engdiary.mureng.databinding.ActivitySettingBinding
+import com.engdiary.mureng.di.MurengApplication
+import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
 import com.engdiary.mureng.ui.push_alert.PushAlertActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -17,9 +22,33 @@ class SettingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.imagebuttonSettingBack.setOnClickListener { finish() }
+        binding.textviewSettingMaker.setOnClickListener {
+            Intent(this, DevelopPersonActivity::class.java)
+                .also { startActivity(it) }
+        }
         initPushAlert(binding.textviewSettingPushalert)
         initLogout(binding.textviewSettingLogout)
         initWithdrawal(binding.textviewSettingWithdraw)
+        initLicense(binding.textviewSettingLicense)
+        initInstaGram(binding.textviewSettingInstagram)
+    }
+
+    private fun initLicense(textviewSettingLicense : TextView) {
+        textviewSettingLicense.setOnClickListener {
+            Intent(this, WebviewActivity::class.java).also {
+                it.putExtra("mode", OPEN_SOURCE)
+                startActivity(it)
+            }
+        }
+    }
+
+    private fun initInstaGram(textviewSettingLicense : TextView) {
+        textviewSettingLicense.setOnClickListener {
+            Intent(this, WebviewActivity::class.java).also {
+                it.putExtra("mode", INSTA_GRAM)
+                startActivity(it)
+            }
+        }
     }
 
     private fun initPushAlert(textviewSettingPushalert: TextView) {

@@ -12,6 +12,7 @@ import com.engdiary.mureng.ui.base.BaseActivity
 import com.engdiary.mureng.ui.base.navigate
 import com.engdiary.mureng.ui.home.HomeFragment
 import com.engdiary.mureng.ui.my.MyPageFragment
+import com.engdiary.mureng.ui.setting.SettingActivity
 import com.engdiary.mureng.ui.social.SocialFragment
 import com.engdiary.mureng.ui.write_diary.WriteDiaryContentActivity
 import com.engdiary.mureng.util.startActivity
@@ -29,7 +30,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.setVariable(BR.vm, viewModel)
 
         // TODO 서버 통신을 위한 임의의 test_jwt 추가 (나중에 지워야함)
-        authManager.test_jwt = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjoxNjIwODM4MTAyLCJleHAiOjE5MDAwMDAwMDB9.R9__KIcXK_MWrxc857K5IQpwoPYlEyt4eW52VsaRBDid1aFRqw8Uu_oeoserjFEjeiUmrqpAal5XvllrdNH52Q"
+        authManager.test_jwt = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpZGVudGl0eSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjozNDk2NzA1MTEwLCJleHAiOjM1MDE4ODkxMTB9.dkvgL0xVaUBGwbN3STJNT3lID5ku5a6qkfkFUg_GZ8WFi5QTiOuduLYgD85yZlzRnjmoKxjjwii4Mr11bZsOHA"
 
         viewModel.selectHome.observe(this, Observer {
             if(it) {
@@ -40,6 +41,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         viewModel.selectMyPage.observe(this, Observer {
             if(it) {
                 MyPageFragment().navigate(supportFragmentManager, fl_main.id)
+//                startActivity(SettingActivity::class, isFinish = false)
             }
         })
 

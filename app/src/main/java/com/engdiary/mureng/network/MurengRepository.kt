@@ -165,6 +165,7 @@ class MurengRepository @Inject constructor(
             )
         } ?: return null
 
+        Timber.d("imageBodypart: $imageBodyPart")
         val response = api.postDiaryImage(
             imageBodyPart
         )
@@ -295,11 +296,11 @@ class MurengRepository @Inject constructor(
         page: Int?,
         size: Int?,
         sort: String?,
-        onSuccess: (List<DiaryNetwork>) -> Unit,
+        onSuccess: (MurengResponse< List<DiaryNetwork>>) -> Unit,
         onFailure: () -> Unit
     ) {
         api.getReplyAnswerList(questionId, page, size, sort).safeEnqueue(
-            onSuccess = { onSuccess(it.data!!) },
+            onSuccess = { onSuccess(it) },
             onFailure = { onFailure() },
             onError = { onFailure() }
         )

@@ -177,4 +177,14 @@ object BindingAdapter {
                 .into(imageView)
         }
     }
+
+    @BindingAdapter("diaryImage")
+    @JvmStatic
+    fun setDiaryImage(imageView: ImageView, diaryImage: String?) {
+        diaryImage?.let {
+            Glide.with(imageView.context)
+                .load(it)
+                .into(imageView)
+        }
+    }
 }
