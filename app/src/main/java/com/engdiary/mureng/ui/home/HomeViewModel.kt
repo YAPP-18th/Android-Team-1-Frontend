@@ -25,12 +25,6 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel(murengRepository) {
 
 
-//    private val _tabItems: MutableLiveData<List<String>> = MutableLiveData()
-
-//    private val _tabItems: MutableLiveData<List<String>> = MutableLiveData()
-//    private val _position: MutableLiveData<Int> = MutableLiveData()
-//    val tabItems: LiveData<List<String>> get() = _tabItems
-
 private val _todayQuestion = MutableLiveData<QuestionRefresh>()
     val todayQuestion: LiveData<QuestionRefresh>
         get() = _todayQuestion
@@ -91,7 +85,6 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
                     Timber.d("scrap")
                 },
                 onFailure = {
-
                 }
         )
     }
