@@ -10,6 +10,7 @@ import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.constant.IntentKey.OPEN_SOURCE
+import com.engdiary.mureng.constant.IntentKey.PRIVACY_POLICY
 import com.engdiary.mureng.constant.URLConstant.INSAT_GRAM_URL
 import com.engdiary.mureng.data.PushAlertSetting
 import com.engdiary.mureng.databinding.ActivitySettingBinding
@@ -38,7 +39,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
         initWithdrawal(binding.textviewSettingWithdraw)
         initLicense(binding.textviewSettingLicense)
         initInstaGram(binding.textviewSettingInstagram)
-
+        initSettingPrivacyPolicy(binding.textviewSettingPrivacyPolicy)
 
         subscribeUi()
     }
@@ -72,6 +73,14 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
 
     private fun initWithdrawal(textviewSettingWithdraw: TextView) {
         textviewSettingWithdraw.setOnClickListener { showWithdrawalDialog(this) }
+    }
+
+    private fun initSettingPrivacyPolicy(textviewSettingPrivacyPolicy: TextView) {
+        textviewSettingPrivacyPolicy.setOnClickListener {
+            Intent(this, WebviewActivity::class.java)
+                .putExtra("mode", PRIVACY_POLICY)
+                .also { startActivity(it) }
+        }
     }
 
     private fun showLogoutDialog(context: Context) {

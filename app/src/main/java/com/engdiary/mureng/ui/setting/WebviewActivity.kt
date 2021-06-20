@@ -11,8 +11,10 @@ import androidx.activity.viewModels
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.IntentKey.OPEN_SOURCE
+import com.engdiary.mureng.constant.IntentKey.PRIVACY_POLICY
 import com.engdiary.mureng.constant.URLConstant.INSAT_GRAM_URL
 import com.engdiary.mureng.constant.URLConstant.LISENCE_URL
+import com.engdiary.mureng.constant.URLConstant.PRIVACY_POLICY_URL
 import com.engdiary.mureng.databinding.ActivityPushAlertBinding
 import com.engdiary.mureng.databinding.ActivityWebviewBinding
 import com.engdiary.mureng.ui.base.BaseActivity
@@ -37,6 +39,7 @@ class WebviewActivity() : BaseActivity<ActivityWebviewBinding>(R.layout.activity
 
         initWebView(binding.webview)
     }
+
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView(webView: WebView) {
 
@@ -53,13 +56,17 @@ class WebviewActivity() : BaseActivity<ActivityWebviewBinding>(R.layout.activity
             domStorageEnabled = true
         }
 
-        if(mode == OPEN_SOURCE) {
+        if (mode == OPEN_SOURCE) {
             webView.loadUrl(LISENCE_URL)
+        }
+
+        if (mode == PRIVACY_POLICY) {
+            webView.loadUrl(PRIVACY_POLICY_URL)
         }
     }
 
     override fun onBackPressed() {
-        if(binding.webview.canGoBack()) {
+        if (binding.webview.canGoBack()) {
             webview.goBack()
         } else {
             super.onBackPressed()
