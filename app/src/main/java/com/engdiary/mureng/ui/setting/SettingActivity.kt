@@ -11,6 +11,7 @@ import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.constant.IntentKey.OPEN_SOURCE
 import com.engdiary.mureng.constant.IntentKey.PRIVACY_POLICY
+import com.engdiary.mureng.constant.IntentKey.TERMS
 import com.engdiary.mureng.constant.URLConstant.INSAT_GRAM_URL
 import com.engdiary.mureng.data.PushAlertSetting
 import com.engdiary.mureng.databinding.ActivitySettingBinding
@@ -39,9 +40,18 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
         initWithdrawal(binding.textviewSettingWithdraw)
         initLicense(binding.textviewSettingLicense)
         initInstaGram(binding.textviewSettingInstagram)
-        initSettingPrivacyPolicy(binding.textviewSettingPrivacyPolicy)
+        initPrivacyPolicy(binding.textviewSettingPrivacyPolicy)
+        initTerms(binding.textviewSettingTerms)
 
         subscribeUi()
+    }
+
+    private fun initTerms(textviewSettingTerms: TextView) {
+        textviewSettingTerms.setOnClickListener {
+            Intent(this, WebviewActivity::class.java)
+                .putExtra("mode", TERMS)
+                .also { startActivity(it) }
+        }
     }
 
     private fun initLicense(textviewSettingLicense: TextView) {
@@ -75,7 +85,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
         textviewSettingWithdraw.setOnClickListener { showWithdrawalDialog(this) }
     }
 
-    private fun initSettingPrivacyPolicy(textviewSettingPrivacyPolicy: TextView) {
+    private fun initPrivacyPolicy(textviewSettingPrivacyPolicy: TextView) {
         textviewSettingPrivacyPolicy.setOnClickListener {
             Intent(this, WebviewActivity::class.java)
                 .putExtra("mode", PRIVACY_POLICY)

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.engdiary.mureng.constant.IntentKey.OPEN_SOURCE
 import com.engdiary.mureng.constant.IntentKey.PRIVACY_POLICY
+import com.engdiary.mureng.constant.IntentKey.TERMS
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 
@@ -26,6 +27,9 @@ class WebviewViewModel @ViewModelInject constructor(
         }
         if(mode == PRIVACY_POLICY){
             _barTitle.value = "개인정보 처리방침"
+        }
+        if(mode == TERMS){
+            _barTitle.value = "이용약관"
         }
     }
 
