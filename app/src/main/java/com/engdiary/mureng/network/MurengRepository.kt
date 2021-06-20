@@ -91,12 +91,11 @@ class MurengRepository @Inject constructor(
                 userExistRequest = userExistRequest,
                 onSuccess = {
 
-                    it.identifier?.let { identifier ->
-                        if(it.exist) {
-                            authManager.jwtIdentifier = identifier
-                        } else {
-                            authManager.identifier = identifier
-                        }
+                it.identifier?.let { identifier ->
+                    if (it.exist) {
+                        authManager.jwtIdentifier = identifier
+                    } else {
+                        authManager.identifier = identifier
                     }
 
                     if (it.exist) {
@@ -403,4 +402,15 @@ class MurengRepository @Inject constructor(
             true
         } ?: false
     }
+    
+    suspend fun postFCMToken(fcmToken: String) {
+        api.postFCMToken(FcmTokenRequest(fcmToken))
+    }
+    suspend fun putUserFcmToken(fcmToken: String) {
+        api.postUserFcmToken(FcmTokenRequest(fcmToken))
+    }
+
 }
+
+
+

@@ -167,4 +167,14 @@ interface MurengService {
     suspend fun putLikeAlertSetting(
         @Body notificationRequest: NotificationRequest
     ): MurengResponse<UserNetwork>
+
+    @POST("/api/fcm-token")
+    suspend fun postFCMToken(
+        @Body fcmTokenRequest: FcmTokenRequest
+    ): MurengResponse<AuthorNetwork>
+
+    @PUT("/api/member/me/fcm-token")
+    suspend fun postUserFcmToken(
+        @Body fcmTokenRequest: FcmTokenRequest
+    ): MurengResponse<AuthorNetwork>
 }

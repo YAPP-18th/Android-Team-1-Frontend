@@ -132,7 +132,7 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="TextAppearance.NotosanskrBoldStyle" parent="android:Widget.TextView">
+    <style name="TextAppearance.NotosanskrBoldStyle" parent="TextAppearance.MaterialComponents.Subtitle2">
         <item name="fontFamily">@font/notosanskr_bold</item>
         <item name="android:fontFamily">@font/notosanskr_bold</item>
         <item name="android:includeFontPadding">false</item>
