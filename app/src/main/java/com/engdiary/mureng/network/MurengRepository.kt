@@ -24,15 +24,12 @@ import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.MEDIA_BASE_URL
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.util.safeEnqueue
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.lang.Exception
 import javax.inject.Inject
 
 class MurengRepository @Inject constructor(
@@ -364,5 +361,11 @@ class MurengRepository @Inject constructor(
         return userNetwork?.let {
             true
         } ?: false
+    }
+
+    suspend fun getUserDiaries(userId: Int): List<Diary>?{
+        return api.getUserDiaries(authManager.accessToken, userId)
+            ?.data
+            ?.map { it.asDomain() }
     }
 }
