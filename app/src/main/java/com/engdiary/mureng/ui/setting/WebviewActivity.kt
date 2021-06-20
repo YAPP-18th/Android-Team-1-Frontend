@@ -12,9 +12,11 @@ import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.IntentKey.OPEN_SOURCE
 import com.engdiary.mureng.constant.IntentKey.PRIVACY_POLICY
+import com.engdiary.mureng.constant.IntentKey.TERMS
 import com.engdiary.mureng.constant.URLConstant.INSAT_GRAM_URL
 import com.engdiary.mureng.constant.URLConstant.LISENCE_URL
 import com.engdiary.mureng.constant.URLConstant.PRIVACY_POLICY_URL
+import com.engdiary.mureng.constant.URLConstant.TEMRS_URL
 import com.engdiary.mureng.databinding.ActivityPushAlertBinding
 import com.engdiary.mureng.databinding.ActivityWebviewBinding
 import com.engdiary.mureng.ui.base.BaseActivity
@@ -62,6 +64,10 @@ class WebviewActivity() : BaseActivity<ActivityWebviewBinding>(R.layout.activity
 
         if (mode == PRIVACY_POLICY) {
             webView.loadUrl(PRIVACY_POLICY_URL)
+        }
+
+        if(mode == TERMS) {
+            webView.loadUrl(TEMRS_URL)
         }
     }
 
