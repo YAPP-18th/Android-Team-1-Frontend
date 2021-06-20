@@ -17,7 +17,6 @@ import com.engdiary.mureng.ui.social.SocialFragment
 import com.engdiary.mureng.ui.write_diary.WriteDiaryContentActivity
 import com.engdiary.mureng.util.startActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -34,20 +33,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         viewModel.selectHome.observe(this, Observer {
             if (it) {
-                HomeFragment().navigate(supportFragmentManager, fl_main.id)
+                HomeFragment().navigate(supportFragmentManager, binding.flMain.id)
             }
         })
 
         viewModel.selectMyPage.observe(this, Observer {
             if (it) {
-                MyPageFragment().navigate(supportFragmentManager, fl_main.id)
+                MyPageFragment().navigate(supportFragmentManager, binding.flMain.id)
 //                startActivity(SettingActivity::class, isFinish = false)
             }
         })
 
         viewModel.selectSocial.observe(this, Observer {
             if (it) {
-                SocialFragment().navigate(supportFragmentManager, fl_main.id)
+                SocialFragment().navigate(supportFragmentManager, binding.flMain.id)
             }
         })
 
