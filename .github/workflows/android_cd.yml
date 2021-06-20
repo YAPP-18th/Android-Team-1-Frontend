@@ -30,12 +30,14 @@ jobs:
 
     - name: Unzip Services
       run: tar xvf app/services.tar -C app
+      
+      
+    - name: signing_config.tar 압축 풀기
+      run: tar xvf app/signing_config.tar
 
     - name: Build APK
       run: bash ./gradlew assembleRelease --stacktrace
      
-    - name: CI 2-8. signing_config.tar 압축 풀기
-      run: tar xvf app/signing_config.tar
       
     - run: './gradlew assembleRelease'
     - uses: MeilCli/slack-upload-file@v1
