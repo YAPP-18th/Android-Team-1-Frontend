@@ -1,7 +1,9 @@
 package com.engdiary.mureng.util
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Outline
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.view.inputmethod.InputMethodManager
@@ -16,11 +18,11 @@ import androidx.databinding.adapters.TextViewBindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.engdiary.mureng.R
-import com.engdiary.mureng.di.BASE_URL
-import com.engdiary.mureng.di.GlideApp
 import com.engdiary.mureng.di.MEDIA_BASE_URL
-import timber.log.Timber
+import jp.wasabeef.blurry.Blurry
 
 
 fun View.setVisible() {
@@ -126,7 +128,7 @@ fun setImageGlideResource(imageView: ImageView, resource: String) {
 
 @BindingAdapter("imageCircleGlideResource")
 fun setImageCircleGlideResource(imageView: ImageView, resource: String?) {
-    if(!resource.isNullOrEmpty()) {
+    if (!resource.isNullOrEmpty()) {
         val resourceStr = MEDIA_BASE_URL + resource
         Glide.with(imageView).load(resourceStr).circleCrop().into(imageView)
     } else {
@@ -136,7 +138,7 @@ fun setImageCircleGlideResource(imageView: ImageView, resource: String?) {
 
 @BindingAdapter("imageCircleSmallGlideResource")
 fun setImageCircleSmallGlideResource(imageView: ImageView, resource: String?) {
-    if(!resource.isNullOrEmpty()) {
+    if (!resource.isNullOrEmpty()) {
         val resourceStr = MEDIA_BASE_URL + resource
         Glide.with(imageView).load(resourceStr).circleCrop().into(imageView)
     } else {
@@ -144,4 +146,30 @@ fun setImageCircleSmallGlideResource(imageView: ImageView, resource: String?) {
     }
 }
 
+@BindingAdapter("imageBlurResource")
+fun setImageBlurResource(imageView: ImageView, resource: String?) {
+    Glide.with(imageView.context)
+        .asBitmap()
+        .load(MEDIA_BASE_URL + resource)
+        .into(object : CustomTarget<Bitmap>() {
+            override fun onResourceReady(
+                resource: Bitmap,
+                transition: Transition<in Bitmap>?
+            ) {
+                loadBlurBitmap(
+                    imageView,
+                    resource
+                )
+            }
 
+            override fun onLoadCleared(placeholder: Drawable?) {}
+        })
+}
+
+
+private fun loadBlurBitmap(imageView: ImageView, bitmap: Bitmap) {
+    Blurry.with(imageView.context)
+        .sampling(1)
+        .from(bitmap)
+        .into(imageView)
+}

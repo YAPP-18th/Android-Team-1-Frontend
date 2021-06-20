@@ -1,7 +1,5 @@
 package com.engdiary.mureng.di
 
-import android.os.Parcel
-import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.annotation.GlideModule
@@ -13,7 +11,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ServiceComponent
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kr.co.nexters.winepick.util.SharedPrefs
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -59,17 +60,17 @@ suspend fun <T> Call<T>.send(): Response<T> = suspendCoroutine {
 class ActivityModule {
     @Provides
     fun provideViewModelFactory(
-            murengRepository: MurengRepository
+        murengRepository: MurengRepository
     ): ViewModelProvider.AndroidViewModelFactory = ViewModelFactoryImpl(
-            MurengApplication.getGlobalAppApplication(), murengRepository
+        MurengApplication.getGlobalAppApplication(), murengRepository
     )
 
     /**
      * ViewModelFactory 구현체 (impl) 를 만드는 클래스
      */
     class ViewModelFactoryImpl(
-            val murengApplication: MurengApplication,
-            val murengRepository: MurengRepository
+        val murengApplication: MurengApplication,
+        val murengRepository: MurengRepository
     ) : ViewModelProvider.AndroidViewModelFactory(murengApplication) {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return BaseViewModel(murengRepository) as T
@@ -111,7 +112,15 @@ object NetworkModule {
             val builder = chain.request().newBuilder()
                 .url(newUrl)
 
-            if (newUrl.contains("/api/reply") || newUrl.contains("/api/questions")) {
+            if (newUrl.contains("/api/reply")
+                || newUrl.contains("/api/member/check-replied-today")
+                || newUrl.contains("/api/member/scrap")
+                || newUrl.contains("/api/questions")
+                || newUrl.contains("/api/today-expression")
+                || newUrl.contains("/api/today-question")
+                || newUrl.contains("/api/member/me")
+                || newUrl.contains("/api/member/me/fcm-token")
+            ) {
                 return@Interceptor chain.proceed(chain.request().newBuilder().apply {
                     addHeader("X-AUTH-TOKEN", authManager.test_jwt)
                     url(newUrl)
@@ -193,3 +202,9 @@ object RepositoryModule {
 object DataSourceModule {
 }
 
+@Module
+@InstallIn(ServiceComponent::class)
+class ServiceModule {
+    @Provides
+    fun provideIoCoroutineScope(): CoroutineScope = CoroutineScope(Dispatchers.IO)
+}

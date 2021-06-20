@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+<!--        <variable-->
+<!--            name="Diary"-->
+<!--            type="com.engdiary.mureng.data.response.DiaryNetwork" />-->
+
+        <variable
+            name="vm"
+            type="com.engdiary.mureng.ui.home.HomeViewModel" />
+
+        <variable
+            name="Expression"
+            type="com.engdiary.mureng.data.response.TodayExpression" />
+
+<!--        <variable-->
+<!--            name="vm2"-->
+<!--            type="com.engdiary.mureng.ui.home.HomeViewModel" />-->
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingStart="14dp"
+        android:paddingEnd="20dp"
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:id="@+id/tv_en_script"
+            style="@style/TextAppearance.RobotoMediumStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="4dp"
+            android:text="@{@string/expression_title(Expression.expression, Expression.meaning)}"
+            android:textColor="@color/colorDarkGray4d"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="가나다라마사" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="32dp"
+            android:id="@+id/img_best_more_profile"
+            app:layout_constraintTop_toBottomOf="@+id/tv_en_script"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="#d7d7d7"
+            />
+
+        <TextView
+            android:text="@{@string/expression_content(Expression.expressionExample, Expression.expressionExampleMeaning)}"
+            android:id="@+id/tv_social_best_more_ques"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tv_en_script"
+            app:layout_constraintTop_toBottomOf="@id/tv_en_script"
+            tools:text="ddddddd"
+            android:layout_marginTop="6dp"
+            style="@style/TextAppearance.RobotoMediumStyle"
+            android:textSize="14dp"
+            android:textColor="#8b8b8b"/>
+
+
+        <ImageView
+            android:id="@+id/img_bookmark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@{Expression.scrappedByRequester ? @drawable/icons_bookmark_default : @drawable/icons_bookmark_fill }"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/icons_heart_outlined" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

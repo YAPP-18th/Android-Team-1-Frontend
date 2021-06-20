@@ -29,10 +29,10 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>(R.layout.activity_login)
         super.onCreate(savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
 
-        binding.googleLogin.setOnClickListener {
-            val toast = Toast.makeText(applicationContext, "준비중 입니다.", duration)
-            toast.show()
-        }
+//        binding.googleLogin.setOnClickListener {
+//            val toast = Toast.makeText(applicationContext, "준비중 입니다.", duration)
+//            toast.show()
+//        }
 
         binding.kakaoLogin.setOnClickListener {
             if (UserApiClient.instance.isKakaoTalkLoginAvailable(this@LoginActivity)) {

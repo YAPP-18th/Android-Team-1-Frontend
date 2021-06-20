@@ -3,15 +3,11 @@ package com.engdiary.mureng.ui.base
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.engdiary.mureng.data.SingleLiveEvent
-import com.engdiary.mureng.data.request.KakaoLoginRequest
 import com.engdiary.mureng.data.request.UserExistRequest
-import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.network.MurengRepository
-
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -63,27 +59,12 @@ open class BaseViewModel @Inject constructor(
     /** 카카오 로그인 서버 통신 */
     open fun addKakaoUser(accessToken: String, refreshToken: String, userId: Long) {
         murengRepository.settingUser(
-            userExistRequest =  UserExistRequest(accessToken = accessToken, refreshToken = refreshToken),
+            userExistRequest =  UserExistRequest(providerAccessToken = accessToken, providerName = "kakao"),
             successAction =  {
-                Log.i("TKAKAEE", "T")
                 _navigateToHome.call()
             },
             failAction =  {
-                Log.i("TKAKA", "T")
-
                 _navigateToSignup.call()
-
-//                val test = Intent(MurengApplication.appContext, SignupTermsActivity::class.java).apply {
-//                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//                }
-
-
-
-                Log.i("TKAKA", "T")
-
-//                _toastMeesageText.value = PerfumeApplication.getGlobalApplicationContext()
-//                    .resources.getString(R.string.api_error)
             })
     }
 
