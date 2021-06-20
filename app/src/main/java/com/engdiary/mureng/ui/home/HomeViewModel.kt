@@ -98,15 +98,38 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
         )
     }
 
-    fun addScrap(expId: Int) {
-        murengRepository.postScrap(expId,
-                onSuccess = {
-                    Timber.d("scrap")
-                },
-                onFailure = {
+    fun addScrap(expression: TodayExpression) {
 
-                }
-        )
+        if(expression.scrappedByRequester) {
+            murengRepository.deleteScrap(expression.expId,
+                    onSuccess = {
+                        viewModelScope.launch {
+                            try {
+                                _todayExpression.value = murengRepository.getTodayExpression()
+                            } catch (networkError: IOException) {
+                            }
+                        }
+                    },
+                    onFailure = {
+                    }
+            )
+        } else {
+            murengRepository.postScrap(expression.expId,
+                    onSuccess = {
+                        viewModelScope.launch {
+                            try {
+                                _todayExpression.value = murengRepository.getTodayExpression()
+                            } catch (networkError: IOException) {
+                            }
+                        }
+                    },
+                    onFailure = {
+
+                    }
+            )
+        }
+//    fun addScrap(expId: Int) {
+
     }
 
 
