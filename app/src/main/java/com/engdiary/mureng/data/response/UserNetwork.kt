@@ -10,7 +10,7 @@ data class UserNetwork(
         @SerializedName("identifier")
         val identifier: String,
         @SerializedName("email")
-        val email: String,
+        val email: String?,
         @SerializedName("nickname")
         val nickname: String,
         @SerializedName("image")

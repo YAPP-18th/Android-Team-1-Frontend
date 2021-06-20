@@ -14,7 +14,7 @@ data class Author(
     val memberId: Int,
     val murengCount: Int,
     val nickname: String,
-    val pushActive: Boolean
+    val pushAlertSetting: PushAlertSetting
 ) : Parcelable {
     fun asNetwork(): AuthorNetwork = AuthorNetwork(
         attendanceCount,
@@ -25,6 +25,6 @@ data class Author(
         memberId,
         murengCount,
         nickname,
-        pushActive
+        pushAlertSetting.asNetwork()
     )
 }

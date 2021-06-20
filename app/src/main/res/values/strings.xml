@@ -65,17 +65,20 @@
     <string name="setting_withdraw">회원 탈퇴</string>
 
     <string name="pushalert_todayalert">오늘의 질문 알림</string>
+    <string name="pushalert_likealert">좋아요 알림</string>
     <string name="pushalert_title">푸시 알림</string>
 
     <string name="diary_detail_otherresponse">이 질문에 다른 사람들은 어떻게 답했을까요?</string>
     <string name="diary_detail_edit">수정</string>
     <string name="diary_detail_delete">삭제</string>
+
     <string name="diary_detail_delete_dialog">글을 삭제하시겠어요?</string>
     <string name="diary_detail_delete_diary_description">삭제된 글은 복구할 수 없어요!</string>
     <string name="diary_detail_delete_dialog_accept">네</string>
     <string name="diary_detail_delete_dialog_cancel">아니오</string>
 
     <string name="hint_write_diary_content">50자 이상 써주세요 :)</string>
+
     <string name="writingdiary_question">%s, %s</string>
     <string name="writingdiary_korean_alert_message">한글은 입력할 수 없어요!</string>
     <string name="writingdiary_korean_alert_message_accept">확인</string>
@@ -90,4 +93,12 @@
     <string name="daily_channel_id">DAILY_CHANNEL</string>
     <string name="daily_channel_name">오늘의 질문 알림</string>
     <string name="daily_channel_description">매일 일기 알림을 받습니다.</string>
-</resources>
+
+    <string name="mypage_tabitem_record">기록</string>
+    <string name="mypage_tabitem_award">성과</string>
+    <string name="mypage_tabitem_scrap">스크랩</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="expression_title">%s  %s</string>
+    <string name="expression_content">%s    %s</string>

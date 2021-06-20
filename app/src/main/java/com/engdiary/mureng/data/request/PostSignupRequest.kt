@@ -8,7 +8,7 @@ data class PostSignupRequest (
     @SerializedName("nickname")
     val nickname : String,
         @SerializedName("email")
-    var email: String
+    var email: String?
 )
 
 data class PostJWTRequest(
