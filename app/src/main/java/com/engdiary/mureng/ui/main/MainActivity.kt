@@ -27,10 +27,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
 
-        // TODO 서버 통신을 위한 임의의 test_jwt 추가 (나중에 지워야함)
-        authManager.test_jwt =
-            "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpZGVudGl0eSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjozNDk2NzA1MTEwLCJleHAiOjM1MDE4ODkxMTB9.dkvgL0xVaUBGwbN3STJNT3lID5ku5a6qkfkFUg_GZ8WFi5QTiOuduLYgD85yZlzRnjmoKxjjwii4Mr11bZsOHA"
-
         viewModel.selectHome.observe(this, Observer {
             if (it) {
                 HomeFragment().navigate(supportFragmentManager, binding.flMain.id)

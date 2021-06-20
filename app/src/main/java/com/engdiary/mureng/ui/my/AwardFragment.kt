@@ -25,14 +25,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AwardFragment : BaseFragment<FragmentAwardBinding>(R.layout.fragment_award) {
 
-    override val viewModel: BestTabViewModel by viewModels<BestTabViewModel>()
-    val handler : Handler = Handler()
-    private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(AnswerRecyclerType.TYPE_BEST ,viewModel, handler) }
-    private val questionAdapter: QuestionAdapter by lazy { QuestionAdapter(viewModel) }
+    override val viewModel: AwardViewModel by viewModels<AwardViewModel>()
+    private val murengTreyAdapter: MurengTreyAdapter by lazy { MurengTreyAdapter() }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
+        binding.rvAwardTrey.apply {
+            adapter = murengTreyAdapter
+        }
 
     }
 

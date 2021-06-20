@@ -180,4 +180,10 @@ interface MurengService {
     suspend fun postUserFcmToken(
         @Body fcmTokenRequest: FcmTokenRequest
     ): MurengResponse<AuthorNetwork>
+
+
+    @GET("/api/member/{memberId}/achievement")
+    suspend fun getUserAchievement(
+        @Path("memberId") userId: Int
+    ) : MurengResponse<AwardNetwork>
 }

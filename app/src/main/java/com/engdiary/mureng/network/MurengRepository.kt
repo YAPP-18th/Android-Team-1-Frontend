@@ -6,21 +6,17 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
+import androidx.lifecycle.Transformations.map
 import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.data.DiaryContent
 import com.engdiary.mureng.data.ItemWriteDiaryImage
 import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.*
 import com.engdiary.mureng.data.request.*
-import com.engdiary.mureng.data.response.JWTResponse
-import com.engdiary.mureng.data.response.KakaoLoginResponse
 import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.data.request.PutDiaryRequest
-import com.engdiary.mureng.data.response.DiaryNetwork
-import com.engdiary.mureng.data.response.MurengResponse
-import com.engdiary.mureng.data.response.TodayExpression
-import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.response.*
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.MEDIA_BASE_URL
 import com.engdiary.mureng.di.MurengApplication
@@ -414,5 +410,9 @@ class MurengRepository @Inject constructor(
     
     suspend fun putUserFcmToken(fcmToken: String) {
         api.postUserFcmToken(FcmTokenRequest(fcmToken))
+    }
+
+    suspend fun getUserAchievement(userId : Int) : Award {
+        return api.getUserAchievement(userId).data!!.asDomain()
     }
 }
