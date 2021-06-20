@@ -34,13 +34,15 @@ jobs:
     - name: Build APK
       run: bash ./gradlew assembleRelease --stacktrace
      
-     
+    - name: CI 2-8. signing_config.tar 압축 풀기
+      run: tar xvf signing_config.tar
+      
     - run: './gradlew assembleRelease'
     - uses: MeilCli/slack-upload-file@v1
       with:
         slack_token: ${{ secrets.SLACK_READ_WRITE_TOKEN }}
         channels: ${{ secrets.SLACK_CHANNEL_DEPLOY }}
-        file_path: '/app/release/app-release.apk'
+        file_path: 'app/build/outputs/apk/release/app-release.apk'
         file_name: 'app-release.apk'
         file_type: 'apk'
         initial_comment: '${{ github.ref }} 테스트 앱 슬랙 배포 성공'
@@ -50,6 +52,6 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: app-release.apk
-        path: /app/release/app-release.apk
+        path: app/build/outputs/apk/release/app-release.apk
         
  
