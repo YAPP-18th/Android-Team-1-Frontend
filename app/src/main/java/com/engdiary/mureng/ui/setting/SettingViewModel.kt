@@ -25,4 +25,15 @@ class SettingViewModel @Inject constructor(private val murengRepository: MurengR
                 ?.let { _navigateToPushAlert.postValue(it) }
         }
     }
+
+    fun withdrawMureng() {
+        viewModelScope.launch(Dispatchers.IO) {
+            takeIf { murengRepository.withdrawMureng() }
+                .run {    _navigateToLogin.postValue(Unit)}
+        }
+    }
+
+    fun expireAccessToken() {
+        murengRepository.expireAccessToken()
+    }
 }

@@ -97,6 +97,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
         MaterialAlertDialogBuilder(context)
             .setTitle(resources.getString(R.string.setting_logout_dialog_title))
             .setPositiveButton(resources.getString(R.string.setting_logout_dialog_accept)) { dialog, _ ->
+                viewModel.expireAccessToken()
                 navigateToLoginActivity()
             }
             .setNegativeButton(resources.getString(R.string.setting_logout_dialog_decline)) { dialog, _ ->
