@@ -7,7 +7,7 @@ data class QuestionNetwork(
     @SerializedName("questionId")
     val questionId: Int,
     @SerializedName("category")
-    val category: String,
+    val category: String?,
     @SerializedName("content")
     val content: String,
     @SerializedName("koContent")
@@ -15,8 +15,15 @@ data class QuestionNetwork(
     @SerializedName("repliesCount")
     val repliesCount: Int = 0 ,
     @SerializedName("wordHints")
-    val wordHints: List<HintNetwork>
+    val wordHints: List<HintNetwork>,
+    @SerializedName("author")
+    val author : AuthorNetwork?,
+    var lineVisible : Boolean = true,
+    var likeYn: Boolean? = null,
 ) : java.io.Serializable {
     fun asDomain(): Question =
-        Question(category, content, contentKr, questionId, repliesCount, wordHints.map { it.asDomain() })
+        Question(category, content, contentKr, questionId, repliesCount, wordHints.map { it.asDomain() }, author?.asDomain())
+
+    val clickedLikeYn: Boolean
+        get() = !(likeYn ?: true)
 }

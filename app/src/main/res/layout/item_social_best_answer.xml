@@ -28,8 +28,9 @@
         
         
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            app:imageCircleGlideResource="@{Diary.image}"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:id="@+id/img_best_more_profile"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -87,6 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:id="@+id/cl_best_more_answer_heart"
             app:layout_constraintTop_toBottomOf="@id/tv_social_best_more_ans"
             app:layout_constraintEnd_toEndOf="parent">
 

@@ -29,4 +29,9 @@ class MyQuesFragment : BaseFragment<MyQuesFragmentBinding>(R.layout.my_ques_frag
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.onResume()
+    }
+
 }

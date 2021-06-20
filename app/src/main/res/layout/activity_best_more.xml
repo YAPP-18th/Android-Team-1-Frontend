@@ -131,7 +131,9 @@
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/nsv_best_more"
                 android:background="@drawable/best_more_bg_white"
+                android:descendantFocusability="afterDescendants"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
@@ -145,9 +147,9 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp"
-                        android:paddingHorizontal="20dp"
+                        android:paddingStart="20dp"
                         android:id="@+id/cl_best_more"
+                        android:layout_marginTop="14dp"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent">
@@ -157,12 +159,52 @@
                             android:layout_height="wrap_content"
                             android:textSize="12dp"
                             tools:text="총 n개의 답변"
+                            android:layout_marginTop="8dp"
                             style="@style/TextAppearance.NotosanskrRegularStyle"
                             android:text="@{vm.isAns ? @string/total_answer_count(vm.totalCnt) : @string/total_ques_count(vm.totalCnt)}"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             android:textColor="@color/colorBlackGray"
                             android:lineSpacingExtra="5sp"/>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingEnd="20dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="4dp"
+                            android:paddingStart="24dp"
+                            app:onSingleClick="@{vm::sortClick}"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+
+                            <TextView
+                                android:id="@+id/tv_social_sort"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{vm.selectedSort}"
+                                style="@style/TextAppearance.NotosanskrRegularStyle"
+                                android:textSize="12dp"
+                                tools:text="인기순"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                android:textColor="@color/colorBlackGray"
+                                android:lineSpacingExtra="5sp"/>
+
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/elements_chevron_down"
+                                app:layout_constraintTop_toTopOf="@id/tv_social_sort"
+                                app:layout_constraintBottom_toBottomOf="@id/tv_social_sort"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/tv_social_sort"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -198,6 +240,53 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/cl_best_more"
                         tools:listitem="@layout/item_social_best_answer"  />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/viewgroup_social_sort"
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/best_sort_bg"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:visibility="@{vm.clickedSort ? View.VISIBLE : View.GONE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/cl_best_more"
+                        android:paddingVertical="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_sort_popular"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="12dp"
+                            android:paddingVertical="4dp"
+                            android:textSize="12sp"
+                            android:paddingEnd="28dp"
+                            android:textColor="@{vm.isPop ? @color/colorBlackGray : @color/colorGrayaf}"
+                            android:lineSpacingExtra="5sp"
+                            app:onSingleClick="@{!vm.isPop ? vm::menuClick : null}"
+                            style="@style/TextAppearance.NotosanskrRegularStyle"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:text="@string/popular"/>
+
+
+                        <TextView
+                            android:layout_marginTop="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="12dp"
+                            android:paddingVertical="4dp"
+                            android:paddingEnd="28dp"
+                            android:textSize="12sp"
+                            android:textColor="@{vm.isPop ? @color/colorGrayaf : @color/colorBlackGray }"
+                            android:lineSpacingExtra="5sp"
+                            app:onSingleClick="@{vm.isPop ? vm::menuClick : null}"
+                            style="@style/TextAppearance.NotosanskrRegularStyle"
+                            app:layout_constraintTop_toBottomOf="@id/tv_sort_popular"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:text="@string/newest"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,7 +2,6 @@ package com.engdiary.mureng.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewbinding.BuildConfig
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
 import com.engdiary.mureng.network.MurengRepository
@@ -67,9 +66,9 @@ class ActivityModule {
      * ViewModelFactory 구현체 (impl) 를 만드는 클래스
      */
     class ViewModelFactoryImpl(
-        val application: MurengApplication,
+        val murengApplication: MurengApplication,
         val murengRepository: MurengRepository
-    ) : ViewModelProvider.AndroidViewModelFactory(application) {
+    ) : ViewModelProvider.AndroidViewModelFactory(murengApplication) {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return BaseViewModel(murengRepository) as T
         }
@@ -110,10 +109,13 @@ object NetworkModule {
             val builder = chain.request().newBuilder()
                 .url(newUrl)
 
-            if (newUrl.contains("/api/reply") ||
-                    newUrl.contains("/api/questions") ||
-                    newUrl.contains("/api/today-expression")
-                    ) {
+            if (newUrl.contains("/api/reply")
+                || newUrl.contains("/api/member/check-replied-today")
+                || newUrl.contains("/api/questions")
+                || newUrl.contains("/api/today-expression")
+                || newUrl.contains("/api/today-question")
+                || newUrl.contains("/api/member/me")
+            ) {
                 return@Interceptor chain.proceed(chain.request().newBuilder().apply {
                     addHeader("X-AUTH-TOKEN", authManager.test_jwt)
                     url(newUrl)

@@ -72,6 +72,7 @@ class SocialQcreateViewModel @Inject constructor(
             } else {
                 _warningEng.value = false
                 _warningMaxEng.value = false
+                _qCreateEngQues.value = ""
                 quesWarningCheck()
             }
 
@@ -91,7 +92,7 @@ class SocialQcreateViewModel @Inject constructor(
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             if (!p0.toString().isNullOrEmpty()) {
-                val ps: Pattern = compile("^[ㄱ-ㅎ가-힣0-9\\s!~`@#\$%\\^?,. ]+$")
+                val ps: Pattern = compile("^[ㄱ-ㅎㅏ-ㅣ가-힣0-9\\s!~`@#\$%\\^?,. ]+$")
                 _warningKor.value = !ps.matcher(p0).matches()
                 _warningMaxKor.value = p0!!.length > 45
 
@@ -110,6 +111,7 @@ class SocialQcreateViewModel @Inject constructor(
             } else {
                 _warningKor.value = false
                 _warningMaxKor.value = false
+                _qCreateKorQues.value = ""
                 quesWarningCheck()
 
             }

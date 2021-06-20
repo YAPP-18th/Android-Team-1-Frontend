@@ -25,14 +25,19 @@ class MyQuesViewModel @Inject constructor(
     /** 생성자 */
     init {
         _quesCnt.value = 0
-        getMyQuesList()
     }
 
     fun getMyQuesList() {
         murengRepository.getMyQuestionList(
             onSuccess = {
-                _quesResults.value = it
+                var questionData : MutableList<QuestionNetwork> = it.toMutableList()
+                for (i in 0 until questionData.size) {
+                    questionData[i].lineVisible =  true
+                }
+                _quesResults.value = questionData
                 _quesCnt.value = it.size
+
+
             },
             onFailure = {
                 Timber.e("나의 질문 리스트 가져오기 통신 실패")
@@ -53,8 +58,17 @@ class MyQuesViewModel @Inject constructor(
         //TODO 안쓰임!!
     }
 
+    override fun answerItemHeartClick(answerData: DiaryNetwork) {
+        //TODO("Not yet implemented")
+    }
+
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {
         super.onCleared()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getMyQuesList()
     }
 }

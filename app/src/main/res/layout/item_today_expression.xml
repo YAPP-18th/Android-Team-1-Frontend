@@ -36,14 +36,13 @@
         <TextView
             android:id="@+id/tv_en_script"
             style="@style/TextAppearance.RobotoMediumStyle"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="4dp"
             android:text="@{@string/expression_title(Expression.expression, Expression.meaning)}"
             android:textColor="@color/colorDarkGray4d"
-            android:textSize="12dp"
-            app:layout_constraintEnd_toStartOf="@+id/img_best_more_heart"
+            android:textSize="18dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="가나다라마사" />
@@ -63,24 +62,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/tv_en_script"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_en_script"
             tools:text="ddddddd"
             android:layout_marginTop="6dp"
             style="@style/TextAppearance.RobotoMediumStyle"
-            android:textSize="16dp"
-            android:textColor="@color/colorBlack17"/>
+            android:textSize="14dp"
+            android:textColor="#8b8b8b"/>
 
 
         <ImageView
             android:id="@+id/img_best_more_heart"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
             android:src="@{Expression.scrappedByRequester ? @drawable/icons_bookmark_default : @drawable/icons_bookmark_fill }"
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_en_script"
-            app:layout_goneMarginRight="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/icons_heart_outlined" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
