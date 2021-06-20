@@ -8,4 +8,5 @@ object IntentKey {
     const val OPEN_SOURCE = "OPEN_SOURCE"
     const val QUESTION_NETWORK = "QUESTION_NETWORK"
     const val PUSH_ALERT_SETTING = "PUSH_ALERT_SETTING"
+    const val PRIVACY_POLICY = "PRIVACY_POLICY"
 }
