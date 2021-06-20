@@ -53,10 +53,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/img_develop_plan"
         android:text="PLAN"
+        style="@style/TextAppearance.ComicSansStyle"
         android:id="@+id/tv_develop_plan"
         app:layout_constraintStart_toEndOf="@id/img_develop_plan"
         android:layout_marginStart="16dp"
-        android:textColor="@color/pink2"
+        android:textColor="@color/pink2fb"
         android:textSize="14dp"/>
 
     <TextView
@@ -87,10 +88,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/img_develop_design"
         android:text="DESIGN"
+        style="@style/TextAppearance.ComicSansStyle"
         android:id="@+id/tv_develop_design"
         app:layout_constraintStart_toEndOf="@id/img_develop_design"
         android:layout_marginStart="16dp"
-        android:textColor="@color/pink2"
+        android:textColor="@color/pink2fb"
         android:textSize="14dp"/>
 
     <TextView
@@ -119,12 +121,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/TextAppearance.ComicSansStyle"
         app:layout_constraintTop_toTopOf="@id/img_develop_android"
         android:text="FRONT-END"
         android:id="@+id/tv_develop_android"
         app:layout_constraintStart_toEndOf="@id/img_develop_android"
         android:layout_marginStart="16dp"
-        android:textColor="@color/pink2"
+        android:textColor="@color/pink2fb"
         android:textSize="14dp"/>
 
     <TextView
@@ -154,10 +157,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/img_develop_server"
         android:text="BACK-END"
+        style="@style/TextAppearance.ComicSansStyle"
         android:id="@+id/tv_develop_server"
         app:layout_constraintStart_toEndOf="@id/img_develop_server"
         android:layout_marginStart="16dp"
-        android:textColor="@color/pink2"
+        android:textColor="@color/pink2fb"
         android:textSize="14dp"/>
 
     <TextView

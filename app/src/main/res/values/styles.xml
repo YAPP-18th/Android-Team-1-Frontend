@@ -144,6 +144,12 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="TextAppearance.ComicSansStyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/comic_sans</item>
+        <item name="android:fontFamily">@font/comic_sans</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
     <!-- Social TabLayout Style -->
     <style name="TextAppearance.SocialTabLayoutStyle" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="fontFamily">@font/roboto_medium</item>

@@ -66,4 +66,8 @@
     <!-- push alert -->
     <color name="pinklight">#ffdae9</color>
     <color name="grey_light4">#c3c3c3</color>
+
+
+    <color name="grey1Opacity10">#1aafafaf</color>
+    <color name="pink2fb">#fb6a95</color>
 </resources>
