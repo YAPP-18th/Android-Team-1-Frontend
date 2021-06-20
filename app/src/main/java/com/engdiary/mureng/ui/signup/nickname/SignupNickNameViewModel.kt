@@ -74,16 +74,24 @@ class SignupNickNameViewModel @Inject constructor(
 
     fun onTextChanged(s: CharSequence, start :Int, before : Int, count: Int) {
         viewModelScope.launch {
+            s.toString().let {
 
-            nickName = String(s.toString().toByteArray(Charsets.ISO_8859_1), Charsets.UTF_8)
-            val res = murengRepository.getNickNameExist(nickName)
-            _isDuplicate.value = res!!.duplicated
-            if(res!!.duplicated) {
-                _next.value = "다음"
-            } else {
-                _next.value = "완료"
+                if(it.isNotEmpty()) {
+                    nickName = String(it.toByteArray(Charsets.ISO_8859_1), Charsets.UTF_8)
+
+                    val res = murengRepository.getNickNameExist(nickName)
+                    _isDuplicate.value = res!!.duplicated
+                    if (res!!.duplicated) {
+                        _next.value = "다음"
+                    } else {
+                        _next.value = "완료"
+                    }
+                } else {
+                    _isDuplicate.value = true
+                    _next.value = "다음"
+                }
+
             }
-
         }
 
     }

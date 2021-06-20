@@ -423,7 +423,8 @@ class MurengRepository @Inject constructor(
 
     suspend fun getUserAchievement(userId: Int): Award {
         return api.getUserAchievement(authManager.accessToken, userId)
-            .data!!.asDomain()
+            .data!!
+            .asDomain()
     }
 
     suspend fun withdrawMureng(): Boolean {

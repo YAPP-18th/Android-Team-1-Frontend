@@ -7,11 +7,6 @@
     <data>
 
         <import type="android.view.View" />
-
-<!--        <variable-->
-<!--            name="Diary"-->
-<!--            type="com.engdiary.mureng.data.response.DiaryNetwork" />-->
-
         <variable
             name="vm"
             type="com.engdiary.mureng.ui.home.HomeViewModel" />
@@ -19,10 +14,6 @@
         <variable
             name="Expression"
             type="com.engdiary.mureng.data.response.TodayExpression" />
-
-<!--        <variable-->
-<!--            name="vm2"-->
-<!--            type="com.engdiary.mureng.ui.home.HomeViewModel" />-->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,7 +65,7 @@
             android:id="@+id/img_bookmark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@{Expression.scrappedByRequester ? @drawable/icons_bookmark_default : @drawable/icons_bookmark_fill }"
+            android:src="@{Expression.scrappedByRequester ? @drawable/icons_bookmark_fill : @drawable/icons_bookmark_default }"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/icons_heart_outlined" />
