@@ -1,9 +1,6 @@
 package com.engdiary.mureng.network
 
 import com.engdiary.mureng.data.request.*
-import com.engdiary.mureng.data.request.PostDiaryRequest
-import com.engdiary.mureng.data.request.PostQuestioRequest
-import com.engdiary.mureng.data.request.PutDiaryRequest
 import com.engdiary.mureng.data.response.*
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -167,6 +164,12 @@ interface MurengService {
     suspend fun putLikeAlertSetting(
         @Body notificationRequest: NotificationRequest
     ): MurengResponse<UserNetwork>
+
+    @GET("/api/member/{memberId}/replies")
+    suspend fun getUserDiaries(
+        @Header("X-AUTH-TOKEN") accessToken: String,
+        @Path("memberId") userId: Int
+    ): MurengResponse<List<DiaryNetwork>>
 
     @POST("/api/fcm-token")
     suspend fun postFCMToken(
