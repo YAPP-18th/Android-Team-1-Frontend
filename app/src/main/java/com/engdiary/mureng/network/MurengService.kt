@@ -184,6 +184,7 @@ interface MurengService {
 
     @GET("/api/member/{memberId}/achievement")
     suspend fun getUserAchievement(
+        @Header("X-AUTH-TOKEN") accessToken: String,
         @Path("memberId") userId: Int
     ) : MurengResponse<AwardNetwork>
 
