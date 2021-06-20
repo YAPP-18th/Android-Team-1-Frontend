@@ -5,25 +5,87 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.engdiary.mureng.ui.my.MyPageViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:context=".ui.my.MyPageFragment">
 
-        <TextView
+        <ImageButton
+            android:id="@+id/mypage_navigateto_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MyPageFragment"
-            android:textSize="20dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@android:color/transparent"
+            android:paddingVertical="12dp"
+            android:paddingRight="16dp"
+            android:src="@drawable/icons_settings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/icons_profile_big"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginRight="8dip"
+            android:duplicateParentState="true"
+            app:imageCircleGlideResource="@{vm.user.image}"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            tools:src="@drawable/icons_profile_big" />
+
+        <TextView
+            android:id="@+id/tv_social_best_pop_ans"
+            style="@style/TextAppearance.NotosanskrBoldStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/grey_dark2"
+            android:textSize="20sp"
+            android:text="@{vm.user.nickname}"
+            app:layout_constraintBottom_toBottomOf="@id/icons_profile_big"
+            app:layout_constraintLeft_toRightOf="@+id/icons_profile_big"
+            app:layout_constraintTop_toTopOf="@+id/icons_profile_big"
+            tools:text="최현정" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_mypage_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icons_profile_big"
+            app:tabIndicator="@color/colorPinkf9"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/colorPinkf9"
+            app:tabTextAppearance="@style/TextAppearance.NotosanskrBoldStyle"
+            app:tabTextColor="@color/grey_light2" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/mypage_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tab_mypage_bar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
