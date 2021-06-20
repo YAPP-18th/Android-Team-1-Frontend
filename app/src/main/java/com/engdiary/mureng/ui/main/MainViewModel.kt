@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +30,7 @@ class MainViewModel @Inject constructor(
     var selectWriting: LiveData<Boolean> = _selectWriting
 
     var todayQuestion: Question? = null
-    private set
+        private set
 
     /** 생성자 */
     init {
@@ -37,8 +38,28 @@ class MainViewModel @Inject constructor(
         _selectWriting.value = false
         _selectSocial.value = false
         _selectMyPage.value = false
+
+        setTodayQuestion()
+        putUserFcmToken()
+    }
+
+    private fun setTodayQuestion() {
         viewModelScope.launch(Dispatchers.IO) {
             todayQuestion = murengRepository.getTodayQuestion()
+        }
+    }
+
+    private fun putUserFcmToken() {
+        FirebaseMessaging.getInstance()
+            .token
+            .addOnSuccessListener {
+                putUserFcmTokenToServer(it)
+            }
+    }
+
+    private fun putUserFcmTokenToServer(fcmToken: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            murengRepository.putUserFcmToken(fcmToken)
         }
     }
 
@@ -51,7 +72,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
-
     fun MypageClick() {
         if (!_selectMyPage.value!!) {
             _selectHome.value = false
@@ -61,11 +81,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
-
     fun WritingClick() {
         _selectWriting.value = true
     }
-
 
     fun SocialClick() {
         if (!_selectSocial.value!!) {
@@ -75,7 +93,6 @@ class MainViewModel @Inject constructor(
             _selectWriting.value = false
         }
     }
-
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {

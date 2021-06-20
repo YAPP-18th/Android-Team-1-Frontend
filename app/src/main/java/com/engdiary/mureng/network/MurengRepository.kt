@@ -369,4 +369,8 @@ class MurengRepository @Inject constructor(
     suspend fun postFCMToken(fcmToken: String) {
         api.postFCMToken(FcmTokenRequest(fcmToken))
     }
+
+    suspend fun putUserFcmToken(fcmToken: String) {
+        api.postUserFcmToken(FcmTokenRequest(fcmToken))
+    }
 }

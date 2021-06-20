@@ -117,6 +117,7 @@ object NetworkModule {
                 || newUrl.contains("/api/questions")
                 || newUrl.contains("/api/today-question")
                 || newUrl.contains("/api/member/me")
+                || newUrl.contains("/api/member/me/fcm-token")
             ) {
                 return@Interceptor chain.proceed(chain.request().newBuilder().apply {
                     addHeader("X-AUTH-TOKEN", authManager.test_jwt)

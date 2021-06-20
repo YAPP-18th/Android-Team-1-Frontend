@@ -153,4 +153,9 @@ interface MurengService {
     suspend fun postFCMToken(
         @Body fcmTokenRequest: FcmTokenRequest
     ): MurengResponse<AuthorNetwork>
+
+    @PUT("/api/member/me/fcm-token")
+    suspend fun postUserFcmToken(
+        @Body fcmTokenRequest: FcmTokenRequest
+    ): MurengResponse<AuthorNetwork>
 }
