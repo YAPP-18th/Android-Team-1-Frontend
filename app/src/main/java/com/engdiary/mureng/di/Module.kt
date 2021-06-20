@@ -36,7 +36,6 @@ const val CONNECT_TIMEOUT = 60.toLong()
 const val WRITE_TIMEOUT = 60.toLong()
 const val READ_TIMEOUT = 60.toLong()
 
-
 const val BASE_URL = "http://dev.mureng.hkpark.net"
 const val MEDIA_BASE_URL = "http://dev.mureng-media.hkpark.net"
 
@@ -114,7 +113,10 @@ object NetworkModule {
                 .url(newUrl)
 
             if (newUrl.contains("/api/reply")
+                || newUrl.contains("/api/member/check-replied-today")
+                || newUrl.contains("/api/member/scrap")
                 || newUrl.contains("/api/questions")
+                || newUrl.contains("/api/today-expression")
                 || newUrl.contains("/api/today-question")
                 || newUrl.contains("/api/member/me")
                 || newUrl.contains("/api/member/me/fcm-token")

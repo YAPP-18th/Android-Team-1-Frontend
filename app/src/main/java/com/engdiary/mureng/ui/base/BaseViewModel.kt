@@ -61,25 +61,10 @@ open class BaseViewModel @Inject constructor(
         murengRepository.settingUser(
             userExistRequest =  UserExistRequest(providerAccessToken = accessToken, providerName = "kakao"),
             successAction =  {
-                Log.i("TKAKAEE", "T")
                 _navigateToHome.call()
             },
             failAction =  {
-                Log.i("TKAKA", "T")
-
                 _navigateToSignup.call()
-
-//                val test = Intent(MurengApplication.appContext, SignupTermsActivity::class.java).apply {
-//                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//                }
-
-
-
-                Log.i("TKAKA", "T")
-
-//                _toastMeesageText.value = PerfumeApplication.getGlobalApplicationContext()
-//                    .resources.getString(R.string.api_error)
             })
     }
 
