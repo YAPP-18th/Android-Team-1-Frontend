@@ -5,134 +5,86 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.engdiary.mureng.ui.my.MyPageViewModel" />
 
-        <variable
-            name="fragmentManager"
-            type="androidx.fragment.app.FragmentManager" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.my.MyPageFragment"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".ui.my.MyPageFragment">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/top_bar"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/mypage_navigateto_setting"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:background="@color/colorWhite"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:background="@android:color/transparent"
+            android:paddingVertical="12dp"
+            android:paddingRight="16dp"
+            android:src="@drawable/icons_settings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/coll_tb_best_more"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:title="Coordinator">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/img_best_more_back"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="12dp"
-                            android:paddingRight="16dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:src="@drawable/icons_settings"/>
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.appcompat.widget.Toolbar>
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
 
         <ImageView
             android:id="@+id/icons_profile_big"
             android:layout_width="60dip"
             android:layout_height="60dip"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="44dp"
             android:layout_marginRight="8dip"
-            android:src="@drawable/icons_profile_big"
             android:duplicateParentState="true"
-            app:layout_constraintTop_toBottomOf="@+id/top_bar"
+            app:imageCircleGlideResource="@{vm.user.image}"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="8dp" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/icons_profile_big" />
 
         <TextView
             android:id="@+id/tv_social_best_pop_ans"
+            style="@style/TextAppearance.NotosanskrBoldStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="최현정"
-            style="@style/TextAppearance.ImcreSoojinStyle"
-            android:textSize="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="18dp"
-            android:textColor="@color/colorPinkfb"
-            app:layout_constraintTop_toTopOf="@+id/icons_profile_big"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/grey_dark2"
+            android:textSize="20sp"
+            android:text="@{vm.user.nickname}"
+            app:layout_constraintBottom_toBottomOf="@id/icons_profile_big"
             app:layout_constraintLeft_toRightOf="@+id/icons_profile_big"
-            />
+            app:layout_constraintTop_toTopOf="@+id/icons_profile_big"
+            tools:text="최현정" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_mypage_bar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:elevation="0dp"
-            app:tabMode="fixed"
-            style="@style/TextAppearance.SocialTabLayoutStyle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:tabIndicatorHeight="2dp"
-            app:tabTextAppearance="@style/TextAppearance.SocialTabLayoutStyle"
-            app:tabIndicator="@color/colorPinkf9"
-            app:tabTextColor="@color/colorSkyPinkff"
-            app:tabSelectedTextColor="@color/colorPinkf9"
-            app:layout_constraintTop_toBottomOf="@id/icons_profile_big"
             android:layout_marginTop="30dp"
-            app:setTapContents="@{vm.tabItems}"
-            app:setViewPosition="@{vm.position}"
-            app:setMypageVm="@{vm}"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icons_profile_big"
+            app:tabIndicator="@color/colorPinkf9"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/colorPinkf9"
+            app:tabTextAppearance="@style/TextAppearance.NotosanskrBoldStyle"
+            app:tabTextColor="@color/grey_light2" />
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vp_mypage"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/mypage_viewpager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-
-            app:setMypageFsm="@{fragmentManager}"
-            app:setViewPosition="@{vm.position}"
-            app:setMypageVm="@{vm}"
-            app:setPagerCount="@{vm.tabItems}"
-
-            app:layout_constraintTop_toBottomOf="@id/tab_mypage_bar"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="parent"/>
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tab_mypage_bar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
