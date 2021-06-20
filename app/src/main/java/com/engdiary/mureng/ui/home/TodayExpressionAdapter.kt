@@ -20,7 +20,7 @@ class TodayExpressionAdapter(private val expressions: List<TodayExpression>, val
 
         return TodayExpressionHolder(binding).apply {
             binding.root.setOnSingleClickListener {
-                vm.addScrap(binding.expression!!.expId)
+                vm.addScrap(binding.expression!!)
             }
         }
 
