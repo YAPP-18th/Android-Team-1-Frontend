@@ -36,6 +36,25 @@ interface MurengService {
     @GET("/api/today-question")
     suspend fun getTodayQuestion(): MurengResponse<QuestionNetwork>
 
+    @GET("/api/today-question/refresh")
+    suspend fun getTodayQuestionRefresh(): MurengResponse<QuestionRefreshNetwork>
+
+    @GET("/api/today-expression")
+    suspend fun getTodayExpression(): MurengResponse<List<TodayExpression>>
+
+    @GET("/api/member/check-replied-today")
+    suspend fun getCheckReplied(): MurengResponse<CheckRepliedNetwork>
+
+    @POST("/api/member/scrap/{expId}")
+    fun postScrap(
+            @Path("expId") expId: Int
+    ): Call<MurengResponse<Unit>>
+
+    @DELETE("/api/member/scrap/{expId}")
+    fun deleteScrap(
+            @Path("expId") expId: Int
+    ): Call<MurengResponse<Unit>>
+
     @Multipart
     @POST("/api/reply/image")
     suspend fun postDiaryImage(
@@ -151,4 +170,14 @@ interface MurengService {
         @Header("X-AUTH-TOKEN") accessToken: String,
         @Path("memberId") userId: Int
     ): MurengResponse<List<DiaryNetwork>>
+
+    @POST("/api/fcm-token")
+    suspend fun postFCMToken(
+        @Body fcmTokenRequest: FcmTokenRequest
+    ): MurengResponse<AuthorNetwork>
+
+    @PUT("/api/member/me/fcm-token")
+    suspend fun postUserFcmToken(
+        @Body fcmTokenRequest: FcmTokenRequest
+    ): MurengResponse<AuthorNetwork>
 }

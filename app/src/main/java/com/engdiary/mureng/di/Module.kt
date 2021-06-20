@@ -11,7 +11,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ServiceComponent
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kr.co.nexters.winepick.util.SharedPrefs
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -32,7 +35,6 @@ import kotlin.coroutines.suspendCoroutine
 const val CONNECT_TIMEOUT = 60.toLong()
 const val WRITE_TIMEOUT = 60.toLong()
 const val READ_TIMEOUT = 60.toLong()
-
 
 const val BASE_URL = "http://dev.mureng.hkpark.net"
 const val MEDIA_BASE_URL = "http://dev.mureng-media.hkpark.net"
@@ -111,9 +113,13 @@ object NetworkModule {
                 .url(newUrl)
 
             if (newUrl.contains("/api/reply")
+                || newUrl.contains("/api/member/check-replied-today")
+                || newUrl.contains("/api/member/scrap")
                 || newUrl.contains("/api/questions")
+                || newUrl.contains("/api/today-expression")
                 || newUrl.contains("/api/today-question")
                 || newUrl.contains("/api/member/me")
+                || newUrl.contains("/api/member/me/fcm-token")
             ) {
                 return@Interceptor chain.proceed(chain.request().newBuilder().apply {
                     addHeader("X-AUTH-TOKEN", authManager.test_jwt)
@@ -196,3 +202,9 @@ object RepositoryModule {
 object DataSourceModule {
 }
 
+@Module
+@InstallIn(ServiceComponent::class)
+class ServiceModule {
+    @Provides
+    fun provideIoCoroutineScope(): CoroutineScope = CoroutineScope(Dispatchers.IO)
+}
