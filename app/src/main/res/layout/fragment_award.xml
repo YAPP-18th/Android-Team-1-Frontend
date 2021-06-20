@@ -55,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     app:layout_constraintDimensionRatio="1:1"
-                    android:src="@drawable/icons_lock"
+                    android:src="@{vm.badgeThree ? @drawable/icons_badge_3 :@drawable/icons_lock}"
                     app:layout_constraintEnd_toStartOf="@id/img_badge_2"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -71,7 +71,7 @@
                     android:layout_marginTop="12dp"
                     style="@style/TextAppearance.ImcreSoojinStyle"
                     android:textSize="12dp"
-                    android:textColor="@{vm.badgeThree ? @color/pink2 : @color/grey1}" />
+                    android:textColor="@{vm.badgeThree ? @color/pink2fb : @color/grey1}" />
 
 
 
@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     app:layout_constraintDimensionRatio="1:1"
-                    android:src="@drawable/icons_lock"
+                    android:src="@{vm.badgeStudy ? @drawable/icons_badge_study :@drawable/icons_lock}"
                     app:layout_constraintStart_toEndOf="@id/img_badge_1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -96,14 +96,14 @@
                     android:layout_marginTop="12dp"
                     style="@style/TextAppearance.ImcreSoojinStyle"
                     android:textSize="12dp"
-                    android:textColor="@{vm.badgeStudy ? @color/pink2 : @color/grey1}"/>
+                    android:textColor="@{vm.badgeStudy ? @color/pink2fb : @color/grey1}"/>
 
                 <ImageView
                     android:id="@+id/img_badge_3"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     app:layout_constraintDimensionRatio="1:1"
-                    android:src="@drawable/icons_lock"
+                    android:src="@{vm.badgeCeleb ? @drawable/icons_badge_celeb :@drawable/icons_lock}"
                     app:layout_constraintStart_toEndOf="@id/img_badge_2"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -119,7 +119,7 @@
                     android:layout_marginTop="12dp"
                     style="@style/TextAppearance.ImcreSoojinStyle"
                     android:textSize="12dp"
-                    android:textColor="@{vm.badgeCeleb ? @color/pink2 : @color/grey1}"/>
+                    android:textColor="@{vm.badgeCeleb ? @color/pink2fb : @color/grey1}"/>
 
 
 
@@ -173,7 +173,7 @@
 
 
                 <TextView
-                    android:visibility="@{vm.murengCnt == 0 ? View.VISIBLE : View.GONE}"
+                    android:visibility="@{vm.userAward.member.murengCount == 0 ? View.VISIBLE : View.GONE}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/award_record_content"
@@ -191,14 +191,12 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_award_trey"
-                    submitList="@{vm.murengTrey}"
-                    android:visibility="@{vm.murengCnt > 0 ? View.VISIBLE : View.GONE}"
+                    android:visibility="@{vm.userAward.member.murengCount > 0 ? View.VISIBLE : View.GONE}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:itemCount="30"
                     app:spanCount="6"
                     android:layout_marginTop="10dp"
-                    android:background="@color/colorWhite"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

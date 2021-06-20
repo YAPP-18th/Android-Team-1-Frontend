@@ -7,11 +7,6 @@
     <data>
 
         <import type="android.view.View" />
-
-<!--        <variable-->
-<!--            name="Diary"-->
-<!--            type="com.engdiary.mureng.data.response.DiaryNetwork" />-->
-
         <variable
             name="vm"
             type="com.engdiary.mureng.ui.home.HomeViewModel" />
@@ -19,10 +14,6 @@
         <variable
             name="Expression"
             type="com.engdiary.mureng.data.response.TodayExpression" />
-
-<!--        <variable-->
-<!--            name="vm2"-->
-<!--            type="com.engdiary.mureng.ui.home.HomeViewModel" />-->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
