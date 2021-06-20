@@ -33,7 +33,19 @@ class MurengFCMService:FirebaseMessagingService() {
         notificationManager.sendNotification(remoteMessage, applicationContext)
     }
 
-    override fun onNewToken(p0: String) {
-        super.onNewToken(p0)
+    override fun onNewToken(fcmToken: String) {
+        super.onNewToken(fcmToken)
+        postFcmTokenToServer(fcmToken)
+    }
+
+    private fun postFcmTokenToServer(fcmToken: String) {
+        ioScope.launch(CoroutineExceptionHandler { _, throwable -> Timber.d(throwable) }) {
+            murengRepository.postFCMToken(fcmToken)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ioScope.cancel()
     }
 }
