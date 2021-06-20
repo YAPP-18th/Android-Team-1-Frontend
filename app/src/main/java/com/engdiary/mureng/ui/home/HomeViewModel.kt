@@ -65,10 +65,8 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
     fun checkReplied() {
         viewModelScope.launch {
             try {
-
                 _checkReplied.value = murengRepository.getCheckRplied()
 //                val replied = _checkReplied.value.replied ?: "2시간 후에 답변을 할 수 있어요"
-
             } catch (networkError: IOException) {
             }
         }
