@@ -54,7 +54,6 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                 binding.reply.text = "답변하기"
             }
         })
-
     }
 
     private fun initHintAdapter(
