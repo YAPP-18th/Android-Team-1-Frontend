@@ -7,9 +7,9 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Author(
     val attendanceCount: Int,
-    val email: String,
+    val email: String?,
     val identifier: String,
-    val image: String,
+    val image: String?,
     val lastAttendanceDate: String,
     val memberId: Int,
     val murengCount: Int,
