@@ -48,7 +48,9 @@
     <color name="blue_lightest">#edf3fd</color>
     <color name="grey_light">#f0f0f0</color>
     <color name="grey_light2">#d7d7d7</color>
+    <color name="grey1">#afafaf</color>
     <color name="grey2">#8b8b8b</color>
+    <color name="grey_dark1">#4d5050</color>
     <color name="pink2">#66fb6a95</color>
     <color name="pinkpink">#fb5284</color>
     
