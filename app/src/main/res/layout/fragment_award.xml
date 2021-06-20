@@ -16,6 +16,24 @@
         android:layout_height="match_parent"
         tools:context=".ui.my.AwardFragment">
 
+        <TextView
+            android:id="@+id/tv_social_best_pop_ques"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popular_ques"
+            android:background="@drawable/best_title_round_bg"
+            style="@style/TextAppearance.NotosanskrBoldStyle"
+            android:textSize="14dp"
+            android:lineSpacingExtra="8sp"
+            android:paddingStart="16dp"
+            android:paddingVertical="2dp"
+            android:paddingEnd="8dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/colorSkyBlue"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
 
 
 

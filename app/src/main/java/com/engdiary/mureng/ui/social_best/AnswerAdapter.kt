@@ -32,7 +32,6 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, 
         return super.getItemCount()
     }
 
-
     override fun getItemViewType(position: Int): Int {
         return when (type) {
             AnswerRecyclerType.TYPE_BEST -> {

@@ -19,7 +19,6 @@ import com.engdiary.mureng.ui.write_diary.HintDecoration
 import com.engdiary.mureng.ui.write_diary.WriteDiaryContentActivity
 import com.engdiary.mureng.util.dpToPx
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
@@ -43,9 +42,9 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             binding.todayQuestion.text = it.content
         })
 
-        viewModel.todayExpression.observe(this) { expressions ->
+        viewModel.todayExpression.observe(viewLifecycleOwner, Observer { expressions ->
             expressions?.let { initHintAdapter(binding.homeTodayExpression, TodayExpressionAdapter(it, viewModel)) }
-        }
+        })
 
 
         viewModel.checkReplied.observe(viewLifecycleOwner, Observer {
@@ -55,7 +54,6 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                 binding.reply.text = "답변하기"
             }
         })
-
     }
 
     private fun initHintAdapter(
