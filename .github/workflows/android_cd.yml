@@ -32,7 +32,7 @@ jobs:
       run: tar xvf app/services.tar -C app
 
     - name: Build APK
-      run: bash ./gradlew assembleDebug --stacktrace
+      run: bash ./gradlew assembleRelease --stacktrace
      
      
     - run: './gradlew assembleRelease'
