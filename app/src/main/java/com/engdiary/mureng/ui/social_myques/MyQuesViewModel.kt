@@ -36,6 +36,8 @@ class MyQuesViewModel @Inject constructor(
                 }
                 _quesResults.value = questionData
                 _quesCnt.value = it.size
+
+
             },
             onFailure = {
                 Timber.e("나의 질문 리스트 가져오기 통신 실패")
@@ -54,6 +56,10 @@ class MyQuesViewModel @Inject constructor(
 
     override fun answerItemClick(answerData: DiaryNetwork) {
         //TODO 안쓰임!!
+    }
+
+    override fun answerItemHeartClick(answerData: DiaryNetwork) {
+        //TODO("Not yet implemented")
     }
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */

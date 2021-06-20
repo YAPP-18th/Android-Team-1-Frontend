@@ -5,24 +5,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
-import com.engdiary.mureng.data.DiaryContent
-import com.engdiary.mureng.data.Question
-import com.engdiary.mureng.data.SingleLiveEvent
+import com.engdiary.mureng.data.*
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
-import java.io.IOException
 
 class WriteDiaryContentViewModel @ViewModelInject constructor(
     private val murengRepository: MurengRepository
 ) : BaseViewModel(murengRepository) {
-    private val _todayQuestion = MutableLiveData<Question>()
-    val todayQuestion: LiveData<Question>
-        get() = _todayQuestion
 
-    val hints = Transformations.map(_todayQuestion) { it.hints }
-
+    val diary = MutableLiveData<Diary>()
     val diaryContent = MutableLiveData<String>()
+
+    private val _question = MutableLiveData<Question>()
+    val question: LiveData<Question>
+        get() = _question
+
+    private val _author = MutableLiveData<Author>()
+    val author: LiveData<Author>
+        get() = _author
+
+    val hints = Transformations.map(_question) { it.hints }
 
     val isDiaryContentConditionSatisfied = Transformations.map(diaryContent) {
         it != null && it.isNotBlank() && DiaryContent.checkMinLengthCondition(it)
@@ -42,10 +45,7 @@ class WriteDiaryContentViewModel @ViewModelInject constructor(
 
     init {
         viewModelScope.launch {
-            try {
-                _todayQuestion.value = murengRepository.getTodayQuestion()
-            } catch (networkError: IOException) {
-            }
+            _author.value = murengRepository.getMyInfo()
         }
     }
 
@@ -59,10 +59,20 @@ class WriteDiaryContentViewModel @ViewModelInject constructor(
 
         diaryContent.value?.let {
             _navigateToWritingDiaryImage.value = DiaryContent.of(it)
-        }?.run { _navigateToWritingDiaryImage.call() }
+        }
     }
 
     fun toggleHint() {
         _isHintOpen.value = _isHintOpen.value?.not()
+    }
+
+    fun setDiary(diary: Diary) {
+        this.diary.value = diary
+        this.diaryContent.value = diary.content.content
+        this._question.value = diary.question
+    }
+
+    fun setQuestion(question: Question) {
+        this._question.value = question
     }
 }

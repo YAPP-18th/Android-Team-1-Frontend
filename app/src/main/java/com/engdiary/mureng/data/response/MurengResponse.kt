@@ -14,5 +14,7 @@ data class MurengResponse<T> (
     @SerializedName("totalPage")
     val totalPage : Int?,
     @SerializedName("pageSize")
-    val pageSize : Int?
+    val pageSize : Int?,
+    @SerializedName("totalElements")
+    val totalItemSize : Int?
 )

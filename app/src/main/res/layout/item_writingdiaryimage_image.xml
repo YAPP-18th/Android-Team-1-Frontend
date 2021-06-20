@@ -14,7 +14,7 @@
 
     <ImageView
         android:onClick="@{() -> onClickListener.onClick(itemWritingDiaryImage)}"
-        app:imageGlideResource="@{itemWritingDiaryImage.url}"
+        app:imageGlideResource="@{itemWritingDiaryImage.imagePath}"
         app:diaryImageSelected="@{itemWritingDiaryImage.isSelected}"
         android:scaleType="centerCrop"
         android:layout_width="120dp"

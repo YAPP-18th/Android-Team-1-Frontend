@@ -1,15 +1,19 @@
 package com.engdiary.mureng.ui.social_best_more
 
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.BestMoreConstant
+import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.constant.SortConstant
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.network.MurengRepository
+import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
 import com.engdiary.mureng.ui.social_best.BestPopularViewModel
+import com.engdiary.mureng.ui.social_detail.SocialDetailActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -20,7 +24,7 @@ class BestMoreViewModel @Inject constructor(
 ) : BestPopularViewModel(murengRepository) {
 
     private var _backButton = MutableLiveData<Boolean>()
-    var backButton: LiveData<Boolean> = _backButton
+    val backButton: LiveData<Boolean> = _backButton
 
     private val _barTitle = MutableLiveData<String>()
     val barTitle : LiveData<String> = _barTitle
@@ -29,24 +33,26 @@ class BestMoreViewModel @Inject constructor(
     val barContent : LiveData<String> = _barContent
 
     private var _totalCnt = MutableLiveData<Int>()
-    var totalCnt : LiveData<Int> = _totalCnt
+    val totalCnt : LiveData<Int> = _totalCnt
 
     private val _barImage = MutableLiveData<Int>()
     val barImage : LiveData<Int> = _barImage
 
     private var _isAns = MutableLiveData<Boolean>()
-    var isAns: LiveData<Boolean> = _isAns
+    val isAns: LiveData<Boolean> = _isAns
 
     private var _clickedSort = MutableLiveData<Boolean>()
-    var clickedSort : LiveData<Boolean> = _clickedSort
+    val clickedSort : LiveData<Boolean> = _clickedSort
 
     private var _selectedSort = MutableLiveData<String>()
-    var selectedSort : LiveData<String> = _selectedSort
+    val selectedSort : LiveData<String> = _selectedSort
 
     private var _isPop = MutableLiveData<Boolean>()
-    var isPop : LiveData<Boolean> = _isPop
+    val isPop : LiveData<Boolean> = _isPop
 
-    private var page: Int = 0
+    private var _totalPage = MutableLiveData<Int>()
+    val totalPage : LiveData<Int> = _totalPage
+
 
 
     init {
@@ -54,6 +60,8 @@ class BestMoreViewModel @Inject constructor(
         _isAns.value = false
         _clickedSort.value = false
         _totalCnt.value = 0
+        _isPop.value = true
+        _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
 
     }
 
@@ -73,34 +81,26 @@ class BestMoreViewModel @Inject constructor(
             getQuestionData(0)
         }
     }
-
-    fun paging(mode : String) {
-        if (mode == BestMoreConstant.ANS) {
-            this.page = page
-            _isAns.value = true
-            _barTitle.value = "ANSWERS"
-            _barContent.value = "다른 사람들은\n어떤 답을 썼을까요?"
-            _barImage.value = R.drawable.icons_symbol_cheek_blue
-            getAnswerData(page)
-
+    fun getAnswerData(page : Int) {
+        var sort : String? = null
+        sort = if(_isPop.value!!) {
+            SortConstant.POP
         } else {
-            this.page = page
-            _isAns.value = false
-            _barTitle.value = "QUESTIONS"
-            _barContent.value = "어떤 질문들이\n나를 기다릴까요?"
-            _barImage.value = R.drawable.icons_symbol_cheek_pink
-            getQuestionData(page)
+            SortConstant.NEW
         }
-    }
 
-    private fun getAnswerData(page : Int) {
-        murengRepository.getAnswerList(page = page , size = 10, sort = SortConstant.POP,
+        murengRepository.getAnswerList(page = page , size = 10, sort = sort,
             onSuccess = {
-                _ansResults.value = it
-                _totalCnt.value = it.size
-                _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
-                _isPop.value = true
-                _clickedSort.value = false
+                if(page > 0) {
+                    for (item in it.data!!) {
+                        addAnswerResult(item)
+                    }
+
+                } else {
+                    _ansResults.value = it.data!!
+                    _totalCnt.value = it.totalItemSize!!
+                    _totalPage.value = it.totalPage!!
+                }
             },
             onFailure = {
                 Timber.d("AnswerList 가져오기 통신 실패")
@@ -108,17 +108,30 @@ class BestMoreViewModel @Inject constructor(
         )
     }
 
-    private fun getQuestionData(page : Int) {
-        murengRepository.getQuestionList(page = page, size = 10, sort = SortConstant.POP,
+    fun getQuestionData(page : Int) {
+        var sort : String? = null
+        sort = if(_isPop.value!!) {
+            SortConstant.POP
+        } else {
+            SortConstant.NEW
+        }
+        murengRepository.getQuestionList(page = page, size = 10, sort = sort,
             onSuccess = {
-                var questionData : MutableList<QuestionNetwork> = it.toMutableList()
+                var questionData : MutableList<QuestionNetwork> = it.data!!.toMutableList()
                 for (i in 0 until questionData.size) {
                     questionData[i].lineVisible =  true
                 }
-                _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
-                _isPop.value = true
-                _quesResults.value = questionData
-                _totalCnt.value = it.size
+
+                if(page > 0) {
+                    for (item in questionData) {
+                        addQuestionResult(item)
+                    }
+
+                } else {
+                    _quesResults.value = questionData
+                    _totalCnt.value = it.totalItemSize!!
+                    _totalPage.value = it.totalPage!!
+                }
             },
             onFailure = {
                 Timber.d("QuestionList 가져오기 통신 실패")
@@ -131,45 +144,30 @@ class BestMoreViewModel @Inject constructor(
     }
 
     fun menuClick() {
+        Timber.e("menuClick - ${_isPop.value}")
         if (!_isPop.value!!) {
-            if(_isAns.value!!) {
-               getAnswerData(page)
-            } else {
-                getQuestionData(page)
-            }
             _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
             _isPop.value = true
             _clickedSort.value = false
-        } else {
+            Timber.d("인기순 정렬")
+
             if(_isAns.value!!) {
-                murengRepository.getAnswerList(page = 0 , size = 10, sort = SortConstant.NEW,
-                        onSuccess = {
-                            _ansResults.value = it
-                            _totalCnt.value = it.size
-                            //TODO : 바꿔야함totalCnt
-                        },
-                        onFailure = {
-                            Timber.d("AnswerList 가져오기 통신 실패")
-                        }
-                )
+               getAnswerData(0)
             } else {
-                murengRepository.getQuestionList(page = 0, size = 10, sort = SortConstant.NEW,
-                        onSuccess = {
-                            var questionData : MutableList<QuestionNetwork> = it.toMutableList()
-                            for (i in 0 until questionData.size) {
-                                questionData[i].lineVisible =  true
-                            }
-                            _quesResults.value = questionData
-                            _totalCnt.value = it.size
-                        },
-                        onFailure = {
-                            Timber.d("QuestionList 가져오기 통신 실패")
-                        }
-                )
+                getQuestionData(0)
             }
+
+        } else {
             _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.newest)
             _isPop.value = false
+            Timber.d("최신순 정렬")
             _clickedSort.value = false
+
+            if(_isAns.value!!) {
+                getAnswerData(0)
+            } else {
+                getQuestionData(0)
+            }
         }
 
     }
@@ -179,13 +177,51 @@ class BestMoreViewModel @Inject constructor(
     }
 
     override fun questionItemClick(questionData: QuestionNetwork) {
-        Timber.d("question Item Click")
-        //    TODO("Not yet implemented")
+        Intent(MurengApplication.appContext, SocialDetailActivity::class.java).apply {
+            this.putExtra("quesitonData", questionData)
+        }.run {
+            MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }
+    }
+    override fun answerItemClick(answerData: DiaryNetwork) {
+        Intent(MurengApplication.appContext, DiaryDetailActivity::class.java).apply {
+            this.putExtra(IntentKey.DIARY, answerData.asDomain())
+        }.run {
+            MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }
     }
 
-    override fun answerItemClick(answerData: DiaryNetwork) {
-        //   TODO("Not yet implemented")
+    override fun answerItemHeartClick(answerData: DiaryNetwork) {
+        if (answerData.likeYn) {
+            deleteLike(answerData.id)
+        } else {
+            addLike(answerData.id)
+        }
     }
+
+    fun deleteLike(replyId : Int) {
+        murengRepository.deleteLikes(replyId,
+                onSuccess = {
+                    Timber.d("좋아요 삭제 성공")
+                },
+                onFailure = {
+
+                }
+        )
+    }
+
+    fun addLike(replyId: Int) {
+        murengRepository.postLikes(replyId,
+                onSuccess = {
+                    Timber.d("좋아요 성공")
+                },
+                onFailure = {
+
+                }
+        )
+    }
+
+
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {

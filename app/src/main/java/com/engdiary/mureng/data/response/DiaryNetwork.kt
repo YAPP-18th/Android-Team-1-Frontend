@@ -3,6 +3,7 @@ package com.engdiary.mureng.data.response
 import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.data.DiaryContent
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class DiaryNetwork(
     @SerializedName("author")
@@ -20,11 +21,12 @@ data class DiaryNetwork(
     @SerializedName("replyId")
     val id: Int,
     @SerializedName("replyLikeCount")
-    val likeCount: Int,
+    var likeCount: Int,
     @SerializedName("requestedByAuthor")
     val isMine: Boolean,
-    var likeYn : Boolean = false
-) {
+    @SerializedName("likedByRequester")
+    var likeYn : Boolean,
+): Serializable  {
     fun asDomain(): Diary =
         Diary(
             author!!.asDomain(),
@@ -37,4 +39,6 @@ data class DiaryNetwork(
             likeCount,
             isMine
         )
+    val clickedLikeYn: Boolean
+        get() = !(likeYn ?: true)
 }

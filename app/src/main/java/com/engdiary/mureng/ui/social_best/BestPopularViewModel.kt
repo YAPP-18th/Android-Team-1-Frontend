@@ -18,7 +18,12 @@ abstract class BestPopularViewModel constructor(
     protected val _ansResults = MutableLiveData<List<DiaryNetwork>>(listOf())
     open val ansResults: LiveData<List<DiaryNetwork>> = _ansResults
 
+
     abstract fun questionItemClick(questionData: QuestionNetwork)
+
+    fun questionItemHeartClick(questionData: QuestionNetwork) {
+
+    }
 
     fun addQuestionResult(questionData: QuestionNetwork) {
         val results: MutableList<QuestionNetwork> = _quesResults.value?.toMutableList() ?: mutableListOf()
@@ -56,7 +61,26 @@ abstract class BestPopularViewModel constructor(
         }
     }
 
+    /** [_results] 내 특정 아이템의 좋아요 클릭 여부 내용만 바꿔준다. */
+    fun toogleQuestionData(preQuestionData: QuestionNetwork) {
+        val results: MutableList<QuestionNetwork> = _quesResults.value?.toMutableList() ?: return
+
+        val replaceIndex = results.indexOf(preQuestionData)
+
+        if (replaceIndex == -1) {
+            Timber.i("$preQuestionData isn't exist")
+            return
+        } else {
+            results.removeAt(replaceIndex)
+            results.add(replaceIndex, preQuestionData.copy(likeYn = preQuestionData.clickedLikeYn))
+            _quesResults.value = results
+        }
+    }
+
+
     abstract fun answerItemClick(answerData: DiaryNetwork)
+
+    abstract fun answerItemHeartClick(answerData: DiaryNetwork)
 
     fun addAnswerResult(answerData: DiaryNetwork) {
         val results: MutableList<DiaryNetwork> = _ansResults.value?.toMutableList() ?: mutableListOf()
@@ -90,6 +114,23 @@ abstract class BestPopularViewModel constructor(
             return
         } else {
             results.removeAt(deleteIndex)
+            _ansResults.value = results
+        }
+    }
+
+
+    /** [_results] 내 특정 아이템의 좋아요 클릭 여부 내용만 바꿔준다. */
+    fun toggleAnswerResult(preAnswerData: DiaryNetwork) {
+        val results: MutableList<DiaryNetwork> = _ansResults.value?.toMutableList() ?: return
+
+        val replaceIndex = results.indexOf(preAnswerData)
+
+        if (replaceIndex == -1) {
+            Timber.i("$preAnswerData isn't exist")
+            return
+        } else {
+            results.removeAt(replaceIndex)
+            results.add(replaceIndex, preAnswerData.copy(likeYn = preAnswerData.clickedLikeYn))
             _ansResults.value = results
         }
     }

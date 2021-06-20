@@ -3,6 +3,7 @@ package com.engdiary.mureng.util
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import timber.log.Timber
 
 /**
  * RecyclerView paging 처리를 위한 클래스
@@ -22,10 +23,18 @@ abstract class EndlessScrollListener(
         val totalItemCount = layoutManager.itemCount
 
         val lastVisibleItemPosition = when (layoutManager) {
-            is GridLayoutManager -> layoutManager.findLastVisibleItemPosition()
-            is LinearLayoutManager -> layoutManager.findLastVisibleItemPosition()
+            is GridLayoutManager -> layoutManager.findLastCompletelyVisibleItemPosition()
+            is LinearLayoutManager -> layoutManager.findLastCompletelyVisibleItemPosition()
             else -> 0
         }
+
+        Timber.e("previousTotalItemCount ${totalItemCount}")
+        Timber.e("last ${lastVisibleItemPosition}")
+
+        if(!recyclerView.canScrollVertically(1)) {
+            Timber.e("end??")
+        }
+
 
         if (totalItemCount < previousTotalItemCount) {
             this.currentPage = this.startingPageIndex
