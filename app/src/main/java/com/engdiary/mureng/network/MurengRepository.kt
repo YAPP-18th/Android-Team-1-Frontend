@@ -412,7 +412,7 @@ class MurengRepository @Inject constructor(
         api.postUserFcmToken(FcmTokenRequest(fcmToken))
     }
 
-    suspend fun getUserAchievement(userId : Int) : Award {
-        return api.getUserAchievement(userId).data!!.asDomain()
+    suspend fun getUserAchievement(userId : Int) : Award? {
+        return api.getUserAchievement(userId).data?.asDomain()
     }
 }
