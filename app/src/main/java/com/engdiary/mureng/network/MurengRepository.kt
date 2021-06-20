@@ -88,15 +88,15 @@ class MurengRepository @Inject constructor(
                 userExistRequest = userExistRequest,
                 onSuccess = {
 
-                it.identifier?.let { identifier ->
-                    if (it.exist) {
-                        authManager.jwtIdentifier = identifier
-                    } else {
-                        authManager.identifier = identifier
-                    }
+                    it.identifier?.let { identifier ->
+                        if (it.exist) {
+                            authManager.jwtIdentifier = identifier
+                        } else {
+                            authManager.identifier = identifier
+                        }
 
-                    if (it.exist) {
-                        getJWT(
+                        if (it.exist) {
+                            getJWT(
                                 jwtRequest = PostJWTRequest(identifier = authManager.jwtIdentifier),
                                 onSuccess = {
                                     Log.i("get JWT it.accessToken", it.accessToken)
@@ -109,11 +109,13 @@ class MurengRepository @Inject constructor(
                                 onFailure = {
                                     //failAction?.let { it() }
                                 }
-                        )
+                            )
 
-                    } else {
-                        failAction?.let { it() }
+                        } else {
+                            failAction?.let { it() }
+                        }
                     }
+
                 },
                 onFailure = { //kakao login fail
                     //errorAction?.let { it() }
