@@ -111,6 +111,7 @@ object NetworkModule {
 
             if (newUrl.contains("/api/reply")
                 || newUrl.contains("/api/member/check-replied-today")
+                || newUrl.contains("/api/member/scrap")
                 || newUrl.contains("/api/questions")
                 || newUrl.contains("/api/today-expression")
                 || newUrl.contains("/api/today-question")
