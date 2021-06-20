@@ -14,6 +14,7 @@ import com.engdiary.mureng.constant.URLConstant.INSAT_GRAM_URL
 import com.engdiary.mureng.data.PushAlertSetting
 import com.engdiary.mureng.databinding.ActivitySettingBinding
 import com.engdiary.mureng.ui.base.BaseActivity
+import com.engdiary.mureng.ui.login.LoginActivity
 import com.engdiary.mureng.ui.push_alert.PushAlertActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
@@ -77,12 +78,18 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
         MaterialAlertDialogBuilder(context)
             .setTitle(resources.getString(R.string.setting_logout_dialog_title))
             .setPositiveButton(resources.getString(R.string.setting_logout_dialog_accept)) { dialog, _ ->
-                // todo 로그아웃 구현
+                navigateToLoginActivity()
             }
             .setNegativeButton(resources.getString(R.string.setting_logout_dialog_decline)) { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
+    }
+
+    private fun navigateToLoginActivity() {
+        Intent(this, LoginActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            .also { startActivity(it) }
     }
 
     private fun showWithdrawalDialog(context: Context) {
