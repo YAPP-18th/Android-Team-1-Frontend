@@ -92,7 +92,7 @@ class MurengRepository @Inject constructor(
 
 
                 it.identifier?.let { identifier ->
-                    if(it.exist) {
+                    if (it.exist) {
                         authManager.jwtIdentifier = identifier
                     } else {
                         authManager.identifier = identifier
@@ -364,5 +364,9 @@ class MurengRepository @Inject constructor(
         return userNetwork?.let {
             true
         } ?: false
+    }
+
+    suspend fun postFCMToken(fcmToken: String) {
+        api.postFCMToken(FcmTokenRequest(fcmToken))
     }
 }
