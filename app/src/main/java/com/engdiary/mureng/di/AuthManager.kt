@@ -88,4 +88,7 @@ class AuthManager @Inject constructor(val sharedPrefs: SharedPrefs) {
             sharedPrefs[TEST_JWT] = value
         }
 
+    fun expireAccessKey(){
+        sharedPrefs[TOKEN_KEY] = ""
+    }
 }

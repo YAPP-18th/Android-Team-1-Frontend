@@ -186,4 +186,7 @@ interface MurengService {
     suspend fun getUserAchievement(
         @Path("memberId") userId: Int
     ) : MurengResponse<AwardNetwork>
+
+    @DELETE("/api/member/me")
+    suspend fun withdrawMureng(): MurengResponse<UserNetwork>
 }
