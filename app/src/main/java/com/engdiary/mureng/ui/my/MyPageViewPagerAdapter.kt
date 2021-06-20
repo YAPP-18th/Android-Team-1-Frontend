@@ -1,40 +1,25 @@
 package com.engdiary.mureng.ui.my
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager.widget.PagerAdapter
-import com.engdiary.mureng.ui.social_best.BestTabFragment
-import com.engdiary.mureng.ui.social_myques.MyQuesFragment
-import timber.log.Timber
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class MyPageViewPagerAdapter(fragmentManager: FragmentManager, items: List<String>) :
-    FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-    private val mItems = mutableListOf<String>()
+const val RECORD_TAB_INDEX = 0
+const val AWARD_TAB_INDEX = 1
+const val SCRAP_TAB_INDEX = 2
 
-    init {
-        mItems.addAll(items)
-    }
+class MyPageViewPagerAdapter(fragmentActivity: FragmentActivity) :
+    FragmentStateAdapter(fragmentActivity) {
 
-    override fun getItem(position: Int): Fragment {
-        return when (position) {
-            0 -> BestTabFragment()
-            else -> MyQuesFragment()
-        }
-    }
+    private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(
+        RECORD_TAB_INDEX to { RecordFragment() },
+        AWARD_TAB_INDEX to { AwardFragment() },
+        SCRAP_TAB_INDEX to { ScrapFragment() }
+    )
 
-    override fun getCount() : Int {
-        return mItems.size
-    }
+    override fun getItemCount() = tabFragmentsCreators.size
 
-    override fun getItemPosition(any: Any): Int {
-        return PagerAdapter.POSITION_NONE
-    }
-
-    fun setItems(items: List<String>) {
-        mItems.clear()
-        mItems.addAll(items)
-        notifyDataSetChanged()
+    override fun createFragment(position: Int): Fragment {
+        return tabFragmentsCreators[position]?.invoke() ?: throw IndexOutOfBoundsException()
     }
 }
