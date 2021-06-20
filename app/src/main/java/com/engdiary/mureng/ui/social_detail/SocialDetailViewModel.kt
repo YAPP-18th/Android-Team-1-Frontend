@@ -75,7 +75,9 @@ class SocialDetailViewModel @Inject constructor(
         _qusetionId.value = questionData.questionId
         if(questionData.author != null) {
             _questionUser.value = questionData.author.nickname
-            _questionUserImg.value = questionData.author.image
+            if(questionData.author.image != null) {
+                _questionUserImg.value = questionData.author.image
+            }
         }
         getPagingReplyData(0)
     }
