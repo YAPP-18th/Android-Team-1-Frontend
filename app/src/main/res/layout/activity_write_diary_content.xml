@@ -49,31 +49,19 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textview_writingdiary_nickname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginEnd="20dp"
-                    android:textAppearance="@style/TextAppearance.WritingDiary.Nickname"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imagebutton_writingdiary_cancel"
-                    android:text="@{viewModel.author.nickname}"
-                    tools:text="현정, " />
-
-                <TextView
                     android:id="@+id/textview_writingdiary_question"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
                     android:layout_marginEnd="20dp"
-                    android:text="@{viewModel.question.content}"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="40dp"
+                    android:text="@{@string/writingdiary_question(viewModel.author.nickname, viewModel.question.content)}"
                     android:textAppearance="@style/TextAppearance.WritingDiary.Question"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/textview_writingdiary_nickname"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/textview_writingdiary_nickname"
-                    tools:text="What makes you live?" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imagebutton_writingdiary_cancel"
+                    tools:text="현정, What makes you live?" />
 
                 <TextView
                     android:id="@+id/textview_writingdiary_question_kr"
@@ -83,7 +71,7 @@
                     android:text="@{viewModel.question.contentKr}"
                     android:textAppearance="@style/TextAppearance.WritingDiary.QuestionKr"
                     app:layout_constraintEnd_toEndOf="@id/textview_writingdiary_question"
-                    app:layout_constraintStart_toStartOf="@id/textview_writingdiary_nickname"
+                    app:layout_constraintStart_toStartOf="@id/textview_writingdiary_question"
                     app:layout_constraintTop_toBottomOf="@id/textview_writingdiary_question"
                     tools:text="최대여섯글자 님이 가장 좋아하는 음식은 무엇인가요?" />
 
@@ -99,7 +87,6 @@
                     app:isHintOpen="@{viewModel.isHintOpen}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textview_writingdiary_question_kr" />
-
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/hints"
@@ -143,7 +130,6 @@
                     android:text="@={viewModel.diaryContent}"
                     android:textColorHint="#d7d7d7" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
