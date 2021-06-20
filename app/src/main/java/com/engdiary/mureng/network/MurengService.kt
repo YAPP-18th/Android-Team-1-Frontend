@@ -48,6 +48,15 @@ interface MurengService {
     @GET("/api/member/check-replied-today")
     suspend fun getCheckReplied(): MurengResponse<CheckRepliedNetwork>
 
+    @POST("/api/member/scrap/{expId}")
+    fun postScrap(
+            @Path("expId") expId: Int
+    ): Call<MurengResponse<Unit>>
+
+    @DELETE("/api/member/scrap/{expId}")
+    fun deleteScrap(
+            @Path("expId") expId: Int
+    ): Call<MurengResponse<Unit>>
 
     @Multipart
     @POST("/api/reply/image")

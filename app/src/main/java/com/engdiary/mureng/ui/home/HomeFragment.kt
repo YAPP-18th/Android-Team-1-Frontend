@@ -44,7 +44,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
         })
 
         viewModel.todayExpression.observe(this) { expressions ->
-            expressions?.let { initHintAdapter(binding.homeTodayExpression, TodayExpressionAdapter(it)) }
+            expressions?.let { initHintAdapter(binding.homeTodayExpression, TodayExpressionAdapter(it, viewModel)) }
         }
 
 

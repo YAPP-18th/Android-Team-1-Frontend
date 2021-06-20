@@ -175,6 +175,31 @@ class MurengRepository @Inject constructor(
                 ?.asDomain()
     }
 
+    fun postScrap(
+            expId: Int,
+            onSuccess: () -> Unit,
+            onFailure: () -> Unit
+    ) {
+        api.postScrap(expId).safeEnqueue(
+                onSuccess = { onSuccess() },
+                onFailure = { onFailure() },
+                onError = { onFailure() }
+        )
+    }
+
+    fun deleteScrap(
+            expId: Int,
+            onSuccess: () -> Unit,
+            onFailure: () -> Unit
+    ) {
+        api.deleteScrap(expId).safeEnqueue(
+                onSuccess = { onSuccess() },
+                onFailure = { onFailure() },
+                onError = { onFailure() }
+        )
+    }
+
+
     suspend fun postDiaryImage(imageUri: Uri?): String? {
         val imageBodyPart = imageUri?.let {
             buildImageMultiBodyPart(

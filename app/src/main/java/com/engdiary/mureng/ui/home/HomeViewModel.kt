@@ -31,10 +31,6 @@ class HomeViewModel @Inject constructor(
 //    private val _position: MutableLiveData<Int> = MutableLiveData()
 //    val tabItems: LiveData<List<String>> get() = _tabItems
 
-//    private val _todayQuestion = MutableLiveData<List<QuestionRefresh>>()
-//    val todayQuestion: LiveData<QuestionRefresh>
-//        get() = _todayQuestion
-
 private val _todayQuestion = MutableLiveData<QuestionRefresh>()
     val todayQuestion: LiveData<QuestionRefresh>
         get() = _todayQuestion
@@ -44,10 +40,6 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
 
     private val _todayExpression = MutableLiveData<List<TodayExpression>>(listOf())
     val todayExpression: LiveData<List<TodayExpression>> = _todayExpression
-
-
-//    open val ansResults: LiveData<List<DiaryNetwork>> = _ansResults
-
 
     private val _checkReplied = MutableLiveData<CheckReplied>()
     val checkReplied: LiveData<CheckReplied> = _checkReplied
@@ -89,25 +81,33 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
 
                 _todayExpression.value = murengRepository.getTodayExpression()
 
-                Log.i("HEARARER", "QEWRQWERE")
 
             } catch (networkError: IOException) {
             }
         }
     }
 
-//    fun getMyQuesList() {
-//        murengRepository.getMyQuestionList(
-//            onSuccess = {
-//                _quesResults.value = it
-//                _quesCnt.value = it.size
-//            },
-//            onFailure = {
-//                Timber.e("나의 질문 리스트 가져오기 통신 실패")
-//            }
-//        )
-//    }
+    fun deleteScrap(expId: Int) {
+        murengRepository.deleteScrap(expId,
+                onSuccess = {
+                    Timber.d("scrap")
+                },
+                onFailure = {
 
+                }
+        )
+    }
+
+    fun addScrap(expId: Int) {
+        murengRepository.postScrap(expId,
+                onSuccess = {
+                    Timber.d("scrap")
+                },
+                onFailure = {
+
+                }
+        )
+    }
 
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */

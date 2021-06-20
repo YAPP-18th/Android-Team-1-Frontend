@@ -71,7 +71,7 @@
 
 
         <ImageView
-            android:id="@+id/img_best_more_heart"
+            android:id="@+id/img_bookmark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@{Expression.scrappedByRequester ? @drawable/icons_bookmark_default : @drawable/icons_bookmark_fill }"
