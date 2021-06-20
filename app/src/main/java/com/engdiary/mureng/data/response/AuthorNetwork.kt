@@ -7,11 +7,11 @@ data class AuthorNetwork(
     @SerializedName("attendanceCount")
     val attendanceCount: Int,
     @SerializedName("email")
-    val email: String,
+    val email: String?,
     @SerializedName("identifier")
     val identifier: String,
     @SerializedName("image")
-    val image: String,
+    val image: String?,
     @SerializedName("lastAttendanceDate")
     val lastAttendanceDate: String,
     @SerializedName("memberId")

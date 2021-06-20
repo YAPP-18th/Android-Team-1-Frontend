@@ -17,7 +17,6 @@ import com.engdiary.mureng.ui.social.SocialFragment
 import com.engdiary.mureng.ui.write_diary.WriteDiaryContentActivity
 import com.engdiary.mureng.util.startActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -28,26 +27,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
 
-        // TODO 서버 통신을 위한 임의의 test_jwt 추가 (나중에 지워야함)
-        authManager.test_jwt =
-            "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpZGVudGl0eSIsIm5pY2tuYW1lIjoi7YWM7Iqk7Yq47Jyg7KCAIiwiaWF0IjozNDk2NzA1MTEwLCJleHAiOjM1MDE4ODkxMTB9.dkvgL0xVaUBGwbN3STJNT3lID5ku5a6qkfkFUg_GZ8WFi5QTiOuduLYgD85yZlzRnjmoKxjjwii4Mr11bZsOHA"
-
         viewModel.selectHome.observe(this, Observer {
             if (it) {
-                HomeFragment().navigate(supportFragmentManager, fl_main.id)
+                HomeFragment().navigate(supportFragmentManager, binding.flMain.id)
             }
         })
 
         viewModel.selectMyPage.observe(this, Observer {
             if (it) {
-                MyPageFragment().navigate(supportFragmentManager, fl_main.id)
+                MyPageFragment().navigate(supportFragmentManager, binding.flMain.id)
 //                startActivity(SettingActivity::class, isFinish = false)
             }
         })
 
         viewModel.selectSocial.observe(this, Observer {
             if (it) {
-                SocialFragment().navigate(supportFragmentManager, fl_main.id)
+                SocialFragment().navigate(supportFragmentManager, binding.flMain.id)
             }
         })
 

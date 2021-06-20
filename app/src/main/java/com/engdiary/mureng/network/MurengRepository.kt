@@ -6,34 +6,27 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
+import androidx.lifecycle.Transformations.map
 import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.data.DiaryContent
 import com.engdiary.mureng.data.ItemWriteDiaryImage
 import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.*
 import com.engdiary.mureng.data.request.*
-import com.engdiary.mureng.data.response.JWTResponse
-import com.engdiary.mureng.data.response.KakaoLoginResponse
 import com.engdiary.mureng.data.request.PostDiaryRequest
 import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.data.request.PutDiaryRequest
-import com.engdiary.mureng.data.response.DiaryNetwork
-import com.engdiary.mureng.data.response.MurengResponse
-import com.engdiary.mureng.data.response.TodayExpression
-import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.response.*
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.MEDIA_BASE_URL
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.util.safeEnqueue
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.lang.Exception
 import javax.inject.Inject
 
 class MurengRepository @Inject constructor(
@@ -91,15 +84,15 @@ class MurengRepository @Inject constructor(
                 userExistRequest = userExistRequest,
                 onSuccess = {
 
-                it.identifier?.let { identifier ->
-                    if (it.exist) {
-                        authManager.jwtIdentifier = identifier
-                    } else {
-                        authManager.identifier = identifier
-                    }
+                    it.identifier?.let { identifier ->
+                        if (it.exist) {
+                            authManager.jwtIdentifier = identifier
+                        } else {
+                            authManager.identifier = identifier
+                        }
 
-                    if (it.exist) {
-                        getJWT(
+                        if (it.exist) {
+                            getJWT(
                                 jwtRequest = PostJWTRequest(identifier = authManager.jwtIdentifier),
                                 onSuccess = {
                                     Log.i("get JWT it.accessToken", it.accessToken)
@@ -112,11 +105,13 @@ class MurengRepository @Inject constructor(
                                 onFailure = {
                                     //failAction?.let { it() }
                                 }
-                        )
+                            )
 
-                    } else {
-                        failAction?.let { it() }
+                        } else {
+                            failAction?.let { it() }
+                        }
                     }
+
                 },
                 onFailure = { //kakao login fail
                     //errorAction?.let { it() }
@@ -402,15 +397,22 @@ class MurengRepository @Inject constructor(
             true
         } ?: false
     }
+
+    suspend fun getUserDiaries(userId: Int): List<Diary>?{
+        return api.getUserDiaries(authManager.accessToken, userId)
+            ?.data
+            ?.map { it.asDomain() }
+    }
     
     suspend fun postFCMToken(fcmToken: String) {
         api.postFCMToken(FcmTokenRequest(fcmToken))
     }
+    
     suspend fun putUserFcmToken(fcmToken: String) {
         api.postUserFcmToken(FcmTokenRequest(fcmToken))
     }
 
+    suspend fun getUserAchievement(userId : Int) : Award {
+        return api.getUserAchievement(userId).data!!.asDomain()
+    }
 }
-
-
-
