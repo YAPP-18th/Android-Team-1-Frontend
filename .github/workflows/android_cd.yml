@@ -39,7 +39,7 @@ jobs:
       run: tar xvf app/signing_config.tar
 
     - name: Build APK
-      run: bash ./gradlew assembleRelease --stacktrace
+      run: bash ./gradlew assembleRelease --warning-mode all
      
       
     - run: './gradlew assembleRelease'
