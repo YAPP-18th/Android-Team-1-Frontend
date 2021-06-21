@@ -30,8 +30,7 @@ jobs:
 
     - name: Unzip Services
       run: tar xvf app/services.tar -C app
-      
-  
+
     - name: keystore.tar 압축 풀기
       run: tar xvf keystore.tar
       
