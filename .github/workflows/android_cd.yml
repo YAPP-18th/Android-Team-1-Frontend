@@ -35,7 +35,7 @@ jobs:
       run: tar xvf keystore.tar
       
     - name: signing_config.tar 압축 풀기
-      run: tar xvf app/signing_config.tar -C /app
+      run: tar xvf app/signing_config.tar -C app
 
     - name: Build APK
       run: bash ./gradlew assembleRelease --warning-mode all
