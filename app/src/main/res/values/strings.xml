@@ -109,6 +109,8 @@
     <string name="award_badge_three_days">머렝 3일</string>
     <string name="award_badge_study">학구적 머렝</string>
     <string name="award_badge_celeb">셀럽 머렝</string>
+    <string name="award_badge_teacher">교수 머렝</string>
+    <string name="award_badge_mrureng_set">머렝set(30입)</string>
     <string name="award_record_content">질문에 답하고 쿠키를 받아\n트레이를 채워요! XD</string>
 
 </resources>
