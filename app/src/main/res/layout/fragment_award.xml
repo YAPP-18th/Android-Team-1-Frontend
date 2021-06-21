@@ -152,6 +152,27 @@
                 app:layout_constraintTop_toBottomOf="@id/view_award"
                 app:layout_constraintStart_toStartOf="parent"/>
 
+            <TextView
+                android:id="@+id/tv_award_badge_cnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{vm.murengCnt.toString()}"
+                android:drawableLeft="@drawable/icons_small_mureng"
+                android:background="@{vm.murengCnt == 0 ? @drawable/award_badge_cnt_grey_bg :@drawable/award_badge_cnt_pink_bg}"
+                style="@style/TextAppearance.ComicSansStyle"
+                android:textSize="12dp"
+                tools:text="0"
+                android:layout_marginStart="12dp"
+                android:paddingVertical="4dp"
+                android:paddingHorizontal="6dp"
+                android:drawablePadding="2dp"
+                tools:background="@drawable/award_badge_cnt_pink_bg"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintTop_toTopOf="@id/tv_award_record"
+                app:layout_constraintBottom_toBottomOf="@id/tv_award_record"
+                app:layout_constraintStart_toEndOf="@id/tv_award_record"/>
+
+
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
