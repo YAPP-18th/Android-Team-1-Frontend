@@ -249,4 +249,5 @@ app/services.tar
 app/google-services.json
 
 
-app/MurengKey
+./MurengKey
+./keystore.properties
