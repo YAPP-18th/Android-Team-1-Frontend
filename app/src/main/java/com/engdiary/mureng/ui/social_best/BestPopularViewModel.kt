@@ -23,6 +23,7 @@ abstract class BestPopularViewModel constructor(
 
     fun questionItemHeartClick(questionData: QuestionNetwork) {
 
+
     }
 
     fun addQuestionResult(questionData: QuestionNetwork) {
