@@ -25,12 +25,6 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel(murengRepository) {
 
 
-//    private val _tabItems: MutableLiveData<List<String>> = MutableLiveData()
-
-//    private val _tabItems: MutableLiveData<List<String>> = MutableLiveData()
-//    private val _position: MutableLiveData<Int> = MutableLiveData()
-//    val tabItems: LiveData<List<String>> get() = _tabItems
-
 private val _todayQuestion = MutableLiveData<QuestionRefresh>()
     val todayQuestion: LiveData<QuestionRefresh>
         get() = _todayQuestion
@@ -65,10 +59,8 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
     fun checkReplied() {
         viewModelScope.launch {
             try {
-
                 _checkReplied.value = murengRepository.getCheckRplied()
 //                val replied = _checkReplied.value.replied ?: "2시간 후에 답변을 할 수 있어요"
-
             } catch (networkError: IOException) {
             }
         }
@@ -93,20 +85,42 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
                     Timber.d("scrap")
                 },
                 onFailure = {
-
                 }
         )
     }
 
-    fun addScrap(expId: Int) {
-        murengRepository.postScrap(expId,
-                onSuccess = {
-                    Timber.d("scrap")
-                },
-                onFailure = {
+    fun addScrap(expression: TodayExpression) {
 
-                }
-        )
+        if(expression.scrappedByRequester) {
+            murengRepository.deleteScrap(expression.expId,
+                    onSuccess = {
+                        viewModelScope.launch {
+                            try {
+                                _todayExpression.value = murengRepository.getTodayExpression()
+                            } catch (networkError: IOException) {
+                            }
+                        }
+                    },
+                    onFailure = {
+                    }
+            )
+        } else {
+            murengRepository.postScrap(expression.expId,
+                    onSuccess = {
+                        viewModelScope.launch {
+                            try {
+                                _todayExpression.value = murengRepository.getTodayExpression()
+                            } catch (networkError: IOException) {
+                            }
+                        }
+                    },
+                    onFailure = {
+
+                    }
+            )
+        }
+//    fun addScrap(expId: Int) {
+
     }
 
 

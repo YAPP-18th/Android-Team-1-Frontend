@@ -33,7 +33,7 @@
                 android:adjustViewBounds="true"
                 android:fitsSystemWindows="true"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-                android:background="@drawable/group_209">
+                android:background="@{vm.checkReplied.replied ? @drawable/main: @drawable/group_209}">
 
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -44,7 +44,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="366dp"
+                        android:layout_height="380dp"
                         >
 
                         <ImageView

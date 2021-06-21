@@ -18,6 +18,10 @@
         <activity android:name=".ui.setting.DevelopPersonActivity" />
         <activity android:name=".ui.setting.VersionActivity" />
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/icon_push_alert" />
+
         <service
             android:name=".fcm.MurengFCMService"
             android:exported="false">
@@ -25,10 +29,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@mipmap/ic_launcher_round" />
 
         <activity
             android:name=".ui.push_alert.PushAlertActivity"

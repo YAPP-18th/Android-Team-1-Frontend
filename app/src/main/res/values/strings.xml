@@ -104,11 +104,13 @@
     <string name="expression_content">%s    %s</string>
 
     <!-- 마이페이지 성과탭 -->
-    <string name="award_badge_title">뱃지</string>
-    <string name="award_record_trey">기록 트레이</string>
+    <string name="award_badge_title">배지</string>
+    <string name="award_record_trey">쿠키 트레이</string>
     <string name="award_badge_three_days">머렝 3일</string>
     <string name="award_badge_study">학구적 머렝</string>
     <string name="award_badge_celeb">셀럽 머렝</string>
+    <string name="award_badge_teacher">교수 머렝</string>
+    <string name="award_badge_mrureng_set">머렝set(30입)</string>
     <string name="award_record_content">질문에 답하고 쿠키를 받아\n트레이를 채워요! XD</string>
 
 </resources>

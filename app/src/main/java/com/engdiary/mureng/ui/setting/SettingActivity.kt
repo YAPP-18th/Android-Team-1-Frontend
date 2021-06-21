@@ -97,6 +97,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
         MaterialAlertDialogBuilder(context)
             .setTitle(resources.getString(R.string.setting_logout_dialog_title))
             .setPositiveButton(resources.getString(R.string.setting_logout_dialog_accept)) { dialog, _ ->
+                viewModel.expireAccessToken()
                 navigateToLoginActivity()
             }
             .setNegativeButton(resources.getString(R.string.setting_logout_dialog_decline)) { dialog, _ ->
@@ -116,7 +117,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
             .setTitle(resources.getString(R.string.setting_withdrawal_dialog_title))
             .setMessage(resources.getString(R.string.setting_withdrawal_dialog_message))
             .setPositiveButton(resources.getString(R.string.setting_withdrawal_dialog_accept)) { dialog, _ ->
-                // todo 로그아웃 구현
+                viewModel.withdrawMureng()
             }
             .setNegativeButton(resources.getString(R.string.setting_withdrawal_dialog_decline)) { dialog, _ ->
                 dialog.dismiss()
@@ -130,11 +131,21 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
                 navigateToPushAlert(it)
             }
         }
+
+        viewModel.navigateToLogin.observe(this) {
+            naivgateToLogin()
+        }
     }
 
     private fun navigateToPushAlert(pushAlertSetting: PushAlertSetting) {
         Intent(this, PushAlertActivity::class.java)
             .putExtra(IntentKey.PUSH_ALERT_SETTING, pushAlertSetting)
+            .also { startActivity(it) }
+    }
+
+    private fun naivgateToLogin() {
+        Intent(this, LoginActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             .also { startActivity(it) }
     }
 }
