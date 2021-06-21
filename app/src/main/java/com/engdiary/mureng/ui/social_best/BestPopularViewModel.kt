@@ -21,10 +21,6 @@ abstract class BestPopularViewModel constructor(
 
     abstract fun questionItemClick(questionData: QuestionNetwork)
 
-    fun questionItemHeartClick(questionData: QuestionNetwork) {
-
-
-    }
 
     fun addQuestionResult(questionData: QuestionNetwork) {
         val results: MutableList<QuestionNetwork> = _quesResults.value?.toMutableList() ?: mutableListOf()
