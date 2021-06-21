@@ -33,7 +33,7 @@ jobs:
       
   
     - name: keystore.tar 압축 풀기
-      run: tar xvf ./keystore.tar
+      run: tar xvf keystore.tar
       
     - name: signing_config.tar 압축 풀기
       run: tar xvf app/signing_config.tar
