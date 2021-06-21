@@ -47,6 +47,9 @@ class AwardViewModel @Inject constructor(
     private val _userAward: MutableLiveData<Award> = MutableLiveData()
     val userAward: LiveData<Award> get() = _userAward
 
+    private val _murengCnt: MutableLiveData<Int> = MutableLiveData()
+    val murengCnt: LiveData<Int> get() = _murengCnt
+
     /** 생성자 */
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -54,6 +57,7 @@ class AwardViewModel @Inject constructor(
             user?.let { murengRepository.getUserAchievement(it.memberId) }
                 .let {
                     _userAward.postValue(it!!)
+                    _murengCnt.postValue(it!!.member.murengCount)
                     for (item in it!!.badges) {
                         when (item.name) {
                             "머렝 3일" -> _badgeThree.postValue(true)
