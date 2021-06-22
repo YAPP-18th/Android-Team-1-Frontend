@@ -1,10 +1,13 @@
 package com.engdiary.mureng.data.response
 
+import android.os.Parcelable
 import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.data.DiaryContent
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
+@Parcelize
 data class DiaryNetwork(
     @SerializedName("author")
     val author: AuthorNetwork?,
@@ -25,8 +28,8 @@ data class DiaryNetwork(
     @SerializedName("requestedByAuthor")
     val isMine: Boolean,
     @SerializedName("likedByRequester")
-    var likeYn : Boolean,
-): Serializable  {
+    val likeYn : Boolean,
+): Parcelable {
     fun asDomain(): Diary =
         Diary(
             author!!.asDomain(),
@@ -37,8 +40,7 @@ data class DiaryNetwork(
             date,
             id,
             likeCount,
-            isMine
+            isMine,
+            likeYn
         )
-    val clickedLikeYn: Boolean
-        get() = !(likeYn ?: true)
 }

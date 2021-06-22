@@ -63,9 +63,7 @@ class BestMoreActivity : BaseActivity<ActivityBestMoreBinding>(R.layout.activity
                             if(page <= viewModel.totalPage.value!!) {
                                 viewModel.getQuestionData(page++)
                             }
-
                         }
-
                     }
                 }
             } )
@@ -79,12 +77,9 @@ class BestMoreActivity : BaseActivity<ActivityBestMoreBinding>(R.layout.activity
             rvSocialBestQuestion.apply {
                 adapter = questionAdapter
             }
-
         }
 
-        viewModel.backButton.observe(this, Observer {
-            if (it) finish()
-        })
+        binding.imgBestMoreBack.setOnClickListener { finish() }
 
     }
 

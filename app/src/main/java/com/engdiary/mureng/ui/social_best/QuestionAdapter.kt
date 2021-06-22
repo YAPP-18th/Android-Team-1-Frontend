@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.R
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.databinding.ItemSocialQuesBinding
 import com.engdiary.mureng.util.setOnSingleClickListener
@@ -15,7 +16,7 @@ import com.engdiary.mureng.util.setOnSingleClickListener
  * Social_Best Tab, My QUES Tab 인기 질문, 내 질문 리스트  RecyclerView Adapter
  */
 class QuestionAdapter(val vm: BestPopularViewModel) :
-    ListAdapter<QuestionNetwork, QuestionViewHolder>(QuestionDiffUtilCallBack) {
+    ListAdapter<Question, QuestionViewHolder>(QuestionDiffUtilCallBack) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding: ItemSocialQuesBinding =
@@ -36,24 +37,24 @@ class QuestionAdapter(val vm: BestPopularViewModel) :
 class QuestionViewHolder(private val binding: ItemSocialQuesBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(question: QuestionNetwork, vm: BestPopularViewModel) {
+    fun bind(question: Question, vm: BestPopularViewModel) {
         binding.quesData = question
         binding.vm = vm
 
     }
 }
 
-object QuestionDiffUtilCallBack : DiffUtil.ItemCallback<QuestionNetwork>() {
+object QuestionDiffUtilCallBack : DiffUtil.ItemCallback<Question>() {
     override fun areItemsTheSame(
-        oldItem: QuestionNetwork,
-        newItem: QuestionNetwork
+        oldItem: Question,
+        newItem: Question
     ): Boolean {
         return oldItem.content == newItem.content
     }
 
     override fun areContentsTheSame(
-        oldItem: QuestionNetwork,
-        newItem: QuestionNetwork
+        oldItem: Question,
+        newItem: Question
     ): Boolean {
         return oldItem.hashCode() == newItem.hashCode()
     }

@@ -58,7 +58,6 @@
                             android:layout_height="wrap_content"
                             android:paddingVertical="12dp"
                             android:paddingRight="16dp"
-                            app:onSingleClick="@{vm::backClick}"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"

@@ -12,7 +12,9 @@ data class Question(
     val questionId: Int,
     val repliesCount: Int,
     val hints: List<Hint>,
-    val author: Author?
+    val author: Author?,
+    var lineVisible : Boolean = true,
+    var likeYn: Boolean? = null
 ) : Parcelable {
     fun asNetwork(): QuestionNetwork = QuestionNetwork(
         questionId,
@@ -23,4 +25,7 @@ data class Question(
         hints.map { it.asNetwork() },
         author?.asNetwork()
     )
+
+    val clickedLikeYn: Boolean
+        get() = !(likeYn ?: true)
 }

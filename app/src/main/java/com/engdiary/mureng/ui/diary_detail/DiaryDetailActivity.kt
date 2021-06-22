@@ -100,9 +100,9 @@ class DiaryDetailActivity :
     }
 
     private fun navigateToSocialDetail() {
-        viewModel.getQuestionNetwork()?.let {
+        viewModel.getQuestion()?.let {
             Intent(this, SocialDetailActivity::class.java)
-                .putExtra(IntentKey.QUESTION_NETWORK, it)
+                .putExtra(IntentKey.QUESTION, it)
         }?.also { startActivity(it) } ?: return
     }
 

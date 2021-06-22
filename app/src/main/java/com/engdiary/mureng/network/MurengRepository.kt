@@ -283,70 +283,65 @@ class MurengRepository @Inject constructor(
         return response?.isDeleted
     }
 
-    fun getQuestionList(
+    suspend fun getQuestionList(
         page: Int,
         size: Int,
-        sort: String,
-        onSuccess: (MurengResponse<List<QuestionNetwork>>) -> Unit,
-        onFailure: () -> Unit
-    ) {
-        api.getQuestionList(page, size, sort).safeEnqueue(
-            onSuccess = { onSuccess(it) },
-            onFailure = { onFailure() },
-            onError = { onFailure() }
-        )
+        sort: String
+    ) : MurengResponse<List<QuestionNetwork>>? {
+        val response = api.getQuestionList(page,size,sort)
+        if(!response.isSuccessful) {
+            Timber.d("Get Qustion List Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
+        }
+        return response?.body()
     }
 
-    fun getAnswerList(
+    suspend fun getAnswerList(
         page: Int,
         size: Int,
-        sort: String,
-        onSuccess: (MurengResponse<List<DiaryNetwork>>) -> Unit,
-        onFailure: () -> Unit
-    ) {
-        api.getAnswerList(page, size, sort).safeEnqueue(
-            onSuccess = { onSuccess(it) },
-            onFailure = { onFailure() },
-            onError = { onFailure() }
-        )
+        sort: String
+    ) : MurengResponse<List<DiaryNetwork>>? {
+
+        val response = api.getAnswerList(page,size,sort)
+        if(!response.isSuccessful) {
+            Timber.d("Get Answer List Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
+        }
+        return response?.body()
     }
 
-    fun getMyQuestionList(
-        onSuccess: (List<QuestionNetwork>) -> Unit,
-        onFailure: () -> Unit
-    ) {
-        api.getMyQuestionList().safeEnqueue(
-            onSuccess = { onSuccess(it.data!!) },
-            onFailure = { onFailure() },
-            onError = { onFailure() }
-        )
+    suspend fun getMyQuestionList(
+    ) : List<Question>? {
+        val response = api.getMyQuestionList()
+        if(!response.isSuccessful) {
+            Timber.d("Get MyQuestionList List Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
+        }
+        return response.body()?.data?.map {
+            it.asDomain()
+        }
     }
 
-    fun postCreateQuestion(
-        postQuestioRequest: PostQuestioRequest,
-        onSuccess: () -> Unit,
-        onFailure: () -> Unit
-    ) {
-        api.postCreateQuestion(postQuestioRequest).safeEnqueue(
-            onSuccess = { onSuccess() },
-            onFailure = { onFailure() },
-            onError = { onFailure() }
-        )
+    suspend fun postCreateQuestion(
+        postQuestioRequest: PostQuestioRequest
+    ) : Boolean {
+        val response = api.postCreateQuestion(postQuestioRequest)
+        if(!response.isSuccessful) {
+            Timber.d("Post Create Question Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
+            return false
+        }
+        return true
     }
 
-    fun getReplyAnswerList(
+    suspend fun getReplyAnswerList(
         questionId: Int,
         page: Int?,
         size: Int?,
         sort: String?,
-        onSuccess: (MurengResponse<List<DiaryNetwork>>) -> Unit,
-        onFailure: () -> Unit
-    ) {
-        api.getReplyAnswerList(questionId, page, size, sort).safeEnqueue(
-            onSuccess = { onSuccess(it) },
-            onFailure = { onFailure() },
-            onError = { onFailure() }
-        )
+    ) : MurengResponse<List<DiaryNetwork>>? {
+
+        val response = api.getReplyAnswerList(questionId, page, size, sort)
+        if(!response.isSuccessful) {
+            Timber.d("Get Reply Answer List Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
+        }
+        return response?.body()
     }
 
     suspend fun getMyInfo(): Author? {
@@ -365,28 +360,26 @@ class MurengRepository @Inject constructor(
         return response.data?.asDomain()
     }
 
-    fun postLikes(
-        replyId: Int,
-        onSuccess: () -> Unit,
-        onFailure: () -> Unit
-    ) {
-        api.postLikes(replyId).safeEnqueue(
-            onSuccess = { onSuccess() },
-            onFailure = { onFailure() },
-            onError = { onFailure() }
-        )
+    suspend fun postLikes(
+        replyId: Int
+    ) : Boolean {
+        val response = api.postLikes(replyId)
+        if(!response.isSuccessful) {
+            Timber.d("Post Like $replyId Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
+            return false
+        }
+        return true
     }
 
-    fun deleteLikes(
-        replyId: Int,
-        onSuccess: () -> Unit,
-        onFailure: () -> Unit
-    ) {
-        api.deleteLikes(replyId).safeEnqueue(
-            onSuccess = { onSuccess() },
-            onFailure = { onFailure() },
-            onError = { onFailure() }
-        )
+    suspend fun deleteLikes(
+        replyId: Int
+    ) : Boolean {
+        val response = api.deleteLikes(replyId)
+        if(!response.isSuccessful) {
+            Timber.d("Delete Like $replyId Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
+            return false
+        }
+        return true
     }
 
     suspend fun getNickNameExist(nickName: String): NickName? {
@@ -421,10 +414,9 @@ class MurengRepository @Inject constructor(
         api.postUserFcmToken(FcmTokenRequest(fcmToken))
     }
 
-    suspend fun getUserAchievement(userId: Int): Award {
+    suspend fun getUserAchievement(userId: Int): Award? {
         return api.getUserAchievement(authManager.accessToken, userId)
-            .data!!
-            .asDomain()
+            ?.data?.asDomain()
     }
 
     suspend fun withdrawMureng(): Boolean {

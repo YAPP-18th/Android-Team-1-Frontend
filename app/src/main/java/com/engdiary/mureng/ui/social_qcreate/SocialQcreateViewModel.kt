@@ -4,10 +4,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.regex.Pattern
 import java.util.regex.Pattern.compile
@@ -146,19 +148,15 @@ class SocialQcreateViewModel @Inject constructor(
     }
 
     fun registerClick() {
-        if (_registerVisible.value!!) {
-            murengRepository.postCreateQuestion(PostQuestioRequest(category = "social",content = _qCreateEngQues.value.toString(), koContent = _qCreateKorQues.value.toString()!!),
-                onSuccess = {
-                    Timber.d("질문 생성 성공")
+        viewModelScope.launch {
+            if (_registerVisible.value!!) {
+                val checkingPost = murengRepository.postCreateQuestion(PostQuestioRequest(category = "social", content = _qCreateEngQues.value.toString(), koContent = _qCreateKorQues.value.toString()!!))
+                if (checkingPost) {
                     _registerQues.value = true
-                },
-                onFailure = {
-                    Timber.d("질문 생성 실패")
                 }
-            )
+            }
         }
     }
-
 
     fun backClick() {
         _backButton.value = true

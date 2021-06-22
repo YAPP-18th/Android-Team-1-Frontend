@@ -2,6 +2,8 @@ package com.engdiary.mureng.ui.social_best
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.engdiary.mureng.data.Diary
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.network.MurengRepository
@@ -12,23 +14,23 @@ abstract class BestPopularViewModel constructor(
     murengRepository: MurengRepository
 ) : BaseViewModel(murengRepository) {
     /** 검색 결과 list */
-    protected val _quesResults = MutableLiveData<List<QuestionNetwork>>(listOf())
-    open var quesResults: LiveData<List<QuestionNetwork>> = _quesResults
+    protected val _quesResults = MutableLiveData<List<Question>>(listOf())
+    open var quesResults: LiveData<List<Question>> = _quesResults
 
-    protected val _ansResults = MutableLiveData<List<DiaryNetwork>>(listOf())
-    open val ansResults: LiveData<List<DiaryNetwork>> = _ansResults
-
-
-    abstract fun questionItemClick(questionData: QuestionNetwork)
+    protected val _ansResults = MutableLiveData<List<Diary>>(listOf())
+    open val ansResults: LiveData<List<Diary>> = _ansResults
 
 
-    fun addQuestionResult(questionData: QuestionNetwork) {
-        val results: MutableList<QuestionNetwork> = _quesResults.value?.toMutableList() ?: mutableListOf()
+    abstract fun questionItemClick(questionData: Question)
+
+
+    fun addQuestionResult(questionData: Question) {
+        val results: MutableList<Question> = _quesResults.value?.toMutableList() ?: mutableListOf()
         results.add(questionData)
         _quesResults.value = results
     }
-    fun replaceQuestionResult(questionData: QuestionNetwork) {
-        val results: MutableList<QuestionNetwork> = _quesResults.value?.toMutableList() ?: return
+    fun replaceQuestionResult(questionData: Question) {
+        val results: MutableList<Question> = _quesResults.value?.toMutableList() ?: return
 
         val prevResult = (results.filter { questionData.content == it.content }).firstOrNull()
 
@@ -46,8 +48,8 @@ abstract class BestPopularViewModel constructor(
         }
     }
 
-    fun deleteQuestionResult(questionData: QuestionNetwork) {
-        val results: MutableList<QuestionNetwork> = _quesResults.value?.toMutableList() ?: return
+    fun deleteQuestionResult(questionData: Question) {
+        val results: MutableList<Question> = _quesResults.value?.toMutableList() ?: return
         val deleteIndex = results.indexOf(questionData)
         if (deleteIndex == -1) {
             Timber.i("$questionData isn't exist")
@@ -59,8 +61,8 @@ abstract class BestPopularViewModel constructor(
     }
 
     /** [_results] 내 특정 아이템의 좋아요 클릭 여부 내용만 바꿔준다. */
-    fun toogleQuestionData(preQuestionData: QuestionNetwork) {
-        val results: MutableList<QuestionNetwork> = _quesResults.value?.toMutableList() ?: return
+    fun toogleQuestionData(preQuestionData: Question) {
+        val results: MutableList<Question> = _quesResults.value?.toMutableList() ?: return
 
         val replaceIndex = results.indexOf(preQuestionData)
 
@@ -75,18 +77,18 @@ abstract class BestPopularViewModel constructor(
     }
 
 
-    abstract fun answerItemClick(answerData: DiaryNetwork)
+    abstract fun answerItemClick(answerData: Diary)
 
-    abstract fun answerItemHeartClick(answerData: DiaryNetwork)
+    abstract fun answerItemHeartClick(answerData: Diary)
 
-    fun addAnswerResult(answerData: DiaryNetwork) {
-        val results: MutableList<DiaryNetwork> = _ansResults.value?.toMutableList() ?: mutableListOf()
+    fun addAnswerResult(answerData: Diary) {
+        val results: MutableList<Diary> = _ansResults.value?.toMutableList() ?: mutableListOf()
         results.add(answerData)
         _ansResults.value = results
     }
 
-    fun replaceAnswerResult(answerData: DiaryNetwork) {
-        val results: MutableList<DiaryNetwork> = _ansResults.value?.toMutableList() ?: return
+    fun replaceAnswerResult(answerData: Diary) {
+        val results: MutableList<Diary> = _ansResults.value?.toMutableList() ?: return
         val prevResult = (results.filter { answerData.content == it.content }).firstOrNull()
         prevResult?.let {
             val replaceIndex = results.indexOf(it)
@@ -103,8 +105,8 @@ abstract class BestPopularViewModel constructor(
     }
 
     /** [_results] 내 특정 아이템을 삭제한다. */
-    fun deleteAnswerResult(answerData: DiaryNetwork) {
-        val results: MutableList<DiaryNetwork> = _ansResults.value?.toMutableList() ?: return
+    fun deleteAnswerResult(answerData: Diary) {
+        val results: MutableList<Diary> = _ansResults.value?.toMutableList() ?: return
         val deleteIndex = results.indexOf(answerData)
         if (deleteIndex == -1) {
             Timber.i("$answerData isn't exist")
@@ -117,8 +119,8 @@ abstract class BestPopularViewModel constructor(
 
 
     /** [_results] 내 특정 아이템의 좋아요 클릭 여부 내용만 바꿔준다. */
-    fun toggleAnswerResult(preAnswerData: DiaryNetwork) {
-        val results: MutableList<DiaryNetwork> = _ansResults.value?.toMutableList() ?: return
+    fun toggleAnswerResult(preAnswerData: Diary) {
+        val results: MutableList<Diary> = _ansResults.value?.toMutableList() ?: return
 
         val replaceIndex = results.indexOf(preAnswerData)
 

@@ -5,9 +5,12 @@ import android.content.Intent
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.engdiary.mureng.constant.BestMoreConstant
 import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.constant.SortConstant
+import com.engdiary.mureng.data.Diary
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.AuthManager
@@ -19,6 +22,7 @@ import com.engdiary.mureng.ui.social_detail.SocialDetailActivity
 import com.engdiary.mureng.ui.social_detail.SocialDetailViewModel
 import com.engdiary.mureng.ui.social_qcreate.SocialQcreateActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -30,33 +34,30 @@ class BestTabViewModel @Inject constructor(
 
     /** 생성자 */
     init {
+        viewModelScope.launch {
+            getAnswerData()
+            getQuestionData()
+        }
     }
 
-    private fun getAnswerData() {
-        murengRepository.getAnswerList(page = 0 , size = 5, sort = SortConstant.POP,
-            onSuccess = {
-                _ansResults.value = it.data!!
-            },
-            onFailure = {
-                Timber.d("AnswerList 가져오기 통신 실패")
-            }
-        )
+    private suspend fun getAnswerData() {
+       murengRepository.getAnswerList(page = 0 , size = 5, sort = SortConstant.POP)
+               .let {
+                   _ansResults.postValue(it?.data?.map { item -> item.asDomain() })
+               }
     }
 
-    private fun getQuestionData() {
-        murengRepository.getQuestionList(page = 0, size = 3, sort = SortConstant.POP,
-            onSuccess = {
-                var questionData : MutableList<QuestionNetwork> = it.data!!.toMutableList()
-                for (i in 0 until questionData.size) {
-                    questionData[i].lineVisible =  false
+    private suspend fun getQuestionData() {
+        murengRepository.getQuestionList(page = 0, size = 3, sort = SortConstant.POP)
+                .let {
+                    var questionData : MutableList<Question>? = it?.data?.map{ item -> item.asDomain() }?.toMutableList()
+                    if(questionData != null) {
+                        for (i in 0 until questionData?.size!!) {
+                            questionData[i].lineVisible = false
+                        }
+                        _quesResults.postValue(questionData)
+                    }
                 }
-                _quesResults.value = questionData
-
-            },
-            onFailure = {
-                Timber.d("QuestionList 가져오기 통신 실패")
-            }
-        )
     }
 
     fun quesMoreClick() {
@@ -77,22 +78,22 @@ class BestTabViewModel @Inject constructor(
     }
 
 
-    override fun questionItemClick(questionData: QuestionNetwork) {
+    override fun questionItemClick(questionData: Question) {
         Intent(MurengApplication.appContext, SocialDetailActivity::class.java).apply {
-            this.putExtra("quesitonData", questionData)
+            this.putExtra(IntentKey.QUESTION, questionData)
         }.run {
             MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }
     }
-    override fun answerItemClick(answerData: DiaryNetwork) {
+    override fun answerItemClick(answerData: Diary) {
         Intent(MurengApplication.appContext, DiaryDetailActivity::class.java).apply {
-            this.putExtra(IntentKey.DIARY, answerData.asDomain())
+            this.putExtra(IntentKey.DIARY, answerData)
         }.run {
             MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }
     }
 
-    override fun answerItemHeartClick(answerData: DiaryNetwork) {
+    override fun answerItemHeartClick(answerData: Diary) {
        // 안쓰임
     }
 
@@ -103,7 +104,5 @@ class BestTabViewModel @Inject constructor(
 
     override fun onResume() {
         super.onResume()
-        getAnswerData()
-        getQuestionData()
     }
 }

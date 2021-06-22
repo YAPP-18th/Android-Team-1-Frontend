@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.R
+import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.databinding.ItemSocialAnswerBinding
 import com.engdiary.mureng.databinding.ItemSocialBestAnswerBinding
@@ -21,7 +22,7 @@ import timber.log.Timber
  * Social_Best Tab 인기 답변 RecyclerView Adapter
  */
 class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, private val handler: android.os.Handler?) :
-    ListAdapter<DiaryNetwork, RecyclerView.ViewHolder>(AnswerDiffUtilCallBack) {
+    ListAdapter<Diary, RecyclerView.ViewHolder>(AnswerDiffUtilCallBack) {
     companion object {
         const val TYPE_BEST = 0
         const val TYPE_BEST_MORE = 1
@@ -118,7 +119,7 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, 
 class AnswerViewHolder(private val binding: ItemSocialAnswerBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(diaryData: DiaryNetwork, vm: BestPopularViewModel, handler: android.os.Handler?) {
+    fun bind(diaryData: Diary, vm: BestPopularViewModel, handler: android.os.Handler?) {
         binding.diary = diaryData
         binding.vm = vm
         handler!!.postDelayed(Runnable {
@@ -132,7 +133,7 @@ class AnswerViewHolder(private val binding: ItemSocialAnswerBinding) :
 class AnswerUserViewHolder(private val binding: ItemSocialUserAnswerBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(diaryData: DiaryNetwork) {
+    fun bind(diaryData: Diary) {
         binding.diary = diaryData
     }
 }
@@ -140,23 +141,23 @@ class AnswerUserViewHolder(private val binding: ItemSocialUserAnswerBinding) :
 class AnswerBestViewHolder(private val binding: ItemSocialBestAnswerBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(diaryData: DiaryNetwork, vm: BestPopularViewModel) {
+    fun bind(diaryData: Diary, vm: BestPopularViewModel) {
         binding.diary = diaryData
         binding.vm = vm
     }
 }
 
-object AnswerDiffUtilCallBack : DiffUtil.ItemCallback<DiaryNetwork>() {
+object AnswerDiffUtilCallBack : DiffUtil.ItemCallback<Diary>() {
     override fun areItemsTheSame(
-            oldItem: DiaryNetwork,
-            newItem: DiaryNetwork,
+            oldItem: Diary,
+            newItem: Diary,
     ): Boolean {
         return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(
-            oldItem: DiaryNetwork,
-            newItem: DiaryNetwork,
+            oldItem: Diary,
+            newItem: Diary,
     ): Boolean {
         return oldItem.hashCode() == newItem.hashCode()
     }
