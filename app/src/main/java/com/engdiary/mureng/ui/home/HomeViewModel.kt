@@ -22,7 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val murengRepository: MurengRepository
-) : BaseViewModel(murengRepository) {
+) : ScrapViewModel(murengRepository) {
 
 
 private val _todayQuestion = MutableLiveData<QuestionRefresh>()
@@ -31,9 +31,6 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
 
     protected val _quesResults = MutableLiveData<List<QuestionNetwork>>(listOf())
     open var quesResults: LiveData<List<QuestionNetwork>> = _quesResults
-
-    private val _todayExpression = MutableLiveData<List<TodayExpression>>(listOf())
-    val todayExpression: LiveData<List<TodayExpression>> = _todayExpression
 
     private val _checkReplied = MutableLiveData<CheckReplied>()
     val checkReplied: LiveData<CheckReplied> = _checkReplied
@@ -70,9 +67,7 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
         viewModelScope.launch {
             try {
                 _todayQuestion.value = murengRepository.getTodayQuestionRefresh()
-
                 _todayExpression.value = murengRepository.getTodayExpression()
-
 
             } catch (networkError: IOException) {
             }
