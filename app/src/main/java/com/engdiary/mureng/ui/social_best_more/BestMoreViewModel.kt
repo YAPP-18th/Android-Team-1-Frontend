@@ -119,10 +119,7 @@ class BestMoreViewModel @Inject constructor(
             murengRepository.getQuestionList(page = page, size = 10, sort = sort)
                     .let {
                         if (it?.data != null) {
-                            var questionData: MutableList<Question> = it.data?.map{ item -> item.asDomain()}.toMutableList()
-                            for (i in 0 until questionData.size) {
-                                questionData[i].lineVisible = true
-                            }
+                            val questionData = it.data?.map{item -> item.asDomain()}
 
                             if (page > 0) {
                                 for (item in questionData) {

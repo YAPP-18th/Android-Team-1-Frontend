@@ -13,7 +13,6 @@ data class Question(
     val repliesCount: Int,
     val hints: List<Hint>,
     val author: Author?,
-    var lineVisible : Boolean = true,
     var likeYn: Boolean? = null
 ) : Parcelable {
     fun asNetwork(): QuestionNetwork = QuestionNetwork(

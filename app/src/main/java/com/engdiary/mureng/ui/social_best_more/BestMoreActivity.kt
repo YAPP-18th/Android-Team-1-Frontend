@@ -25,7 +25,7 @@ class BestMoreActivity : BaseActivity<ActivityBestMoreBinding>(R.layout.activity
         viewModel,
         null
     ) }
-    private val questionAdapter: QuestionAdapter by lazy { QuestionAdapter(viewModel) }
+    private val questionAdapter: QuestionAdapter by lazy { QuestionAdapter(QuestionRecyclerType.TYPE_QUES_MORE,viewModel) }
 
     private var scrollListener: EndlessScrollListener? = null
 

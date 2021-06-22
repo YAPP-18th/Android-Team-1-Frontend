@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             android:paddingVertical="14dp"
             android:paddingHorizontal="16dp"
-            app:onSingleClick="@{vm::backClick}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:src="@drawable/writingdiary_btn_cancel"/>

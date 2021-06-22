@@ -39,9 +39,6 @@ class SocialQcreateViewModel @Inject constructor(
     private var _warningMaxEng = MutableLiveData<Boolean>()
     val warningMaxEng : LiveData<Boolean> = _warningMaxEng
 
-    private var _backButton = MutableLiveData<Boolean>()
-    val backButton : LiveData<Boolean> = _backButton
-
     private var _registerQues = MutableLiveData<Boolean>()
     var registerQues : LiveData<Boolean> = _registerQues
 
@@ -133,13 +130,11 @@ class SocialQcreateViewModel @Inject constructor(
         _warningKor.value = false
         _warningMaxEng.value = false
         _warningMaxKor.value = false
-        _backButton.value = false
         _registerQues.value = false
         _registerVisible.value = false
 
     }
     fun quesWarningCheck() {
-        Timber.e(_qCreateEngQues.value)
         if(!_qCreateEngQues.value!!.toString().isNullOrBlank()) {
             _registerVisible.value = !_warningEng.value!! && !_warningKor.value!! && !_warningMaxEng.value!! && !_warningMaxKor.value!!
         } else {
@@ -157,11 +152,6 @@ class SocialQcreateViewModel @Inject constructor(
             }
         }
     }
-
-    fun backClick() {
-        _backButton.value = true
-    }
-
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {
         super.onCleared()

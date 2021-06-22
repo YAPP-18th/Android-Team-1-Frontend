@@ -1,7 +1,11 @@
 package com.engdiary.mureng.ui.social_best
 
+import android.content.Context
+import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.DiffUtil
@@ -122,13 +126,18 @@ class AnswerViewHolder(private val binding: ItemSocialAnswerBinding) :
     fun bind(diaryData: Diary, vm: BestPopularViewModel, handler: android.os.Handler?) {
         binding.diary = diaryData
         binding.vm = vm
+
         handler!!.postDelayed(Runnable {
-            Blurry.with(MurengApplication.appContext).sampling(1)
-                .capture(binding.imgBestAnsImage).into(binding.imgBestAnsImage)
-        }, 500)
+            Blurry.with(MurengApplication.appContext)
+                .sampling(1)
+                .capture(binding.imgBestAnsImage)
+                .into(binding.imgBestAnsImage)
+        }, 1000)
+
 
     }
 }
+
 
 class AnswerUserViewHolder(private val binding: ItemSocialUserAnswerBinding) :
     RecyclerView.ViewHolder(binding.root) {

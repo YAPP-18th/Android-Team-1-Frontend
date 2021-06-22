@@ -30,18 +30,18 @@ class MyQuesViewModel @Inject constructor(
     /** 생성자 */
     init {
         _quesCnt.value = 0
+        myQuestionListSetting()
+    }
+
+    private fun myQuestionListSetting() {
         viewModelScope.launch {
             murengRepository.getMyQuestionList()
-                    .let {
-                        if(it != null) {
-                            var questionData : MutableList<Question> = it.toMutableList()
-                            for (i in 0 until questionData.size) {
-                                questionData[i].lineVisible =  true
-                            }
-                            _quesResults.postValue(questionData)
-                            _quesCnt.value = it.size
-                        }
+                .let {
+                    if(it != null) {
+                        _quesResults.postValue(it)
+                        _quesCnt.value = it.size
                     }
+                }
         }
     }
     override fun questionItemClick(questionData: Question) {
@@ -68,5 +68,6 @@ class MyQuesViewModel @Inject constructor(
 
     override fun onResume() {
         super.onResume()
+        myQuestionListSetting()
     }
 }

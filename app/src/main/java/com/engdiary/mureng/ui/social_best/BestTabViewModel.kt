@@ -50,11 +50,8 @@ class BestTabViewModel @Inject constructor(
     private suspend fun getQuestionData() {
         murengRepository.getQuestionList(page = 0, size = 3, sort = SortConstant.POP)
                 .let {
-                    var questionData : MutableList<Question>? = it?.data?.map{ item -> item.asDomain() }?.toMutableList()
+                    var questionData = it?.data?.map{ item -> item.asDomain() }
                     if(questionData != null) {
-                        for (i in 0 until questionData?.size!!) {
-                            questionData[i].lineVisible = false
-                        }
                         _quesResults.postValue(questionData)
                     }
                 }
@@ -104,5 +101,9 @@ class BestTabViewModel @Inject constructor(
 
     override fun onResume() {
         super.onResume()
+        viewModelScope.launch {
+            getAnswerData()
+            getQuestionData()
+        }
     }
 }
