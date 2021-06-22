@@ -8,6 +8,7 @@ import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.BestMoreConstant
 import com.engdiary.mureng.constant.IntentKey
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.databinding.ActivitySocialDetailBinding
 import com.engdiary.mureng.ui.base.BaseActivity
@@ -22,8 +23,8 @@ class SocialDetailActivity : BaseActivity<ActivitySocialDetailBinding>(R.layout.
     private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(AnswerRecyclerType.TYPE_DETAIL, viewModel, null) }
 
     /** 이전 화면에서부터 받은 QuestionItem[QuestionData] */
-    private val questionData: QuestionNetwork?
-        get() = intent.getSerializableExtra(IntentKey.QUESTION_NETWORK) as? QuestionNetwork
+    private val questionData: Question?
+        get() = intent.getParcelableExtra(IntentKey.QUESTION) as? Question
 
     private var page : Int = 0
 
@@ -41,8 +42,6 @@ class SocialDetailActivity : BaseActivity<ActivitySocialDetailBinding>(R.layout.
                     if(page <= viewModel.totalPage.value!!) {
                         viewModel.getPagingReplyData(page++)
                     }
-
-
                 }
             }
         } )
@@ -51,10 +50,6 @@ class SocialDetailActivity : BaseActivity<ActivitySocialDetailBinding>(R.layout.
             adapter = answerAdapter
         }
 
-
-        viewModel.backButton.observe(this, Observer {
-            if(it) finish()
-        })
-
+        binding.imgSocialDetailBack.setOnClickListener { finish() }
     }
 }

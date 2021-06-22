@@ -1,8 +1,11 @@
 package com.engdiary.mureng.data.response
 
+import android.os.Parcelable
 import com.engdiary.mureng.data.Question
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class QuestionNetwork(
     @SerializedName("questionId")
     val questionId: Int,
@@ -17,13 +20,8 @@ data class QuestionNetwork(
     @SerializedName("wordHints")
     val wordHints: List<HintNetwork>,
     @SerializedName("author")
-    val author : AuthorNetwork?,
-    var lineVisible : Boolean = true,
-    var likeYn: Boolean? = null,
-) : java.io.Serializable {
+    val author : AuthorNetwork?
+) : Parcelable {
     fun asDomain(): Question =
         Question(category, content, contentKr, questionId, repliesCount, wordHints.map { it.asDomain() }, author?.asDomain())
-
-    val clickedLikeYn: Boolean
-        get() = !(likeYn ?: true)
 }
