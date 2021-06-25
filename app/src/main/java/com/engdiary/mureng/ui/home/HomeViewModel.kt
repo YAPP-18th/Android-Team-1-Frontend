@@ -67,7 +67,8 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
         viewModelScope.launch {
             try {
                 _todayQuestion.value = murengRepository.getTodayQuestionRefresh()
-                _todayExpression.value = murengRepository.getTodayExpression()
+
+                //_todayExpression.value = murengRepository.getTodayExpression()
 
             } catch (networkError: IOException) {
             }

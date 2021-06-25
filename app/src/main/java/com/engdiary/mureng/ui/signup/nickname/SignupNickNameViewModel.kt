@@ -77,9 +77,9 @@ class SignupNickNameViewModel @Inject constructor(
             s.toString().let {
 
                 if(it.isNotEmpty()) {
-                    nickName = String(it.toByteArray(Charsets.ISO_8859_1), Charsets.UTF_8)
-
-                    val res = murengRepository.getNickNameExist(nickName)
+                    //nickName = String(it.toByteArray(Charsets.ISO_8859_1), Charsets.UTF_8)
+                    //var trans = it.toByteArray(Charsets.UTF_8)
+                    val res = murengRepository.getNickNameExist(it)
                     _isDuplicate.value = res!!.duplicated
                     if (res!!.duplicated) {
                         _next.value = "다음"
