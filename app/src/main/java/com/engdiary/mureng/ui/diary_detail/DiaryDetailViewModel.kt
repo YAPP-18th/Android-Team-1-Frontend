@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.engdiary.mureng.data.Diary
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.SingleLiveEvent
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.network.MurengRepository
@@ -43,5 +44,5 @@ class DiaryDetailViewModel @Inject constructor(private val murengRepository: Mur
         _diary.value = diary
     }
 
-    fun getQuestionNetwork(): QuestionNetwork? = question.value?.asNetwork()
+    fun getQuestion() : Question? = question?.value
 }

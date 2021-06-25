@@ -50,8 +50,7 @@
                     android:paddingHorizontal="16dp"
                     android:id="@+id/img_social_detail_back"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:onSingleClick="@{vm::backClick}"/>
+                    app:layout_constraintStart_toStartOf="parent"/>
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout

@@ -10,7 +10,7 @@
 
         <variable
             name="Diary"
-            type="com.engdiary.mureng.data.response.DiaryNetwork" />
+            type="com.engdiary.mureng.data.Diary" />
 
         <variable
             name="vm"
@@ -76,7 +76,7 @@
 
         <TextView
             android:id="@+id/tv_social_best_answer_content"
-            android:text="@{Diary.content}"
+            android:text="@{Diary.content.content}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"

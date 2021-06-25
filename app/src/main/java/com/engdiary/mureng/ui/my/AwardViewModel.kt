@@ -72,6 +72,7 @@ class AwardViewModel @Inject constructor(
         _badgeCeleb.value = false
         _badgeThree.value = false
 
+
     }
 
     override fun onResume() {

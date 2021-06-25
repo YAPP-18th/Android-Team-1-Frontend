@@ -27,6 +27,7 @@ class MurengTreyAdapter() :
 
     override fun onBindViewHolder(holder: MurengTreyViewHolder, position: Int) {
         holder.bind(getItem(position))
+
     }
 }
 

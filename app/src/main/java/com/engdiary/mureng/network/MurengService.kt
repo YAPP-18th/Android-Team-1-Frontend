@@ -81,47 +81,47 @@ interface MurengService {
      *  답변 가져오기 (Best, Newest)
      */
     @GET("/api/reply")
-    fun getAnswerList(
+    suspend fun getAnswerList(
         @Query("page") page: Int,
         @Query("size") size: Int,
         @Query("sort") sort: String
-    ): Call<MurengResponse<List<DiaryNetwork>>>
+    ): Response<MurengResponse<List<DiaryNetwork>>>
 
     /**
      *  질문 가져오기 (Best, Newest)
      */
     @GET("/api/questions")
-    fun getQuestionList(
+    suspend fun getQuestionList(
         @Query("page") page: Int,
         @Query("size") size: Int,
         @Query("sort") sort: String
-    ): Call<MurengResponse<List<QuestionNetwork>>>
+    ): Response<MurengResponse<List<QuestionNetwork>>>
 
     /**
      *  내가 만든 질문 리스트 가져오기
      */
     @GET("/api/questions/me")
-    fun getMyQuestionList(
-    ): Call<MurengResponse<List<QuestionNetwork>>>
+    suspend fun getMyQuestionList(
+    ): Response<MurengResponse<List<QuestionNetwork>>>
 
     /**
      *  질문 생성
      */
     @POST("/api/questions")
-    fun postCreateQuestion(
+    suspend fun postCreateQuestion(
         @Body postQuestioRequest: PostQuestioRequest
-    ): Call<MurengResponse<Unit>>
+    ): Response<MurengResponse<Unit>>
 
     /**
      *  질문 상세 답변 리스트 가져오기
      */
     @GET("/api/questions/{questionId}/replies")
-    fun getReplyAnswerList(
+    suspend fun getReplyAnswerList(
         @Path("questionId") questionId: Int,
         @Query("page") page: Int?,
         @Query("size") size: Int?,
         @Query("sort") sort: String?
-    ): Call<MurengResponse<List<DiaryNetwork>>>
+    ): Response<MurengResponse<List<DiaryNetwork>>>
 
     @POST("/api/member/signup")
     suspend fun postUserSignup(
@@ -143,17 +143,17 @@ interface MurengService {
      * 답변 좋아요
      */
     @POST("/api/reply/{replyId}/reply-likes")
-    fun postLikes(
+    suspend fun postLikes(
         @Path("replyId") replyId: Int
-    ): Call<MurengResponse<Unit>>
+    ): Response<MurengResponse<Unit>>
 
     /**
      * 답변 좋아요 취소
      */
     @DELETE("/api/reply/{replyId}/reply-likes")
-    fun deleteLikes(
+    suspend fun deleteLikes(
         @Path("replyId") replyId: Int
-    ): Call<MurengResponse<Unit>>
+    ): Response<MurengResponse<Unit>>
 
     @PUT("api/member/me/setting/push/daily")
     suspend fun putDailyPushAlertSetting(

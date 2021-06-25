@@ -24,9 +24,7 @@ class SocialQcreateActivity : BaseActivity<ActivitySocialQcreateBinding>(R.layou
         super.onCreate(savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
 
-        viewModel.backButton.observe(this, Observer {
-            if(it) finish()
-        })
+        binding.imgQcreateBack.setOnClickListener { finish()}
 
         viewModel.registerQues.observe(this, Observer {
             if(it) finish()

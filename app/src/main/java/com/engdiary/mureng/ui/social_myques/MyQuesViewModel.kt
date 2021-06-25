@@ -3,6 +3,10 @@ package com.engdiary.mureng.ui.social_myques
 import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.engdiary.mureng.constant.IntentKey
+import com.engdiary.mureng.data.Diary
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.MurengApplication
@@ -11,6 +15,7 @@ import com.engdiary.mureng.ui.social_best.BestPopularViewModel
 import com.engdiary.mureng.ui.social_detail.SocialDetailActivity
 import com.engdiary.mureng.ui.social_qcreate.SocialQcreateActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -25,40 +30,34 @@ class MyQuesViewModel @Inject constructor(
     /** 생성자 */
     init {
         _quesCnt.value = 0
+        myQuestionListSetting()
     }
 
-    fun getMyQuesList() {
-        murengRepository.getMyQuestionList(
-            onSuccess = {
-                var questionData : MutableList<QuestionNetwork> = it.toMutableList()
-                for (i in 0 until questionData.size) {
-                    questionData[i].lineVisible =  true
+    private fun myQuestionListSetting() {
+        viewModelScope.launch {
+            murengRepository.getMyQuestionList()
+                .let {
+                    if(it != null) {
+                        _quesResults.postValue(it)
+                        _quesCnt.value = it.size
+                    }
                 }
-                _quesResults.value = questionData
-                _quesCnt.value = it.size
-
-
-            },
-            onFailure = {
-                Timber.e("나의 질문 리스트 가져오기 통신 실패")
-            }
-        )
+        }
     }
-
-    override fun questionItemClick(questionData: QuestionNetwork) {
+    override fun questionItemClick(questionData: Question) {
         Intent(MurengApplication.appContext, SocialDetailActivity::class.java).apply {
-            this.putExtra("quesitonData", questionData)
+            this.putExtra(IntentKey.QUESTION, questionData)
         }.run {
             MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }
 
     }
 
-    override fun answerItemClick(answerData: DiaryNetwork) {
-        //TODO 안쓰임!!
+    override fun answerItemClick(answerData: Diary) {
+        //TODO("Not yet implemented")
     }
 
-    override fun answerItemHeartClick(answerData: DiaryNetwork) {
+    override fun answerItemHeartClick(answerData: Diary) {
         //TODO("Not yet implemented")
     }
 
@@ -69,6 +68,6 @@ class MyQuesViewModel @Inject constructor(
 
     override fun onResume() {
         super.onResume()
-        getMyQuesList()
+        myQuestionListSetting()
     }
 }

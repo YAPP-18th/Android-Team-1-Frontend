@@ -30,16 +30,25 @@ jobs:
 
     - name: Unzip Services
       run: tar xvf app/services.tar -C app
-      
-  
+
+    - name: Decrypt keystore
+      run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$KEYSTORE_SECRET" --output keystore.tar keystore.tar.gpg
+      env:
+        KEYSTORE_SECRET: ${{ secrets.KEYSTORE_SECRET }}
+
     - name: keystore.tar 압축 풀기
       run: tar xvf keystore.tar
+
+    - name: Decrypt signing_config
+      run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$SIGN_CONFIG_SECRET" --output app/signing_config.tar app/signing_config.tar.gpg
+      env:
+        SIGN_CONFIG_SECRET: ${{ secrets.SIGN_CONFIG_SECRET }}
       
     - name: signing_config.tar 압축 풀기
-      run: tar xvf app/signing_config.tar
+      run: tar xvf app/signing_config.tar -C app
 
     - name: Build APK
-      run: bash ./gradlew assembleRelease --stacktrace
+      run: bash ./gradlew assembleRelease --warning-mode all
      
       
     - run: './gradlew assembleRelease'
