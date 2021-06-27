@@ -24,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
 
     override val viewModel: HomeViewModel by viewModels<HomeViewModel>()
-    val handler : Handler = Handler()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,7 +42,9 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
         })
 
         viewModel.todayExpression.observe(viewLifecycleOwner, Observer { expressions ->
-            expressions?.let { initHintAdapter(binding.homeTodayExpression, TodayExpressionAdapter(it, viewModel)) }
+            expressions?.let {
+               binding.homeTodayExpression.adapter = TodayExpressionAdapter(ScrapListType.TYPE_HOME, it, viewModel)
+            }
         })
 
 
@@ -54,21 +55,6 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                 binding.reply.text = "답변하기"
             }
         })
-    }
-
-    private fun initHintAdapter(
-        hints: RecyclerView,
-        hintAdapter: TodayExpressionAdapter
-    ) {
-        hints.adapter = hintAdapter
-        hints.addItemDecoration(HintDecoration(HomeFragment.HINT_SPAN_COUNT, HomeFragment.HINT_SPACING.dpToPx()))
-        hintAdapter.notifyDataSetChanged()
-    }
-
-
-    companion object {
-        private const val HINT_SPAN_COUNT = 2
-        private const val HINT_SPACING = 20
     }
 }
 

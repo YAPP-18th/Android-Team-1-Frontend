@@ -14,16 +14,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyScrapViewModel @Inject constructor(
-        private val murengRepository: MurengRepository,
-        private val authManager: AuthManager
+        private val murengRepository: MurengRepository
 ) : ScrapViewModel(murengRepository) {
 
     init {
         viewModelScope.launch {
             val expressions = murengRepository.getTodayExpression()
             expressions?.let {
-                for (item in it!!) {
-                    addExpressionResult(item)
+                if(it != null) {
+                    _todayExpression.postValue(it)
                 }
             }
         }
