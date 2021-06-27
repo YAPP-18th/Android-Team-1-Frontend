@@ -10,7 +10,7 @@ import com.engdiary.mureng.data.response.TodayExpression
 import com.engdiary.mureng.databinding.ItemTodayExpressionBinding
 import com.engdiary.mureng.util.setOnSingleClickListener
 
-class TodayExpressionAdapter(private val expressions: List<TodayExpression>, val vm: HomeViewModel) : RecyclerView.Adapter<TodayExpressionHolder>() {
+class TodayExpressionAdapter(private val expressions: List<TodayExpression>, val vm: ScrapViewModel) : RecyclerView.Adapter<TodayExpressionHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodayExpressionHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
