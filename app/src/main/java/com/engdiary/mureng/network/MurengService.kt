@@ -42,6 +42,9 @@ interface MurengService {
     @GET("/api/today-expression")
     suspend fun getTodayExpression(): MurengResponse<List<TodayExpression>>
 
+    @GET("/api/member/me/scrap")
+    suspend fun getMyScrapList(): MurengResponse<List<TodayExpression>>
+
     @GET("/api/member/check-replied-today")
     suspend fun getCheckReplied(): MurengResponse<CheckRepliedNetwork>
 

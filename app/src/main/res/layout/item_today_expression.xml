@@ -9,7 +9,7 @@
         <import type="android.view.View" />
         <variable
             name="vm"
-            type="com.engdiary.mureng.ui.home.HomeViewModel" />
+            type="com.engdiary.mureng.ui.home.ScrapViewModel" />
 
         <variable
             name="Expression"
@@ -27,9 +27,8 @@
         <TextView
             android:id="@+id/tv_en_script"
             style="@style/TextAppearance.RobotoMediumStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginEnd="4dp"
             android:text="@{@string/expression_title(Expression.expression, Expression.meaning)}"
             android:textColor="@color/colorDarkGray4d"
@@ -48,17 +47,19 @@
             />
 
         <TextView
-            android:text="@{@string/expression_content(Expression.expressionExample, Expression.expressionExampleMeaning)}"
             android:id="@+id/tv_social_best_more_ques"
-            android:layout_width="0dp"
+            style="@style/TextAppearance.RobotoMediumStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@{@string/expression_content(Expression.expressionExample, Expression.expressionExampleMeaning)}"
+            android:textColor="#8b8b8b"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_en_script"
             app:layout_constraintTop_toBottomOf="@id/tv_en_script"
-            tools:text="ddddddd"
-            android:layout_marginTop="6dp"
-            style="@style/TextAppearance.RobotoMediumStyle"
-            android:textSize="14dp"
-            android:textColor="#8b8b8b"/>
+            tools:text="ddddddd" />
 
 
         <ImageView

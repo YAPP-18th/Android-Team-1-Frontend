@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.engdiary.mureng.data.CheckReplied
+import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.QuestionRefresh
 import com.engdiary.mureng.data.response.DiaryNetwork
@@ -22,7 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val murengRepository: MurengRepository
-) : BaseViewModel(murengRepository) {
+) : ScrapViewModel(murengRepository) {
 
 
 private val _todayQuestion = MutableLiveData<QuestionRefresh>()
@@ -31,9 +32,6 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
 
     protected val _quesResults = MutableLiveData<List<QuestionNetwork>>(listOf())
     open var quesResults: LiveData<List<QuestionNetwork>> = _quesResults
-
-    private val _todayExpression = MutableLiveData<List<TodayExpression>>(listOf())
-    val todayExpression: LiveData<List<TodayExpression>> = _todayExpression
 
     private val _checkReplied = MutableLiveData<CheckReplied>()
     val checkReplied: LiveData<CheckReplied> = _checkReplied
@@ -69,10 +67,15 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
     fun getQuestionData() {
         viewModelScope.launch {
             try {
+
                 _todayQuestion.value = murengRepository.getTodayQuestionRefresh()
 
-                _todayExpression.value = murengRepository.getTodayExpression()
-
+                murengRepository.getTodayExpression()
+                        .let {
+                                for (item in it!!) {
+                                    addExpressionResult(item)
+                                }
+                        }
 
             } catch (networkError: IOException) {
             }
@@ -89,39 +92,39 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
         )
     }
 
-    fun addScrap(expression: TodayExpression) {
-
-        if(expression.scrappedByRequester) {
-            murengRepository.deleteScrap(expression.expId,
-                    onSuccess = {
-                        viewModelScope.launch {
-                            try {
-                                _todayExpression.value = murengRepository.getTodayExpression()
-                            } catch (networkError: IOException) {
-                            }
-                        }
-                    },
-                    onFailure = {
-                    }
-            )
-        } else {
-            murengRepository.postScrap(expression.expId,
-                    onSuccess = {
-                        viewModelScope.launch {
-                            try {
-                                _todayExpression.value = murengRepository.getTodayExpression()
-                            } catch (networkError: IOException) {
-                            }
-                        }
-                    },
-                    onFailure = {
-
-                    }
-            )
-        }
-//    fun addScrap(expId: Int) {
-
-    }
+//    fun addScrap(expression: TodayExpression) {
+//
+//        if(expression.scrappedByRequester) {
+//            murengRepository.deleteScrap(expression.expId,
+//                    onSuccess = {
+//                        viewModelScope.launch {
+//                            try {
+//
+//                                _todayExpression.value = murengRepository.getTodayExpression()
+//                            } catch (networkError: IOException) {
+//                            }
+//                        }
+//                    },
+//                    onFailure = {
+//                    }
+//            )
+//        } else {
+//            murengRepository.postScrap(expression.expId,
+//                    onSuccess = {
+//                        viewModelScope.launch {
+//                            try {
+//                                _todayExpression.value = murengRepository.getTodayExpression()
+//                            } catch (networkError: IOException) {
+//                            }
+//                        }
+//                    },
+//                    onFailure = {
+//
+//                    }
+//            )
+//        }
+//
+//    }
 
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */

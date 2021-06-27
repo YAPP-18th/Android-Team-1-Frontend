@@ -16,7 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -83,7 +82,7 @@
                             android:layout_marginTop="8dp"
                             android:paddingRight="16dp"
                             android:src="@drawable/icons_autorenew"
-                            app:layout_constraintStart_toEndOf="@+id/today_question"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintBottom_toBottomOf="@+id/today_question"
                             app:onSingleClick="@{vm::getQuestionData}" />
 
