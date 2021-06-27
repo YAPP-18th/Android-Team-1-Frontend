@@ -14,6 +14,7 @@ import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import com.kakao.usermgmt.StringSet.email
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.time.Instant
@@ -24,10 +25,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignupNickNameViewModel @Inject constructor(
-        private val murengRepository: MurengRepository,
-        private val authManager: AuthManager
-): BaseViewModel(murengRepository) {
-
+    private val murengRepository: MurengRepository,
+    private val authManager: AuthManager
+) : BaseViewModel(murengRepository) {
 
 
     private var _isDuplicate = MutableLiveData<Boolean>()
@@ -44,19 +44,48 @@ class SignupNickNameViewModel @Inject constructor(
     val signupFail: LiveData<Unit>
         get() = _signupFail
 
-    var nickName = ""
 
     init {
         _isDuplicate.value = true
         _next.value = "다음"
     }
 
-    fun userSignup() {
-        if(_isDuplicate.value == false) {
+    fun requestSignUp(nickname: String){
+        viewModelScope.launch {
+            val completableDeferred = viewModelScope.async {
+                getNicknameExist(nickname)
+            }
+            completableDeferred.await()
+            postSignUp(nickname)
+        }
+    }
 
-            val currentTimestamp = System.currentTimeMillis()
-            val signupRequest = PostSignupRequest(identifier = authManager.identifier, nickname = nickName, email = null)
-//
+    private suspend fun getNicknameExist(nickname: String) {
+            if(nickname.isNotBlank()) {
+                val res = murengRepository.getNickNameExist(nickname)
+                _isDuplicate.value = res?.duplicated
+                if(res?.duplicated!!){
+                    _next.value = "다음"
+                } else{
+                    _next.value = "완료"
+                }
+            }
+            else {
+                _isDuplicate.value = true
+                _next.value = "다음"
+            }
+
+    }
+
+    private fun postSignUp(nickname: String) {
+        if (_isDuplicate.value == false) {
+
+            val signupRequest = PostSignupRequest(
+                identifier = authManager.identifier,
+                nickname = nickname,
+                email = null
+            )
+
             viewModelScope.launch {
                 murengRepository.userSignup(
                     signupRequest,
@@ -68,36 +97,12 @@ class SignupNickNameViewModel @Inject constructor(
                     }
                 )
             }
-
         }
     }
 
-    fun onTextChanged(s: CharSequence, start :Int, before : Int, count: Int) {
-        viewModelScope.launch {
-            s.toString().let {
 
-                if(it.isNotEmpty()) {
-                    //nickName = String(it.toByteArray(Charsets.ISO_8859_1), Charsets.UTF_8)
-                    //var trans = it.toByteArray(Charsets.UTF_8)
-                    val res = murengRepository.getNickNameExist(it)
-                    _isDuplicate.value = res!!.duplicated
-                    if (res!!.duplicated) {
-                        _next.value = "다음"
-                    } else {
-                        _next.value = "완료"
-                    }
-                } else {
-                    _isDuplicate.value = true
-                    _next.value = "다음"
-                }
-
-            }
-        }
-
-    }
 
     override fun onCleared() {
         super.onCleared()
     }
-
 }
