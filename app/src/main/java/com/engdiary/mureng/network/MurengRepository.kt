@@ -179,7 +179,8 @@ class MurengRepository @Inject constructor(
 
     suspend fun getTodayQuestion(): Question? {
         return api.getTodayQuestion()
-            .data
+            .body()
+            ?.data
             ?.asDomain()
     }
 
@@ -351,7 +352,9 @@ class MurengRepository @Inject constructor(
 
     suspend fun getMyInfo(): Author? {
         val response = api.getMyInfo()
-        return response?.data?.asDomain()
+        return response?.body()
+            ?.data
+            ?.asDomain()
     }
 
     suspend fun putDiary(
