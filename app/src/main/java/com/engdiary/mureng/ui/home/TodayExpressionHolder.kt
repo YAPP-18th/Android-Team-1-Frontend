@@ -23,7 +23,7 @@ import com.engdiary.mureng.ui.social_best.BestPopularViewModel
 class TodayExpressionHolder(private val binding: ItemTodayExpressionBinding):
         RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(tx: TodayExpression, vm: HomeViewModel) {
+    fun bind(tx: TodayExpression, vm: ScrapViewModel) {
         binding.expression = tx
         binding.vm = vm
     }

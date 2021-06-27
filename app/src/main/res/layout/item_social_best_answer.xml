@@ -29,8 +29,8 @@
         
         <ImageView
             app:imageCircleGlideResource="@{Diary.image}"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:id="@+id/img_best_more_profile"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
