@@ -72,9 +72,9 @@ private val _todayQuestion = MutableLiveData<QuestionRefresh>()
 
                 murengRepository.getTodayExpression()
                         .let {
-                                for (item in it!!) {
-                                    addExpressionResult(item)
-                                }
+                            if(it != null) {
+                                _todayExpression.value = it
+                            }
                         }
 
             } catch (networkError: IOException) {
