@@ -36,8 +36,8 @@ const val CONNECT_TIMEOUT = 60.toLong()
 const val WRITE_TIMEOUT = 60.toLong()
 const val READ_TIMEOUT = 60.toLong()
 
-const val BASE_URL = "http://dev.mureng.hkpark.net"
-const val MEDIA_BASE_URL = "http://dev.mureng-media.hkpark.net"
+const val BASE_URL = "https://mureng.hkpark.net"
+const val MEDIA_BASE_URL = "https://mureng-media.hkpark.net"
 
 /**
  * 코루틴을 활용하여 HTTP 요청을 보낼 시 활용하는 로직
