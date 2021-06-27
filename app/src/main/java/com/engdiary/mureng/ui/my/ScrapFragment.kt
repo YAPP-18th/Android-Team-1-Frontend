@@ -53,7 +53,6 @@ class ScrapFragment : BaseFragment<FragmentScrapBinding>(R.layout.fragment_scrap
     ) {
         hints.adapter = hintAdapter
         hints.addItemDecoration(HintDecoration(ScrapFragment.HINT_SPAN_COUNT, ScrapFragment.HINT_SPACING.dpToPx()))
-        hintAdapter.notifyDataSetChanged()
     }
 
     companion object {
