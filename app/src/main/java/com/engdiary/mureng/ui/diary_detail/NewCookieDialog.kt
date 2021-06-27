@@ -16,6 +16,7 @@ class NewCookieDialog(context: Context) : Dialog(context) {
 
         binding.textviewDiarycookieAccept.setOnClickListener { this.dismiss() }
         binding.imageviewDiarycookieBg.setRound(BACKGROUND_ROUND)
+        binding.root.setRound(BACKGROUND_ROUND)
     }
 
     companion object{
