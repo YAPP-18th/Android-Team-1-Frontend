@@ -153,8 +153,7 @@ object NetworkModule {
     ): Authenticator {
         return object : Authenticator {
             override fun authenticate(route: Route?, response: okhttp3.Response): Request? {
-
-                Timber.d("(authenticate url: ${response.request.url}) ")
+                
                 if (response.request.url.toString().contains("/api/member/refresh")) {
                     return null
                 }
