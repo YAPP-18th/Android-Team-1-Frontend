@@ -7,6 +7,7 @@ import com.engdiary.mureng.util.sendNotification
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.ServiceScoped
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
@@ -14,8 +15,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-
-@AndroidEntryPoint
+@ServiceScoped
 class MurengFCMService:FirebaseMessagingService() {
     @Inject lateinit var ioScope: CoroutineScope
     @Inject lateinit var murengRepository: MurengRepository
