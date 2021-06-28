@@ -196,7 +196,6 @@ interface MurengService {
 
     @POST("/api/member/refresh")
     fun postRefreshAccessToken(
-        @Header("X-AUTH-TOKEN") accessToken: String,
         @Body postRefreshAccessTokenRequest: PostRefreshAccessTokenRequest
     ): Call<MurengResponse<PostRefreshAccessTokenResponse>>
 }
