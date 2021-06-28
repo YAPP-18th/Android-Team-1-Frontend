@@ -152,15 +152,21 @@ object NetworkModule {
     ): Authenticator {
         return object : Authenticator {
             override fun authenticate(route: Route?, response: okhttp3.Response): Request? {
+                if (response.request.header("REFRESH_ACCESS_TOKEN") == null){
+                    return null
+                }
+
                 val tokenRefreshResponse =
                     serviceHolder.service!!
                         .postRefreshAccessToken(PostRefreshAccessTokenRequest(authManager.refreshToken))
                         .execute()
 
+                val credential = Credentials.basic("username", "password")
                 return if (tokenRefreshResponse.isSuccessful) {
                     saveToken(authManager, tokenRefreshResponse.body()?.data!!)
                     response.request
                         .newBuilder()
+                        .header("REFRESH_ACCESS_TOKEN", credential)
                         .header("X-AUTH-TOKEN", authManager.accessToken)
                         .build()
                 } else {
