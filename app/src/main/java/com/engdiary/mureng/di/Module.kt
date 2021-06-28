@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
+import com.engdiary.mureng.data.request.PostRefreshAccessTokenRequest
+import com.engdiary.mureng.data.response.PostRefreshAccessTokenResponse
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.network.MurengService
 import com.engdiary.mureng.ui.base.BaseViewModel
@@ -16,16 +18,16 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kr.co.nexters.winepick.util.SharedPrefs
-import okhttp3.Cache
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
+import javax.inject.Qualifier
 import javax.inject.Singleton
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -38,6 +40,15 @@ const val READ_TIMEOUT = 60.toLong()
 
 const val BASE_URL = "https://mureng.hkpark.net"
 const val MEDIA_BASE_URL = "https://mureng-media.hkpark.net"
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class RefreshTokenInterceptor
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class TokenInterceptor
+
 
 /**
  * 코루틴을 활용하여 HTTP 요청을 보낼 시 활용하는 로직
@@ -103,6 +114,7 @@ object NetworkModule {
     /**
      * 커스텀 interceptor
      */
+    @TokenInterceptor
     @Provides
     @Singleton
     fun provideMurengInterceptor(authManager: AuthManager): Interceptor {
@@ -131,14 +143,60 @@ object NetworkModule {
         }
     }
 
+
+    @RefreshTokenInterceptor
+    @Provides
+    @Singleton
+    fun provideAuthenticator(
+        serviceHolder: ServiceHolder,
+        authManager: AuthManager
+    ): Authenticator {
+        return object : Authenticator {
+            override fun authenticate(route: Route?, response: okhttp3.Response): Request? {
+                Timber.d("(authenticate url: ${response.request.url}) ")
+                if (response.request.url.toString().contains("/api/member/refresh")) {
+                    return null
+                }
+
+                val tokenRefreshResponse =
+                    serviceHolder.service!!
+                        .postRefreshAccessToken(
+                            authManager.accessToken,
+                            PostRefreshAccessTokenRequest(authManager.refreshToken)
+                        )
+                        .execute()
+
+                return if (tokenRefreshResponse.isSuccessful) {
+                    saveToken(authManager, tokenRefreshResponse.body()?.data!!)
+                    response.request
+                        .newBuilder()
+                        .header("X-AUTH-TOKEN", authManager.accessToken)
+                        .build()
+                } else {
+                    response.request
+                }
+            }
+        }
+    }
+
+    private fun saveToken(authManager: AuthManager, response: PostRefreshAccessTokenResponse) {
+        authManager.refreshToken = response.refreshToken
+        authManager.accessToken = response.accessToken
+    }
+
     /** HttpClient 객체를 생성하는 Provider 함수이다. */
     @Provides
     @Singleton
-    fun provideHttpClient(okHttpCache: Cache, murengInterceptor: Interceptor): OkHttpClient {
+    fun provideHttpClient(
+        okHttpCache: Cache,
+        @TokenInterceptor murengInterceptor: Interceptor,
+        @RefreshTokenInterceptor authenticator: Authenticator
+    ): OkHttpClient {
         return OkHttpClient.Builder()
             .cache(okHttpCache)
             .addInterceptor(httpLoggingInterceptor)
             .addInterceptor(murengInterceptor)
+            .authenticator(authenticator)
             .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
@@ -159,9 +217,14 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): MurengService {
+    fun provideApiService(retrofit: Retrofit, serviceHolder: ServiceHolder): MurengService {
         return retrofit.create(MurengService::class.java)
+            .also { serviceHolder.service = it }
     }
+
+    @Provides
+    @Singleton
+    fun provideServiceHolder(): ServiceHolder = ServiceHolder()
 }
 
 @Module

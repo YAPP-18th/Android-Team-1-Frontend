@@ -29,7 +29,7 @@ interface MurengService {
     ): Call<MurengResponse<JWTResponse>>
 
     @GET("/api/today-question")
-    suspend fun getTodayQuestion(): MurengResponse<QuestionNetwork>
+    suspend fun getTodayQuestion(): Response<MurengResponse<QuestionNetwork>>
 
     @GET("/api/today-question/refresh")
     suspend fun getTodayQuestionRefresh(): MurengResponse<QuestionRefreshNetwork>
@@ -68,7 +68,7 @@ interface MurengService {
     suspend fun getDefaultImages(): Response<MurengResponse<List<String>>>
 
     @GET("/api/member/me")
-    suspend fun getMyInfo(): MurengResponse<AuthorNetwork>
+    suspend fun getMyInfo(): Response<MurengResponse<AuthorNetwork>>
 
     @DELETE("/api/reply/{replyId}")
     suspend fun deleteDiary(
@@ -177,7 +177,7 @@ interface MurengService {
     @PUT("/api/member/me/fcm-token")
     suspend fun postUserFcmToken(
         @Body fcmTokenRequest: FcmTokenRequest
-    ): MurengResponse<AuthorNetwork>
+    ): Response<MurengResponse<AuthorNetwork>>
 
 
     @GET("/api/member/{memberId}/achievement")
@@ -188,4 +188,10 @@ interface MurengService {
 
     @DELETE("/api/member/me")
     suspend fun withdrawMureng(): MurengResponse<UserNetwork>
+
+    @POST("/api/member/refresh")
+    fun postRefreshAccessToken(
+        @Header("X-AUTH-TOKEN") accessToken: String,
+        @Body postRefreshAccessTokenRequest: PostRefreshAccessTokenRequest
+    ): Call<MurengResponse<PostRefreshAccessTokenResponse>>
 }

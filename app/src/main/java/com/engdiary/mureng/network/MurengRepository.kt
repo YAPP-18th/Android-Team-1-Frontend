@@ -6,15 +6,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.DiaryContent
-import com.engdiary.mureng.data.ItemWriteDiaryImage
-import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.*
 import com.engdiary.mureng.data.request.*
-import com.engdiary.mureng.data.request.PostDiaryRequest
-import com.engdiary.mureng.data.request.PostQuestioRequest
-import com.engdiary.mureng.data.request.PutDiaryRequest
 import com.engdiary.mureng.data.response.*
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.MEDIA_BASE_URL
@@ -169,6 +162,7 @@ class MurengRepository @Inject constructor(
     suspend fun getMyScrapList(): List<TodayExpression>? {
         return api.getMyScrapList()
                 .data?.scrapList
+            .data
     }
 
     suspend fun getCheckReplied(): CheckReplied? {
@@ -179,7 +173,8 @@ class MurengRepository @Inject constructor(
 
     suspend fun getTodayQuestion(): Question? {
         return api.getTodayQuestion()
-            .data
+            .body()
+            ?.data
             ?.asDomain()
     }
 
@@ -314,9 +309,9 @@ class MurengRepository @Inject constructor(
     }
 
     suspend fun getMyQuestionList(
-    ) : List<Question>? {
+    ): List<Question>? {
         val response = api.getMyQuestionList()
-        if(!response.isSuccessful) {
+        if (!response.isSuccessful) {
             Timber.d("Get MyQuestionList List Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
         }
         return response.body()?.data?.map {
@@ -326,9 +321,9 @@ class MurengRepository @Inject constructor(
 
     suspend fun postCreateQuestion(
         postQuestioRequest: PostQuestioRequest
-    ) : Boolean {
+    ): Boolean {
         val response = api.postCreateQuestion(postQuestioRequest)
-        if(!response.isSuccessful) {
+        if (!response.isSuccessful) {
             Timber.d("Post Create Question Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
             return false
         }
