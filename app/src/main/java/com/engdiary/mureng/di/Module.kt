@@ -25,6 +25,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Qualifier
 import javax.inject.Singleton
@@ -152,6 +153,7 @@ object NetworkModule {
     ): Authenticator {
         return object : Authenticator {
             override fun authenticate(route: Route?, response: okhttp3.Response): Request? {
+                Timber.d("(authenticate url: ${response.request.url}) ")
                 if (response.request.url.toString().contains("/api/member/refresh")) {
                     return null
                 }
