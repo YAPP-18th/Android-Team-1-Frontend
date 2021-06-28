@@ -161,7 +161,6 @@ object NetworkModule {
                 val tokenRefreshResponse =
                     serviceHolder.service!!
                         .postRefreshAccessToken(
-                            authManager.accessToken,
                             PostRefreshAccessTokenRequest(authManager.refreshToken)
                         )
                         .execute()
