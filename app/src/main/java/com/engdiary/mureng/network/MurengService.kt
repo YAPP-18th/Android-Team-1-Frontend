@@ -12,11 +12,6 @@ import retrofit2.http.*
  */
 interface MurengService {
 
-    /** 예시
-     *  @GET("v2/api/survey/")
-     *  fun getSurveys(): Call<WinePickResponse<List<Survey>>>
-     */
-
     @POST("/api/member/user-exists/{provider}")
     fun postUserExist(
         @Path("provider") provider: String,
@@ -43,7 +38,7 @@ interface MurengService {
     suspend fun getTodayExpression(): MurengResponse<List<TodayExpression>>
 
     @GET("/api/member/me/scrap")
-    suspend fun getMyScrapList(): MurengResponse<List<TodayExpression>>
+    suspend fun getMyScrapList(): MurengResponse<MyScrapNetwork>
 
     @GET("/api/member/check-replied-today")
     suspend fun getCheckReplied(): MurengResponse<CheckRepliedNetwork>

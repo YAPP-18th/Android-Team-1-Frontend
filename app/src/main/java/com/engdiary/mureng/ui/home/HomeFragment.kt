@@ -28,18 +28,6 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
-        binding.vm = viewModel
-
-        binding.reply.setBackgroundColor(Color.BLACK)
-
-        binding.apply {
-            vm = viewModel
-            lifecycleOwner = this@HomeFragment.viewLifecycleOwner
-        }
-
-        viewModel.todayQuestion.observe(viewLifecycleOwner, Observer {
-            binding.todayQuestion.text = it.content
-        })
 
         viewModel.todayExpression.observe(viewLifecycleOwner, Observer { expressions ->
             expressions?.let {
@@ -47,14 +35,6 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             }
         })
 
-
-        viewModel.checkReplied.observe(viewLifecycleOwner, Observer {
-            if(it.replied == true) {
-                binding.reply.text = "2시간 후에 답변을 할 수 있어요"
-            } else {
-                binding.reply.text = "답변하기"
-            }
-        })
     }
 }
 

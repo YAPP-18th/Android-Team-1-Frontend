@@ -27,7 +27,7 @@ class TodayExpressionAdapter(val type : ScrapListType ,private val expressions: 
         return when(viewType) {
             TYPE_HOME -> {
                 return TodayExpressionHolder(binding).apply {
-                    binding.root.setOnSingleClickListener {
+                    binding.imgBookmark.setOnClickListener {
                         vm.addScrap(binding.expression!!)
                     }
                 }
@@ -36,7 +36,7 @@ class TodayExpressionAdapter(val type : ScrapListType ,private val expressions: 
             else -> {
 
                 return TodayExpressionHolder(binding).apply {
-                    binding.root.setOnSingleClickListener {
+                    binding.imgBookmark.setOnSingleClickListener {
                         vm.deleteScrap(binding.expression!!)
                     }
                 }

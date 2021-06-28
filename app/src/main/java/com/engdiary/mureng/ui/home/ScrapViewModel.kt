@@ -34,30 +34,22 @@ abstract class ScrapViewModel constructor(
 
     fun addScrap(expression: TodayExpression) {
 
+        toggleTodayExpression(expression)
         if(expression.scrappedByRequester!!) {
-            toggleTodayExpression(expression)
-
-            murengRepository.postScrap(expression.expId,
+            murengRepository.deleteScrap(expression.expId,
                     onSuccess = {
-                        viewModelScope.launch {
-                            try {
-                            } catch (networkError: IOException) {
-                            }
-                        }
+
                     },
                     onFailure = {
-
                     }
             )
 
         } else {
+
+
             murengRepository.postScrap(expression.expId,
                     onSuccess = {
-                        viewModelScope.launch {
-                            try {
-                            } catch (networkError: IOException) {
-                            }
-                        }
+
                     },
                     onFailure = {
 
