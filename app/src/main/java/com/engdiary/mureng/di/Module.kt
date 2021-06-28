@@ -172,9 +172,7 @@ object NetworkModule {
                             .newBuilder()
                             .header("X-AUTH-TOKEN", authManager.accessToken)
                             .build()
-                    } else {
-                        response.request
-                    }
+                    } else null
                 }
                 return response.request
             }
