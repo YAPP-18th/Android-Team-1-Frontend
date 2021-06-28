@@ -162,7 +162,6 @@ class MurengRepository @Inject constructor(
     suspend fun getMyScrapList(): List<TodayExpression>? {
         return api.getMyScrapList()
                 .data?.scrapList
-            .data
     }
 
     suspend fun getCheckReplied(): CheckReplied? {
@@ -346,7 +345,7 @@ class MurengRepository @Inject constructor(
 
     suspend fun getMyInfo(): Author? {
         val response = api.getMyInfo()
-        return response?.data?.asDomain()
+        return response?.body()?.data?.asDomain()
     }
 
     suspend fun putDiary(

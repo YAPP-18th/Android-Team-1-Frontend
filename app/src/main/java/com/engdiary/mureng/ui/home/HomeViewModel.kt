@@ -38,6 +38,8 @@ class HomeViewModel @Inject constructor(
 
     /** 생성자 */
     init {
+        _userName.value = ""
+        _questionTitle.value = ""
         viewModelScope.launch(Dispatchers.IO) {
             murengRepository.getMyInfo()
                     ?.let { _userName.postValue(it.nickname) }
