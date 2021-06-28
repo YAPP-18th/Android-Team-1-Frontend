@@ -193,4 +193,9 @@ interface MurengService {
 
     @DELETE("/api/member/me")
     suspend fun withdrawMureng(): MurengResponse<UserNetwork>
+
+    @POST("/api/member/refresh")
+    fun postRefreshAccessToken(
+        @Body postRefreshAccessTokenRequest: PostRefreshAccessTokenRequest
+    ): Call<MurengResponse<PostRefreshAccessTokenResponse>>
 }

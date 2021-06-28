@@ -6,15 +6,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.DiaryContent
-import com.engdiary.mureng.data.ItemWriteDiaryImage
-import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.*
 import com.engdiary.mureng.data.request.*
-import com.engdiary.mureng.data.request.PostDiaryRequest
-import com.engdiary.mureng.data.request.PostQuestioRequest
-import com.engdiary.mureng.data.request.PutDiaryRequest
 import com.engdiary.mureng.data.response.*
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.di.MEDIA_BASE_URL
@@ -168,7 +161,7 @@ class MurengRepository @Inject constructor(
 
     suspend fun getMyScrapList(): List<TodayExpression>? {
         return api.getMyScrapList()
-                .data
+            .data
     }
 
     suspend fun getCheckRplied(): CheckReplied? {
@@ -293,9 +286,9 @@ class MurengRepository @Inject constructor(
         page: Int,
         size: Int,
         sort: String
-    ) : MurengResponse<List<QuestionNetwork>>? {
-        val response = api.getQuestionList(page,size,sort)
-        if(!response.isSuccessful) {
+    ): MurengResponse<List<QuestionNetwork>>? {
+        val response = api.getQuestionList(page, size, sort)
+        if (!response.isSuccessful) {
             Timber.d("Get Qustion List Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
         }
         return response?.body()
@@ -305,19 +298,19 @@ class MurengRepository @Inject constructor(
         page: Int,
         size: Int,
         sort: String
-    ) : MurengResponse<List<DiaryNetwork>>? {
+    ): MurengResponse<List<DiaryNetwork>>? {
 
-        val response = api.getAnswerList(page,size,sort)
-        if(!response.isSuccessful) {
+        val response = api.getAnswerList(page, size, sort)
+        if (!response.isSuccessful) {
             Timber.d("Get Answer List Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
         }
         return response?.body()
     }
 
     suspend fun getMyQuestionList(
-    ) : List<Question>? {
+    ): List<Question>? {
         val response = api.getMyQuestionList()
-        if(!response.isSuccessful) {
+        if (!response.isSuccessful) {
             Timber.d("Get MyQuestionList List Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
         }
         return response.body()?.data?.map {
@@ -327,9 +320,9 @@ class MurengRepository @Inject constructor(
 
     suspend fun postCreateQuestion(
         postQuestioRequest: PostQuestioRequest
-    ) : Boolean {
+    ): Boolean {
         val response = api.postCreateQuestion(postQuestioRequest)
-        if(!response.isSuccessful) {
+        if (!response.isSuccessful) {
             Timber.d("Post Create Question Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
             return false
         }
@@ -341,10 +334,10 @@ class MurengRepository @Inject constructor(
         page: Int?,
         size: Int?,
         sort: String?,
-    ) : MurengResponse<List<DiaryNetwork>>? {
+    ): MurengResponse<List<DiaryNetwork>>? {
 
         val response = api.getReplyAnswerList(questionId, page, size, sort)
-        if(!response.isSuccessful) {
+        if (!response.isSuccessful) {
             Timber.d("Get Reply Answer List Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
         }
         return response?.body()
@@ -370,9 +363,9 @@ class MurengRepository @Inject constructor(
 
     suspend fun postLikes(
         replyId: Int
-    ) : Boolean {
+    ): Boolean {
         val response = api.postLikes(replyId)
-        if(!response.isSuccessful) {
+        if (!response.isSuccessful) {
             Timber.d("Post Like $replyId Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
             return false
         }
@@ -381,9 +374,9 @@ class MurengRepository @Inject constructor(
 
     suspend fun deleteLikes(
         replyId: Int
-    ) : Boolean {
+    ): Boolean {
         val response = api.deleteLikes(replyId)
-        if(!response.isSuccessful) {
+        if (!response.isSuccessful) {
             Timber.d("Delete Like $replyId Fail (code: ${response.code()}) (message: ${response.message()} (respnse: ${response.raw()})")
             return false
         }
