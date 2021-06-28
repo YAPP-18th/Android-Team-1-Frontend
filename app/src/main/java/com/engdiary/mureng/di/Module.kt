@@ -158,6 +158,7 @@ object NetworkModule {
                 if (response.request.url.toString().contains("/api/member/refresh")) {
                     return null
                 }
+                Timber.d("(authenticate url: ${response.request.url}) ")
                 if(response.code == 401){
                     val tokenRefreshResponse =
                         serviceHolder.service!!
@@ -173,8 +174,9 @@ object NetworkModule {
                             .header("X-AUTH-TOKEN", authManager.accessToken)
                             .build()
                     } else null
+                } else{
+                    return response.request
                 }
-                return response.request
             }
         }
     }
