@@ -153,27 +153,30 @@ object NetworkModule {
     ): Authenticator {
         return object : Authenticator {
             override fun authenticate(route: Route?, response: okhttp3.Response): Request? {
+
                 Timber.d("(authenticate url: ${response.request.url}) ")
                 if (response.request.url.toString().contains("/api/member/refresh")) {
                     return null
                 }
+                if(response.code == 401){
+                    val tokenRefreshResponse =
+                        serviceHolder.service!!
+                            .postRefreshAccessToken(
+                                PostRefreshAccessTokenRequest(authManager.refreshToken)
+                            )
+                            .execute()
 
-                val tokenRefreshResponse =
-                    serviceHolder.service!!
-                        .postRefreshAccessToken(
-                            PostRefreshAccessTokenRequest(authManager.refreshToken)
-                        )
-                        .execute()
-
-                return if (tokenRefreshResponse.isSuccessful) {
-                    saveToken(authManager, tokenRefreshResponse.body()?.data!!)
-                    response.request
-                        .newBuilder()
-                        .header("X-AUTH-TOKEN", authManager.accessToken)
-                        .build()
-                } else {
-                    response.request
+                    return if (tokenRefreshResponse.isSuccessful) {
+                        saveToken(authManager, tokenRefreshResponse.body()?.data!!)
+                        response.request
+                            .newBuilder()
+                            .header("X-AUTH-TOKEN", authManager.accessToken)
+                            .build()
+                    } else {
+                        response.request
+                    }
                 }
+                return response.request
             }
         }
     }
