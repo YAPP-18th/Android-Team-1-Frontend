@@ -19,7 +19,7 @@ class MyScrapViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val expressions = murengRepository.getTodayExpression()
+            val expressions = murengRepository.getMyScrapList()
             expressions?.let {
                 if(it != null) {
                     _todayExpression.postValue(it)

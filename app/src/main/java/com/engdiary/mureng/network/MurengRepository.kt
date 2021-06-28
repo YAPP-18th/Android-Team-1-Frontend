@@ -168,10 +168,10 @@ class MurengRepository @Inject constructor(
 
     suspend fun getMyScrapList(): List<TodayExpression>? {
         return api.getMyScrapList()
-                .data
+                .data?.scrapList
     }
 
-    suspend fun getCheckRplied(): CheckReplied? {
+    suspend fun getCheckReplied(): CheckReplied? {
         return api.getCheckReplied()
             .data
             ?.asDomain()

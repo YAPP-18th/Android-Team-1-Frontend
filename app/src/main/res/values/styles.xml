@@ -8,6 +8,11 @@
         <item name="android:fontFamily">@font/roboto</item>
         <item name="colorControlNormal">@color/primary_pink</item>
         <item name="fontFamily">@font/roboto</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:colorPrimaryDark">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
     <style name="Widget.WritingDiary.EditTextView" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
