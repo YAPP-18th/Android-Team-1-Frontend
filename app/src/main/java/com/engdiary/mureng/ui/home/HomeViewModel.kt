@@ -15,6 +15,7 @@ import com.engdiary.mureng.data.response.TodayExpression
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.IOException
@@ -25,107 +26,48 @@ class HomeViewModel @Inject constructor(
     private val murengRepository: MurengRepository
 ) : ScrapViewModel(murengRepository) {
 
-
-private val _todayQuestion = MutableLiveData<QuestionRefresh>()
-    val todayQuestion: LiveData<QuestionRefresh>
-        get() = _todayQuestion
-
-    protected val _quesResults = MutableLiveData<List<QuestionNetwork>>(listOf())
-    open var quesResults: LiveData<List<QuestionNetwork>> = _quesResults
-
     private val _checkReplied = MutableLiveData<CheckReplied>()
     val checkReplied: LiveData<CheckReplied> = _checkReplied
 
     private var _questionTitle = MutableLiveData<String>()
     var questionTitle : LiveData<String> = _questionTitle
 
-    private val _replyButtonTitle = MutableLiveData<String>()
-    val replyButtonTitle : LiveData<String> = _replyButtonTitle
+    private var _userName = MutableLiveData<String>()
+    val userName : LiveData<String> = _userName
 
-    private var _isReplied = MutableLiveData<Boolean>()
-    var isReplied : LiveData<Boolean> = _isReplied
 
     /** 생성자 */
     init {
-        getQuestionData()
-        checkReplied()
-
-        _replyButtonTitle.value = "답변하기"
+        _userName.value = ""
         _questionTitle.value = ""
-    }
+        viewModelScope.launch(Dispatchers.IO) {
+            murengRepository.getMyInfo()
+                    ?.let { _userName.postValue(it.nickname) }
 
-    fun checkReplied() {
-        viewModelScope.launch {
-            try {
-                _checkReplied.value = murengRepository.getCheckRplied()
-//                val replied = _checkReplied.value.replied ?: "2시간 후에 답변을 할 수 있어요"
-            } catch (networkError: IOException) {
+            murengRepository.getCheckReplied()?.let {
+                _checkReplied.postValue(it)
             }
+
+            murengRepository.getTodayExpression()
+                    .let {
+                        if(it != null) {
+                            _todayExpression.postValue(it)
+                        }
+                    }
+            _questionTitle.postValue(murengRepository.getTodayQuestion()?.content)
+
         }
     }
 
     fun getQuestionData() {
         viewModelScope.launch {
             try {
-
-                _todayQuestion.value = murengRepository.getTodayQuestionRefresh()
-
-                murengRepository.getTodayExpression()
-                        .let {
-                            if(it != null) {
-                                _todayExpression.value = it
-                            }
-                        }
+                _questionTitle.postValue(murengRepository.getTodayQuestionRefresh()?.content)
 
             } catch (networkError: IOException) {
             }
         }
     }
-
-    fun deleteScrap(expId: Int) {
-        murengRepository.deleteScrap(expId,
-                onSuccess = {
-                    Timber.d("scrap")
-                },
-                onFailure = {
-                }
-        )
-    }
-
-//    fun addScrap(expression: TodayExpression) {
-//
-//        if(expression.scrappedByRequester) {
-//            murengRepository.deleteScrap(expression.expId,
-//                    onSuccess = {
-//                        viewModelScope.launch {
-//                            try {
-//
-//                                _todayExpression.value = murengRepository.getTodayExpression()
-//                            } catch (networkError: IOException) {
-//                            }
-//                        }
-//                    },
-//                    onFailure = {
-//                    }
-//            )
-//        } else {
-//            murengRepository.postScrap(expression.expId,
-//                    onSuccess = {
-//                        viewModelScope.launch {
-//                            try {
-//                                _todayExpression.value = murengRepository.getTodayExpression()
-//                            } catch (networkError: IOException) {
-//                            }
-//                        }
-//                    },
-//                    onFailure = {
-//
-//                    }
-//            )
-//        }
-//
-//    }
-
 
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {

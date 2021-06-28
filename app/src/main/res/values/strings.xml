@@ -100,8 +100,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="expression_title">%s  %s</string>
-    <string name="expression_content">%s    %s</string>
+    <string name="home_title">%s, %s</string>
 
     <!-- 마이페이지 성과탭 -->
     <string name="award_badge_title">배지</string>
