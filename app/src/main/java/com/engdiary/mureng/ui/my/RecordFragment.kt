@@ -40,7 +40,6 @@ class RecordFragment : BaseFragment<FragmentRecordBinding>(R.layout.fragment_rec
     private fun navigateToDiaryDetail(diary: Diary) {
         Intent(context, DiaryDetailActivity::class.java)
             .putExtra(IntentKey.DIARY, diary)
-            .putExtra(IntentKey.EDITED_DIARY.first, IntentKey.EDITED_DIARY.second)
             .also { startActivity(it) }
     }
 
