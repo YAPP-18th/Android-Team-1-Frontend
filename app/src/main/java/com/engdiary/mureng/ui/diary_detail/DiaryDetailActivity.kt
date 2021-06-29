@@ -26,8 +26,8 @@ class DiaryDetailActivity :
     private val diary: Diary?
         get() = intent.getParcelableExtra(IntentKey.DIARY)
 
-    private val isDiaryEdited: String?
-        get() = intent.getStringExtra(IntentKey.EDITED_DIARY.first)
+    private val isNewDiaryEdited: String?
+        get() = intent.getStringExtra(IntentKey.NEW_DIARY.first)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,14 +35,14 @@ class DiaryDetailActivity :
         binding.viewModel = viewModel
 
         diary?.let { viewModel.setDiary(it) } ?: finish()
-        showNewCookieDialog(isDiaryEdited)
+        showNewCookieDialog(isNewDiaryEdited)
         initToolbar(binding.toolbar, diary?.isMine)
         initButtons(binding)
         subscribeUi()
     }
 
-    private fun showNewCookieDialog(isDiaryEdited: String?) {
-        if (isDiaryEdited == null) {
+    private fun showNewCookieDialog(isNewDiaryEdited: String?) {
+        if (isNewDiaryEdited != null) {
             NewCookieDialog(this).show()
         }
     }

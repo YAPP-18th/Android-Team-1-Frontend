@@ -109,9 +109,9 @@ class WriteDiaryImageActivity :
         val intent = Intent(this, DiaryDetailActivity::class.java)
             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             .putExtra(IntentKey.DIARY, diary)
-        if (isDiaryEdited) intent.putExtra(
-            IntentKey.EDITED_DIARY.first,
-            IntentKey.EDITED_DIARY.second
+        if (!isDiaryEdited) intent.putExtra(
+            IntentKey.NEW_DIARY.first,
+            IntentKey.NEW_DIARY.second
         )
         startActivity(intent)
     }
