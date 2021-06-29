@@ -127,25 +127,28 @@ class MurengRepository @Inject constructor(
         failAction: (() -> Unit)? = null
     ) {
 
-        val res = api.postUserSignup(postSignupRequest).body()?.data?.asDomain()
-        res.let {
-            authManager.jwtIdentifier = it!!.identifier
-            getJWT(
-                jwtRequest = PostJWTRequest(identifier = authManager.jwtIdentifier),
-                onSuccess = {
-                    authManager.accessToken = it.accessToken
+        val response  = api.postUserSignup(postSignupRequest)
+        response.body()
+            ?.data
+            ?.asDomain()
+            ?.let {
+                authManager.jwtIdentifier = it.identifier
+                getJWT(
+                    jwtRequest = PostJWTRequest(identifier = authManager.jwtIdentifier),
+                    onSuccess = {
+                        authManager.accessToken = it.accessToken
 
-                    it.refreshToken?.let {
-                        authManager.refreshToken = it
+                        it.refreshToken?.let {
+                            authManager.refreshToken = it
+                        }
+
+                        successAction?.let { it() }
+
+                    },
+                    onFailure = {
                     }
-
-                    successAction?.let { it() }
-
-                },
-                onFailure = {
-                }
-            )
-        }
+                )
+            }
     }
 
     suspend fun getTodayQuestionRefresh(): QuestionRefresh? {
