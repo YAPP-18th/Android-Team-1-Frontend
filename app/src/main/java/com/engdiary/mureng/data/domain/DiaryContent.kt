@@ -22,7 +22,7 @@ class DiaryContent private constructor(
     companion object {
         private const val KOREAN_REGEX_PATTERN = "[ㄱ-ㅎ|가-힣]"
         val KoreanRegex = KOREAN_REGEX_PATTERN.toRegex()
-        const val CONTENT_MIN_LENGTH = 5
+        const val CONTENT_MIN_LENGTH = 50
 
         fun of(content: String): DiaryContent {
             validateDiaryContentCondition(content)
