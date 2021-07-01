@@ -3,9 +3,12 @@ package com.engdiary.mureng.ui.social_detail
 import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.constant.SortConstant
+import com.engdiary.mureng.data.Diary
+import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.di.MurengApplication
@@ -13,6 +16,8 @@ import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
 import com.engdiary.mureng.ui.social_best.BestPopularViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -20,9 +25,6 @@ import javax.inject.Inject
 class SocialDetailViewModel @Inject constructor(
     private val murengRepository: MurengRepository
 ) : BestPopularViewModel(murengRepository) {
-
-    private var _backButton = MutableLiveData<Boolean>()
-    val backButton: LiveData<Boolean> = _backButton
 
     private var _answerCnt = MutableLiveData<Int>()
     val answerCnt : LiveData<Int> = _answerCnt
@@ -42,8 +44,8 @@ class SocialDetailViewModel @Inject constructor(
     private var _selectedSort = MutableLiveData<String>()
     val selectedSort : LiveData<String> = _selectedSort
 
-    private var _questionNetwork = MutableLiveData<QuestionNetwork>()
-    val questionNetwork : LiveData<QuestionNetwork> = _questionNetwork
+    private var _questionNetwork = MutableLiveData<Question>()
+    val questionNetwork : LiveData<Question> = _questionNetwork
 
     private var _isPop = MutableLiveData<Boolean>()
     val isPop : LiveData<Boolean> = _isPop
@@ -59,25 +61,26 @@ class SocialDetailViewModel @Inject constructor(
 
     /** 생성자 */
     init {
-        _backButton.value = false
         _answerCnt.value = 0
         _clickedSort.value = false
         _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
         _isPop.value = true
-
-
     }
 
-    fun getQuestionData(questionData : QuestionNetwork) {
+    fun getQuestionData(questionData : Question) {
         _questionNetwork.value = questionData
         _questionContent.value = questionData.contentKr
         _questionTitle.value = questionData.content
         _qusetionId.value = questionData.questionId
         if(questionData.author != null) {
             _questionUser.value = questionData.author.nickname
-            _questionUserImg.value = questionData.author.image
+            if(questionData.author.image != null) {
+                _questionUserImg.value = questionData.author.image!!
+            }
         }
-        getPagingReplyData(0)
+        viewModelScope.launch {
+            getPagingReplyData(0)
+        }
     }
 
     fun getPagingReplyData(page : Int) {
@@ -87,83 +90,67 @@ class SocialDetailViewModel @Inject constructor(
         } else {
             SortConstant.NEW
         }
-        murengRepository.getReplyAnswerList(questionId = _qusetionId.value!!, sort = sort, size = 10, page = page,
-            onSuccess = {
-                if(page > 0) {
-                    for (item in it.data!!) {
-                        addAnswerResult(item)
+        viewModelScope.launch {
+            murengRepository.getReplyAnswerList(questionId = _qusetionId.value!!, sort = sort, size = 10, page = page)
+                    .let {
+                        if (it?.data != null) {
+                            val itemList = it?.data.map { item -> item.asDomain() }
+                            if (page > 0) {
+                                for (item in itemList) {
+                                    addAnswerResult(item)
+                                }
+                            } else {
+                                _ansResults.postValue(itemList)
+                                _answerCnt.postValue(it.totalItemSize!!)
+                                _totalPage.postValue(it.totalPage!!)
+                            }
+                        }
                     }
-                } else {
-                    _ansResults.value = it.data!!
-                    _answerCnt.value = it.totalItemSize!!
-                    _totalPage.value = it.totalPage!!
-                }
-            },
-            onFailure = {
-                Timber.d("질문관련 답변 가져오기 실패")
-            }
-        )
-    }
-
-    override fun answerItemHeartClick(answerData: DiaryNetwork) {
-        if (answerData.likeYn) {
-            deleteLike(answerData.id)
-        } else {
-            addLike(answerData.id)
         }
     }
 
-    fun deleteLike(replyId : Int) {
-        murengRepository.deleteLikes(replyId,
-            onSuccess = {
-                Timber.d("좋아요 삭제 성공")
-            },
-            onFailure = {
-
-            }
-        )
+    override fun answerItemHeartClick(answerData: Diary) {
+        viewModelScope.launch {
+            if (answerData.likeYn) deleteLike(answerData.id) else addLike(answerData.id)
+        }
     }
 
-    fun addLike(replyId: Int) {
-        murengRepository.postLikes(replyId,
-            onSuccess = {
-                Timber.d("좋아요 성공")
-            },
-            onFailure = {
+    suspend fun deleteLike(replyId : Int) {
+        murengRepository.deleteLikes(replyId)
+    }
 
-            }
-        )
+    suspend fun addLike(replyId: Int) {
+        murengRepository.postLikes(replyId)
     }
 
     fun sortClick() {
         _clickedSort.value = !_clickedSort.value!!
     }
 
-    fun menuClick() {
-        if (!_isPop.value!!) {
-            _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
-            _clickedSort.value = false
-            _isPop.value = true
-            getPagingReplyData(0)
-        } else {
-            _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.newest)
-            _clickedSort.value = false
-            _isPop.value = false
-            getPagingReplyData(0)
-        }
+     fun menuClick() {
+         viewModelScope.launch {
+             if (!_isPop.value!!) {
+                 _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
+                 _clickedSort.value = false
+                 _isPop.value = true
+                 getPagingReplyData(0)
+             } else {
+                 _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.newest)
+                 _clickedSort.value = false
+                 _isPop.value = false
+                 getPagingReplyData(0)
+             }
+         }
 
     }
-    fun backClick() {
-        _backButton.value = true
-    }
 
-    override fun questionItemClick(questionData: QuestionNetwork) {
+    override fun questionItemClick(questionData: Question) {
         //TODO("Not yet implemented")
     }
 
-    override fun answerItemClick(answerData: DiaryNetwork) {
+    override fun answerItemClick(answerData: Diary) {
         Intent(MurengApplication.appContext, DiaryDetailActivity::class.java).apply {
-            this.putExtra(IntentKey.DIARY, answerData.asDomain())
+            this.putExtra(IntentKey.DIARY, answerData)
         }.run {
             MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }

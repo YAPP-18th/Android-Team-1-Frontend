@@ -4,10 +4,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.engdiary.mureng.data.request.PostQuestioRequest
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.regex.Pattern
 import java.util.regex.Pattern.compile
@@ -36,9 +38,6 @@ class SocialQcreateViewModel @Inject constructor(
 
     private var _warningMaxEng = MutableLiveData<Boolean>()
     val warningMaxEng : LiveData<Boolean> = _warningMaxEng
-
-    private var _backButton = MutableLiveData<Boolean>()
-    val backButton : LiveData<Boolean> = _backButton
 
     private var _registerQues = MutableLiveData<Boolean>()
     var registerQues : LiveData<Boolean> = _registerQues
@@ -131,13 +130,11 @@ class SocialQcreateViewModel @Inject constructor(
         _warningKor.value = false
         _warningMaxEng.value = false
         _warningMaxKor.value = false
-        _backButton.value = false
         _registerQues.value = false
         _registerVisible.value = false
 
     }
     fun quesWarningCheck() {
-        Timber.e(_qCreateEngQues.value)
         if(!_qCreateEngQues.value!!.toString().isNullOrBlank()) {
             _registerVisible.value = !_warningEng.value!! && !_warningKor.value!! && !_warningMaxEng.value!! && !_warningMaxKor.value!!
         } else {
@@ -146,24 +143,15 @@ class SocialQcreateViewModel @Inject constructor(
     }
 
     fun registerClick() {
-        if (_registerVisible.value!!) {
-            murengRepository.postCreateQuestion(PostQuestioRequest(category = "social",content = _qCreateEngQues.value.toString(), koContent = _qCreateKorQues.value.toString()!!),
-                onSuccess = {
-                    Timber.d("질문 생성 성공")
+        viewModelScope.launch {
+            if (_registerVisible.value!!) {
+                val checkingPost = murengRepository.postCreateQuestion(PostQuestioRequest(category = "social", content = _qCreateEngQues.value.toString(), koContent = _qCreateKorQues.value.toString()!!))
+                if (checkingPost) {
                     _registerQues.value = true
-                },
-                onFailure = {
-                    Timber.d("질문 생성 실패")
                 }
-            )
+            }
         }
     }
-
-
-    fun backClick() {
-        _backButton.value = true
-    }
-
     /** UI 의 onDestroy 개념으로 생각하면 편할듯 */
     override fun onCleared() {
         super.onCleared()

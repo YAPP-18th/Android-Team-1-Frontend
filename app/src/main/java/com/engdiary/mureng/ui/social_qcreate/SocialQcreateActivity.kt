@@ -14,7 +14,6 @@ import com.engdiary.mureng.ui.home.HomeFragment
 import com.engdiary.mureng.ui.main.MainViewModel
 import com.engdiary.mureng.ui.my.MyPageFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class SocialQcreateActivity : BaseActivity<ActivitySocialQcreateBinding>(R.layout.activity_social_qcreate) {
@@ -25,9 +24,7 @@ class SocialQcreateActivity : BaseActivity<ActivitySocialQcreateBinding>(R.layou
         super.onCreate(savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
 
-        viewModel.backButton.observe(this, Observer {
-            if(it) finish()
-        })
+        binding.imgQcreateBack.setOnClickListener { finish()}
 
         viewModel.registerQues.observe(this, Observer {
             if(it) finish()

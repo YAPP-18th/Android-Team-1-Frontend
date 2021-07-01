@@ -10,7 +10,7 @@
 
         <variable
             name="QuesData"
-            type="com.engdiary.mureng.data.response.QuestionNetwork" />
+            type="com.engdiary.mureng.data.Question" />
 
 
         <variable
@@ -89,7 +89,6 @@
             app:layout_constraintStart_toStartOf="@id/img_social_replay"/>
 
     <View
-        android:visibility="@{QuesData.lineVisible ? View.VISIBLE : View.GONE}"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/colorWhiteGray"

@@ -16,8 +16,12 @@ data class TodayExpression(
         @SerializedName("expressionExampleMeaning")
         val expressionExampleMeaning: String,
         @SerializedName("scrappedByRequester")
-        val scrappedByRequester: Boolean
-)
+        var scrappedByRequester: Boolean?
+) {
+        val clickedScrap : Boolean
+                get() = !(scrappedByRequester ?: true)
+
+}
 //{
 //        fun asDomain(): Diary =
 //                TodayExpression(

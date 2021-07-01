@@ -1,14 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.my.AwardFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="com.engdiary.mureng.ui.my.AwardViewModel" />
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        tools:context=".ui.my.AwardFragment">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite">
+
+            <TextView
+                android:id="@+id/tv_award_badges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/award_badge_title"
+                android:background="@drawable/best_title_round_bg"
+                style="@style/TextAppearance.NotosanskrBoldStyle"
+                android:textSize="14dp"
+                android:lineSpacingExtra="8sp"
+                android:paddingStart="18dp"
+                android:paddingVertical="2dp"
+                android:paddingEnd="10dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/colorSkyBlue"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cl_award_list"
+                android:paddingTop="16dp"
+                android:layout_marginHorizontal="20dp"
+                android:paddingBottom="26dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_award_badges">
+
+                <ImageView
+                    android:id="@+id/img_badge_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    android:src="@{vm.badgeThree ? @drawable/icons_badge_3 :@drawable/icons_lock}"
+                    app:layout_constraintEnd_toStartOf="@id/img_badge_2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/award_badge_three_days"
+                    app:layout_constraintTop_toBottomOf="@id/img_badge_1"
+                    app:layout_constraintEnd_toEndOf="@id/img_badge_1"
+                    app:layout_constraintStart_toStartOf="@id/img_badge_1"
+                    android:layout_marginTop="12dp"
+                    style="@style/TextAppearance.ImcreSoojinStyle"
+                    android:textSize="12dp"
+                    android:textColor="@{vm.badgeThree ? @color/pink2fb : @color/grey1}" />
+
+
+
+                <ImageView
+                    android:id="@+id/img_badge_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    android:src="@{vm.badgeStudy ? @drawable/icons_badge_study :@drawable/icons_lock}"
+                    app:layout_constraintStart_toEndOf="@id/img_badge_1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/img_badge_3"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/award_badge_study"
+                    app:layout_constraintTop_toBottomOf="@id/img_badge_2"
+                    app:layout_constraintEnd_toEndOf="@id/img_badge_2"
+                    app:layout_constraintStart_toStartOf="@id/img_badge_2"
+                    android:layout_marginTop="12dp"
+                    style="@style/TextAppearance.ImcreSoojinStyle"
+                    android:textSize="12dp"
+                    android:textColor="@{vm.badgeStudy ? @color/pink2fb : @color/grey1}"/>
+
+                <ImageView
+                    android:id="@+id/img_badge_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    android:src="@{vm.badgeCeleb ? @drawable/icons_badge_celeb :@drawable/icons_lock}"
+                    app:layout_constraintStart_toEndOf="@id/img_badge_2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/award_badge_celeb"
+                    app:layout_constraintTop_toBottomOf="@id/img_badge_3"
+                    app:layout_constraintEnd_toEndOf="@id/img_badge_3"
+                    app:layout_constraintStart_toStartOf="@id/img_badge_3"
+                    android:layout_marginTop="12dp"
+                    style="@style/TextAppearance.ImcreSoojinStyle"
+                    android:textSize="12dp"
+                    android:textColor="@{vm.badgeCeleb ? @color/pink2fb : @color/grey1}"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <View
+                android:id="@+id/view_award"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_award_list"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <TextView
+                android:id="@+id/tv_award_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/award_record_trey"
+                android:background="@drawable/best_title_round_bg"
+                style="@style/TextAppearance.NotosanskrBoldStyle"
+                android:textSize="14dp"
+                android:lineSpacingExtra="8sp"
+                android:paddingStart="18dp"
+                android:paddingVertical="2dp"
+                android:paddingEnd="10dp"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/colorSkyBlue"
+                app:layout_constraintTop_toBottomOf="@id/view_award"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_award_badge_cnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{vm.murengCnt.toString()}"
+                android:drawableLeft="@drawable/icons_small_mureng"
+                android:background="@{vm.murengCnt == 0 ? @drawable/award_badge_cnt_grey_bg :@drawable/award_badge_cnt_pink_bg}"
+                style="@style/TextAppearance.ComicSansStyle"
+                android:textSize="12dp"
+                tools:text="0"
+                android:layout_marginStart="12dp"
+                android:paddingVertical="4dp"
+                android:paddingHorizontal="6dp"
+                android:drawablePadding="2dp"
+                tools:background="@drawable/award_badge_cnt_pink_bg"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintTop_toTopOf="@id/tv_award_record"
+                app:layout_constraintBottom_toBottomOf="@id/tv_award_record"
+                app:layout_constraintStart_toEndOf="@id/tv_award_record"/>
+
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="18dp"
+                android:minHeight="260dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/award_record_trey_bg"
+                app:layout_constraintTop_toBottomOf="@id/tv_award_record"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="20dp"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+
+
+
+                <TextView
+                    android:visibility="@{vm.userAward.member.murengCount == 0 ? View.VISIBLE : View.GONE}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/award_record_content"
+                    android:textColor="@color/grey1"
+                    style="@style/TextAppearance.NotosanskrRegularStyle"
+                    android:textSize="12dp"
+                    android:lineSpacingExtra="5sp"
+                    android:includeFontPadding="false"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_award_trey"
+                    android:visibility="@{vm.userAward.member.murengCount > 0 ? View.VISIBLE : View.GONE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:itemCount="30"
+                    app:spanCount="6"
+                    android:layout_marginTop="10dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:listitem="@layout/item_badges" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

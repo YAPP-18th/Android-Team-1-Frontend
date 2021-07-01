@@ -22,7 +22,6 @@ import com.engdiary.mureng.databinding.ActivityWebviewBinding
 import com.engdiary.mureng.ui.base.BaseActivity
 import com.engdiary.mureng.ui.push_alert.PushAlertViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_webview.*
 
 @AndroidEntryPoint
 class WebviewActivity() : BaseActivity<ActivityWebviewBinding>(R.layout.activity_webview) {
@@ -73,7 +72,7 @@ class WebviewActivity() : BaseActivity<ActivityWebviewBinding>(R.layout.activity
 
     override fun onBackPressed() {
         if (binding.webview.canGoBack()) {
-            webview.goBack()
+            binding.webview.goBack()
         } else {
             super.onBackPressed()
         }

@@ -12,6 +12,10 @@ data class Diary(
     val questionId: Int,
     val date: String,
     val id: Int,
-    val likeCount: Int,
-    val isMine: Boolean
-) : Parcelable
+    var likeCount: Int,
+    val isMine: Boolean,
+    var likeYn : Boolean
+) : Parcelable {
+    val clickedLikeYn: Boolean
+        get() = !(likeYn ?: true)
+}

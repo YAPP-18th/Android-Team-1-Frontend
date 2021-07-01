@@ -1,20 +1,18 @@
 package com.engdiary.mureng.ui.splash
 
-import android.content.Intent
-import com.engdiary.mureng.BR
-
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
+import android.os.Looper
 import androidx.activity.viewModels
+import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.databinding.ActivitySplashBinding
 import com.engdiary.mureng.ui.base.BaseActivity
 import com.engdiary.mureng.ui.login.LoginActivity
 import com.engdiary.mureng.ui.main.MainActivity
+import com.engdiary.mureng.util.startActivity
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashActivity: BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
@@ -26,15 +24,19 @@ class SplashActivity: BaseActivity<ActivitySplashBinding>(R.layout.activity_spla
         super.onCreate(savedInstanceState)
         binding.setVariable(BR.vm, viewModel)
 
-        Handler().postDelayed({ //delay를 위한 handler
-            if(authManager.accessToken.isEmpty()) {
-                startActivity(Intent(this, LoginActivity::class.java))
-            } else {
-                startActivity(Intent(this, MainActivity::class.java))
-            }
-
-            finish()
+        Handler(Looper.getMainLooper()).postDelayed({
+            viewModel.postRefreshAccessToken()
         }, SPLASH_VIEW_TIME)
 
+        subscribeUi()
+    }
+
+    private fun subscribeUi() {
+        viewModel.navigateToLogin.observe(this){
+            startActivity(LoginActivity::class, isFinish = true)
+        }
+        viewModel.navigateToMain.observe(this){
+            startActivity(MainActivity::class, isFinish = true)
+        }
     }
 }

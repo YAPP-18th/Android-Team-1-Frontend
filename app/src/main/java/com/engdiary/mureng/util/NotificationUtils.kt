@@ -35,7 +35,6 @@ fun NotificationManager.sendNotification(
 
     notificationBuilder.setContentTitle(remoteMessage.notification?.title)
         .setContentText(remoteMessage.notification?.body)
-        .setSmallIcon(R.mipmap.ic_launcher)
         .setContentIntent(pendingIntent)
         .setAutoCancel(true)
 

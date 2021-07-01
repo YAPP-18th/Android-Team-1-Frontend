@@ -19,10 +19,25 @@ class SettingViewModel @Inject constructor(private val murengRepository: MurengR
     val navigateToPushAlert: LiveData<PushAlertSetting>
         get() = _navigateToPushAlert
 
+    private val _navigateToLogin = SingleLiveEvent<Unit>()
+    val navigateToLogin: LiveData<Unit>
+        get() = _navigateToLogin
+
     fun navigateToPushAlert() {
         viewModelScope.launch(Dispatchers.IO) {
             murengRepository.getMyInfo()?.pushAlertSetting
                 ?.let { _navigateToPushAlert.postValue(it) }
         }
+    }
+
+    fun withdrawMureng() {
+        viewModelScope.launch(Dispatchers.IO) {
+            takeIf { murengRepository.withdrawMureng() }
+                .run {    _navigateToLogin.postValue(Unit)}
+        }
+    }
+
+    fun expireAccessToken() {
+        murengRepository.expireAccessToken()
     }
 }

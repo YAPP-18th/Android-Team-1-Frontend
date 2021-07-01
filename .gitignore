@@ -247,3 +247,9 @@ fabric.properties
 
 app/services.tar
 app/google-services.json
+
+
+keystore.properties
+keystore.tar
+app/signing_config.tar
+app/MurengKey

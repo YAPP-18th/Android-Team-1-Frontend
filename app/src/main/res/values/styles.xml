@@ -8,6 +8,11 @@
         <item name="android:fontFamily">@font/roboto</item>
         <item name="colorControlNormal">@color/primary_pink</item>
         <item name="fontFamily">@font/roboto</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:colorPrimaryDark">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
     <style name="Widget.WritingDiary.EditTextView" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
@@ -141,6 +146,12 @@
     <style name="TextAppearance.NotosanskrLightStyle" parent="android:Widget.TextView">
         <item name="fontFamily">@font/notosanskr_light</item>
         <item name="android:fontFamily">@font/notosanskr_light</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.ComicSansStyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/comic_sans</item>
+        <item name="android:fontFamily">@font/comic_sans</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 

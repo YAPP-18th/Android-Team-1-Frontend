@@ -8,7 +8,7 @@
         <import type="android.view.View" />
         <variable
             name="Diary"
-            type="com.engdiary.mureng.data.response.DiaryNetwork" />
+            type="com.engdiary.mureng.data.Diary" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/img_social_user_profile"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="14dp"
             app:imageCircleGlideResource="@{Diary.image}"
@@ -48,7 +48,7 @@
             android:id="@+id/tv_social_user_answer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{Diary.content}"
+            android:text="@{Diary.content.content}"
             android:textStyle="normal"
             android:textSize="14dp"
             android:layout_marginTop="4dp"

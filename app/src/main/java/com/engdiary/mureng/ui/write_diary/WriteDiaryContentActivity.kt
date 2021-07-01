@@ -10,7 +10,6 @@ import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.data.Diary
 import com.engdiary.mureng.data.DiaryContent
-import com.engdiary.mureng.data.Hint
 import com.engdiary.mureng.data.Question
 import com.engdiary.mureng.databinding.ActivityWriteDiaryContentBinding
 import com.engdiary.mureng.databinding.ExpandableparentHintWritingdiaryBinding
@@ -69,7 +68,7 @@ class WriteDiaryContentActivity :
         }
 
         viewModel.hints.observe(this) { hints ->
-            hints?.let { initHintAdapter(binding.hints, HintAdapter(it)) }
+            hints.let { initHintAdapter(binding.hints, HintAdapter(it)) }
         }
     }
 

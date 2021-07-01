@@ -10,7 +10,7 @@
 
         <variable
             name="Diary"
-            type="com.engdiary.mureng.data.response.DiaryNetwork" />
+            type="com.engdiary.mureng.data.Diary" />
 
         <variable
             name="vm"
@@ -29,8 +29,8 @@
         
         <ImageView
             app:imageCircleGlideResource="@{Diary.image}"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:id="@+id/img_best_more_profile"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
 
 
         <TextView
-            android:text="@{Diary.content}"
+            android:text="@{Diary.question.content}"
             android:id="@+id/tv_social_best_more_ques"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
 
 
         <TextView
-            android:text="@{Diary.question.content}"
+            android:text="@{Diary.content.content}"
             android:id="@+id/tv_social_best_more_ans"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

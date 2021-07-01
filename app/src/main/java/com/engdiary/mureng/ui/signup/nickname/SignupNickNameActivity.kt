@@ -18,7 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class SignupNickNameActivity: BaseActivity<ActivitySignupNicknameBinding>(R.layout.activity_signup_nickname) {
+class SignupNickNameActivity :
+    BaseActivity<ActivitySignupNicknameBinding>(R.layout.activity_signup_nickname) {
 
     override val viewModel: SignupNickNameViewModel by viewModels<SignupNickNameViewModel>()
 
@@ -37,5 +38,8 @@ class SignupNickNameActivity: BaseActivity<ActivitySignupNicknameBinding>(R.layo
             Log.i("DUPLICATE", it.toString())
         })
 
+        binding.next.setOnClickListener {
+            viewModel.requestSignUp(binding.nickname.text.toString())
+        }
     }
 }

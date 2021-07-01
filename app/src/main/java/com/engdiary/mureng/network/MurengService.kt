@@ -12,11 +12,6 @@ import retrofit2.http.*
  */
 interface MurengService {
 
-    /** 예시
-     *  @GET("v2/api/survey/")
-     *  fun getSurveys(): Call<WinePickResponse<List<Survey>>>
-     */
-
     @POST("/api/member/user-exists/{provider}")
     fun postUserExist(
         @Path("provider") provider: String,
@@ -34,13 +29,16 @@ interface MurengService {
     ): Call<MurengResponse<JWTResponse>>
 
     @GET("/api/today-question")
-    suspend fun getTodayQuestion(): MurengResponse<QuestionNetwork>
+    suspend fun getTodayQuestion(): Response<MurengResponse<QuestionNetwork>>
 
     @GET("/api/today-question/refresh")
     suspend fun getTodayQuestionRefresh(): MurengResponse<QuestionRefreshNetwork>
 
     @GET("/api/today-expression")
     suspend fun getTodayExpression(): MurengResponse<List<TodayExpression>>
+
+    @GET("/api/member/me/scrap")
+    suspend fun getMyScrapList(): MurengResponse<MyScrapNetwork>
 
     @GET("/api/member/check-replied-today")
     suspend fun getCheckReplied(): MurengResponse<CheckRepliedNetwork>
@@ -70,7 +68,7 @@ interface MurengService {
     suspend fun getDefaultImages(): Response<MurengResponse<List<String>>>
 
     @GET("/api/member/me")
-    suspend fun getMyInfo(): MurengResponse<AuthorNetwork>
+    suspend fun getMyInfo(): Response<MurengResponse<AuthorNetwork>>
 
     @DELETE("/api/reply/{replyId}")
     suspend fun deleteDiary(
@@ -81,47 +79,47 @@ interface MurengService {
      *  답변 가져오기 (Best, Newest)
      */
     @GET("/api/reply")
-    fun getAnswerList(
+    suspend fun getAnswerList(
         @Query("page") page: Int,
         @Query("size") size: Int,
         @Query("sort") sort: String
-    ): Call<MurengResponse<List<DiaryNetwork>>>
+    ): Response<MurengResponse<List<DiaryNetwork>>>
 
     /**
      *  질문 가져오기 (Best, Newest)
      */
     @GET("/api/questions")
-    fun getQuestionList(
+    suspend fun getQuestionList(
         @Query("page") page: Int,
         @Query("size") size: Int,
         @Query("sort") sort: String
-    ): Call<MurengResponse<List<QuestionNetwork>>>
+    ): Response<MurengResponse<List<QuestionNetwork>>>
 
     /**
      *  내가 만든 질문 리스트 가져오기
      */
     @GET("/api/questions/me")
-    fun getMyQuestionList(
-    ): Call<MurengResponse<List<QuestionNetwork>>>
+    suspend fun getMyQuestionList(
+    ): Response<MurengResponse<List<QuestionNetwork>>>
 
     /**
      *  질문 생성
      */
     @POST("/api/questions")
-    fun postCreateQuestion(
+    suspend fun postCreateQuestion(
         @Body postQuestioRequest: PostQuestioRequest
-    ): Call<MurengResponse<Unit>>
+    ): Response<MurengResponse<Unit>>
 
     /**
      *  질문 상세 답변 리스트 가져오기
      */
     @GET("/api/questions/{questionId}/replies")
-    fun getReplyAnswerList(
+    suspend fun getReplyAnswerList(
         @Path("questionId") questionId: Int,
         @Query("page") page: Int?,
         @Query("size") size: Int?,
         @Query("sort") sort: String?
-    ): Call<MurengResponse<List<DiaryNetwork>>>
+    ): Response<MurengResponse<List<DiaryNetwork>>>
 
     @POST("/api/member/signup")
     suspend fun postUserSignup(
@@ -143,17 +141,17 @@ interface MurengService {
      * 답변 좋아요
      */
     @POST("/api/reply/{replyId}/reply-likes")
-    fun postLikes(
+    suspend fun postLikes(
         @Path("replyId") replyId: Int
-    ): Call<MurengResponse<Unit>>
+    ): Response<MurengResponse<Unit>>
 
     /**
      * 답변 좋아요 취소
      */
     @DELETE("/api/reply/{replyId}/reply-likes")
-    fun deleteLikes(
+    suspend fun deleteLikes(
         @Path("replyId") replyId: Int
-    ): Call<MurengResponse<Unit>>
+    ): Response<MurengResponse<Unit>>
 
     @PUT("api/member/me/setting/push/daily")
     suspend fun putDailyPushAlertSetting(
@@ -179,5 +177,20 @@ interface MurengService {
     @PUT("/api/member/me/fcm-token")
     suspend fun postUserFcmToken(
         @Body fcmTokenRequest: FcmTokenRequest
-    ): MurengResponse<AuthorNetwork>
+    ): Response<MurengResponse<AuthorNetwork>>
+
+
+    @GET("/api/member/{memberId}/achievement")
+    suspend fun getUserAchievement(
+        @Header("X-AUTH-TOKEN") accessToken: String,
+        @Path("memberId") userId: Int
+    ) : MurengResponse<AwardNetwork>
+
+    @DELETE("/api/member/me")
+    suspend fun withdrawMureng(): MurengResponse<UserNetwork>
+
+    @POST("/api/member/refresh")
+    fun postRefreshAccessToken(
+        @Body postRefreshAccessTokenRequest: PostRefreshAccessTokenRequest
+    ): Call<MurengResponse<PostRefreshAccessTokenResponse>>
 }

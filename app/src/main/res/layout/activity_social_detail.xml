@@ -2,7 +2,8 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true">
 
     <data>
         <import type="android.view.View"/>
@@ -50,8 +51,7 @@
                     android:paddingHorizontal="16dp"
                     android:id="@+id/img_social_detail_back"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:onSingleClick="@{vm::backClick}"/>
+                    app:layout_constraintStart_toStartOf="parent"/>
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
