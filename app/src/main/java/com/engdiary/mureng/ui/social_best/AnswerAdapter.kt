@@ -1,31 +1,28 @@
 package com.engdiary.mureng.ui.social_best
 
-import android.content.Context
-import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.R
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.response.DiaryNetwork
+import com.engdiary.mureng.data.domain.Diary
 import com.engdiary.mureng.databinding.ItemSocialAnswerBinding
 import com.engdiary.mureng.databinding.ItemSocialBestAnswerBinding
 import com.engdiary.mureng.databinding.ItemSocialUserAnswerBinding
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.util.setOnSingleClickListener
 import jp.wasabeef.blurry.Blurry
-import timber.log.Timber
 
 /**
  * Social_Best Tab 인기 답변 RecyclerView Adapter
  */
-class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, private val handler: android.os.Handler?) :
+class AnswerAdapter(
+    val type: AnswerRecyclerType,
+    val vm: BestPopularViewModel,
+    private val handler: android.os.Handler?
+) :
     ListAdapter<Diary, RecyclerView.ViewHolder>(AnswerDiffUtilCallBack) {
     companion object {
         const val TYPE_BEST = 0
@@ -56,7 +53,7 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, 
         return when (viewType) {
             TYPE_BEST -> {
                 val binding: ItemSocialAnswerBinding = DataBindingUtil.inflate(
-                        layoutInflater, R.layout.item_social_answer, parent, false
+                    layoutInflater, R.layout.item_social_answer, parent, false
                 )
                 AnswerViewHolder(binding).apply {
                     binding.root.setOnSingleClickListener {
@@ -66,16 +63,16 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, 
             }
             TYPE_BEST_MORE -> {
                 val binding: ItemSocialBestAnswerBinding = DataBindingUtil.inflate(
-                        layoutInflater, R.layout.item_social_best_answer, parent, false
+                    layoutInflater, R.layout.item_social_best_answer, parent, false
                 )
-                AnswerBestViewHolder(binding).apply{
+                AnswerBestViewHolder(binding).apply {
                     binding.root.setOnSingleClickListener {
                         vm.answerItemClick(binding.diary!!)
                     }
                     binding.clBestMoreAnswerHeart.setOnClickListener {
                         vm.answerItemHeartClick(binding.diary!!)
                         binding.diary = binding.diary!!.apply {
-                            if(likeYn) likeCount -= 1
+                            if (likeYn) likeCount -= 1
                             else likeCount += 1
                             likeYn = !this.likeYn!!
                         }
@@ -85,7 +82,7 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, 
             }
             else -> {
                 val binding: ItemSocialUserAnswerBinding = DataBindingUtil.inflate(
-                        layoutInflater, R.layout.item_social_user_answer, parent, false
+                    layoutInflater, R.layout.item_social_user_answer, parent, false
                 )
                 AnswerUserViewHolder(binding).apply {
                     binding.root.setOnSingleClickListener {
@@ -94,7 +91,7 @@ class AnswerAdapter(val type: AnswerRecyclerType, val vm: BestPopularViewModel, 
                     binding.clSocialUserHeart.setOnClickListener {
                         vm.answerItemHeartClick(binding.diary!!)
                         binding.diary = binding.diary!!.apply {
-                            if(likeYn) likeCount -= 1
+                            if (likeYn) likeCount -= 1
                             else likeCount += 1
                             likeYn = !this.likeYn!!
                         }
@@ -158,17 +155,18 @@ class AnswerBestViewHolder(private val binding: ItemSocialBestAnswerBinding) :
 
 object AnswerDiffUtilCallBack : DiffUtil.ItemCallback<Diary>() {
     override fun areItemsTheSame(
-            oldItem: Diary,
-            newItem: Diary,
+        oldItem: Diary,
+        newItem: Diary,
     ): Boolean {
         return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(
-            oldItem: Diary,
-            newItem: Diary,
+        oldItem: Diary,
+        newItem: Diary,
     ): Boolean {
         return oldItem.hashCode() == newItem.hashCode()
     }
 }
-enum class AnswerRecyclerType { TYPE_BEST , TYPE_BEST_MORE, TYPE_DETAIL }
+
+enum class AnswerRecyclerType { TYPE_BEST, TYPE_BEST_MORE, TYPE_DETAIL }

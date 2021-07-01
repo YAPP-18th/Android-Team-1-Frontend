@@ -3,7 +3,7 @@ package com.engdiary.mureng.ui.write_diary
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.engdiary.mureng.data.ItemWriteDiaryImage
+import com.engdiary.mureng.data.domain.ItemWriteDiaryImage
 import com.engdiary.mureng.databinding.ItemWritingdiaryimageImageBinding
 
 

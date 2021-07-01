@@ -6,7 +6,7 @@
     <data>
         <variable
             name="diary"
-            type="com.engdiary.mureng.data.Diary" />
+            type="com.engdiary.mureng.data.domain.Diary" />
         
         <variable
             name="onClickListener"

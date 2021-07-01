@@ -3,7 +3,7 @@ package com.engdiary.mureng.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.engdiary.mureng.data.Question
+import com.engdiary.mureng.data.domain.Question
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import com.google.firebase.messaging.FirebaseMessaging

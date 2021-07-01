@@ -1,11 +1,10 @@
 package com.engdiary.mureng.data.response
 
 import android.os.Parcelable
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.DiaryContent
+import com.engdiary.mureng.data.domain.Diary
+import com.engdiary.mureng.data.domain.DiaryContent
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import java.io.Serializable
 
 @Parcelize
 data class DiaryNetwork(

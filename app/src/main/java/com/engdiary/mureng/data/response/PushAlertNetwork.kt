@@ -1,6 +1,6 @@
 package com.engdiary.mureng.data.response
 
-import com.engdiary.mureng.data.PushAlertSetting
+import com.engdiary.mureng.data.domain.PushAlertSetting
 import com.google.gson.annotations.SerializedName
 
 data class PushAlertNetwork(

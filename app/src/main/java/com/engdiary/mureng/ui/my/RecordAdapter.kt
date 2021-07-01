@@ -3,7 +3,7 @@ package com.engdiary.mureng.ui.my
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.engdiary.mureng.data.Diary
+import com.engdiary.mureng.data.domain.Diary
 
 class RecordAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Diary, RecordViewHolder>(DiffCallback) {

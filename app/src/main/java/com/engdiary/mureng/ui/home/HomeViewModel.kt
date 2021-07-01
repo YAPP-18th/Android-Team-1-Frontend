@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.engdiary.mureng.data.CheckReplied
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.Question
-import com.engdiary.mureng.data.QuestionRefresh
+import com.engdiary.mureng.data.domain.CheckReplied
+import com.engdiary.mureng.data.domain.Diary
+import com.engdiary.mureng.data.domain.Question
+import com.engdiary.mureng.data.domain.QuestionRefresh
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.data.response.TodayExpression

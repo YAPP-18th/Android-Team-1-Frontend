@@ -1,4 +1,4 @@
-package com.engdiary.mureng.data
+package com.engdiary.mureng.data.domain
 
 import androidx.databinding.ObservableBoolean
 

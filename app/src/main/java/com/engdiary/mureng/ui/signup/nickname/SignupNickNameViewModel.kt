@@ -1,25 +1,16 @@
 package com.engdiary.mureng.ui.signup.nickname
 
-import android.util.Log
-import android.view.View
-import android.widget.CompoundButton
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.engdiary.mureng.data.NickName
-import com.engdiary.mureng.data.SingleLiveEvent
+import com.engdiary.mureng.data.domain.SingleLiveEvent
 import com.engdiary.mureng.data.request.PostSignupRequest
 import com.engdiary.mureng.di.AuthManager
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
-import com.kakao.usermgmt.StringSet.email
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.io.IOException
-import java.time.Instant
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 
@@ -50,7 +41,7 @@ class SignupNickNameViewModel @Inject constructor(
         _next.value = "다음"
     }
 
-    fun requestSignUp(nickname: String){
+    fun requestSignUp(nickname: String) {
         viewModelScope.launch {
             val completableDeferred = viewModelScope.async {
                 getNicknameExist(nickname)
@@ -61,19 +52,18 @@ class SignupNickNameViewModel @Inject constructor(
     }
 
     private suspend fun getNicknameExist(nickname: String) {
-            if(nickname.isNotBlank()) {
-                val res = murengRepository.getNickNameExist(nickname)
-                _isDuplicate.value = res?.duplicated
-                if(res?.duplicated!!){
-                    _next.value = "다음"
-                } else{
-                    _next.value = "완료"
-                }
-            }
-            else {
-                _isDuplicate.value = true
+        if (nickname.isNotBlank()) {
+            val res = murengRepository.getNickNameExist(nickname)
+            _isDuplicate.value = res?.duplicated
+            if (res?.duplicated!!) {
                 _next.value = "다음"
+            } else {
+                _next.value = "완료"
             }
+        } else {
+            _isDuplicate.value = true
+            _next.value = "다음"
+        }
 
     }
 
@@ -99,7 +89,6 @@ class SignupNickNameViewModel @Inject constructor(
             }
         }
     }
-
 
 
     override fun onCleared() {

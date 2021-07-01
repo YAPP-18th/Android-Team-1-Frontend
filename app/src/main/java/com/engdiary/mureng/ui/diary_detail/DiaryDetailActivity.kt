@@ -8,7 +8,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.IntentKey
-import com.engdiary.mureng.data.Diary
+import com.engdiary.mureng.data.domain.Diary
 import com.engdiary.mureng.databinding.ActivityDiaryDetailBinding
 import com.engdiary.mureng.ui.base.BaseActivity
 import com.engdiary.mureng.ui.main.MainActivity
