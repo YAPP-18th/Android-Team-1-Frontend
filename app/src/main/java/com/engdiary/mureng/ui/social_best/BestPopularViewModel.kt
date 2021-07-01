@@ -2,10 +2,8 @@ package com.engdiary.mureng.ui.social_best
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.Question
-import com.engdiary.mureng.data.response.DiaryNetwork
-import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.domain.Diary
+import com.engdiary.mureng.data.domain.Question
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import timber.log.Timber
@@ -29,6 +27,7 @@ abstract class BestPopularViewModel constructor(
         results.add(questionData)
         _quesResults.value = results
     }
+
     fun replaceQuestionResult(questionData: Question) {
         val results: MutableList<Question> = _quesResults.value?.toMutableList() ?: return
 

@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.R
-import com.engdiary.mureng.data.Question
-import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.domain.Question
 import com.engdiary.mureng.databinding.ItemSocialQuesBinding
 import com.engdiary.mureng.databinding.ItemSocialQuesPopBinding
 import com.engdiary.mureng.util.setOnSingleClickListener
@@ -16,7 +15,7 @@ import com.engdiary.mureng.util.setOnSingleClickListener
 /**
  * Social_Best Tab, My QUES Tab 인기 질문, 내 질문 리스트  RecyclerView Adapter
  */
-class QuestionAdapter(val type : QuestionRecyclerType, val vm: BestPopularViewModel) :
+class QuestionAdapter(val type: QuestionRecyclerType, val vm: BestPopularViewModel) :
     ListAdapter<Question, RecyclerView.ViewHolder>(QuestionDiffUtilCallBack) {
     companion object {
         const val TYPE_QUES_POP = 0
@@ -24,8 +23,8 @@ class QuestionAdapter(val type : QuestionRecyclerType, val vm: BestPopularViewMo
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(type) {
-           QuestionRecyclerType.TYPE_QUES_MORE -> {
+        return when (type) {
+            QuestionRecyclerType.TYPE_QUES_MORE -> {
                 TYPE_QUES_MORE
             }
             else -> {
@@ -33,9 +32,10 @@ class QuestionAdapter(val type : QuestionRecyclerType, val vm: BestPopularViewMo
             }
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return when(viewType) {
+        return when (viewType) {
             TYPE_QUES_MORE -> {
                 val binding: ItemSocialQuesBinding =
                     DataBindingUtil.inflate(
@@ -53,7 +53,8 @@ class QuestionAdapter(val type : QuestionRecyclerType, val vm: BestPopularViewMo
             }
             else -> {
                 val binding: ItemSocialQuesPopBinding = DataBindingUtil.inflate(
-                    layoutInflater, R.layout.item_social_ques_pop, parent, false)
+                    layoutInflater, R.layout.item_social_ques_pop, parent, false
+                )
 
                 QuestionPopViewHolder(binding).apply {
                     binding.root.setOnSingleClickListener {
@@ -65,12 +66,12 @@ class QuestionAdapter(val type : QuestionRecyclerType, val vm: BestPopularViewMo
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder.itemViewType) {
+        when (holder.itemViewType) {
             TYPE_QUES_MORE -> {
                 (holder as QuestionViewHolder).bind(getItem(position), vm)
             }
             else -> {
-                (holder as QuestionPopViewHolder).bind(getItem(position),vm)
+                (holder as QuestionPopViewHolder).bind(getItem(position), vm)
             }
         }
 
@@ -113,5 +114,6 @@ object QuestionDiffUtilCallBack : DiffUtil.ItemCallback<Question>() {
         return oldItem.hashCode() == newItem.hashCode()
     }
 }
-enum class QuestionRecyclerType { TYPE_QUES_POP , TYPE_QUES_MORE }
+
+enum class QuestionRecyclerType { TYPE_QUES_POP, TYPE_QUES_MORE }
 

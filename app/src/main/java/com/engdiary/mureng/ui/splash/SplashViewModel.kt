@@ -2,7 +2,7 @@ package com.engdiary.mureng.ui.splash
 
 
 import androidx.lifecycle.LiveData
-import com.engdiary.mureng.data.SingleLiveEvent
+import com.engdiary.mureng.data.domain.SingleLiveEvent
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

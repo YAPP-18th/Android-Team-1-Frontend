@@ -1,15 +1,12 @@
 package com.engdiary.mureng.ui.push_alert
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
-import com.engdiary.mureng.data.PushAlertSetting
+import com.engdiary.mureng.data.domain.PushAlertSetting
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class PushAlertViewModel @ViewModelInject constructor(

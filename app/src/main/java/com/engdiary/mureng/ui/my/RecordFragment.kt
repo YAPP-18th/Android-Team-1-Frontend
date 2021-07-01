@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.IntentKey
-import com.engdiary.mureng.data.Diary
+import com.engdiary.mureng.data.domain.Diary
 import com.engdiary.mureng.databinding.FragmentRecordBinding
 import com.engdiary.mureng.ui.base.BaseFragment
 import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
@@ -18,9 +18,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RecordFragment : BaseFragment<FragmentRecordBinding>(R.layout.fragment_record) {
     override val viewModel: RecordViewModel by viewModels()
-    private val recordAdapter by lazy { RecordAdapter(RecordAdapter.OnClickListener {
-        navigateToDiaryDetail(it)
-    }) }
+    private val recordAdapter by lazy {
+        RecordAdapter(RecordAdapter.OnClickListener {
+            navigateToDiaryDetail(it)
+        })
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,7 +46,7 @@ class RecordFragment : BaseFragment<FragmentRecordBinding>(R.layout.fragment_rec
     }
 
     private fun subscribeUi() {
-        viewModel.records.observe(viewLifecycleOwner){
+        viewModel.records.observe(viewLifecycleOwner) {
             recordAdapter.submitList(it)
         }
     }

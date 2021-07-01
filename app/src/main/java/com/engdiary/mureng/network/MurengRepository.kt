@@ -6,7 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
-import com.engdiary.mureng.data.*
+import com.engdiary.mureng.data.domain.*
 import com.engdiary.mureng.data.request.*
 import com.engdiary.mureng.data.response.*
 import com.engdiary.mureng.di.AuthManager

@@ -1,8 +1,6 @@
-package com.engdiary.mureng.data
+package com.engdiary.mureng.data.domain
 
 import android.os.Parcelable
-import com.engdiary.mureng.data.Author
-import com.engdiary.mureng.data.Badge
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

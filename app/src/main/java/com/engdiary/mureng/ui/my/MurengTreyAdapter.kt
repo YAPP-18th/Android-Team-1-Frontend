@@ -7,13 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.R
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.Record
-import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.domain.Record
 import com.engdiary.mureng.databinding.ItemBadgesBinding
-import com.engdiary.mureng.databinding.ItemSocialQuesBinding
-import com.engdiary.mureng.ui.social_best.BestPopularViewModel
-import com.engdiary.mureng.util.setOnSingleClickListener
 
 class MurengTreyAdapter() :
     ListAdapter<Record, MurengTreyViewHolder>(MurengTreyDiffUtilCallBack) {

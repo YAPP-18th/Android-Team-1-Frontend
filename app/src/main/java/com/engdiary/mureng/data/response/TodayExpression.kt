@@ -1,7 +1,5 @@
 package com.engdiary.mureng.data.response
 
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.DiaryContent
 import com.google.gson.annotations.SerializedName
 
 data class TodayExpression(
@@ -18,8 +16,8 @@ data class TodayExpression(
         @SerializedName("scrappedByRequester")
         var scrappedByRequester: Boolean?
 ) {
-        val clickedScrap : Boolean
-                get() = !(scrappedByRequester ?: true)
+    val clickedScrap: Boolean
+        get() = !(scrappedByRequester ?: true)
 
 }
 //{

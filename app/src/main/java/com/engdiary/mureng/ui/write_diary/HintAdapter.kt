@@ -2,7 +2,7 @@ package com.engdiary.mureng.ui.write_diary
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.engdiary.mureng.data.Hint
+import com.engdiary.mureng.data.domain.Hint
 
 class HintAdapter(private val hints: List<Hint>) : RecyclerView.Adapter<HintViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HintViewHolder {

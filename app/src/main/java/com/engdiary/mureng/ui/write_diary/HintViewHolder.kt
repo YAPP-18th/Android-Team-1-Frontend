@@ -3,7 +3,7 @@ package com.engdiary.mureng.ui.write_diary
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.engdiary.mureng.data.Hint
+import com.engdiary.mureng.data.domain.Hint
 import com.engdiary.mureng.databinding.ItemHintBinding
 
 class HintViewHolder private constructor(

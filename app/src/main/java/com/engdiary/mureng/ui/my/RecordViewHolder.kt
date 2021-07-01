@@ -3,7 +3,7 @@ package com.engdiary.mureng.ui.my
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.engdiary.mureng.data.Diary
+import com.engdiary.mureng.data.domain.Diary
 import com.engdiary.mureng.databinding.ItemRecordBinding
 import com.engdiary.mureng.util.setRound
 

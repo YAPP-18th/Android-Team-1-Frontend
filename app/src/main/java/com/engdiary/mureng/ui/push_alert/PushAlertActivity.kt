@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.IntentKey
-import com.engdiary.mureng.data.PushAlertSetting
+import com.engdiary.mureng.data.domain.PushAlertSetting
 import com.engdiary.mureng.databinding.ActivityPushAlertBinding
 import com.engdiary.mureng.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint

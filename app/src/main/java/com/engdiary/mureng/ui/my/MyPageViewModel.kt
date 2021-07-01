@@ -3,7 +3,7 @@ package com.engdiary.mureng.ui.my
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.engdiary.mureng.data.Author
+import com.engdiary.mureng.data.domain.Author
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,8 +1,6 @@
 package com.engdiary.mureng.data.response
 
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.DiaryContent
-import com.engdiary.mureng.data.QuestionRefresh
+import com.engdiary.mureng.data.domain.QuestionRefresh
 import com.google.gson.annotations.SerializedName
 
 data class QuestionRefreshNetwork(

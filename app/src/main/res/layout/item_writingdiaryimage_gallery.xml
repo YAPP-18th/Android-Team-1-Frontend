@@ -6,7 +6,7 @@
 
         <variable
             name="itemWritingDiaryGallery"
-            type="com.engdiary.mureng.data.ItemWriteDiaryImage.Gallery" />
+            type="com.engdiary.mureng.data.domain.ItemWriteDiaryImage.Gallery" />
 
         <variable
             name="onClickListener"

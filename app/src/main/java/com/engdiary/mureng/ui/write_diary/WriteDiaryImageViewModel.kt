@@ -6,8 +6,12 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.engdiary.mureng.data.*
-import com.engdiary.mureng.data.ItemWriteDiaryImage.DiaryImage.Companion.FROM_SERVER_ID
+import com.engdiary.mureng.data.domain.DiaryContent
+import com.engdiary.mureng.data.domain.Diary
+import com.engdiary.mureng.data.domain.ItemWriteDiaryImage
+import com.engdiary.mureng.data.domain.ItemWriteDiaryImage.DiaryImage.Companion.FROM_SERVER_ID
+import com.engdiary.mureng.data.domain.Question
+import com.engdiary.mureng.data.domain.SingleLiveEvent
 import com.engdiary.mureng.di.MEDIA_BASE_URL
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel

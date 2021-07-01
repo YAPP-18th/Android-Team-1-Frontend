@@ -8,10 +8,8 @@ import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.BestMoreConstant
 import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.constant.SortConstant
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.Question
-import com.engdiary.mureng.data.response.DiaryNetwork
-import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.domain.Diary
+import com.engdiary.mureng.data.domain.Question
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
@@ -28,32 +26,31 @@ class BestMoreViewModel @Inject constructor(
 ) : BestPopularViewModel(murengRepository) {
 
     private val _barTitle = MutableLiveData<String>()
-    val barTitle : LiveData<String> = _barTitle
+    val barTitle: LiveData<String> = _barTitle
 
     private val _barContent = MutableLiveData<String>()
-    val barContent : LiveData<String> = _barContent
+    val barContent: LiveData<String> = _barContent
 
     private var _totalCnt = MutableLiveData<Int>()
-    val totalCnt : LiveData<Int> = _totalCnt
+    val totalCnt: LiveData<Int> = _totalCnt
 
     private val _barImage = MutableLiveData<Int>()
-    val barImage : LiveData<Int> = _barImage
+    val barImage: LiveData<Int> = _barImage
 
     private var _isAns = MutableLiveData<Boolean>()
     val isAns: LiveData<Boolean> = _isAns
 
     private var _clickedSort = MutableLiveData<Boolean>()
-    val clickedSort : LiveData<Boolean> = _clickedSort
+    val clickedSort: LiveData<Boolean> = _clickedSort
 
     private var _selectedSort = MutableLiveData<String>()
-    val selectedSort : LiveData<String> = _selectedSort
+    val selectedSort: LiveData<String> = _selectedSort
 
     private var _isPop = MutableLiveData<Boolean>()
-    val isPop : LiveData<Boolean> = _isPop
+    val isPop: LiveData<Boolean> = _isPop
 
     private var _totalPage = MutableLiveData<Int>()
-    val totalPage : LiveData<Int> = _totalPage
-
+    val totalPage: LiveData<Int> = _totalPage
 
 
     init {
@@ -61,10 +58,11 @@ class BestMoreViewModel @Inject constructor(
         _clickedSort.value = false
         _totalCnt.value = 0
         _isPop.value = true
-        _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
+        _selectedSort.value =
+            MurengApplication.getGlobalAppApplication().getString(R.string.popular)
     }
 
-    fun setMode(mode : String){
+    fun setMode(mode: String) {
         viewModelScope.launch {
             if (mode == BestMoreConstant.ANS) {
                 _isAns.value = true
@@ -82,7 +80,8 @@ class BestMoreViewModel @Inject constructor(
             }
         }
     }
-    fun getAnswerData(page : Int) {
+
+    fun getAnswerData(page: Int) {
         val sort = if (_isPop.value!!) {
             SortConstant.POP
         } else {
@@ -90,25 +89,25 @@ class BestMoreViewModel @Inject constructor(
         }
         viewModelScope.launch {
             murengRepository.getAnswerList(page = page, size = 10, sort = sort)
-                    .let {
-                        if (it?.data != null) {
-                            val itemList = it.data?.map { item -> item.asDomain() }
-                            if (page > 0) {
-                                for (item in itemList) {
-                                    addAnswerResult(item)
-                                }
-
-                            } else {
-                                _ansResults.value = itemList
-                                _totalCnt.value = it.totalItemSize!!
-                                _totalPage.value = it.totalPage!!
+                .let {
+                    if (it?.data != null) {
+                        val itemList = it.data?.map { item -> item.asDomain() }
+                        if (page > 0) {
+                            for (item in itemList) {
+                                addAnswerResult(item)
                             }
+
+                        } else {
+                            _ansResults.value = itemList
+                            _totalCnt.value = it.totalItemSize!!
+                            _totalPage.value = it.totalPage!!
                         }
                     }
+                }
         }
     }
 
-    fun getQuestionData(page : Int) {
+    fun getQuestionData(page: Int) {
         val sort = if (_isPop.value!!) {
             SortConstant.POP
         } else {
@@ -117,22 +116,22 @@ class BestMoreViewModel @Inject constructor(
 
         viewModelScope.launch {
             murengRepository.getQuestionList(page = page, size = 10, sort = sort)
-                    .let {
-                        if (it?.data != null) {
-                            val questionData = it.data?.map{item -> item.asDomain()}
+                .let {
+                    if (it?.data != null) {
+                        val questionData = it.data?.map { item -> item.asDomain() }
 
-                            if (page > 0) {
-                                for (item in questionData) {
-                                    addQuestionResult(item)
-                                }
-
-                            } else {
-                                _quesResults.value = questionData
-                                _totalCnt.value = it.totalItemSize!!
-                                _totalPage.value = it.totalPage!!
+                        if (page > 0) {
+                            for (item in questionData) {
+                                addQuestionResult(item)
                             }
+
+                        } else {
+                            _quesResults.value = questionData
+                            _totalCnt.value = it.totalItemSize!!
+                            _totalPage.value = it.totalPage!!
                         }
                     }
+                }
         }
     }
 
@@ -142,12 +141,13 @@ class BestMoreViewModel @Inject constructor(
 
     fun menuClick() {
         if (!_isPop.value!!) {
-            _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.popular)
+            _selectedSort.value =
+                MurengApplication.getGlobalAppApplication().getString(R.string.popular)
             _isPop.value = true
             _clickedSort.value = false
             Timber.d("인기순 정렬")
             viewModelScope.launch {
-                if(_isAns.value!!) {
+                if (_isAns.value!!) {
                     getAnswerData(0)
 
                 } else {
@@ -156,12 +156,13 @@ class BestMoreViewModel @Inject constructor(
             }
 
         } else {
-            _selectedSort.value = MurengApplication.getGlobalAppApplication().getString(R.string.newest)
+            _selectedSort.value =
+                MurengApplication.getGlobalAppApplication().getString(R.string.newest)
             _isPop.value = false
             Timber.d("최신순 정렬")
             _clickedSort.value = false
             viewModelScope.launch {
-                if(_isAns.value!!) {
+                if (_isAns.value!!) {
                     getAnswerData(0)
 
                 } else {
@@ -176,14 +177,17 @@ class BestMoreViewModel @Inject constructor(
         Intent(MurengApplication.appContext, SocialDetailActivity::class.java).apply {
             this.putExtra(IntentKey.QUESTION, questionData)
         }.run {
-            MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            MurengApplication.getGlobalApplicationContext()
+                .startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }
     }
+
     override fun answerItemClick(answerData: Diary) {
         Intent(MurengApplication.appContext, DiaryDetailActivity::class.java).apply {
             this.putExtra(IntentKey.DIARY, answerData)
         }.run {
-            MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            MurengApplication.getGlobalApplicationContext()
+                .startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }
     }
 
@@ -193,7 +197,7 @@ class BestMoreViewModel @Inject constructor(
         }
     }
 
-    suspend fun deleteLike(replyId : Int) {
+    suspend fun deleteLike(replyId: Int) {
         murengRepository.deleteLikes(replyId)
     }
 

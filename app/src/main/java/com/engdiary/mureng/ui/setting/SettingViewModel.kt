@@ -2,8 +2,8 @@ package com.engdiary.mureng.ui.setting
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.engdiary.mureng.data.PushAlertSetting
-import com.engdiary.mureng.data.SingleLiveEvent
+import com.engdiary.mureng.data.domain.PushAlertSetting
+import com.engdiary.mureng.data.domain.SingleLiveEvent
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,7 +33,7 @@ class SettingViewModel @Inject constructor(private val murengRepository: MurengR
     fun withdrawMureng() {
         viewModelScope.launch(Dispatchers.IO) {
             takeIf { murengRepository.withdrawMureng() }
-                .run {    _navigateToLogin.postValue(Unit)}
+                .run { _navigateToLogin.postValue(Unit) }
         }
     }
 
