@@ -34,7 +34,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         viewModel.selectMyPage.observe(this, Observer {
             if (it) {
                 MyPageFragment().navigate(supportFragmentManager, binding.flMain.id)
-//                startActivity(SettingActivity::class, isFinish = false)
             }
         })
 
@@ -46,10 +45,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         viewModel.selectWriting.observe(this, Observer {
             if (it) {
-                Intent(this, WriteDiaryContentActivity::class.java)
-                    .putExtra(IntentKey.QUESTION, viewModel.todayQuestion)
-                    .let { intent -> startActivity(intent) }
+                viewModel.getIfTodayQuestionReplied()
             }
         })
+
+        viewModel.navigateToWriteDiaryContent.observe(this) {
+            Intent(this, WriteDiaryContentActivity::class.java)
+                .putExtra(IntentKey.QUESTION, viewModel.todayQuestion)
+                .let { intent -> startActivity(intent) }
+        }
     }
 }
