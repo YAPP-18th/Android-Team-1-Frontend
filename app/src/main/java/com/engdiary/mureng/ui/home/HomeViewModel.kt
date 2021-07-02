@@ -5,10 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.engdiary.mureng.data.CheckReplied
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.Question
-import com.engdiary.mureng.data.QuestionRefresh
+import com.engdiary.mureng.data.*
 import com.engdiary.mureng.data.response.DiaryNetwork
 import com.engdiary.mureng.data.response.QuestionNetwork
 import com.engdiary.mureng.data.response.TodayExpression
@@ -32,6 +29,10 @@ class HomeViewModel @Inject constructor(
     private var _questionTitle = MutableLiveData<String>()
     var questionTitle : LiveData<String> = _questionTitle
 
+    private var _question = MutableLiveData<Question>()
+    var question : LiveData<Question> = _question
+        get() = _question
+
     private var _userName = MutableLiveData<String>()
     val userName : LiveData<String> = _userName
 
@@ -40,6 +41,16 @@ class HomeViewModel @Inject constructor(
     init {
         _userName.value = ""
         _questionTitle.value = ""
+
+        viewModelScope.launch {
+            val todayQuestion = murengRepository.getTodayQuestion()
+            todayQuestion?.let {
+                if(it != null) {
+                    _question.value = it
+                }
+            }
+        }
+
         viewModelScope.launch(Dispatchers.IO) {
             murengRepository.getMyInfo()
                     ?.let { _userName.postValue(it.nickname) }
@@ -57,6 +68,8 @@ class HomeViewModel @Inject constructor(
             _questionTitle.postValue(murengRepository.getTodayQuestion()?.content)
 
         }
+
+
     }
 
     fun getQuestionData() {

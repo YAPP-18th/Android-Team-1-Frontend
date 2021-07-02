@@ -1,5 +1,6 @@
 package com.engdiary.mureng.ui.home
 
+import android.content.Intent
 import android.graphics.Color
 import android.net.wifi.hotspot2.pps.HomeSp
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +14,11 @@ import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.databinding.HomeFragmentBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.ui.base.BaseFragment
+import com.engdiary.mureng.ui.diary_detail.DiaryDetailActivity
+import com.engdiary.mureng.ui.setting.WebviewActivity
+import com.engdiary.mureng.ui.signup.nickname.SignupNickNameActivity
 import com.engdiary.mureng.ui.write_diary.HintAdapter
 import com.engdiary.mureng.ui.write_diary.HintDecoration
 import com.engdiary.mureng.ui.write_diary.WriteDiaryContentActivity
@@ -34,6 +39,20 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                binding.homeTodayExpression.adapter = TodayExpressionAdapter(ScrapListType.TYPE_HOME, it, viewModel)
             }
         })
+
+        viewModel.question.observe(this) { test ->
+        }
+
+//        viewModel.question.observe()
+
+        binding.btnReply.setOnClickListener {
+//            Intent(this, WebviewActivity::class.java)
+//                    .putExtra("mode", IntentKey.TERMS)
+//                    .also { startActivity(it) }
+            Intent(context, WriteDiaryContentActivity::class.java)
+                    .putExtra(IntentKey.QUESTION, viewModel.question.value)
+                    .also { startActivity(it) }
+        }
 
     }
 }
