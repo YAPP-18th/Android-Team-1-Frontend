@@ -80,6 +80,8 @@
 
 
             <Button
+                tools:visibility="gone"
+                android:visibility="@{vm.checkReplied.replied ? View.GONE: View.VISIBLE }"
                 android:id="@+id/btn_reply"
                 style="@style/TextAppearance.NotosanskrBoldStyle"
                 android:layout_width="match_parent"
@@ -121,7 +123,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
 
-                <Button
+                <TextView
                     android:id="@+id/btn_reply_warning"
                     style="@style/TextAppearance.NotosanskrMediumStyle"
                     android:layout_width="0dp"
@@ -133,6 +135,7 @@
                     android:textColor="@color/primary_pink"
                     tools:text="2시간 후에 답변할 수 있어요"
                     android:textSize="14dp"
+                    android:gravity="center"
                     android:backgroundTint="@null"
                     android:backgroundTintMode="@null"
                     app:layout_constraintBottom_toBottomOf="parent"
