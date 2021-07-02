@@ -36,6 +36,7 @@ fun NotificationManager.sendNotification(
     notificationBuilder.setContentTitle(remoteMessage.notification?.title)
         .setContentText(remoteMessage.notification?.body)
         .setContentIntent(pendingIntent)
+        .setSmallIcon(R.drawable.icon_push_alert)
         .setAutoCancel(true)
 
     notify(NOTIFICATION_ID, notificationBuilder.build())
