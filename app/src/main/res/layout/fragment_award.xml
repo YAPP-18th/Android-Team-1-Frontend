@@ -214,13 +214,14 @@
                     android:id="@+id/rv_award_trey"
                     android:visibility="@{vm.userAward.member.murengCount > 0 ? View.VISIBLE : View.GONE}"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     tools:itemCount="30"
                     app:spanCount="6"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginVertical="10dp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:listitem="@layout/item_badges" />
 
