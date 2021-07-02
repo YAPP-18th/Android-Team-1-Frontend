@@ -4,10 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.Question
-import com.engdiary.mureng.data.SingleLiveEvent
-import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.domain.Diary
+import com.engdiary.mureng.data.domain.Question
+import com.engdiary.mureng.data.domain.SingleLiveEvent
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

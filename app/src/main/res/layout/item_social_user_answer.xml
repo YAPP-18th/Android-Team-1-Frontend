@@ -8,7 +8,7 @@
         <import type="android.view.View" />
         <variable
             name="Diary"
-            type="com.engdiary.mureng.data.Diary" />
+            type="com.engdiary.mureng.data.domain.Diary" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

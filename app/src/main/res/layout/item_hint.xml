@@ -6,7 +6,7 @@
     <data>
         <variable
             name="hint"
-            type="com.engdiary.mureng.data.Hint" />
+            type="com.engdiary.mureng.data.domain.Hint" />
 
     </data>
 

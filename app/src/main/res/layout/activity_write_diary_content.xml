@@ -45,6 +45,7 @@
                     android:layout_marginEnd="17dp"
                     android:text="@string/writingdiary_nextbutton"
                     android:textAppearance="@style/TextAppearance.WritingDiary.Next"
+                    android:enabled="@{viewModel.isDiaryContentConditionSatisfied()}"
                     android:textColor="@{viewModel.isDiaryContentConditionSatisfied() ? @color/pinkpink : @color/pink2}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

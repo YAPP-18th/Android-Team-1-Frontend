@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.engdiary.mureng.R
-import com.engdiary.mureng.data.ItemWriteDiaryImage
+import com.engdiary.mureng.data.domain.ItemWriteDiaryImage
 import com.google.android.material.tabs.TabLayout
 import jp.wasabeef.blurry.Blurry
 

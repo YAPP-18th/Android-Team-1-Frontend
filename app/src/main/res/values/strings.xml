@@ -112,4 +112,7 @@
     <string name="award_badge_mrureng_set">머렝set(30입)</string>
     <string name="award_record_content">질문에 답하고 쿠키를 받아\n트레이를 채워요! XD</string>
 
+    <!-- 홈 탭 -->
+    <string name="home_reply_timer">%d시간 후에 답변할 수 있어요</string>
+
 </resources>

@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-@ServiceScoped
+@AndroidEntryPoint
 class MurengFCMService:FirebaseMessagingService() {
     @Inject lateinit var ioScope: CoroutineScope
     @Inject lateinit var murengRepository: MurengRepository

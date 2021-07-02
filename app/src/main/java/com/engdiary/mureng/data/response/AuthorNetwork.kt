@@ -1,6 +1,6 @@
 package com.engdiary.mureng.data.response
 
-import com.engdiary.mureng.data.Author
+import com.engdiary.mureng.data.domain.Author
 import com.google.gson.annotations.SerializedName
 
 data class AuthorNetwork(

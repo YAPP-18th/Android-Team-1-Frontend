@@ -1,7 +1,7 @@
 package com.engdiary.mureng.data.response
 
 import android.os.Parcelable
-import com.engdiary.mureng.data.Question
+import com.engdiary.mureng.data.domain.Question
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 

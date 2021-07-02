@@ -10,7 +10,7 @@
 
         <variable
             name="QuesData"
-            type="com.engdiary.mureng.data.Question" />
+            type="com.engdiary.mureng.data.domain.Question" />
 
 
         <variable

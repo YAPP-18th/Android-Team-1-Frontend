@@ -40,15 +40,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             }
         })
 
-        viewModel.question.observe(this) { test ->
-        }
-
-//        viewModel.question.observe()
-
         binding.btnReply.setOnClickListener {
-//            Intent(this, WebviewActivity::class.java)
-//                    .putExtra("mode", IntentKey.TERMS)
-//                    .also { startActivity(it) }
             Intent(context, WriteDiaryContentActivity::class.java)
                     .putExtra(IntentKey.QUESTION, viewModel.question.value)
                     .also { startActivity(it) }

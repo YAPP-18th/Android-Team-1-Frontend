@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
 import com.engdiary.mureng.constant.IntentKey
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.DiaryContent
-import com.engdiary.mureng.data.Question
+import com.engdiary.mureng.data.domain.Diary
+import com.engdiary.mureng.data.domain.DiaryContent
+import com.engdiary.mureng.data.domain.Question
 import com.engdiary.mureng.databinding.ActivityWriteDiaryContentBinding
 import com.engdiary.mureng.databinding.ExpandableparentHintWritingdiaryBinding
 import com.engdiary.mureng.ui.base.BaseActivity

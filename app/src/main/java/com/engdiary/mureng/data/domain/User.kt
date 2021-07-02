@@ -1,4 +1,4 @@
-package com.engdiary.mureng.data
+package com.engdiary.mureng.data.domain
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

@@ -3,13 +3,10 @@ package com.engdiary.mureng.ui.social_detail
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.widget.NestedScrollView
-import androidx.lifecycle.Observer
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
-import com.engdiary.mureng.constant.BestMoreConstant
 import com.engdiary.mureng.constant.IntentKey
-import com.engdiary.mureng.data.Question
-import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.domain.Question
 import com.engdiary.mureng.databinding.ActivitySocialDetailBinding
 import com.engdiary.mureng.ui.base.BaseActivity
 import com.engdiary.mureng.ui.social_best.AnswerAdapter
@@ -17,16 +14,23 @@ import com.engdiary.mureng.ui.social_best.AnswerRecyclerType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SocialDetailActivity : BaseActivity<ActivitySocialDetailBinding>(R.layout.activity_social_detail) {
+class SocialDetailActivity :
+    BaseActivity<ActivitySocialDetailBinding>(R.layout.activity_social_detail) {
 
     override val viewModel: SocialDetailViewModel by viewModels<SocialDetailViewModel>()
-    private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(AnswerRecyclerType.TYPE_DETAIL, viewModel, null) }
+    private val answerAdapter: AnswerAdapter by lazy {
+        AnswerAdapter(
+            AnswerRecyclerType.TYPE_DETAIL,
+            viewModel,
+            null
+        )
+    }
 
     /** 이전 화면에서부터 받은 QuestionItem[QuestionData] */
     private val questionData: Question?
         get() = intent.getParcelableExtra(IntentKey.QUESTION) as? Question
 
-    private var page : Int = 0
+    private var page: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,12 +43,12 @@ class SocialDetailActivity : BaseActivity<ActivitySocialDetailBinding>(R.layout.
                         .measuredHeight - v.measuredHeight &&
                     scrollY > oldScrollY
                 ) {
-                    if(page <= viewModel.totalPage.value!!) {
+                    if (page <= viewModel.totalPage.value!!) {
                         viewModel.getPagingReplyData(page++)
                     }
                 }
             }
-        } )
+        })
 
         binding.rvSocialMyques.apply {
             adapter = answerAdapter

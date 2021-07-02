@@ -5,18 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.engdiary.mureng.constant.IntentKey
-import com.engdiary.mureng.data.Diary
-import com.engdiary.mureng.data.Question
-import com.engdiary.mureng.data.response.DiaryNetwork
-import com.engdiary.mureng.data.response.QuestionNetwork
+import com.engdiary.mureng.data.domain.Diary
+import com.engdiary.mureng.data.domain.Question
 import com.engdiary.mureng.di.MurengApplication
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.social_best.BestPopularViewModel
 import com.engdiary.mureng.ui.social_detail.SocialDetailActivity
-import com.engdiary.mureng.ui.social_qcreate.SocialQcreateActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,18 +33,20 @@ class MyQuesViewModel @Inject constructor(
         viewModelScope.launch {
             murengRepository.getMyQuestionList()
                 .let {
-                    if(it != null) {
+                    if (it != null) {
                         _quesResults.postValue(it)
                         _quesCnt.value = it.size
                     }
                 }
         }
     }
+
     override fun questionItemClick(questionData: Question) {
         Intent(MurengApplication.appContext, SocialDetailActivity::class.java).apply {
             this.putExtra(IntentKey.QUESTION, questionData)
         }.run {
-            MurengApplication.getGlobalApplicationContext().startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            MurengApplication.getGlobalApplicationContext()
+                .startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }
 
     }

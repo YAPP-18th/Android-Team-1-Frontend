@@ -6,7 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
-import com.engdiary.mureng.data.*
+import com.engdiary.mureng.data.domain.*
 import com.engdiary.mureng.data.request.*
 import com.engdiary.mureng.data.response.*
 import com.engdiary.mureng.di.AuthManager
@@ -27,20 +27,6 @@ class MurengRepository @Inject constructor(
 ) {
     private val IMAGE_MEDIA_TYPE = "image/jpg".toMediaType()
     private val DIARY_IMAGE = "image"
-
-    /** 예시
-     * fun postUser(
-    data: AccessTokenData,
-    onSuccess: (UserData) -> Unit,
-    onFailure: () -> Unit
-    ) {
-    api.postUser(data).safeEnqueue(
-    onSuccess = { onSuccess(it!!.result!!) },
-    onFailure = { onFailure() },
-    onError = { onFailure() }
-    )
-    }
-     */
 
     fun postKakaoLogin(
         userExistRequest: UserExistRequest,

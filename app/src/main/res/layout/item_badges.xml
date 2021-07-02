@@ -6,7 +6,7 @@
     <data>
         <variable
             name="record"
-            type="com.engdiary.mureng.data.Record" />
+            type="com.engdiary.mureng.data.domain.Record" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

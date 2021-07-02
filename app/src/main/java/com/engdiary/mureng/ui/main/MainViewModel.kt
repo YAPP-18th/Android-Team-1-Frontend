@@ -3,7 +3,8 @@ package com.engdiary.mureng.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.engdiary.mureng.data.Question
+import com.engdiary.mureng.data.domain.Question
+import com.engdiary.mureng.data.domain.SingleLiveEvent
 import com.engdiary.mureng.network.MurengRepository
 import com.engdiary.mureng.ui.base.BaseViewModel
 import com.google.firebase.messaging.FirebaseMessaging
@@ -28,6 +29,10 @@ class MainViewModel @Inject constructor(
 
     private var _selectWriting = MutableLiveData<Boolean>()
     var selectWriting: LiveData<Boolean> = _selectWriting
+
+    private val _navigateToWriteDiaryContent = SingleLiveEvent<Unit>()
+    val navigateToWriteDiaryContent: LiveData<Unit>
+        get() = _navigateToWriteDiaryContent
 
     var todayQuestion: Question? = null
         private set
@@ -91,6 +96,19 @@ class MainViewModel @Inject constructor(
             _selectMyPage.value = false
             _selectSocial.value = true
             _selectWriting.value = false
+        }
+    }
+
+    fun getIfTodayQuestionReplied() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = murengRepository.getCheckReplied()
+            if (!response?.replied!!) {
+                _navigateToWriteDiaryContent.postValue(Unit)
+                return@launch
+            }
+            viewModelScope.launch(Dispatchers.Main) {
+                MypageClick()
+            }
         }
     }
 

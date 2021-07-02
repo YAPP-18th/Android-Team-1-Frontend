@@ -1,7 +1,6 @@
 package com.engdiary.mureng.data.response
 
-import com.engdiary.mureng.data.User
-import com.engdiary.mureng.data.Question
+import com.engdiary.mureng.data.domain.User
 import com.google.gson.annotations.SerializedName
 
 data class UserNetwork(
@@ -24,5 +23,5 @@ data class UserNetwork(
 
 ) : java.io.Serializable {
     fun asDomain(): User =
-            User(memberId, identifier, email, nickname, image, murengCount, attendanceCount, pushActive)
+        User(memberId, identifier, email, nickname, image, murengCount, attendanceCount, pushActive)
 }

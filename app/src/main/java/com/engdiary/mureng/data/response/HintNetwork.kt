@@ -1,6 +1,6 @@
 package com.engdiary.mureng.data.response
 
-import com.engdiary.mureng.data.Hint
+import com.engdiary.mureng.data.domain.Hint
 import com.google.gson.annotations.SerializedName
 
 data class HintNetwork(

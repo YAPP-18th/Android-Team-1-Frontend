@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.engdiary.mureng.data.SingleLiveEvent
+import com.engdiary.mureng.data.domain.SingleLiveEvent
 import com.engdiary.mureng.data.request.UserExistRequest
 import com.engdiary.mureng.network.MurengRepository
 import io.reactivex.rxjava3.disposables.CompositeDisposable

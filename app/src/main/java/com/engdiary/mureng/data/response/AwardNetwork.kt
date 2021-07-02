@@ -1,9 +1,9 @@
 package com.engdiary.mureng.data.response
 
 import android.os.Parcelable
-import com.engdiary.mureng.data.Author
-import com.engdiary.mureng.data.Award
-import com.engdiary.mureng.data.Badge
+import com.engdiary.mureng.data.domain.Author
+import com.engdiary.mureng.data.domain.Award
+import com.engdiary.mureng.data.domain.Badge
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
