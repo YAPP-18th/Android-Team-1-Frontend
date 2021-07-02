@@ -8,8 +8,10 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.engdiary.mureng.BR
 import com.engdiary.mureng.R
+import com.engdiary.mureng.constant.IntentKey
 import com.engdiary.mureng.databinding.ActivitySignupTermsBinding
 import com.engdiary.mureng.ui.base.BaseActivity
+import com.engdiary.mureng.ui.setting.WebviewActivity
 import com.engdiary.mureng.ui.signup.nickname.SignupNickNameActivity
 import com.engdiary.mureng.ui.signup.terms.SignupTermsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +36,18 @@ class SignupTermsActivity: BaseActivity<ActivitySignupTermsBinding>(R.layout.act
                 termsGuideToast.show()
             }
 
+        }
+
+        binding.serviceTerm.setOnClickListener {
+            Intent(this, WebviewActivity::class.java)
+                    .putExtra("mode", IntentKey.TERMS)
+                    .also { startActivity(it) }
+        }
+
+        binding.policeTerm.setOnClickListener {
+            Intent(this, WebviewActivity::class.java)
+                    .putExtra("mode", IntentKey.PRIVACY_POLICY)
+                    .also { startActivity(it) }
         }
 
         viewModel.selectAllTerms.observe(this, Observer {
