@@ -95,7 +95,6 @@ class WriteDiaryImageViewModel @ViewModelInject constructor(
         imagePath?.let {
             murengRepository.postDiary(question.value?.questionId!!, diaryContent.value!!, it)
                 ?.let { diary -> _navigateToNewDiaryDetail.value = diary }
-                .run { _navigateToNewDiaryDetail.call() }
         }
     }
 
