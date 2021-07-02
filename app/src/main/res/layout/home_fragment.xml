@@ -131,7 +131,7 @@
                     android:layout_marginHorizontal="18dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/reply_round_warning"
-                    android:text="2시간 후에 답변할 수 있어요"
+                    android:text="@{@string/home_reply_timer(vm.timerCount)}"
                     android:textColor="@color/primary_pink"
                     tools:text="2시간 후에 답변할 수 있어요"
                     android:textSize="14dp"

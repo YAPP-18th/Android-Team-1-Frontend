@@ -35,6 +35,8 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             }
         })
 
+
+
     }
 }
 

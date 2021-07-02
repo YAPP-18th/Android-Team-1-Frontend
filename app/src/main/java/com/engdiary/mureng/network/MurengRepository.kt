@@ -28,20 +28,6 @@ class MurengRepository @Inject constructor(
     private val IMAGE_MEDIA_TYPE = "image/jpg".toMediaType()
     private val DIARY_IMAGE = "image"
 
-    /** 예시
-     * fun postUser(
-    data: AccessTokenData,
-    onSuccess: (UserData) -> Unit,
-    onFailure: () -> Unit
-    ) {
-    api.postUser(data).safeEnqueue(
-    onSuccess = { onSuccess(it!!.result!!) },
-    onFailure = { onFailure() },
-    onError = { onFailure() }
-    )
-    }
-     */
-
     fun postKakaoLogin(
         userExistRequest: UserExistRequest,
         onSuccess: (KakaoLoginResponse) -> Unit,
