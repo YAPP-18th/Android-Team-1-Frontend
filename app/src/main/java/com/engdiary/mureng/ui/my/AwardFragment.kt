@@ -28,10 +28,6 @@ class AwardFragment : BaseFragment<FragmentAwardBinding>(R.layout.fragment_award
 
         subscribeUi()
 
-
-
-
-
     }
 
     private fun subscribeUi() {
@@ -39,7 +35,7 @@ class AwardFragment : BaseFragment<FragmentAwardBinding>(R.layout.fragment_award
         viewModel.userAward.observe(viewLifecycleOwner){
 
             if(it!!.member.murengCount != 0) {
-                for (i in 0 .. it.member.murengCount) {
+                for (i in 1 .. it.member.murengCount) {
                     when(i % 8) {
                         0 -> murengTrey.add(Record(R.drawable.mureng_8))
                         1 -> murengTrey.add(Record(R.drawable.mureng_1))
