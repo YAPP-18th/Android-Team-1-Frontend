@@ -21,8 +21,7 @@ class SocialDetailActivity :
     private val answerAdapter: AnswerAdapter by lazy {
         AnswerAdapter(
             AnswerRecyclerType.TYPE_DETAIL,
-            viewModel,
-            null
+            viewModel
         )
     }
 

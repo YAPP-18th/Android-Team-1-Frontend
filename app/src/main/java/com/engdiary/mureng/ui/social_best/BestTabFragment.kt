@@ -23,7 +23,7 @@ class BestTabFragment : BaseFragment<BestTabFragmentBinding>(R.layout.best_tab_f
 
     override val viewModel: BestTabViewModel by viewModels<BestTabViewModel>()
     val handler : Handler = Handler()
-    private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(AnswerRecyclerType.TYPE_BEST ,viewModel, handler) }
+    private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(AnswerRecyclerType.TYPE_BEST ,viewModel) }
     private val questionAdapter: QuestionAdapter by lazy { QuestionAdapter(QuestionRecyclerType.TYPE_QUES_POP,viewModel) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

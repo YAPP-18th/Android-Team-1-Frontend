@@ -22,8 +22,7 @@ class BestMoreActivity : BaseActivity<ActivityBestMoreBinding>(R.layout.activity
 
     private val answerAdapter: AnswerAdapter by lazy { AnswerAdapter(
         AnswerRecyclerType.TYPE_BEST_MORE,
-        viewModel,
-        null
+        viewModel
     ) }
     private val questionAdapter: QuestionAdapter by lazy { QuestionAdapter(QuestionRecyclerType.TYPE_QUES_MORE,viewModel) }
 

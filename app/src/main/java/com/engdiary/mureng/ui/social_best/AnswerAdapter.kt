@@ -20,8 +20,7 @@ import jp.wasabeef.blurry.Blurry
  */
 class AnswerAdapter(
     val type: AnswerRecyclerType,
-    val vm: BestPopularViewModel,
-    private val handler: android.os.Handler?
+    val vm: BestPopularViewModel
 ) :
     ListAdapter<Diary, RecyclerView.ViewHolder>(AnswerDiffUtilCallBack) {
     companion object {
@@ -105,7 +104,7 @@ class AnswerAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder.itemViewType) {
             TYPE_BEST -> {
-                (holder as AnswerViewHolder).bind(getItem(position), vm, handler)
+                (holder as AnswerViewHolder).bind(getItem(position), vm)
             }
             TYPE_BEST_MORE -> {
                 (holder as AnswerBestViewHolder).bind(getItem(position), vm)
@@ -120,18 +119,9 @@ class AnswerAdapter(
 class AnswerViewHolder(private val binding: ItemSocialAnswerBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(diaryData: Diary, vm: BestPopularViewModel, handler: android.os.Handler?) {
+    fun bind(diaryData: Diary, vm: BestPopularViewModel) {
         binding.diary = diaryData
         binding.vm = vm
-
-        handler!!.postDelayed(Runnable {
-            Blurry.with(MurengApplication.appContext)
-                .sampling(1)
-                .capture(binding.imgBestAnsImage)
-                .into(binding.imgBestAnsImage)
-        }, 1000)
-
-
     }
 }
 
