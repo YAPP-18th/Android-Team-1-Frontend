@@ -16,6 +16,7 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.engdiary.mureng.R
 import com.engdiary.mureng.data.domain.ItemWriteDiaryImage
+import com.engdiary.mureng.di.MEDIA_BASE_URL
 import com.google.android.material.tabs.TabLayout
 import jp.wasabeef.blurry.Blurry
 
@@ -199,4 +200,24 @@ object BindingAdapter {
             .from(bitmap)
             .into(imageView)
     }
+
+    @BindingAdapter("blurImageGlide")
+    @JvmStatic
+    fun setBlurGlide(imageView: ImageView, imageUrl : String) {
+        val image = MEDIA_BASE_URL + imageUrl
+        Glide.with(imageView.context)
+                .asBitmap()
+                .load(image)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                            resource: Bitmap,
+                            transition: Transition<in Bitmap>?
+                    ) {
+                        loadBlurBitmap(imageView, resource)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {}
+                })
+    }
+
 }

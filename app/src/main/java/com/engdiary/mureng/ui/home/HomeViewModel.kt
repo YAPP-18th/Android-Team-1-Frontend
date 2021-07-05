@@ -91,34 +91,8 @@ class HomeViewModel @Inject constructor(
 
 
     }
-
-    fun getTime() {
-        val date = Date()
-        Timber.e("date${date}")
-        val calendar: Calendar = GregorianCalendar()
-        calendar.time = date
-        val year = calendar[Calendar.YEAR]
-        val month = calendar[Calendar.MONTH]
-        val day = calendar[Calendar.DAY_OF_MONTH]
-        val c_hour = calendar[Calendar.HOUR_OF_DAY]
-        val c_min = calendar[Calendar.MINUTE]
-        val c_sec = calendar[Calendar.SECOND]
-
-
-        val baseCal: Calendar = GregorianCalendar(year, month, day, c_hour, c_min, c_sec)
-        val targetCal: Calendar = GregorianCalendar(year, month, day + 1, 0, 0, 0)
-
-        val diffSec = (targetCal.timeInMillis - baseCal.timeInMillis) / 1000
-        val hourTime = floor((diffSec / 3600).toDouble()).toInt()
-
-        _timerCount.value = hourTime
-
-    }
-
-    fun timerStart() {
+    private fun timerStart() {
         if(::timerJob.isInitialized) timerJob.cancel()
-
-        Timber.e("ddd?")
         var hourTime = 12
         timerJob = viewModelScope.launch {
             while (hourTime > 0){
@@ -146,7 +120,7 @@ class HomeViewModel @Inject constructor(
 
     }
 
-    fun timerEnd() {
+    private fun timerEnd() {
         if(::timerJob.isInitialized) timerJob.cancel()
     }
 
