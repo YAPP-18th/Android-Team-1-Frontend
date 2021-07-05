@@ -1,4 +1,118 @@
 <resources>
     <string name="app_name">Mureng</string>
-    <string name="test">test</string>
+    <string name="home">HOME</string>
+    <string name="social">SOCIAL</string>
+    <string name="writing">WRITING</string>
+    <string name="my">MY</string>
+
+    <!--social-->
+    <string name="make_question">질문 만들기</string>
+    <string name="best">BEST</string>
+    <string name="myques">MY QUES.</string>
+
+    <!--social_ques-->
+    <string name="total_ques_count">총 %d개의 질문</string>
+    <string name="reply_answer_cnt">%d</string>
+
+
+    <!--social_ques_detail-->
+    <string name="null_question">내가 만든 질문이 없어요!\n질문을 만들러 가볼까요?</string>
+
+    <!--social_best-->
+    <string name="popular_ques">인기 질문 TOP 3</string>
+    <string name="popular_answer">인기 답변 TOP 5</string>
+    <string name="more">더보기</string>
+
+    <!--social_best_detail-->
+    <string name="total_answer_count">총 %d개의 답변</string>
+    <string name="popular">인기순</string>
+    <string name="newest">최신순</string>
+    <string name="null_answer">아직 등록된 답변이 없어요!</string>
+
+    <!--social_qcreat-->
+    <string name="qcreate_alert_message">등록 후 수정/삭제할 수 없으므로\n오타에 유의해주세요!</string>
+    <string name="qcreate_number1_ques">1. 질문을 자유롭게 만들어보세요.</string>
+    <string name="qcreate_number2_ques">2. 해석을 쓰면 답변 확률이 높아져요.</string>
+    <string name="qcreate_eng_warning">영어로 작성할 수 있는 칸이에요!</string>
+    <string name="qcreate_eng_max_cnt">최대 73자까지 쓸 수 있어요!</string>
+    <string name="qcreate_kor_warning">한글로 작성할 수 있는 칸이에요!</string>
+    <string name="qcreate_kor_max_cnt">최대 45자까지 쓸 수 있어요!</string>
+    <string name="qcreate_create_ques">등록</string>
+    <string name="qcreate_eng_hint">Let\'s write! :D</string>
+    <string name="qcreate_kor_hint">한글로 써주세요!</string>
+
+    <string name="dialog_diarycookie_title">쿠키를 받았어요!</string>
+    <string name="dialog_diarycookie_desription">받은 쿠키는 MY에서 확인할 수 있답니다.\n내일도 머렝과 놀아주세요 :)</string>
+    <string name="dialog_diarycookie_accept">확인</string>
+
+    <string name="setting_title">설정</string>
+    <string name="setting_logout_dialog_title">로그아웃 하시겠어요?</string>
+    <string name="setting_logout_dialog_accept">예</string>
+    <string name="setting_logout_dialog_decline">아니오</string>
+    <string name="setting_withdrawal_dialog_title">머렝을 탈퇴하시겠어요?</string>
+    <string name="setting_withdrawal_dialog_message">정말... 탈퇴하실 건가요? T^T</string>
+    <string name="setting_withdrawal_dialog_accept">예</string>
+    <string name="setting_withdrawal_dialog_decline">아니오</string>
+    <string name="setting_pushalert">푸시 알림</string>
+    <string name="setting_version">버전 정보</string>
+    <string name="setting_maker">만든 사람들</string>
+    <string name="setting_terms">이용 약관</string>
+    <string name="setting_privacy_policy">개인정보 처리방침</string>
+    <string name="setting_license">오픈소스 라이센스</string>
+    <string name="setting_review">앱 스토어 리뷰</string>
+    <string name="setting_instagram">머렝 인스타그램</string>
+    <string name="setting_logout">로그아웃</string>
+    <string name="setting_withdraw">회원 탈퇴</string>
+
+    <string name="pushalert_todayalert">오늘의 질문 알림</string>
+    <string name="pushalert_likealert">좋아요 알림</string>
+    <string name="pushalert_title">푸시 알림</string>
+
+    <string name="diary_detail_otherresponse">이 질문에 다른 사람들은 어떻게 답했을까요?</string>
+    <string name="diary_detail_edit">수정</string>
+    <string name="diary_detail_delete">삭제</string>
+
+    <string name="diary_detail_delete_dialog">글을 삭제하시겠어요?</string>
+    <string name="diary_detail_delete_diary_description">삭제된 글은 복구할 수 없어요!</string>
+    <string name="diary_detail_delete_dialog_accept">네</string>
+    <string name="diary_detail_delete_dialog_cancel">아니오</string>
+
+    <string name="hint_write_diary_content">50자 이상 써주세요 :)</string>
+
+    <string name="writingdiary_question">%s, %s</string>
+    <string name="writingdiary_korean_alert_message">한글은 입력할 수 없어요!</string>
+    <string name="writingdiary_korean_alert_message_accept">확인</string>
+    <string name="writingdiary_nextbutton">다음</string>
+
+    <!-- like push notification -->
+    <string name="like_channel_id">LIKE_CHANNEL</string>
+    <string name="like_channel_name">좋아요 알림</string>
+    <string name="like_channel_description">좋아요를 받으면 알림이 옵니다.</string>
+
+    <!-- 매일 일기 알람 -->
+    <string name="daily_channel_id">DAILY_CHANNEL</string>
+    <string name="daily_channel_name">오늘의 질문 알림</string>
+    <string name="daily_channel_description">매일 일기 알림을 받습니다.</string>
+
+    <string name="mypage_tabitem_record">기록</string>
+    <string name="mypage_tabitem_award">성과</string>
+    <string name="mypage_tabitem_scrap">스크랩</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="home_title">%s, %s</string>
+
+    <!-- 마이페이지 성과탭 -->
+    <string name="award_badge_title">배지</string>
+    <string name="award_record_trey">쿠키 트레이</string>
+    <string name="award_badge_three_days">머렝 3일</string>
+    <string name="award_badge_study">학구적 머렝</string>
+    <string name="award_badge_celeb">셀럽 머렝</string>
+    <string name="award_badge_teacher">교수 머렝</string>
+    <string name="award_badge_mrureng_set">머렝set(30입)</string>
+    <string name="award_record_content">질문에 답하고 쿠키를 받아\n트레이를 채워요! XD</string>
+
+    <!-- 홈 탭 -->
+    <string name="home_reply_timer">%d시간 후에 답변할 수 있어요</string>
+
 </resources>

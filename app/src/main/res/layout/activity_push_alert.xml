@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    >
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.engdiary.mureng.ui.push_alert.PushAlertViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.push_alert.PushAlertActivity">
+
+        <ImageButton
+            android:id="@+id/imagebutton_pushalert_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:src="@drawable/btn_cancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textview_pushalert_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/notosanskr"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="2sp"
+            android:text="@string/pushalert_title"
+            android:textColor="#323232"
+            android:textFontWeight="500"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textview_pushalert_todayalert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/notosanskr"
+            android:lineSpacingExtra="7sp"
+            android:text="@string/pushalert_todayalert"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="@id/imagebutton_pushalert_back"
+            app:layout_constraintTop_toBottomOf="@id/imagebutton_pushalert_back" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_todayalert"
+            android:checked="@={viewModel.isDailyPushAlertActive}"
+            style="@style/Widget.PushAlert.Switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/textview_pushalert_todayalert"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textview_pushalert_todayalert" />
+
+        <TextView
+            android:id="@+id/textview_pushalert_likealert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="43dp"
+            android:fontFamily="@font/notosanskr"
+            android:lineSpacingExtra="7sp"
+            android:text="@string/pushalert_likealert"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="@id/textview_pushalert_todayalert"
+            app:layout_constraintTop_toBottomOf="@id/textview_pushalert_todayalert" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_likealert"
+            style="@style/Widget.PushAlert.Switch"
+            android:checked="@={viewModel.isLikePushAlertActive}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/textview_pushalert_likealert"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textview_pushalert_likealert" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

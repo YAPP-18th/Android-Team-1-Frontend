@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimary">@color/primary_pink</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+
+    <!-- main -->
+    <color name="colorGrayaf">#afafaf</color>
+    <color name="colorPinkfc">#fc89ac</color>
+
+    <!--social-->
+    <color name="colorSkyBlue">#77a8ec</color>
+    <color name="colorPinkf9">#f91c5e</color>
+    <color name="colorSkyPinkff">#ffdae9</color>
+    <color name="colorPinkOpacity70">#b3fc89ac</color>
+    <color name="colorBlackOpacity14">#23000000</color>
+
+    <!--social_myques-->
+    <color name="colorBlackGray">#323232</color>
+    <color name="colorWhiteGray">#f0f0f0</color>
+
+    <!--social_detail-->
+    <color name="colorLightGraydf">#dfdfdf</color>
+    <color name="colorLightGrayd7">#d7d7d7</color>
+    <color name="colorBlack17">#171717</color>
+    <color name="colorBabyPinkff">#ffdae9</color>
+    <color name="colorGraye6">#e6e6e6</color>
+
+    <!--social_qcreate-->
+    <color name="colorLigthGrayf5">#f5f5f5</color>
+    <color name="colorLigthGrayf5Opacity10">#1af5f5f5</color>
+    
+    
+    <!--social_best_more-->
+    <color name="colorDarkGray4d">#4d5050</color>
+    <color name="colorPinkfb">#fb6a95</color>
+
+    <color name="primary_pink">#fc89ac</color>
+    <color name="peachy_pink_40">#66ff8f8f</color>
+    <color name="pale">#ffeecb</color>
+    <color name="warm_pink">#fb5284</color>
+    <color name="white">#ffffff</color>
+    <color name="grey_bg">#fafafa</color>
+    <color name="dialog_bg_black">#4d000000</color>
+    <color name="blue_dark">#4789e7</color>
+    <color name="blue_lightest">#edf3fd</color>
+    <color name="grey_light">#f0f0f0</color>
+    <color name="grey_light2">#d7d7d7</color>
+    <color name="grey1">#afafaf</color>
+    <color name="grey2">#8b8b8b</color>
+    <color name="grey_dark1">#4d5050</color>
+    <color name="pink2">#66fb6a95</color>
+    <color name="pinkpink">#fb5284</color>
+    
+    <!-- write_diary_content-->
+    <color name="powder_blue">#c2d8f7</color>
+    <color name="powder_pink">#ffaac4</color>
+    <!-- write_diary_image -->
+    <color name="diaryimage_selected_tint">#B3ffffff</color>
+
+    <!-- setting -->
+    <color name="grey_dark2">#323232</color>
+
+    <!-- push alert -->
+    <color name="pinklight">#ffdae9</color>
+    <color name="grey_light4">#c3c3c3</color>
+
+
+    <color name="grey1Opacity10">#1aafafaf</color>
+    <color name="pink2fb">#fb6a95</color>
 </resources>

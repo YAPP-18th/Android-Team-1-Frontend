@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="Diary"
+            type="com.engdiary.mureng.data.domain.Diary" />
+
+        <variable
+            name="vm"
+            type="com.engdiary.mureng.ui.social_best.BestPopularViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_social_answer_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingStart="14dp"
+        android:paddingEnd="20dp"
+        android:paddingVertical="10dp">
+        
+        
+        <ImageView
+            app:imageCircleGlideResource="@{Diary.image}"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:id="@+id/img_best_more_profile"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:src="@drawable/icons_profile_m"/>
+
+
+        <TextView
+            tools:text="가나다라마사"
+            android:id="@+id/tv_social_best_more_nickname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/img_best_more_profile"
+            app:layout_constraintStart_toEndOf="@id/img_best_more_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="10dp"
+            style="@style/TextAppearance.NotosanskrMediumStyle"
+            android:textSize="12dp"
+            android:text="@{Diary.author.nickname}"
+            android:textColor="@color/colorDarkGray4d" />
+
+
+        <TextView
+            android:text="@{Diary.question.content}"
+            android:id="@+id/tv_social_best_more_ques"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tv_social_best_more_nickname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_social_best_more_nickname"
+            tools:text="ddddddd"
+            android:layout_marginTop="6dp"
+            style="@style/TextAppearance.RobotoMediumStyle"
+            android:textSize="16dp"
+            android:textColor="@color/colorBlack17"/>
+
+
+        <TextView
+            android:text="@{Diary.content.content}"
+            android:id="@+id/tv_social_best_more_ans"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_social_best_more_ques"
+            app:layout_constraintStart_toStartOf="@id/tv_social_best_more_nickname"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="dddd"
+            android:layout_marginTop="4dp"
+            style="@style/TextAppearance.RobotoRegularStyle"
+            android:textSize="14dp"
+            android:textColor="@color/colorBlack17"
+            android:lineSpacingExtra="3sp"/>
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:id="@+id/cl_best_more_answer_heart"
+            app:layout_constraintTop_toBottomOf="@id/tv_social_best_more_ans"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:src="@{Diary.likeYn ? @drawable/icons_heart_filled_pink : @drawable/icons_heart_outlined }"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/img_best_more_heart"
+                tools:src="@drawable/icons_heart_outlined"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="6dp"
+                app:layout_constraintEnd_toStartOf="@id/tv_best_more_heart"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                tools:text="999"
+                style="@style/TextAppearance.NotosanskrRegularStyle"
+                android:textSize="14dp"
+                android:text="@{@string/reply_answer_cnt(Diary.likeCount)}"
+                android:textColor="@{Diary.likeYn ? @color/pinkpink : @color/colorGrayaf}"
+                android:lineSpacingExtra="7sp"
+                android:gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_best_more_heart"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

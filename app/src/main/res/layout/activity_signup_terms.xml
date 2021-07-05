@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.engdiary.mureng.ui.signup.terms.SignupTermsViewModel" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        tools:context=".ui.signup.agreement.SignupAcitivty"
+        >
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="20dp"
+            android:text="먼저 이용약관을 읽고\n동의해주세요."
+            android:textColor="#323232"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/terms_view"
+            android:layout_width="match_parent"
+            android:layout_height="188dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="77dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/signup_border"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="34dp"
+            app:layout_constraintLeft_toLeftOf="@id/terms_view"
+            app:layout_constraintTop_toTopOf="@id/terms_view">
+
+
+
+            <CheckBox
+                android:id="@+id/checkbox_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:buttonTint="#fb5284"
+                android:text="모든 약관을 읽었으며, 이에 동의해요."
+                app:onSingleClick="@{vm::allTerms}"
+                />
+
+
+
+            <View
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                app:layout_constraintLeft_toLeftOf="@id/terms_view"
+                app:layout_constraintRight_toRightOf="@id/terms_view"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="#f0f0f0" />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+                <CheckBox
+                    android:id="@+id/checkbox_cheese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:buttonTint="#fb5284"
+                    android:text="[필수] 서비스 이용약관 동의"
+                    app:onSingleClick="@{vm::serviceTerms}"
+                    />
+
+                <ImageButton
+                    android:id="@+id/service_term"
+                    android:layout_width="32dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="12dp"
+                    android:background="#ffffff"
+                    android:src="@drawable/elements_chevron_more_xs"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/checkbox_cheese" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+                <CheckBox
+                    android:id="@+id/checkbox_cheese2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:buttonTint="#fb5284"
+                    android:text="[필수] 개인정보 수집/이용 동의"
+                    app:onSingleClick="@{vm::infoTerms}"
+                    />
+
+                <ImageButton
+                    android:id="@+id/police_term"
+                    android:layout_marginLeft="12dp"
+                    android:layout_width="32dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/elements_chevron_more_xs"
+                    android:background="#ffffff"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/checkbox_cheese" />
+            </LinearLayout>
+
+<!--            android:checked="@{vm.selectInfoTerms}"-->
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_marginLeft="20dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@drawable/icons_symbol_glasses_pink"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout" />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="다음"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@{vm.selectServiceTerms &amp;&amp; vm.selectInfoTerms ? @drawable/signup_complete_round : @drawable/signup_round }"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="10dp"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

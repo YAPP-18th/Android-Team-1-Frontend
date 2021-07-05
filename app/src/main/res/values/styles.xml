@@ -1,10 +1,186 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/warm_pink</item>
+        <item name="colorAccent">@color/warm_pink</item>
+        <item name="colorOnBackground">@android:color/white</item>
+        <item name="colorOnSurface">@android:color/black</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="colorControlNormal">@color/primary_pink</item>
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:colorPrimaryDark">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <style name="Widget.WritingDiary.EditTextView" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@android:color/transparent</item>
+        <item name="hintAnimationEnabled">false</item>
+        <item name="hintEnabled">false</item>
+        <item name="boxStrokeColor">@color/content_writingdiary</item>
+    </style>
+
+    <style name="Widget.PushAlert.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="thumbTint">@color/switch_thumb_pushalert</item>
+        <item name="trackTint">@color/switch_track_pushalert</item>
+    </style>
+
+    <style name="TextAppearance.WritingDiary.Question" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="fontWeight">500</item>
+    </style>
+
+    <style name="TextAppearance.WritingDiary.Nickname" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="fontFamily">@font/notosanskr</item>
+        <item name="android:fontFamily">@font/notosanskr</item>
+        <item name="fontWeight">500</item>
+    </style>
+
+    <style name="TextAppearance.WritingDiary.QuestionKr" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:lineSpacingExtra">7sp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/notosanskr</item>
+        <item name="android:fontFamily">@font/notosanskr</item>
+    </style>
+
+    <style name="TextAppearance.WritingDiary.Next" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+    </style>
+
+    <style name="TextAppearance.DiaryDetail.Question" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="TextAppearance.DiaryDetail.Nickname" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+    </style>
+
+    <style name="TextAppearance.DiaryDetail.Content" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+    </style>
+
+    <style name="TextAppearance.DiaryDetail.Date" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+    </style>
+
+    <style name="TextAppearance.DiaryDetail.OtherResponse" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+    </style>
+
+    <style name="TextAppearance.DialogCookie.Title" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/notosanskr</item>
+        <item name="android:fontFamily">@font/notosanskr</item>
+        <item name="fontWeight">500</item>
+    </style>
+
+    <style name="TextAppearance.DialogCookie.Description" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+        <item name="fontFamily">@font/notosanskr</item>
+        <item name="android:fontFamily">@font/notosanskr</item>
+    </style>
+
+    <style name="TextAppearance.DialogCookie.Accept" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">10sp</item>
+        <item name="fontFamily">@font/notosanskr</item>
+        <item name="android:fontFamily">@font/notosanskr</item>
+        <item name="fontWeight">700</item>
+    </style>
+
+
+    <style name="TextAppearance.ImcreSoojinStyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/imcresoojin_regular</item>
+        <item name="android:fontFamily">@font/imcresoojin_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.RobotoMediumStyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.RobotoRegularStyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.RobotoBoldstyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+
+    <style name="TextAppearance.NotosanskrRegularStyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/notosanskr_regular</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.NotosanskrMediumStyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/notosanskr_medium</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.NotosanskrBoldStyle" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/notosanskr_bold</item>
+        <item name="android:fontFamily">@font/notosanskr_bold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.NotosanskrLightStyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/notosanskr_light</item>
+        <item name="android:fontFamily">@font/notosanskr_light</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.ComicSansStyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/comic_sans</item>
+        <item name="android:fontFamily">@font/comic_sans</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!-- Social TabLayout Style -->
+    <style name="TextAppearance.SocialTabLayoutStyle" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="tabSelectedTextColor">@color/colorPinkf9</item>
+        <item name="android:textColor">@color/colorSkyPinkff</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+
+    <style name="TextAppearance.MainTabSelectedStyle" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/colorPinkfc</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+
+    <style name="TextAppearance.MainTabUnSelectedStyle" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/colorGrayaf</item>
+        <item name="android:textSize">12dp</item>
     </style>
 
 </resources>

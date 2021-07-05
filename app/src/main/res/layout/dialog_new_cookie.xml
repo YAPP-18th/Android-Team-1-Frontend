@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageview_diarycookie_bg"
+        android:layout_width="316dp"
+        android:layout_height="302dp"
+        android:background="@drawable/dialog_diarycookie_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textview_diarycookie_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/dialog_diarycookie_title"
+        android:textAppearance="@style/TextAppearance.DialogCookie.Title"
+        app:layout_constraintEnd_toEndOf="@id/imageview_diarycookie_bg"
+        app:layout_constraintStart_toStartOf="@id/imageview_diarycookie_bg"
+        app:layout_constraintTop_toTopOf="@id/imageview_diarycookie_bg" />
+
+    <ImageView
+        android:id="@+id/imageview_diarycookie_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/icons_symbol_party"
+        app:layout_constraintEnd_toEndOf="@id/textview_diarycookie_title"
+        app:layout_constraintStart_toStartOf="@id/textview_diarycookie_title"
+        app:layout_constraintTop_toBottomOf="@id/textview_diarycookie_title" />
+
+    <TextView
+        android:id="@+id/textview_diarycookie_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/dialog_diarycookie_desription"
+        android:textAppearance="@style/TextAppearance.DialogCookie.Description"
+        app:layout_constraintEnd_toEndOf="@id/imageview_diarycookie_icon"
+        app:layout_constraintStart_toStartOf="@id/imageview_diarycookie_icon"
+        app:layout_constraintTop_toBottomOf="@id/imageview_diarycookie_icon" />
+
+    <TextView
+        android:id="@+id/textview_diarycookie_accept"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:background="@drawable/dialog_diarycookie_accept"
+        android:gravity="center"
+        android:paddingVertical="9dp"
+        android:text="@string/dialog_diarycookie_accept"
+        android:textAppearance="@style/TextAppearance.DialogCookie.Accept"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/imageview_diarycookie_bg"
+        app:layout_constraintEnd_toEndOf="@id/imageview_diarycookie_bg"
+        app:layout_constraintStart_toStartOf="@id/imageview_diarycookie_bg"
+        app:layout_constraintTop_toBottomOf="@id/textview_diarycookie_description" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="itemWritingDiaryImage"
+            type="com.engdiary.mureng.data.domain.ItemWriteDiaryImage.DiaryImage" />
+        <variable
+            name="onClickListener"
+            type="com.engdiary.mureng.ui.write_diary.WriteDiaryImageAdapter.OnClickListener" />
+    </data>
+
+    <ImageView
+        android:onClick="@{() -> onClickListener.onClick(itemWritingDiaryImage)}"
+        app:imageGlideResource="@{itemWritingDiaryImage.imagePath}"
+        app:diaryImageSelected="@{itemWritingDiaryImage.isSelected}"
+        android:scaleType="centerCrop"
+        android:layout_width="120dp"
+        android:layout_height="120dp" />
+</layout>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.engdiary.mureng.ui.diary_detail.DiaryDetailViewModel" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.diary_detail.DiaryDetailActivity">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    style="@style/Widget.MaterialComponents.Toolbar.Surface"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:menu="@menu/diary_detail_top_app_bar"
+                    app:navigationIcon="@drawable/icons_home_big" />
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <ImageView
+                android:id="@+id/imageview_diarydetail_diary"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:imageBlurResource="@{viewModel.diaryImage}"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appbar_layout" />
+
+            <TextView
+                android:id="@+id/textview_diarydetail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@{viewModel.question.content}"
+                android:textAppearance="@style/TextAppearance.DiaryDetail.Question"
+                android:textColor="@color/white"
+                android:textFontWeight="500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appbar_layout"
+                tools:text="What are your biggest worries or concerns these days?" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/viewgroup_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageview_diarydetail_diary">
+
+                <ImageView
+                    android:id="@+id/imageview_diarydetail_profileimage"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="10dp"
+                    app:imageCircleGlideResource="@{viewModel.author.image}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textview_diarydetail_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:fontFamily="@font/notosanskr"
+                    android:text="@{viewModel.author.nickname}"
+                    android:textAppearance="@style/TextAppearance.DiaryDetail.Nickname"
+                    app:layout_constraintBottom_toBottomOf="@id/imageview_diarydetail_profileimage"
+                    app:layout_constraintStart_toEndOf="@id/imageview_diarydetail_profileimage"
+                    app:layout_constraintTop_toTopOf="@id/imageview_diarydetail_profileimage"
+                    tools:text="닉네임" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <View
+                android:id="@+id/view_delimiter"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="11dp"
+                android:background="@color/grey_light"
+                app:layout_constraintTop_toBottomOf="@id/viewgroup_profile" />
+
+            <TextView
+                android:layout_marginTop="12dp"
+                android:id="@+id/textview_diarydetail_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:text="@{viewModel.content.content}"
+                android:textAppearance="@style/TextAppearance.DiaryDetail.Content"
+                app:layout_constraintTop_toBottomOf="@id/view_delimiter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="95dp"
+                android:text="@{viewModel.diary.date}"
+                android:textAppearance="@style/TextAppearance.DiaryDetail.Date"
+                android:textColor="@color/grey2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/textview_diarydetail_content"
+                app:layout_constraintTop_toBottomOf="@id/textview_diarydetail_content"
+                tools:text="2021. 06. 01." />
+
+
+            <TextView
+                android:id="@+id/textview_diarydetail_otherresponse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_lightest"
+                android:fontFamily="@font/notosanskr"
+                android:gravity="center_horizontal"
+                android:paddingHorizontal="71dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="15dp"
+                android:text="@string/diary_detail_otherresponse"
+                android:textAppearance="@style/TextAppearance.DiaryDetail.OtherResponse"
+                android:textColor="@color/blue_dark"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>
